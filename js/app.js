@@ -14,7 +14,8 @@
     start: document.getElementById("screenStart"),
     register: document.getElementById("screenRegister"),
     reveal: document.getElementById("screenReveal"),
-    mission: document.getElementById("screenMission")
+    mission: document.getElementById("screenMission"),
+    challenge: document.getElementById("screenChallenge")
   };
 
   const beginButton = document.getElementById("beginButton");
@@ -52,6 +53,31 @@
   const bootMessage = document.getElementById("bootMessage");
   const retryConnectionButton = document.getElementById("retryConnectionButton");
   const statusCopy = document.getElementById("statusCopy");
+
+  const challengeBackButton = document.getElementById("challengeBackButton");
+  const challengeTeamName = document.getElementById("challengeTeamName");
+  const challengeHouse = document.getElementById("challengeHouse");
+  const challengeTimer = document.getElementById("challengeTimer");
+  const challengeNumberLabel = document.getElementById("challengeNumberLabel");
+  const challengeEyebrow = document.getElementById("challengeEyebrow");
+  const challengeTitle = document.getElementById("challengeTitle");
+  const challengeIntro = document.getElementById("challengeIntro");
+  const challengeDuration = document.getElementById("challengeDuration");
+  const challengeContent = document.getElementById("challengeContent");
+  const challengeAnswerForm = document.getElementById("challengeAnswerForm");
+  const challengeAnswerLabel = document.getElementById("challengeAnswerLabel");
+  const challengeAnswerHelp = document.getElementById("challengeAnswerHelp");
+  const challengeAnswerInput = document.getElementById("challengeAnswerInput");
+  const challengeSubmitButton = document.getElementById("challengeSubmitButton");
+  const challengeSubmitLabel = document.getElementById("challengeSubmitLabel");
+  const challengeMessage = document.getElementById("challengeMessage");
+  const challengeProgress = document.getElementById("challengeProgress");
+  const challengeStatus = document.getElementById("challengeStatus");
+  const challengeStatusText = document.getElementById("challengeStatusText");
+  const challengeFieldKitButton = document.getElementById("challengeFieldKitButton");
+  const challengeStatusCard = challengeStatus.closest(".challenge-status-card");
+
+  const challengeRegistry = window.FREEZE_CHALLENGES;
 
   const houseNames = {
     "thackeray": "Thackeray",
@@ -94,6 +120,9 @@
   let syncInterval = null;
   let syncInFlight = false;
   let dashboardVisible = false;
+  let currentChallengeId = null;
+  let challengeSubmitInFlight = false;
+  let challengeHistoryPushed = false;
 
   const urlParams = new URL(window.location.href).searchParams;
   const iceDemoMode = urlParams.get("iceDemo") === "1";
@@ -108,7 +137,7 @@
       section.classList.toggle("is-active", active);
     });
 
-    dashboardVisible = name === "mission";
+    dashboardVisible = name === "mission" || name === "challenge";
 
     if (dashboardVisible) {
       startBackgroundSync();
@@ -267,7 +296,9 @@
     stopTimer();
 
     if (team.finished && Number.isFinite(Number(team.elapsedSeconds))) {
-      missionTimer.textContent = formatElapsed(Number(team.elapsedSeconds));
+      const display = formatElapsed(Number(team.elapsedSeconds));
+      missionTimer.textContent = display;
+      challengeTimer.textContent = display;
       return;
     }
 
@@ -275,12 +306,15 @@
 
     if (!Number.isFinite(startMs)) {
       missionTimer.textContent = "--:--";
+      challengeTimer.textContent = "--:--";
       return;
     }
 
     const update = () => {
       const elapsed = Math.max(0, Math.floor((Date.now() - startMs) / 1000));
-      missionTimer.textContent = formatElapsed(elapsed);
+      const display = formatElapsed(elapsed);
+      missionTimer.textContent = display;
+      challengeTimer.textContent = display;
     };
 
     update();
@@ -634,8 +668,262 @@
 
     startClientTimer(team);
 
+    if (currentChallengeId) {
+      updateChallengeChrome(team);
+    }
+
     if (!options.skipScreen) {
       showScreen("mission");
+      window.setTimeout(() => {
+        routeFromCurrentHash();
+      }, 0);
+    }
+  }
+
+  function getChallengeDefinition(challengeId) {
+    return challengeRegistry ? challengeRegistry.get(Number(challengeId)) : null;
+  }
+
+  function isChallengeComplete(team, challengeId) {
+    return getCompletedSet(team).has(Number(challengeId));
+  }
+
+  function updateChallengeChrome(team) {
+    if (!team || !currentChallengeId) return;
+
+    const house = team.house || "";
+    const houseLabel = team.houseName || houseNames[house] || house;
+    const completed = Number(team.completedCount) || 0;
+    const solved = isChallengeComplete(team, currentChallengeId);
+
+    challengeTeamName.textContent = team.teamName || "Team";
+    challengeHouse.textContent = `${houseLabel} House`;
+    challengeProgress.textContent = `${completed} / 8`;
+
+    challengeStatus.textContent = solved ? "COMPLETED" : "UNSOLVED";
+    challengeStatusText.textContent = solved
+      ? "This security seal has already been recovered."
+      : "Recover its seal to clear this section of ice.";
+    challengeStatusCard.classList.toggle("is-complete", solved);
+
+    if (solved) {
+      challengeAnswerInput.disabled = true;
+      challengeSubmitButton.disabled = true;
+    }
+  }
+
+  function configureChallengeSubmission(definition, team) {
+    const solved = isChallengeComplete(team, definition.id);
+    const submission = definition.submission || {};
+
+    challengeAnswerLabel.textContent = submission.label || "Security answer";
+    challengeAnswerInput.placeholder = submission.placeholder || "Challenge answer";
+    challengeAnswerInput.value = "";
+    challengeMessage.textContent = "";
+    challengeMessage.classList.remove("is-success");
+
+    const enabled = Boolean(submission.enabled) && !solved;
+    challengeAnswerInput.disabled = !enabled;
+    challengeSubmitButton.disabled = !enabled;
+
+    challengeAnswerHelp.textContent = solved
+      ? "This challenge is already complete."
+      : enabled
+        ? "Submit one team answer when you are confident."
+        : "Answer submission will activate when this puzzle is installed.";
+
+    challengeSubmitLabel.textContent = solved ? "Completed" : "Submit answer";
+  }
+
+  function renderChallenge(definition, team) {
+    currentChallengeId = definition.id;
+
+    challengeNumberLabel.textContent = String(definition.id).padStart(2, "0");
+    challengeEyebrow.textContent = definition.eyebrow;
+    challengeTitle.textContent = definition.title;
+    challengeIntro.textContent = definition.intro;
+    challengeDuration.textContent = definition.duration;
+
+    challengeContent.innerHTML = "";
+
+    if (typeof definition.render === "function") {
+      definition.render(challengeContent, {
+        team,
+        challengeId: definition.id
+      });
+    }
+
+    configureChallengeSubmission(definition, team);
+    updateChallengeChrome(team);
+  }
+
+  function challengeHash(challengeId) {
+    return `#challenge-${Number(challengeId)}`;
+  }
+
+  function readChallengeFromHash() {
+    const match = String(window.location.hash || "").match(/^#challenge-(\d+)$/i);
+    if (!match) return null;
+
+    const id = Number(match[1]);
+    return id >= 1 && id <= 8 ? id : null;
+  }
+
+  function openChallenge(challengeId, options = {}) {
+    if (!currentTeam || !currentTeam.started) return;
+
+    const id = Number(challengeId);
+    const definition = getChallengeDefinition(id);
+
+    if (!definition) {
+      showDashboardToast("Challenge unavailable", "This challenge is not registered correctly.");
+      return;
+    }
+
+    if (isChallengeComplete(currentTeam, id)) {
+      const seal = sealDefinitions[id];
+      showDashboardToast(
+        `Challenge ${String(id).padStart(2, "0")} already solved`,
+        seal ? `${seal.label} seal recovered. Code number ${seal.number}.` : "This seal has already been recovered."
+      );
+      return;
+    }
+
+    renderChallenge(definition, currentTeam);
+    startClientTimer(currentTeam);
+    showScreen("challenge");
+    setStatus(`Challenge ${String(id).padStart(2, "0")}: ${definition.title}`);
+
+    if (options.pushHistory !== false) {
+      const desired = challengeHash(id);
+
+      if (window.location.hash !== desired) {
+        window.history.pushState(
+          { screen: "challenge", challengeId: id },
+          "",
+          desired
+        );
+        challengeHistoryPushed = true;
+      }
+    }
+  }
+
+  function returnToMissionBoard(options = {}) {
+    currentChallengeId = null;
+    showMission(currentTeam);
+
+    if (options.updateHistory === false) {
+      return;
+    }
+
+    const cleanUrl = window.location.pathname + window.location.search;
+
+    if (challengeHistoryPushed) {
+      challengeHistoryPushed = false;
+      window.history.back();
+    } else {
+      window.history.replaceState({ screen: "mission" }, "", cleanUrl);
+    }
+  }
+
+  function routeFromCurrentHash() {
+    const challengeId = readChallengeFromHash();
+
+    if (!challengeId || !currentTeam || !currentTeam.started) {
+      return false;
+    }
+
+    if (isChallengeComplete(currentTeam, challengeId)) {
+      window.history.replaceState(
+        { screen: "mission" },
+        "",
+        window.location.pathname + window.location.search
+      );
+      showMission(currentTeam);
+      return false;
+    }
+
+    openChallenge(challengeId, { pushHistory: false });
+    return true;
+  }
+
+  async function submitCurrentChallengeAnswer() {
+    if (
+      !currentSession ||
+      !currentTeam ||
+      !currentChallengeId ||
+      challengeSubmitInFlight
+    ) {
+      return;
+    }
+
+    const definition = getChallengeDefinition(currentChallengeId);
+
+    if (!definition || !definition.submission?.enabled) {
+      return;
+    }
+
+    const answer = challengeAnswerInput.value.trim();
+
+    if (!answer) {
+      challengeMessage.textContent = "Enter an answer before submitting.";
+      challengeMessage.classList.remove("is-success");
+      challengeAnswerInput.focus();
+      return;
+    }
+
+    challengeSubmitInFlight = true;
+    challengeSubmitButton.disabled = true;
+    challengeAnswerInput.disabled = true;
+    challengeSubmitLabel.textContent = "Checking…";
+    challengeMessage.textContent = "";
+
+    try {
+      const result = await api.submitAnswer({
+        ...currentSession,
+        challengeId: currentChallengeId,
+        answer
+      });
+
+      if (!result.correct) {
+        challengeMessage.textContent = "Not quite. Check the evidence and try again.";
+        challengeMessage.classList.remove("is-success");
+        challengeAnswerInput.disabled = false;
+        challengeSubmitButton.disabled = false;
+        challengeSubmitLabel.textContent = "Submit answer";
+        challengeAnswerInput.select();
+        return;
+      }
+
+      challengeMessage.textContent = "ACCESS GRANTED · Security seal recovered.";
+      challengeMessage.classList.add("is-success");
+      challengeSubmitLabel.textContent = "Access granted";
+
+      const previousTeam = currentTeam;
+      const refreshed = await api.getTeamState(currentSession);
+      currentTeam = refreshed;
+
+      window.setTimeout(() => {
+        currentChallengeId = null;
+        window.history.replaceState(
+          { screen: "mission" },
+          "",
+          window.location.pathname + window.location.search
+        );
+        showMission(refreshed, {
+          previousTeam,
+          animateNew: true
+        });
+      }, 1050);
+    } catch (error) {
+      console.error("Challenge submission failed:", error);
+      challengeMessage.textContent = mapApiError(error);
+      challengeMessage.classList.remove("is-success");
+      challengeAnswerInput.disabled = false;
+      challengeSubmitButton.disabled = false;
+      challengeSubmitLabel.textContent = "Submit answer";
+    } finally {
+      challengeSubmitInFlight = false;
     }
   }
 
@@ -645,6 +933,13 @@
     stateStore.clearSession();
     currentSession = null;
     currentTeam = null;
+    currentChallengeId = null;
+    challengeHistoryPushed = false;
+    window.history.replaceState(
+      { screen: "start" },
+      "",
+      window.location.pathname + window.location.search
+    );
     registrationForm.reset();
     shownMembers = 2;
 
@@ -813,10 +1108,38 @@
       return;
     }
 
+    openChallenge(challengeNumber);
+  });
+
+  challengeBackButton.addEventListener("click", () => {
+    returnToMissionBoard();
+  });
+
+  challengeFieldKitButton.addEventListener("click", () => {
     showDashboardToast(
-      `Challenge ${String(challengeNumber).padStart(2, "0")}: ${title}`,
-      "Challenge navigation arrives in Task 6D."
+      "Field Kit",
+      "The expedition tools overlay arrives in Task 6E."
     );
+  });
+
+  challengeAnswerForm.addEventListener("submit", event => {
+    event.preventDefault();
+    submitCurrentChallengeAnswer();
+  });
+
+  window.addEventListener("popstate", () => {
+    if (!currentTeam || !currentTeam.started) return;
+
+    const challengeId = readChallengeFromHash();
+
+    if (challengeId) {
+      challengeHistoryPushed = false;
+      openChallenge(challengeId, { pushHistory: false });
+      return;
+    }
+
+    currentChallengeId = null;
+    showMission(currentTeam);
   });
 
   fieldKitButton.addEventListener("click", () => {
@@ -846,6 +1169,12 @@
 
   brandHome.addEventListener("click", () => {
     if (currentTeam && currentTeam.started) {
+      currentChallengeId = null;
+      window.history.replaceState(
+        { screen: "mission" },
+        "",
+        window.location.pathname + window.location.search
+      );
       showMission(currentTeam);
       return;
     }

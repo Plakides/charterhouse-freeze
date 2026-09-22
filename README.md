@@ -62,3 +62,16 @@ Task 6C now binds the dashboard to the real backend progress state.
 - silent polling refreshes mission progress every 15 seconds while the dashboard is open
 - returning to the tab also triggers a refresh
 - existing demo URLs still work, and `progressDemo=...` was added for safe visual QA
+
+
+## Build 6D1
+Task 6D adds the reusable challenge-navigation framework.
+
+- unsolved dashboard tiles open a dedicated challenge screen
+- solved tiles stay locked and do not reopen
+- all eight challenges are isolated modules in `js/challenges/`
+- challenge URL hashes support browser Back/Forward and refresh recovery
+- the same mission timer continues inside a challenge
+- generic answer-submission plumbing is wired to the live `submitAnswer` endpoint
+- submission is deliberately disabled in the placeholder modules until real puzzle content is authored
+- on a future correct submission, the shell is already coded to show ACCESS GRANTED, refresh authoritative state, return to the board and animate the newly recovered tile

@@ -74,6 +74,9 @@
     },
     getTeamState(payload) {
       return request("getTeamState", payload);
+    },
+    submitAnswer(payload) {
+      return request("submitAnswer", payload);
     }
   });
 

@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=6C1">
-  <link rel="stylesheet" href="css/components.css?v=6C1">
-  <link rel="stylesheet" href="css/animations.css?v=6C1">
+  <link rel="stylesheet" href="css/main.css?v=6D1">
+  <link rel="stylesheet" href="css/components.css?v=6D1">
+  <link rel="stylesheet" href="css/animations.css?v=6D1">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -295,18 +295,122 @@
 
         <div class="dashboard-toast" id="dashboardToast" role="status" aria-live="polite" hidden><strong id="dashboardToastTitle">Challenge content comes next.</strong><span id="dashboardToastText">Task 6A is the visual mission shell only.</span></div>
       </section>
+
+      <section class="screen challenge-screen" id="screenChallenge" aria-labelledby="challengeTitle" hidden>
+        <div class="challenge-shell">
+          <header class="challenge-topbar">
+            <button class="challenge-back-button" id="challengeBackButton" type="button">
+              <span aria-hidden="true">←</span>
+              <span>Mission board</span>
+            </button>
+
+            <div class="challenge-team-strip">
+              <span id="challengeTeamName">Team</span>
+              <i aria-hidden="true"></i>
+              <span id="challengeHouse">House</span>
+            </div>
+
+            <div class="challenge-timer-card">
+              <span>ELAPSED TIME</span>
+              <strong id="challengeTimer">0:00</strong>
+            </div>
+          </header>
+
+          <div class="challenge-layout">
+            <main class="challenge-stage">
+              <div class="challenge-heading">
+                <div class="challenge-number-block">
+                  <span>CHALLENGE</span>
+                  <strong id="challengeNumberLabel">01</strong>
+                </div>
+
+                <div class="challenge-heading-copy">
+                  <p class="protocol protocol-dark" id="challengeEyebrow">SECURITY CHALLENGE</p>
+                  <h2 id="challengeTitle">House of Confusion</h2>
+                  <p id="challengeIntro">Challenge briefing.</p>
+                </div>
+
+                <div class="challenge-duration">
+                  <span>EST.</span>
+                  <strong id="challengeDuration">4 min</strong>
+                </div>
+              </div>
+
+              <div class="challenge-content-card" id="challengeContent">
+                <p>Loading challenge…</p>
+              </div>
+
+              <form class="challenge-answer-panel" id="challengeAnswerForm">
+                <div class="challenge-answer-copy">
+                  <label for="challengeAnswerInput" id="challengeAnswerLabel">Security answer</label>
+                  <p id="challengeAnswerHelp">Answer submission will activate when this puzzle is installed.</p>
+                </div>
+
+                <div class="challenge-answer-controls">
+                  <input id="challengeAnswerInput" type="text" autocomplete="off" placeholder="Challenge answer" disabled>
+                  <button class="button button-primary" id="challengeSubmitButton" type="submit" disabled>
+                    <span id="challengeSubmitLabel">Submit answer</span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+
+                <p class="challenge-message" id="challengeMessage" role="status" aria-live="polite"></p>
+              </form>
+            </main>
+
+            <aside class="challenge-rail">
+              <section class="challenge-rail-card">
+                <span class="challenge-rail-label">MISSION PROGRESS</span>
+                <strong id="challengeProgress">0 / 8</strong>
+                <span>security seals recovered</span>
+              </section>
+
+              <section class="challenge-rail-card challenge-status-card">
+                <span class="challenge-rail-label">THIS CHALLENGE</span>
+                <strong id="challengeStatus">UNSOLVED</strong>
+                <span id="challengeStatusText">Recover its seal to clear this section of ice.</span>
+              </section>
+
+              <button class="dashboard-tool-button challenge-field-kit-button" id="challengeFieldKitButton" type="button">
+                <span class="tool-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg>
+                </span>
+                <span>
+                  <strong>Field Kit</strong>
+                  <small>Tools & references</small>
+                </span>
+                <span class="tool-arrow" aria-hidden="true">→</span>
+              </button>
+
+              <section class="challenge-rail-card challenge-tip-card">
+                <span class="challenge-rail-label">MISSION NOTE</span>
+                <p>You can return to the board at any time. The mission timer keeps running.</p>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="status-strip">
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
-      <span class="demo-badge">TASK 6C · LIVE PROGRESS BINDING · BUILD 6C1</span>
+      <span class="demo-badge">TASK 6D · CHALLENGE FRAMEWORK · BUILD 6D1</span>
     </footer>
   </div>
 
-  <script src="js/config.js?v=6C1"></script>
-  <script src="js/api.js?v=6C1"></script>
-  <script src="js/state.js?v=6C1"></script>
-  <script src="js/app.js?v=6C1"></script>
+  <script src="js/config.js?v=6D1"></script>
+  <script src="js/api.js?v=6D1"></script>
+  <script src="js/state.js?v=6D1"></script>
+  <script src="js/challenges/registry.js?v=6D1"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=6D1"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=6D1"></script>
+  <script src="js/challenges/challenge-03-language.js?v=6D1"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=6D1"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=6D1"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=6D1"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=6D1"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=6D1"></script>
+  <script src="js/app.js?v=6D1"></script>
 </body>
 </html>
