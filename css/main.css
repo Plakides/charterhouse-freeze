@@ -87,7 +87,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: .13em;
   color: #5e6872;
@@ -998,9 +998,9 @@ main {
   justify-self: start;
   width: auto;
   padding: 5px 7px;
-  border: 1px solid rgba(247,244,238,.32);
-  background: rgba(9,33,64,.72);
-  color: #f7f4ee;
+  border: 1px solid rgba(247,244,238,.22);
+  background: rgba(9,33,64,.50);
+  color: rgba(247,244,238,.90);
   text-shadow: none;
 }
 
@@ -2613,22 +2613,22 @@ body.modal-open {
 }
 
 .vault-route-shadow {
-  stroke: rgba(9,33,64,.58);
-  stroke-width: 9;
+  stroke: rgba(9,33,64,.40);
+  stroke-width: 6;
 }
 
 .vault-route-line {
-  stroke: #d393a0;
-  stroke-width: 5;
+  stroke: rgba(211,147,160,.88);
+  stroke-width: 3.6;
   filter: url(#routeGlow);
-  stroke-dasharray: 11 8;
+  stroke-dasharray: 9 7;
   animation: route-dash 8s linear infinite;
 }
 
 .vault-route-nodes circle {
-  fill: #092140;
-  stroke: #f7f4ee;
-  stroke-width: 2;
+  fill: rgba(9,33,64,.92);
+  stroke: rgba(247,244,238,.92);
+  stroke-width: 1.6;
   vector-effect: non-scaling-stroke;
 }
 
@@ -2674,7 +2674,7 @@ body.modal-open {
 }
 
 .freeze-board.has-final-route .challenge-tile.is-revealed .tile-status {
-  opacity: .92;
+  opacity: .72;
 }
 
 .freeze-board.has-final-route .board-centre .centre-window-label {
@@ -3000,5 +3000,401 @@ body.modal-open {
   .victory-campus {
     transition: none !important;
     transform: none !important;
+  }
+}
+
+
+/* ========================================================================== */
+/* TASK 7A — HOUSE OF CONFUSION                                               */
+/* ========================================================================== */
+
+.challenge-content-card.logic-challenge-content {
+  min-height: 0;
+  padding: 0;
+  display: block;
+  text-align: left;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+
+.logic-puzzle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  min-height: 390px;
+  border: 1px solid rgba(9,33,64,.15);
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 14px 38px rgba(9,33,64,.06);
+}
+
+.logic-scene {
+  min-width: 0;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(221,235,242,.52), transparent 34%),
+    rgba(247,244,238,.66);
+}
+
+.logic-scene-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 7px;
+}
+
+.logic-scene-heading > div:first-child > span {
+  display: block;
+  margin-bottom: 4px;
+  color: #8d6070;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.logic-scene-heading h3 {
+  margin: 0;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-size: 29px;
+  font-weight: 500;
+}
+
+.logic-key-icon {
+  width: 46px;
+  height: 46px;
+  padding: 7px;
+  border: 1px solid rgba(9,33,64,.14);
+  background: rgba(255,255,255,.68);
+  color: #547187;
+}
+
+.logic-key-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.logic-brief {
+  max-width: 650px !important;
+  margin: 0 0 16px !important;
+  color: var(--muted) !important;
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+}
+
+.logic-suspects {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.logic-suspect {
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(9,33,64,.15);
+  background: rgba(255,255,255,.85);
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+.logic-suspect.is-selected {
+  border-color: rgba(211,147,160,.95);
+  box-shadow:
+    0 0 0 2px rgba(211,147,160,.18),
+    0 10px 24px rgba(9,33,64,.08);
+  transform: translateY(-2px);
+}
+
+.logic-suspect.is-eliminated {
+  opacity: .38;
+  filter: grayscale(.75);
+}
+
+.logic-suspect.is-eliminated::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  left: 8%;
+  top: 46%;
+  width: 84%;
+  height: 2px;
+  background: rgba(126,47,55,.8);
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+
+.logic-suspect-select {
+  width: 100%;
+  appearance: none;
+  padding: 12px 8px 10px;
+  display: grid;
+  justify-items: center;
+  border: 0;
+  border-bottom: 1px solid rgba(9,33,64,.1);
+  background:
+    linear-gradient(180deg, rgba(221,235,242,.55), rgba(255,255,255,.25));
+  color: var(--ch-navy);
+}
+
+.logic-suspect-select:hover {
+  background:
+    linear-gradient(180deg, rgba(211,147,160,.15), rgba(255,255,255,.45));
+}
+
+.logic-avatar {
+  width: 58px;
+  height: 58px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin-bottom: 7px;
+  border: 1px solid rgba(9,33,64,.17);
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e8f0f3;
+  color: rgba(9,33,64,.38);
+}
+
+.logic-avatar-head {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  top: 10px;
+  border-radius: 50%;
+  background: #7893a5;
+}
+
+.logic-avatar-body {
+  position: absolute;
+  width: 39px;
+  height: 29px;
+  top: 29px;
+  border-radius: 22px 22px 4px 4px;
+  background: #9db5c3;
+}
+
+.logic-avatar strong {
+  position: relative;
+  z-index: 2;
+  width: 21px;
+  height: 21px;
+  margin-top: 29px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(247,244,238,.9);
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-size: 11px;
+}
+
+.logic-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.logic-select-copy {
+  margin-top: 3px;
+  color: #8c737d;
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.logic-facts {
+  margin: 0;
+  padding: 8px 9px;
+}
+
+.logic-facts > div {
+  min-height: 29px;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  border-bottom: 1px solid rgba(9,33,64,.07);
+}
+
+.logic-facts > div:last-child {
+  border-bottom: 0;
+}
+
+.logic-facts dt {
+  color: #83909a;
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+.logic-facts dd {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ch-navy);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.logic-colour-dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid rgba(9,33,64,.18);
+}
+
+.logic-colour-dot.is-blue { background: #6a94b2; }
+.logic-colour-dot.is-red { background: #b46970; }
+
+.logic-locker {
+  min-width: 22px;
+  justify-content: center;
+  padding: 2px 5px;
+  background: var(--ch-navy);
+  color: white !important;
+  font-family: var(--mono);
+}
+
+.logic-eliminate {
+  width: calc(100% - 16px);
+  min-height: 28px;
+  margin: 0 8px 9px;
+  appearance: none;
+  border: 1px dashed rgba(9,33,64,.18);
+  background: transparent;
+  color: #697a86;
+  font-size: 7px;
+  font-weight: 850;
+}
+
+.logic-eliminate:hover {
+  border-style: solid;
+  background: rgba(9,33,64,.035);
+}
+
+.logic-clue-board {
+  padding: 18px 16px;
+  border-left: 1px solid rgba(9,33,64,.13);
+  background:
+    linear-gradient(180deg, rgba(9,33,64,.035), transparent 50%),
+    #eeeae2;
+}
+
+.logic-clue-heading {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(9,33,64,.14);
+}
+
+.logic-clue-heading span {
+  display: block;
+  color: #93606b;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+.logic-clue-heading strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-size: 19px;
+}
+
+.logic-clues {
+  margin: 0;
+  padding: 9px 0 0;
+  list-style: none;
+}
+
+.logic-clues li {
+  min-height: 49px;
+  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 7px;
+  border-bottom: 1px solid rgba(9,33,64,.09);
+}
+
+.logic-clues li > span {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(9,33,64,.13);
+  background: rgba(255,255,255,.62);
+  color: #8c6472;
+  font-family: var(--mono);
+  font-size: 7px;
+  font-weight: 900;
+}
+
+.logic-clues p {
+  margin: 1px 0 0;
+  color: #42566a;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.logic-tip {
+  margin-top: 12px;
+  padding: 9px 10px;
+  border-left: 3px solid var(--ch-pink);
+  background: rgba(255,255,255,.58);
+}
+
+.logic-tip strong,
+.logic-tip span {
+  display: block;
+}
+
+.logic-tip strong {
+  color: var(--ch-navy);
+  font-size: 9px;
+}
+
+.logic-tip span {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+@media(max-width:1050px) {
+  .logic-puzzle {
+    grid-template-columns: 1fr 250px;
+  }
+
+  .logic-suspects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:760px) {
+  .logic-puzzle {
+    grid-template-columns: 1fr;
+  }
+
+  .logic-clue-board {
+    border-left: 0;
+    border-top: 1px solid rgba(9,33,64,.13);
+  }
+}
+
+@media(max-width:480px) {
+  .logic-suspects {
+    grid-template-columns: 1fr;
   }
 }

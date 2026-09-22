@@ -162,3 +162,31 @@ Task 6 is now feature-complete as an engine.
 
 This corrects the story lifecycle: recovering all eight seals reveals the final route,
 but the school only visibly thaws after the final vault has actually been completed.
+
+
+## Build 6F2 — final visual polish
+No gameplay or backend behaviour changed.
+
+- final pink route made thinner and slightly more transparent
+- numbered route markers reduced in size
+- revealed `SEAL RECOVERED` strips softened so the campus image and final clue read more clearly
+
+This is the final Task 6 presentation pass before freezing the engine.
+
+
+# Task 7A — House of Confusion
+
+Challenge 01 is now a complete playable puzzle.
+
+## Puzzle
+Four students are shown with scarf colour, bag type, carried item and locker number.
+Teams use five security notes to eliminate suspects and identify who has the emergency key.
+
+The student cards are interactive:
+- click a student to select them as the final answer
+- use `Mark eliminated` while reasoning
+- selected student automatically populates the common answer field
+
+## Server validation
+No Apps Script update is required.
+The existing server-side Challenge 1 answer is `amina`, with case/whitespace normalisation.
