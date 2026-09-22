@@ -35,6 +35,17 @@
   const missionTimer = document.getElementById("missionTimer");
   const missionState = document.getElementById("missionState");
   const missionProgress = document.getElementById("missionProgress");
+  const sidebarProgress = document.getElementById("sidebarProgress");
+  const statusMeterFill = document.getElementById("statusMeterFill");
+  const dashboardHouseShield = document.getElementById("dashboardHouseShield");
+  const dashboardHouseMark = document.getElementById("dashboardHouseMark");
+  const freezeBoard = document.getElementById("freezeBoard");
+  const fieldKitButton = document.getElementById("fieldKitButton");
+  const leaderboardButton = document.getElementById("leaderboardButton");
+  const dashboardToast = document.getElementById("dashboardToast");
+  const dashboardToastTitle = document.getElementById("dashboardToastTitle");
+  const dashboardToastText = document.getElementById("dashboardToastText");
+  const emergencyBulletin = document.getElementById("emergencyBulletin");
 
   const bootMessage = document.getElementById("bootMessage");
   const retryConnectionButton = document.getElementById("retryConnectionButton");
@@ -46,6 +57,21 @@
     "wesley": "Wesley",
     "portman": "Portman"
   };
+
+  const houseAssets = {
+    "thackeray": "assets/branding/thackeray.png",
+    "baden-powell": "assets/branding/baden-powell.png",
+    "wesley": "assets/branding/wesley.png",
+    "portman": "assets/branding/portman.png"
+  };
+
+  const bulletinLines = [
+    "Indoor temperature: increasingly character-building.",
+    "Science Department requests that nobody lick the windows.",
+    "Heating status: emotionally unavailable.",
+    "Emergency blankets remain disappointingly theoretical.",
+    "The snow leopard continues to deny involvement."
+  ];
 
   let shownMembers = 2;
   let currentSession = null;
@@ -235,21 +261,38 @@
   function showMission(team) {
     currentTeam = team;
 
-    missionTeamName.textContent = team.teamName;
-    missionHouse.textContent = `${team.houseName || houseNames[team.house] || team.house} House`;
-
+    const house = team.house || "";
+    const houseLabel = team.houseName || houseNames[house] || house;
     const completed = Number(team.completedCount) || 0;
-    missionProgress.textContent = `${completed}/8 security seals recovered`;
+    const percent = Math.max(0, Math.min(100, (completed / 8) * 100));
+
+    missionTeamName.textContent = team.teamName;
+    missionHouse.textContent = `${houseLabel} House`;
+    missionProgress.textContent = `${completed}/8`;
+    sidebarProgress.textContent = `${completed} / 8`;
+    statusMeterFill.style.width = `${percent}%`;
+
+    if (houseAssets[house]) {
+      dashboardHouseShield.src = houseAssets[house];
+      dashboardHouseShield.alt = `${houseLabel} House shield`;
+    }
+    dashboardHouseMark.dataset.house = house;
+
+    freezeBoard.querySelectorAll(".challenge-tile").forEach(tile => {
+      tile.classList.remove("is-complete");
+      const status = tile.querySelector(".tile-status");
+      if (status) status.textContent = "FROZEN";
+    });
 
     if (team.finished) {
-      missionState.textContent = "MISSION COMPLETE";
-      missionProgress.textContent = "All systems restored";
+      missionState.innerHTML = '<i aria-hidden="true"></i> COMPLETE';
       setStatus(`${team.teamName} completed the mission.`);
     } else {
-      missionState.textContent = "MISSION ACTIVE";
+      missionState.innerHTML = '<i aria-hidden="true"></i> ACTIVE';
       setStatus(`${team.teamName} mission timer is running.`);
     }
 
+    emergencyBulletin.textContent = bulletinLines[Math.floor(Math.random() * bulletinLines.length)];
     startClientTimer(team);
     showScreen("mission");
   }
@@ -326,6 +369,36 @@
       restoring = false;
     }
   }
+
+  function showDashboardToast(title, message) {
+    dashboardToastTitle.textContent = title;
+    dashboardToastText.textContent = message;
+    dashboardToast.hidden = false;
+    dashboardToast.classList.remove("is-visible");
+    void dashboardToast.offsetWidth;
+    dashboardToast.classList.add("is-visible");
+    window.clearTimeout(showDashboardToast.timeoutId);
+    showDashboardToast.timeoutId = window.setTimeout(() => {
+      dashboardToast.classList.remove("is-visible");
+      window.setTimeout(() => { dashboardToast.hidden = true; }, 220);
+    }, 2200);
+  }
+
+  freezeBoard.addEventListener("click", event => {
+    const tile = event.target.closest(".challenge-tile");
+    if (!tile) return;
+    const challengeNumber = tile.dataset.challenge || "?";
+    const title = tile.querySelector(".tile-title")?.textContent || "Challenge";
+    showDashboardToast(`Challenge ${challengeNumber}: ${title}`, "Challenge navigation arrives in Task 6D.");
+  });
+
+  fieldKitButton.addEventListener("click", () => {
+    showDashboardToast("Field Kit", "The expedition tools overlay arrives in Task 6E.");
+  });
+
+  leaderboardButton.addEventListener("click", () => {
+    showDashboardToast("Leaderboard", "The live Team and House leaderboard arrives in Task 6E.");
+  });
 
   function applyResetQueryParameter() {
     const url = new URL(window.location.href);

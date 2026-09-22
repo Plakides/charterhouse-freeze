@@ -198,42 +198,106 @@
         </div>
       </section>
 
-      <section class="screen mission-screen" id="screenMission" aria-labelledby="missionTitle" hidden>
-        <div class="mission-holding-card">
-          <div class="mission-status-row">
-            <span class="mission-live-dot" aria-hidden="true"></span>
-            <span id="missionState">MISSION ACTIVE</span>
+      <section class="screen mission-screen dashboard-screen" id="screenMission" aria-labelledby="missionTitle" hidden>
+        <div class="dashboard-shell">
+          <header class="dashboard-topbar">
+            <div class="dashboard-team">
+              <div class="dashboard-house-mark" id="dashboardHouseMark">
+                <img id="dashboardHouseShield" src="assets/branding/baden-powell.png" alt="">
+              </div>
+              <div class="dashboard-team-copy">
+                <span class="dashboard-kicker">EMERGENCY RESPONSE TEAM</span>
+                <h2 id="missionTitle"><span id="missionTeamName">Suspicious Baursaks</span></h2>
+                <p id="missionHouse">Baden-Powell House</p>
+              </div>
+            </div>
+            <div class="dashboard-timer-card">
+              <span>ELAPSED TIME</span>
+              <strong id="missionTimer">0:00</strong>
+            </div>
+          </header>
+
+          <div class="dashboard-main">
+            <section class="mission-board-panel" aria-labelledby="boardHeading">
+              <div class="board-heading-row">
+                <div>
+                  <p class="protocol protocol-dark">SECURITY GRID</p>
+                  <h3 id="boardHeading">Recover the eight lost seals</h3>
+                </div>
+                <div class="board-progress-pill">
+                  <span id="missionProgress">0/8</span>
+                  <small>RECOVERED</small>
+                </div>
+              </div>
+
+              <div class="freeze-board" id="freezeBoard" aria-label="Eight frozen challenge tiles surrounding the emergency control core">
+                <button class="challenge-tile" type="button" data-challenge="1" aria-label="Challenge 1: Logic">
+                  <span class="tile-number">01</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 13h30v22H9zM14 18h8v8h-8zm12 0h8v4h-8zm0 8h8v4h-8zM14 30h20"/></svg></span><span class="tile-title">LOGIC</span><span class="tile-status">FROZEN</span>
+                </button>
+                <button class="challenge-tile" type="button" data-challenge="2" aria-label="Challenge 2: Lost in Almaty">
+                  <span class="tile-number">02</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 36l9-22 9 11 5-7 9 18H8zm13-1 5-10m5 10 3-8M13 32l4-9"/></svg></span><span class="tile-title">LOST IN ALMATY</span><span class="tile-status">FROZEN</span>
+                </button>
+                <button class="challenge-tile" type="button" data-challenge="3" aria-label="Challenge 3: Secret Message">
+                  <span class="tile-number">03</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 12h30v24H9zM13 17h22M13 22h16M13 27h19M13 32h11"/></svg></span><span class="tile-title">SECRET MESSAGE</span><span class="tile-status">FROZEN</span>
+                </button>
+                <button class="challenge-tile" type="button" data-challenge="4" aria-label="Challenge 4: Telegram">
+                  <span class="tile-number">04</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 13h34v22H7zM7 14l17 13 17-13M13 31h9m4 0h9"/></svg></span><span class="tile-title">TELEGRAM</span><span class="tile-status">FROZEN</span>
+                </button>
+
+                <div class="board-centre" aria-label="Emergency control core">
+                  <div class="centre-sigil"><span class="centre-small">CHARTERHOUSE</span><strong>ALMATY</strong><span class="centre-divider"></span><span class="centre-temp">SYSTEM<br>FROZEN</span></div>
+                </div>
+
+                <button class="challenge-tile" type="button" data-challenge="5" aria-label="Challenge 5: Timetable">
+                  <span class="tile-number">05</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 11h30v27H9zM9 18h30M16 8v7m16-7v7M14 23h6m4 0h10M14 28h12m4 0h4M14 33h8m4 0h8"/></svg></span><span class="tile-title">TIMETABLE</span><span class="tile-status">FROZEN</span>
+                </button>
+                <button class="challenge-tile" type="button" data-challenge="6" aria-label="Challenge 6: Brain Freeze">
+                  <span class="tile-number">06</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M18 38h12M20 34h8M24 7a11 11 0 0 0-7 19c2 2 3 4 3 6h8c0-2 1-4 3-6A11 11 0 0 0 24 7zm0 0v6m-7-3 4 5m10-5-4 5"/></svg></span><span class="tile-title">BRAIN FREEZE</span><span class="tile-status">FROZEN</span>
+                </button>
+                <button class="challenge-tile" type="button" data-challenge="7" aria-label="Challenge 7: Frozen Crossword">
+                  <span class="tile-number">07</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 9h30v30H9zM19 9v30M29 9v30M9 19h30M9 29h30"/></svg></span><span class="tile-title">CROSSWORD</span><span class="tile-status">FROZEN</span>
+                </button>
+                <button class="challenge-tile" type="button" data-challenge="8" aria-label="Challenge 8: Memory">
+                  <span class="tile-number">08</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 9c8 0 14 6 14 14 0 5-3 9-7 12l-7 4-7-4c-4-3-7-7-7-12 0-8 6-14 14-14zm-6 13h12M18 27h12M24 17v15"/></svg></span><span class="tile-title">MEMORY</span><span class="tile-status">FROZEN</span>
+                </button>
+              </div>
+
+              <div class="board-instruction"><span class="instruction-mark" aria-hidden="true">i</span><span>Choose challenges in any order. Each recovered seal removes part of the ice.</span></div>
+            </section>
+
+            <aside class="mission-sidebar" aria-label="Mission controls">
+              <section class="sidebar-card status-card">
+                <div class="sidebar-card-heading"><span>MISSION STATUS</span><span class="mission-live" id="missionState"><i aria-hidden="true"></i> ACTIVE</span></div>
+                <div class="status-meter" aria-hidden="true"><span id="statusMeterFill" style="width:0%"></span></div>
+                <div class="status-numbers"><strong id="sidebarProgress">0 / 8</strong><span>security seals</span></div>
+              </section>
+
+              <section class="sidebar-card seals-card">
+                <div class="sidebar-card-heading"><span>RECOVERED SEALS</span><small>SECURE</small></div>
+                <div class="seal-grid" id="sealGrid" aria-label="Recovered security seals">
+                  <div class="seal-slot"><span>?</span><small>01</small></div><div class="seal-slot"><span>?</span><small>02</small></div><div class="seal-slot"><span>?</span><small>03</small></div><div class="seal-slot"><span>?</span><small>04</small></div>
+                  <div class="seal-slot"><span>?</span><small>05</small></div><div class="seal-slot"><span>?</span><small>06</small></div><div class="seal-slot"><span>?</span><small>07</small></div><div class="seal-slot"><span>?</span><small>08</small></div>
+                </div>
+              </section>
+
+              <div class="tool-buttons">
+                <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg></span><span><strong>Field Kit</strong><small>Tools & references</small></span><span class="tool-arrow" aria-hidden="true">→</span></button>
+                <button class="dashboard-tool-button" id="leaderboardButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 37V25h7v12m6 0V16h7v21m6 0V10h7v27M7 37h37"/></svg></span><span><strong>Leaderboard</strong><small>Teams & Houses</small></span><span class="tool-arrow" aria-hidden="true">→</span></button>
+              </div>
+
+              <section class="sidebar-card emergency-card"><span>EMERGENCY BULLETIN</span><p id="emergencyBulletin">Indoor temperature: increasingly character-building.</p></section>
+            </aside>
           </div>
-
-          <p class="protocol protocol-dark">EMERGENCY RESPONSE TEAM</p>
-          <h2 id="missionTitle">
-            <span id="missionTeamName">Suspicious Baursaks</span>
-          </h2>
-          <p class="mission-house" id="missionHouse">Baden-Powell House</p>
-
-          <div class="mission-timer-block">
-            <span>ELAPSED TIME</span>
-            <strong id="missionTimer">0:00</strong>
-          </div>
-
-          <p class="mission-progress" id="missionProgress">0/8 security seals recovered</p>
-
-          <div class="mission-placeholder">
-            <strong>Mission session secured.</strong>
-            <span>The frozen 3×3 challenge board is the next build stage.</span>
-          </div>
-
-          <p class="mission-refresh-note">
-            You can refresh or accidentally close this page. This device will reconnect to the same team and the timer will not reset.
-          </p>
         </div>
+
+        <div class="dashboard-toast" id="dashboardToast" role="status" aria-live="polite" hidden><strong id="dashboardToastTitle">Challenge content comes next.</strong><span id="dashboardToastText">Task 6A is the visual mission shell only.</span></div>
       </section>
     </main>
 
     <footer class="status-strip">
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
-      <span class="demo-badge">TASK 5C · PERSISTENT SESSION</span>
+      <span class="demo-badge">TASK 6A · MISSION DASHBOARD</span>
     </footer>
   </div>
 
