@@ -204,3 +204,11 @@ challenge into columns.
 - visible book/compass evidence
 - visual clue icons alongside the written clues
 - more compact challenge header so the full puzzle reads properly at 1366×768
+
+
+## 7A3 hotfix
+- Replaced placeholder suspect art with four generated suspect evidence cards.
+- Desktop layout now uses a 2x2 suspect grid with larger cards and an enlarge-card modal.
+- Challenge 1 clues still resolve uniquely to **Amina**.
+- Correct answers now apply an immediate optimistic reveal on the mission board, then silently reconcile with the backend.
+- API requests now retry once if Apps Script returns a temporary unreadable response.

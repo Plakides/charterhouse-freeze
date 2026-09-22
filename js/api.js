@@ -16,6 +16,55 @@
     }
   }
 
+  function delay(ms) {
+    return new Promise(resolve => window.setTimeout(resolve, ms));
+  }
+
+  function parseEnvelope(text) {
+    const clean = String(text || "").trim().replace(/^\)\]\}'\s*/, "");
+    if (!clean) throw new Error("Empty response");
+    return JSON.parse(clean);
+  }
+
+  async function fetchAndParse(url, options, timeoutMs = 12000, retries = 1) {
+    let lastError = null;
+
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+      try {
+        const response = await fetch(url, {
+          ...options,
+          redirect: "follow",
+          cache: "no-store",
+          signal: controller.signal
+        });
+        const text = await response.text();
+        return parseEnvelope(text);
+      } catch (error) {
+        lastError = error;
+        const isAbort = error && error.name === "AbortError";
+        if (attempt < retries) {
+          await delay(350 * (attempt + 1));
+          continue;
+        }
+        if (isAbort) {
+          throw new FreezeApiError(
+            "API_TIMEOUT",
+            "The emergency network is responding too slowly. Try again.",
+            error
+          );
+        }
+        throw error;
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    }
+
+    throw lastError || new FreezeApiError("API_ERROR", "The emergency network request failed.");
+  }
+
   async function requestPublicGet(action, params = {}) {
     const url = new URL(config.API_URL);
     url.searchParams.set("action", action);
@@ -25,44 +74,15 @@
       url.searchParams.set(key, String(value));
     });
 
-    const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), 12000);
-
-    let response;
-
-    try {
-      response = await fetch(url.toString(), {
-        method: "GET",
-        redirect: "follow",
-        cache: "no-store",
-        signal: controller.signal
-      });
-    } catch (error) {
-      if (error && error.name === "AbortError") {
-        throw new FreezeApiError(
-          "API_TIMEOUT",
-          "The scoreboard is taking too long to respond. Try again.",
-          error
-        );
-      }
-
-      throw new FreezeApiError(
-        "NETWORK_ERROR",
-        "The emergency network could not be reached. Check your connection and try again.",
-        error
-      );
-    } finally {
-      window.clearTimeout(timeoutId);
-    }
-
     let envelope;
 
     try {
-      envelope = await response.json();
+      envelope = await fetchAndParse(url.toString(), { method: "GET" }, 12000, 1);
     } catch (error) {
+      if (error instanceof FreezeApiError) throw error;
       throw new FreezeApiError(
-        "INVALID_RESPONSE",
-        "The emergency network returned an unreadable response.",
+        "NETWORK_ERROR",
+        "The emergency network could not be reached. Check your connection and try again.",
         error
       );
     }
@@ -80,37 +100,21 @@
   }
 
   async function request(action, payload = {}) {
-    let response;
+    let envelope;
 
     try {
-      response = await fetch(config.API_URL, {
+      envelope = await fetchAndParse(config.API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "text/plain;charset=utf-8"
         },
-        body: JSON.stringify({
-          action,
-          payload
-        }),
-        redirect: "follow",
-        cache: "no-store"
-      });
+        body: JSON.stringify({ action, payload })
+      }, 14000, 1);
     } catch (error) {
-      throw new FreezeApiError(
-        "NETWORK_ERROR",
-        "The emergency network could not be reached. Check your connection and try again.",
-        error
-      );
-    }
-
-    let envelope;
-
-    try {
-      envelope = await response.json();
-    } catch (error) {
+      if (error instanceof FreezeApiError) throw error;
       throw new FreezeApiError(
         "INVALID_RESPONSE",
-        "The emergency network returned an unreadable response.",
+        "The emergency network returned a response the page could not read.",
         error
       );
     }

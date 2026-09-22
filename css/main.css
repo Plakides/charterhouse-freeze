@@ -3060,19 +3060,19 @@ body.modal-open {
 
 .logic-puzzle {
   display: grid;
-  grid-template-columns: minmax(0,1fr) 270px;
+  grid-template-columns: minmax(0,1fr) 280px;
   min-height: 382px;
   border: 1px solid rgba(9,33,64,.15);
-  background: rgba(255,255,255,.72);
+  background: rgba(255,255,255,.74);
   box-shadow: 0 14px 38px rgba(9,33,64,.06);
 }
 
 .logic-scene {
   min-width: 0;
-  padding: 15px;
+  padding: 16px;
   background:
     radial-gradient(circle at 45% 0%, rgba(221,235,242,.58), transparent 35%),
-    rgba(247,244,238,.68);
+    rgba(247,244,238,.72);
 }
 
 .logic-scene-heading {
@@ -3087,7 +3087,7 @@ body.modal-open {
   display: block;
   margin-bottom: 2px;
   color: #8d6070;
-  font-size: 6px;
+  font-size: 9px;
   font-weight: 900;
   letter-spacing: .15em;
 }
@@ -3096,46 +3096,33 @@ body.modal-open {
   margin: 0;
   color: var(--ch-navy);
   font-family: var(--serif);
-  font-size: 25px;
+  font-size: 34px;
   font-weight: 500;
 }
 
 .logic-key-icon {
-  width: 38px;
-  height: 38px;
-  padding: 6px;
+  width: 42px;
+  height: 42px;
   border: 1px solid rgba(9,33,64,.14);
   background: rgba(255,255,255,.72);
   color: #547187;
-}
-
-.logic-key-icon svg,
-.logic-evidence-icon svg,
-.logic-clue-icon svg {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.logic-key-icon svg {
-  stroke-width: 3.5;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
 }
 
 .logic-brief {
-  max-width: 680px !important;
-  margin: 4px 0 11px !important;
+  max-width: 760px !important;
+  margin: 6px 0 14px !important;
   color: var(--muted) !important;
-  font-size: 9px !important;
-  line-height: 1.4 !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
 }
 
 .logic-suspects {
   display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 8px;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
 }
 
 .logic-suspect {
@@ -3143,265 +3130,191 @@ body.modal-open {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(9,33,64,.14);
-  background: rgba(255,255,255,.9);
-  transition:
-    opacity .18s ease,
-    transform .18s ease,
-    border-color .18s ease,
-    box-shadow .18s ease;
+  background: rgba(255,255,255,.94);
+  transition: opacity .18s ease, transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 
 .logic-suspect.is-selected {
   border-color: rgba(211,147,160,.96);
-  box-shadow:
-    0 0 0 2px rgba(211,147,160,.20),
-    0 9px 22px rgba(9,33,64,.08);
+  box-shadow: 0 0 0 2px rgba(211,147,160,.20), 0 14px 28px rgba(9,33,64,.10);
   transform: translateY(-2px);
 }
 
-.logic-suspect.is-selected .logic-suspect-select {
-  background:
-    linear-gradient(180deg,rgba(211,147,160,.17),rgba(255,255,255,.7));
-}
-
 .logic-suspect.is-eliminated {
-  opacity: .35;
-  filter: grayscale(.72);
+  opacity: .45;
+  filter: grayscale(.8);
 }
 
 .logic-suspect.is-eliminated::after {
   content: "";
   position: absolute;
   z-index: 6;
-  left: 5%;
-  top: 42%;
-  width: 90%;
-  height: 3px;
+  left: 7%;
+  top: 46%;
+  width: 86%;
+  height: 4px;
   background: rgba(126,47,55,.82);
-  transform: rotate(-17deg);
+  transform: rotate(-18deg);
   pointer-events: none;
 }
 
 .logic-suspect-select {
   width: 100%;
   appearance: none;
-  padding: 6px 6px 7px;
+  padding: 10px 10px 8px;
   display: grid;
-  justify-items: center;
+  justify-items: stretch;
   border: 0;
   border-bottom: 1px solid rgba(9,33,64,.09);
-  background:
-    linear-gradient(180deg,rgba(221,235,242,.45),rgba(255,255,255,.4));
+  background: linear-gradient(180deg,rgba(221,235,242,.42),rgba(255,255,255,.45));
   color: var(--ch-navy);
+  text-align: center;
 }
 
-.logic-suspect-select:hover {
-  background:
-    linear-gradient(180deg,rgba(211,147,160,.14),rgba(255,255,255,.58));
-}
-
-.logic-student-portrait {
+.logic-student-card {
   display: block;
   width: 100%;
-  max-height: 116px;
-  margin-bottom: 3px;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  background: #fbfbfb;
+  border: 1px solid rgba(9,33,64,.08);
 }
 
-.logic-name {
+.logic-nameplate {
+  margin-top: 10px;
+  color: var(--ch-navy);
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 700;
 }
 
 .logic-select-copy {
-  margin-top: 1px;
+  margin-top: 4px;
   color: #8c737d;
-  font-size: 5px;
-  font-weight: 900;
-  letter-spacing: .13em;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
-.logic-evidence-strip {
+.logic-suspect-meta {
+  padding: 10px 12px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px 12px;
   border-bottom: 1px solid rgba(9,33,64,.08);
 }
 
-.logic-evidence-item {
-  min-width: 0;
-  padding: 6px 5px;
-  display: grid;
-  grid-template-columns: 24px minmax(0,1fr);
-  gap: 5px;
-  align-items: center;
-  border-right: 1px solid rgba(9,33,64,.07);
-}
-
-.logic-evidence-item:last-child {
-  border-right: 0;
-}
-
-.logic-evidence-icon {
-  width: 23px;
-  height: 23px;
-  color: #58758a;
-}
-
-.logic-evidence-icon svg {
-  stroke-width: 2.3;
-}
-
-.logic-evidence-item small,
-.logic-fact-row small {
+.logic-suspect-meta small {
   display: block;
   color: #8a969f;
-  font-size: 5px;
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
-.logic-evidence-item strong,
-.logic-fact-row strong {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  overflow: hidden;
+.logic-suspect-meta strong {
+  display: block;
+  margin-top: 2px;
   color: var(--ch-navy);
-  font-size: 8px;
-  line-height: 1.15;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
-.logic-fact-row {
-  min-height: 35px;
-  padding: 5px 6px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 5px;
-  align-items: center;
+.logic-suspect-actions {
+  padding: 10px 12px 12px;
+  display: flex;
+  gap: 10px;
 }
 
-.logic-fact-row > span:first-child {
-  min-width: 0;
-}
-
-.logic-colour-dot {
-  width: 8px;
-  height: 8px;
-  flex: 0 0 auto;
-  display: inline-block;
-  border-radius: 50%;
-  border: 1px solid rgba(9,33,64,.18);
-}
-
-.logic-colour-dot.is-blue { background:#6090b0; }
-.logic-colour-dot.is-red { background:#b7656b; }
-
-.logic-locker {
-  min-width: 22px;
-  justify-content: center;
-  padding: 3px 6px;
-  background: var(--ch-navy);
-  color: #fff !important;
-  font-family: var(--mono);
-  font-size: 9px !important;
+.logic-view-card,
+.logic-eliminate {
+  flex: 1;
+  min-height: 38px;
+  appearance: none;
+  border: 1px solid rgba(9,33,64,.16);
+  background: #fff;
+  color: var(--ch-navy);
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .logic-eliminate {
-  width: calc(100% - 12px);
-  min-height: 24px;
-  margin: 0 6px 6px;
-  appearance: none;
-  border: 1px dashed rgba(9,33,64,.18);
-  background: transparent;
+  border-style: dashed;
   color: #697a86;
-  font-size: 6px;
-  font-weight: 850;
 }
 
+.logic-view-card:hover,
 .logic-eliminate:hover {
-  border-style: solid;
   background: rgba(9,33,64,.035);
 }
 
 .logic-clue-board {
-  padding: 14px 13px;
+  padding: 16px 14px;
   border-left: 1px solid rgba(9,33,64,.13);
-  background:
-    linear-gradient(180deg,rgba(9,33,64,.035),transparent 52%),
-    #eeeae2;
+  background: linear-gradient(180deg,rgba(9,33,64,.035),transparent 52%), #eeeae2;
 }
 
 .logic-clue-heading {
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(9,33,64,.14);
 }
 
 .logic-clue-heading span {
   display: block;
   color: #93606b;
-  font-size: 6px;
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: .14em;
 }
 
 .logic-clue-heading strong {
   display: block;
-  margin-top: 2px;
+  margin-top: 3px;
   color: var(--ch-navy);
   font-family: var(--serif);
-  font-size: 17px;
+  font-size: 24px;
 }
 
 .logic-clues {
   margin: 0;
-  padding: 6px 0 0;
+  padding: 10px 0 0;
   list-style: none;
 }
 
 .logic-clues li {
-  min-height: 50px;
-  padding: 7px 0;
+  min-height: 62px;
+  padding: 9px 0;
   display: grid;
-  grid-template-columns: 38px 1fr;
-  gap: 7px;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
   align-items: center;
   border-bottom: 1px solid rgba(9,33,64,.09);
 }
 
 .logic-clue-icon {
-  width: 34px;
-  height: 34px;
-  padding: 6px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(9,33,64,.12);
   background: rgba(255,255,255,.62);
   color: #607e91;
-}
-
-.logic-clue-icon svg {
-  stroke-width: 2.4;
-}
-
-.logic-clues small {
-  display: block;
-  margin-bottom: 1px;
-  color: #a46a77;
-  font-family: var(--mono);
-  font-size: 6px;
   font-weight: 900;
+  font-size: 12px;
 }
 
 .logic-clues p {
   margin: 0;
   color: #42566a;
-  font-size: 9px;
-  line-height: 1.3;
+  font-size: 13px;
+  line-height: 1.35;
 }
 
 .logic-tip {
-  margin-top: 9px;
-  padding: 8px 9px;
+  margin-top: 12px;
+  padding: 10px 11px;
   border-left: 3px solid var(--ch-pink);
   background: rgba(255,255,255,.62);
 }
@@ -3413,15 +3326,70 @@ body.modal-open {
 
 .logic-tip strong {
   color: var(--ch-navy);
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .logic-tip span {
-  margin-top: 2px;
+  margin-top: 4px;
   color: var(--muted);
-  font-size: 7px;
+  font-size: 12px;
   line-height: 1.35;
 }
+
+.logic-lightbox[hidden] { display: none !important; }
+
+.logic-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.logic-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9,33,64,.76);
+}
+
+.logic-lightbox-panel {
+  position: relative;
+  z-index: 1;
+  width: min(920px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  margin: 16px auto;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(0,0,0,.28);
+}
+
+.logic-lightbox-panel img {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 120px);
+  object-fit: contain;
+  background: #f8f8f8;
+}
+
+.logic-lightbox-caption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.logic-lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(9,33,64,.16);
+  background: #fff;
+  color: var(--ch-navy);
+  font-size: 28px;
+  line-height: 1;
+}
+
+body.modal-open { overflow: hidden; }
 
 .challenge-screen .challenge-answer-panel {
   margin-top: 9px;
@@ -3436,21 +3404,13 @@ body.modal-open {
   min-height: 42px;
 }
 
-@media(max-width:1100px) {
+@media(max-width:1200px) {
   .logic-puzzle {
-    grid-template-columns: 1fr 235px;
-  }
-
-  .logic-suspects {
-    grid-template-columns: repeat(2,1fr);
-  }
-
-  .logic-student-portrait {
-    max-height: 130px;
+    grid-template-columns: 1fr 250px;
   }
 }
 
-@media(max-width:760px) {
+@media(max-width:950px) {
   .logic-puzzle {
     grid-template-columns: 1fr;
   }
@@ -3461,8 +3421,13 @@ body.modal-open {
   }
 }
 
-@media(max-width:480px) {
+@media(max-width:720px) {
   .logic-suspects {
     grid-template-columns: 1fr;
   }
+
+  .logic-suspect-actions {
+    flex-direction: column;
+  }
 }
+

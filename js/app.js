@@ -427,6 +427,35 @@
     return next;
   }
 
+
+  function buildOptimisticSolvedTeam(team, challengeId) {
+    if (!team) return team;
+
+    const id = Number(challengeId);
+    const completed = Array.isArray(team.completed) ? team.completed.map(Number).filter(Number.isInteger) : [];
+    const completedSet = new Set(completed);
+    completedSet.add(id);
+
+    const seals = Array.isArray(team.seals) ? team.seals.map(cloneSeal).filter(Boolean) : [];
+    const hasSeal = seals.some(seal => Number(seal.challengeId) === id);
+
+    if (!hasSeal && sealDefinitions[id]) {
+      seals.push({
+        challengeId: id,
+        symbol: sealDefinitions[id].symbol,
+        number: sealDefinitions[id].number,
+        label: sealDefinitions[id].label
+      });
+    }
+
+    return {
+      ...team,
+      completed: Array.from(completedSet).sort((a, b) => a - b),
+      completedCount: completedSet.size,
+      seals
+    };
+  }
+
   function createSvgPath(svg, d, filled) {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("d", d);
@@ -1024,10 +1053,9 @@
       challengeSubmitLabel.textContent = "Access granted";
 
       const previousTeam = currentTeam;
-      const refreshed = await api.getTeamState(currentSession);
-
-      currentTeam = refreshed;
-      persistTeamSnapshot(refreshed);
+      const optimisticTeam = buildOptimisticSolvedTeam(currentTeam, currentChallengeId);
+      currentTeam = optimisticTeam;
+      persistTeamSnapshot(optimisticTeam);
 
       window.setTimeout(() => {
         currentChallengeId = null;
@@ -1036,11 +1064,21 @@
           "",
           window.location.pathname + window.location.search
         );
-        showMission(refreshed, {
+        showMission(optimisticTeam, {
           previousTeam,
           animateNew: true
         });
-      }, 1050);
+      }, 650);
+
+      api.getTeamState(currentSession)
+        .then(refreshed => {
+          currentTeam = refreshed;
+          persistTeamSnapshot(refreshed);
+          showMission(refreshed, { skipScreen: true });
+        })
+        .catch(error => {
+          console.warn("Post-submit team sync failed:", error);
+        });
     } catch (error) {
       console.error("Challenge submission failed:", error);
       challengeMessage.textContent = mapApiError(error);
