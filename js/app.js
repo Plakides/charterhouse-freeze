@@ -1,3 +1,4 @@
+
 (() => {
   "use strict";
 
@@ -40,6 +41,7 @@
   const dashboardHouseShield = document.getElementById("dashboardHouseShield");
   const dashboardHouseMark = document.getElementById("dashboardHouseMark");
   const freezeBoard = document.getElementById("freezeBoard");
+  const sealGrid = document.getElementById("sealGrid");
   const fieldKitButton = document.getElementById("fieldKitButton");
   const leaderboardButton = document.getElementById("leaderboardButton");
   const dashboardToast = document.getElementById("dashboardToast");
@@ -73,14 +75,30 @@
     "The snow leopard continues to deny involvement."
   ];
 
+  const sealDefinitions = Object.freeze({
+    1: Object.freeze({ symbol: "snow-leopard", number: 4, label: "Snow Leopard" }),
+    2: Object.freeze({ symbol: "mountain", number: 8, label: "Mountain" }),
+    3: Object.freeze({ symbol: "book", number: 2, label: "Book" }),
+    4: Object.freeze({ symbol: "teapot", number: 7, label: "Teapot" }),
+    5: Object.freeze({ symbol: "eagle", number: 5, label: "Eagle" }),
+    6: Object.freeze({ symbol: "snowflake", number: 1, label: "Snowflake" }),
+    7: Object.freeze({ symbol: "key", number: 9, label: "Key" }),
+    8: Object.freeze({ symbol: "compass", number: 3, label: "Compass" })
+  });
+
   let shownMembers = 2;
   let currentSession = null;
   let currentTeam = null;
   let timerInterval = null;
   let restoring = false;
+  let syncInterval = null;
+  let syncInFlight = false;
+  let dashboardVisible = false;
+
   const urlParams = new URL(window.location.href).searchParams;
   const iceDemoMode = urlParams.get("iceDemo") === "1";
   const thawDemoMode = urlParams.get("thawDemo") === "1";
+  const progressDemoRaw = String(urlParams.get("progressDemo") || "").trim();
 
   function showScreen(name) {
     Object.entries(screens).forEach(([key, section]) => {
@@ -89,6 +107,14 @@
       section.hidden = !active;
       section.classList.toggle("is-active", active);
     });
+
+    dashboardVisible = name === "mission";
+
+    if (dashboardVisible) {
+      startBackgroundSync();
+    } else {
+      stopBackgroundSync();
+    }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -261,6 +287,154 @@
     timerInterval = window.setInterval(update, 1000);
   }
 
+  function parseCompletedList(team) {
+    const completed = Array.isArray(team && team.completed) ? team.completed : [];
+    return completed
+      .map(value => Number(value))
+      .filter(value => Number.isInteger(value) && value >= 1 && value <= 8)
+      .sort((a, b) => a - b);
+  }
+
+  function getCompletedSet(team) {
+    return new Set(parseCompletedList(team));
+  }
+
+  function parseProgressDemoList() {
+    if (!progressDemoRaw) return null;
+
+    if (progressDemoRaw.toLowerCase() === "all") {
+      return [1, 2, 3, 4, 5, 6, 7, 8];
+    }
+
+    const ids = progressDemoRaw
+      .split(",")
+      .map(part => Number(String(part).trim()))
+      .filter(value => Number.isInteger(value) && value >= 1 && value <= 8);
+
+    return Array.from(new Set(ids)).sort((a, b) => a - b);
+  }
+
+  function cloneSeal(seal) {
+    if (!seal) return null;
+    return {
+      challengeId: Number(seal.challengeId),
+      symbol: String(seal.symbol || ""),
+      number: Number(seal.number),
+      label: String(seal.label || "")
+    };
+  }
+
+  function applyDemoOverrides(team) {
+    let next = {
+      ...team,
+      completed: parseCompletedList(team),
+      seals: Array.isArray(team.seals) ? team.seals.map(cloneSeal).filter(Boolean) : []
+    };
+
+    const demoCompleted = parseProgressDemoList();
+
+    if (demoCompleted) {
+      next.completed = demoCompleted.slice();
+      next.seals = demoCompleted.map(id => {
+        const def = sealDefinitions[id];
+        return {
+          challengeId: id,
+          symbol: def.symbol,
+          number: def.number,
+          label: def.label
+        };
+      });
+      next.completedCount = next.completed.length;
+    }
+
+    if (thawDemoMode) {
+      next.completed = [1, 2, 3, 4, 5, 6, 7, 8];
+      next.seals = next.completed.map(id => {
+        const def = sealDefinitions[id];
+        return {
+          challengeId: id,
+          symbol: def.symbol,
+          number: def.number,
+          label: def.label
+        };
+      });
+      next.completedCount = 8;
+      next.finished = true;
+    }
+
+    if (!Number.isInteger(Number(next.completedCount))) {
+      next.completedCount = next.completed.length;
+    }
+
+    return next;
+  }
+
+  function createSvgPath(svg, d, filled) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", d);
+    if (filled) {
+      path.setAttribute("fill", "currentColor");
+    }
+    svg.appendChild(path);
+  }
+
+  function createSvgCircle(svg, cx, cy, r, filled) {
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", String(cx));
+    circle.setAttribute("cy", String(cy));
+    circle.setAttribute("r", String(r));
+    if (filled) {
+      circle.setAttribute("fill", "currentColor");
+    }
+    svg.appendChild(circle);
+  }
+
+  function createSealIcon(symbol) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 48 48");
+    svg.setAttribute("aria-hidden", "true");
+
+    switch (symbol) {
+      case "snow-leopard":
+        createSvgPath(svg, "M24 9c6 0 11 3 13 9 1 5-1 11-5 15-3 2-5 4-8 5-3-1-5-3-8-5-4-4-6-10-5-15 2-6 7-9 13-9z", false);
+        createSvgCircle(svg, 19, 23, 1.3, true);
+        createSvgCircle(svg, 29, 23, 1.3, true);
+        createSvgPath(svg, "M20 29c2 2 6 2 8 0M17 16l-4-5M31 16l4-5", false);
+        break;
+      case "mountain":
+        createSvgPath(svg, "M7 35 18 15l8 10 5-8 10 18H7zm11 0 8-12m5 12 4-8", false);
+        break;
+      case "book":
+        createSvgPath(svg, "M9 13c7-2 12-1 15 2 3-3 8-4 15-2v22c-7-2-12-1-15 2-3-3-8-4-15-2V13z", false);
+        createSvgPath(svg, "M24 15v22M14 20h6m10 0h4M14 26h6m10 0h4", false);
+        break;
+      case "teapot":
+        createSvgPath(svg, "M11 18h20v11c0 6-4 10-10 10s-10-4-10-10V18zm4-7h12m-8 0-3-4m8 4 3-4M31 22h7c3 0 5 3 3 6-2 3-5 4-10 4", false);
+        break;
+      case "eagle":
+        createSvgPath(svg, "M24 33c-5-9-10-14-17-17 8-1 14 1 18 4 4-5 10-8 18-8-6 4-11 11-12 21-2-3-4-5-7-7-3 2-5 4-7 7z", false);
+        createSvgPath(svg, "M22 22l4-2", false);
+        break;
+      case "snowflake":
+        createSvgPath(svg, "M24 8v32M10 16l28 16M10 32l28-16M24 8l-4 4m4-4 4 4M24 40l-4-4m4 4 4-4", false);
+        break;
+      case "key":
+        createSvgCircle(svg, 18, 20, 7, false);
+        createSvgPath(svg, "M24 24l14 14m-1-6 4-4m-10 1 3-3", false);
+        break;
+      case "compass":
+        createSvgCircle(svg, 24, 24, 13, false);
+        createSvgPath(svg, "M21 30l3-12 6 9-9 3z", true);
+        createSvgPath(svg, "M24 8v4M40 24h-4M24 40v-4M8 24h4", false);
+        break;
+      default:
+        createSvgPath(svg, "M12 24h24", false);
+        break;
+    }
+
+    return svg;
+  }
+
   function setFinalSceneThawed(thawed) {
     freezeBoard.classList.toggle("is-thawed", Boolean(thawed));
 
@@ -314,7 +488,119 @@
     setFinalSceneThawed(false);
   }
 
-  function showMission(team) {
+  function renderSealGrid(team) {
+    if (!sealGrid) return;
+
+    const seals = Array.isArray(team.seals) ? team.seals.map(cloneSeal).filter(Boolean) : [];
+    const sealsByChallenge = new Map(
+      seals
+        .filter(seal => Number.isInteger(seal.challengeId))
+        .map(seal => [seal.challengeId, seal])
+    );
+
+    sealGrid.innerHTML = "";
+
+    for (let challengeId = 1; challengeId <= 8; challengeId += 1) {
+      const slot = document.createElement("div");
+      const seal = sealsByChallenge.get(challengeId);
+
+      if (seal) {
+        slot.className = "seal-slot is-recovered";
+        slot.setAttribute("aria-label", `Recovered seal ${challengeId}: ${seal.label}, code number ${seal.number}`);
+
+        const content = document.createElement("div");
+        content.className = "seal-slot-content";
+
+        const iconWrap = document.createElement("div");
+        iconWrap.className = "seal-slot-icon";
+        iconWrap.appendChild(createSealIcon(seal.symbol));
+
+        const number = document.createElement("div");
+        number.className = "seal-slot-number";
+        number.textContent = String(seal.number);
+
+        const label = document.createElement("div");
+        label.className = "seal-slot-label";
+        label.textContent = seal.label;
+
+        const index = document.createElement("small");
+        index.textContent = String(challengeId).padStart(2, "0");
+
+        content.append(iconWrap, number, label, index);
+        slot.appendChild(content);
+      } else {
+        slot.className = "seal-slot is-pending";
+        slot.setAttribute("aria-label", `Seal ${challengeId} not yet recovered`);
+
+        const content = document.createElement("div");
+        content.className = "seal-slot-content";
+
+        const marker = document.createElement("div");
+        marker.className = "seal-slot-number";
+        marker.textContent = "?";
+
+        const label = document.createElement("div");
+        label.className = "seal-slot-label";
+        label.textContent = "LOCKED";
+
+        const index = document.createElement("small");
+        index.textContent = String(challengeId).padStart(2, "0");
+
+        content.append(marker, label, index);
+        slot.appendChild(content);
+      }
+
+      sealGrid.appendChild(slot);
+    }
+
+    sealGrid.setAttribute("aria-label", `${seals.length} recovered security seals`);
+  }
+
+  function applyRealProgress(team, previousTeam, animateNew) {
+    const previousCompleted = previousTeam ? getCompletedSet(previousTeam) : new Set();
+    const currentCompleted = getCompletedSet(team);
+
+    resetIceBoard();
+
+    freezeBoard.querySelectorAll(".challenge-tile").forEach(tile => {
+      const challengeId = Number(tile.dataset.challenge);
+      if (!currentCompleted.has(challengeId)) return;
+
+      const shouldAnimate = Boolean(animateNew && !previousCompleted.has(challengeId));
+      setTileRevealed(tile, true, shouldAnimate);
+    });
+
+    renderSealGrid(team);
+
+    if (team.finished || Number(team.completedCount) >= 8) {
+      setFinalSceneThawed(true);
+    }
+  }
+
+  function buildBulletinMessage(team) {
+    if (iceDemoMode) {
+      return "ICE DEMO: click frozen tiles to preview reveal. Backend progress is untouched.";
+    }
+
+    if (thawDemoMode) {
+      return "THAW DEMO: the school is fully unfrozen and the non-snowy campus image is showing.";
+    }
+
+    if (progressDemoRaw) {
+      return `PROGRESS DEMO: dashboard is simulating ${team.completedCount}/8 completed challenges.`;
+    }
+
+    if (team.finished || Number(team.completedCount) >= 8) {
+      return "All eight seals are secure. The school is now fully unfrozen.";
+    }
+
+    return bulletinLines[Math.floor(Math.random() * bulletinLines.length)];
+  }
+
+  function showMission(rawTeam, options = {}) {
+    const team = applyDemoOverrides(rawTeam);
+    const previousTeam = options.previousTeam ? applyDemoOverrides(options.previousTeam) : null;
+
     currentTeam = team;
 
     const house = team.house || "";
@@ -334,14 +620,9 @@
     }
     dashboardHouseMark.dataset.house = house;
 
-    resetIceBoard();
+    applyRealProgress(team, previousTeam, options.animateNew === true);
 
-    if (team.finished || completed >= 8 || thawDemoMode) {
-      setFinalSceneThawed(true);
-      freezeBoard.querySelectorAll(".challenge-tile").forEach(tile => setTileRevealed(tile, true, false));
-    }
-
-    if (team.finished || completed >= 8 || thawDemoMode) {
+    if (team.finished || completed >= 8) {
       missionState.innerHTML = '<i aria-hidden="true"></i> COMPLETE';
       setStatus(`${team.teamName} completed the mission.`);
     } else {
@@ -349,22 +630,18 @@
       setStatus(`${team.teamName} mission timer is running.`);
     }
 
-    emergencyBulletin.textContent = bulletinLines[Math.floor(Math.random() * bulletinLines.length)];
-
-    if (iceDemoMode) {
-      emergencyBulletin.textContent = "6B ICE DEMO: click frozen tiles to preview the reveal animation. Backend progress is untouched.";
-    }
-
-    if (thawDemoMode) {
-      emergencyBulletin.textContent = "6B THAW DEMO: the school is fully unfrozen and the non-snowy campus image is now showing.";
-    }
+    emergencyBulletin.textContent = buildBulletinMessage(team);
 
     startClientTimer(team);
-    showScreen("mission");
+
+    if (!options.skipScreen) {
+      showScreen("mission");
+    }
   }
 
   function clearSessionAndReturnHome(message) {
     stopTimer();
+    stopBackgroundSync();
     stateStore.clearSession();
     currentSession = null;
     currentTeam = null;
@@ -450,15 +727,63 @@
     }, 2200);
   }
 
+  async function syncTeamStateSilently() {
+    if (!currentSession || syncInFlight || !dashboardVisible || iceDemoMode) return;
+
+    if (!currentTeam || !currentTeam.started || currentTeam.finished) {
+      return;
+    }
+
+    syncInFlight = true;
+
+    try {
+      const team = await api.getTeamState(currentSession);
+      const previousTeam = currentTeam;
+      currentTeam = team;
+      showMission(team, {
+        skipScreen: true,
+        previousTeam,
+        animateNew: true
+      });
+    } catch (error) {
+      console.warn("Silent mission sync failed:", error);
+
+      if (isDeadSessionError(error)) {
+        clearSessionAndReturnHome("Team session expired. Please register again.");
+      }
+    } finally {
+      syncInFlight = false;
+    }
+  }
+
+  function startBackgroundSync() {
+    stopBackgroundSync();
+
+    if (!currentSession || !dashboardVisible || iceDemoMode) return;
+    if (!currentTeam || !currentTeam.started || currentTeam.finished) return;
+
+    syncInterval = window.setInterval(syncTeamStateSilently, 15000);
+  }
+
+  function stopBackgroundSync() {
+    if (syncInterval) {
+      window.clearInterval(syncInterval);
+      syncInterval = null;
+    }
+  }
+
   freezeBoard.addEventListener("click", event => {
     const tile = event.target.closest(".challenge-tile");
     if (!tile) return;
 
-    const challengeNumber = tile.dataset.challenge || "?";
+    const challengeNumber = Number(tile.dataset.challenge || 0);
     const title = tile.querySelector(".tile-title")?.textContent || "Challenge";
 
     if (iceDemoMode) {
-      setTileRevealed(tile, true, true);
+      const alreadyRevealed = tile.classList.contains("is-revealed");
+      if (!alreadyRevealed) {
+        setTileRevealed(tile, true, true);
+      }
 
       const remainingFrozen = freezeBoard.querySelectorAll(".challenge-tile:not(.is-revealed):not(.is-revealing)").length;
 
@@ -472,15 +797,24 @@
         }, 700);
       } else {
         showDashboardToast(
-          `Ice section ${challengeNumber} released`,
-          "6B visual demo only. No backend progress was changed."
+          `Ice section ${String(challengeNumber).padStart(2, "0")} released`,
+          "6C visual demo only. No backend progress was changed."
         );
       }
       return;
     }
 
+    if (tile.classList.contains("is-revealed")) {
+      const seal = sealDefinitions[challengeNumber];
+      showDashboardToast(
+        `Challenge ${String(challengeNumber).padStart(2, "0")} already solved`,
+        seal ? `${seal.label} seal recovered. Code number ${seal.number}.` : "This seal has already been recovered."
+      );
+      return;
+    }
+
     showDashboardToast(
-      `Challenge ${challengeNumber}: ${title}`,
+      `Challenge ${String(challengeNumber).padStart(2, "0")}: ${title}`,
       "Challenge navigation arrives in Task 6D."
     );
   });
@@ -554,7 +888,6 @@
 
       currentSession = stateStore.saveSession(team.teamId, team.token);
 
-      // Do not keep the bearer token in the normal team object used by the UI.
       currentTeam = {
         ...team
       };
@@ -598,6 +931,14 @@
   });
 
   retryConnectionButton.addEventListener("click", restoreSavedSession);
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && dashboardVisible) {
+      syncTeamStateSilently();
+    }
+  });
+
+  window.addEventListener("beforeunload", stopBackgroundSync);
 
   applyResetQueryParameter();
   updateMemberControls();

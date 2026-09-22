@@ -49,3 +49,16 @@ the puzzle thematically more appropriate for a frozen challenge.
 
 ## Build 6B4 gameplay correction
 The board now uses the snowy real-campus scene during normal play. When the mission is fully completed, the board automatically switches to the non-snowy real-campus scene, so the school visually looks thawed/unfrozen at the end.
+
+
+## Build 6C1
+Task 6C now binds the dashboard to the real backend progress state.
+
+### What 6C1 adds
+- challenge tiles reveal automatically from real `team.completed`
+- recovered seals sidebar renders from real `team.seals`
+- completed-count meter and thawed-final-scene state are driven from backend data
+- if the mission is already complete, the thawed campus scene is shown immediately
+- silent polling refreshes mission progress every 15 seconds while the dashboard is open
+- returning to the tab also triggers a refresh
+- existing demo URLs still work, and `progressDemo=...` was added for safe visual QA
