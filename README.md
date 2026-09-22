@@ -75,3 +75,11 @@ Task 6D adds the reusable challenge-navigation framework.
 - generic answer-submission plumbing is wired to the live `submitAnswer` endpoint
 - submission is deliberately disabled in the placeholder modules until real puzzle content is authored
 - on a future correct submission, the shell is already coded to show ACCESS GRANTED, refresh authoritative state, return to the board and animate the newly recovered tile
+
+
+## Build 6D2 hotfix
+Fixed `?progressDemo=1,3,6` so the simulated completed challenges remain locked
+while every simulated-unsolved challenge still opens its challenge shell.
+
+The fix also disables live background polling during progress/thaw demo modes,
+so real backend state cannot race or overwrite the visual QA simulation.

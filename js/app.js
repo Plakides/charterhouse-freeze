@@ -379,6 +379,7 @@
         };
       });
       next.completedCount = next.completed.length;
+      next.finished = next.completed.length === 8;
     }
 
     if (thawDemoMode) {
@@ -685,7 +686,19 @@
   }
 
   function isChallengeComplete(team, challengeId) {
-    return getCompletedSet(team).has(Number(challengeId));
+    const id = Number(challengeId);
+
+    if (thawDemoMode) {
+      return true;
+    }
+
+    const demoCompleted = parseProgressDemoList();
+
+    if (demoCompleted) {
+      return demoCompleted.includes(id);
+    }
+
+    return getCompletedSet(team).has(id);
   }
 
   function updateChallengeChrome(team) {
@@ -1054,7 +1067,14 @@
   function startBackgroundSync() {
     stopBackgroundSync();
 
-    if (!currentSession || !dashboardVisible || iceDemoMode) return;
+    if (
+      !currentSession ||
+      !dashboardVisible ||
+      iceDemoMode ||
+      thawDemoMode ||
+      Boolean(progressDemoRaw)
+    ) return;
+
     if (!currentTeam || !currentTeam.started || currentTeam.finished) return;
 
     syncInterval = window.setInterval(syncTeamStateSilently, 15000);
@@ -1096,6 +1116,22 @@
           "6C visual demo only. No backend progress was changed."
         );
       }
+      return;
+    }
+
+    const demoCompleted = parseProgressDemoList();
+
+    if (demoCompleted) {
+      if (demoCompleted.includes(challengeNumber)) {
+        const seal = sealDefinitions[challengeNumber];
+        showDashboardToast(
+          `Challenge ${String(challengeNumber).padStart(2, "0")} already solved`,
+          seal ? `${seal.label} seal recovered. Code number ${seal.number}.` : "This seal has already been recovered."
+        );
+        return;
+      }
+
+      openChallenge(challengeNumber);
       return;
     }
 
