@@ -83,3 +83,25 @@ while every simulated-unsolved challenge still opens its challenge shell.
 
 The fix also disables live background polling during progress/thaw demo modes,
 so real backend state cannot race or overwrite the visual QA simulation.
+
+
+## Build 6D3 — fast reconnect
+Performance patch before Task 6E.
+
+### Frontend
+- safely caches a non-sensitive team snapshot in localStorage
+- refresh/reopen renders the existing board immediately from that snapshot
+- Apps Script reconciliation then happens quietly in the background
+- credentials are still stored separately and remain required for all backend calls
+- snapshots do not contain student names or the session token
+- live team-state polling reduced from 15 seconds to 30 seconds
+- authoritative backend responses continuously refresh the snapshot
+
+### Backend
+`getTeamState` is now strictly read-only:
+- no global ScriptLock
+- no LastSeen write
+- no spreadsheet mutation
+- token authentication still required
+
+Meaningful mutations still update LastSeen normally.

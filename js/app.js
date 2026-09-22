@@ -271,7 +271,10 @@
 
     summaryHouse.textContent = team.houseName || houseNames[team.house] || team.house;
 
-    const count = Array.isArray(team.students) ? team.students.length : 0;
+    const count = Array.isArray(team.students)
+      ? team.students.length
+      : Math.max(0, Number(team.studentCount) || 0);
+
     summaryMembers.textContent = `${count} ${count === 1 ? "student" : "students"}`;
 
     showScreen("reveal");
@@ -914,7 +917,9 @@
 
       const previousTeam = currentTeam;
       const refreshed = await api.getTeamState(currentSession);
+
       currentTeam = refreshed;
+      persistTeamSnapshot(refreshed);
 
       window.setTimeout(() => {
         currentChallengeId = null;
@@ -938,6 +943,11 @@
     } finally {
       challengeSubmitInFlight = false;
     }
+  }
+
+  function persistTeamSnapshot(team) {
+    if (!team || !team.teamId) return;
+    stateStore.saveSnapshot(team);
   }
 
   function clearSessionAndReturnHome(message) {
@@ -980,26 +990,47 @@
     restoring = true;
 
     retryConnectionButton.hidden = true;
-    bootMessage.textContent = "Checking this device for an existing emergency team…";
-    showScreen("boot");
-    setStatus("Checking for an existing mission session…");
+    currentSession = stateStore.loadSession();
+
+    if (!currentSession) {
+      showScreen("start");
+      setStatus("Emergency system awaiting response.");
+      restoring = false;
+      return;
+    }
+
+    const cachedTeam = stateStore.loadSnapshot(currentSession.teamId);
+
+    // Instant restore: render the last safe, non-sensitive team snapshot before
+    // waiting for Apps Script / Google Sheets. Backend remains authoritative.
+    if (cachedTeam) {
+      currentTeam = cachedTeam;
+
+      if (cachedTeam.started) {
+        showMission(cachedTeam);
+        setStatus(`${cachedTeam.teamName} restored locally. Checking live state…`);
+      } else {
+        revealTeam(cachedTeam);
+        setStatus(`${cachedTeam.teamName} restored locally. Checking registration…`);
+      }
+    } else {
+      bootMessage.textContent = "Existing team found. Reconnecting to Charterhouse emergency control…";
+      showScreen("boot");
+      setStatus("Reconnecting to live mission state…");
+    }
 
     try {
-      currentSession = stateStore.loadSession();
-
-      if (!currentSession) {
-        showScreen("start");
-        setStatus("Emergency system awaiting response.");
-        return;
-      }
-
-      bootMessage.textContent = "Existing team found. Reconnecting to Charterhouse emergency control…";
-
       const team = await api.getTeamState(currentSession);
+      const previousTeam = currentTeam;
+
       currentTeam = team;
+      persistTeamSnapshot(team);
 
       if (team.started) {
-        showMission(team);
+        showMission(team, {
+          previousTeam,
+          animateNew: false
+        });
       } else {
         revealTeam(team);
         setStatus(`${team.teamName} session restored. Timer has not started.`);
@@ -1009,6 +1040,19 @@
 
       if (isDeadSessionError(error)) {
         clearSessionAndReturnHome("Saved session was no longer valid. Start a new team.");
+        return;
+      }
+
+      if (cachedTeam) {
+        // Keep the immediately restored screen visible. Do not punish the team
+        // with a blocking reconnect page just because Google is slow.
+        setStatus("Live check is slow. Using the saved team state for now.");
+
+        if (cachedTeam.started) {
+          emergencyBulletin.textContent =
+            "Emergency network is slow. Your saved mission state is still available on this device.";
+        }
+
         return;
       }
 
@@ -1047,7 +1091,10 @@
     try {
       const team = await api.getTeamState(currentSession);
       const previousTeam = currentTeam;
+
       currentTeam = team;
+      persistTeamSnapshot(team);
+
       showMission(team, {
         skipScreen: true,
         previousTeam,
@@ -1077,7 +1124,7 @@
 
     if (!currentTeam || !currentTeam.started || currentTeam.finished) return;
 
-    syncInterval = window.setInterval(syncTeamStateSilently, 15000);
+    syncInterval = window.setInterval(syncTeamStateSilently, 30000);
   }
 
   function stopBackgroundSync() {
@@ -1258,6 +1305,7 @@
       };
       delete currentTeam.token;
 
+      persistTeamSnapshot(currentTeam);
       revealTeam(currentTeam);
     } catch (error) {
       console.error("Registration failed:", error);
@@ -1277,6 +1325,7 @@
     try {
       const team = await api.startMission(currentSession);
       currentTeam = team;
+      persistTeamSnapshot(team);
       showMission(team);
     } catch (error) {
       console.error("Could not start mission:", error);
