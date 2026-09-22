@@ -77,6 +77,9 @@
     },
     submitAnswer(payload) {
       return request("submitAnswer", payload);
+    },
+    getLeaderboard(payload = {}) {
+      return request("getLeaderboard", payload);
     }
   });
 

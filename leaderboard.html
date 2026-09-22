@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Great Charterhouse Freeze · Live Leaderboard</title>
+  <link rel="stylesheet" href="css/main.css?v=6E1">
+  <link rel="stylesheet" href="css/components.css?v=6E1">
+  <style>
+    body { overflow: hidden; background:#071a33; }
+    .projector-shell {
+      min-height:100vh;
+      padding:26px 34px 30px;
+      background:
+        radial-gradient(circle at 72% 10%, rgba(120,147,165,.22), transparent 28%),
+        linear-gradient(135deg,#071a33,#092140 50%,#123c66);
+      color:white;
+    }
+    .projector-header {
+      min-height:100px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+      border-bottom:1px solid rgba(255,255,255,.18);
+    }
+    .projector-brand { display:flex; align-items:center; gap:22px; }
+    .projector-brand img {
+      width:270px;
+      padding:10px 14px;
+      background:#f7f4ee;
+    }
+    .projector-brand h1 {
+      margin:0;
+      font-family:Georgia,serif;
+      font-size:38px;
+      font-weight:500;
+    }
+    .projector-brand p {
+      margin:4px 0 0;
+      color:rgba(255,255,255,.62);
+      font-size:11px;
+      letter-spacing:.09em;
+    }
+    .projector-clock {
+      text-align:right;
+      font-family:Consolas,monospace;
+      font-size:12px;
+      color:rgba(255,255,255,.7);
+    }
+    .projector-clock strong {
+      display:block;
+      color:white;
+      font-size:28px;
+    }
+    .projector-controls {
+      margin:16px 0 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .projector-controls .leaderboard-tabs { padding:0; background:transparent; }
+    .projector-controls .leaderboard-tabs button {
+      color:rgba(255,255,255,.62);
+      border-color:rgba(255,255,255,.15);
+    }
+    .projector-controls .leaderboard-tabs button.is-active {
+      background:#f7f4ee;
+      color:#092140;
+    }
+    .projector-meta {
+      display:flex;
+      align-items:center;
+      gap:22px;
+      color:rgba(255,255,255,.7);
+      font-size:10px;
+    }
+    .projector-meta strong { color:white; font-family:Consolas,monospace; }
+    .projector-board {
+      height:calc(100vh - 180px);
+      overflow:hidden;
+      background:#f4f3ef;
+      color:#102237;
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow:0 25px 70px rgba(0,0,0,.2);
+    }
+    .projector-board .leaderboard-panel {
+      height:100%;
+      padding:0 14px 14px;
+    }
+    .projector-board .leader-team-row,
+    .projector-board .leader-house-row { min-height:70px; }
+    .projector-board .leader-team-identity strong,
+    .projector-board .leader-house-identity strong { font-size:20px; }
+    @media(max-width:900px) {
+      .projector-brand img { width:210px; }
+      .projector-brand h1 { font-size:30px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="projector-shell" id="projectorLeaderboard">
+    <header class="projector-header">
+      <div class="projector-brand">
+        <img src="assets/branding/charterhouse-logo.png" alt="Charterhouse Almaty">
+        <div>
+          <h1>The Great Charterhouse Freeze</h1>
+          <p>LIVE HOUSE COMPETITION · STUDENT NAMES HIDDEN</p>
+        </div>
+      </div>
+      <div class="projector-clock">
+        <span>LIVE SCOREBOARD</span>
+        <strong id="projectorTime">--:--</strong>
+        <span data-leader-updated>Waiting…</span>
+      </div>
+    </header>
+
+    <div class="projector-controls">
+      <div class="leaderboard-tabs" role="tablist" aria-label="Leaderboard view">
+        <button type="button" class="is-active" data-leader-tab="teams" aria-selected="true">Teams</button>
+        <button type="button" data-leader-tab="houses" aria-selected="false">Houses</button>
+      </div>
+      <div class="projector-meta">
+        <span>ACTIVE <strong data-leader-team-count>0</strong></span>
+        <span>ESCAPED <strong data-leader-escaped-count>0</strong></span>
+        <span data-leader-status>Live scoreboard</span>
+        <button class="leader-refresh-button" type="button" data-leader-refresh>↻ Refresh</button>
+      </div>
+    </div>
+
+    <section class="projector-board">
+      <section class="leaderboard-panel" data-leader-panel="teams">
+        <div class="leaderboard-column-labels team-columns">
+          <span>RANK</span><span>TEAM</span><span>STATUS</span><span>RESULT</span>
+        </div>
+        <div class="leaderboard-list" data-leader-teams>
+          <div class="leader-empty"><strong>Loading scoreboard…</strong></div>
+        </div>
+      </section>
+
+      <section class="leaderboard-panel" data-leader-panel="houses" hidden>
+        <div class="leaderboard-column-labels house-columns">
+          <span>RANK</span><span>HOUSE</span><span>AVERAGE PROGRESS</span><span>DETAIL</span>
+        </div>
+        <div class="leaderboard-list" data-leader-houses>
+          <div class="leader-empty"><strong>Loading House standings…</strong></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/config.js?v=6E1"></script>
+  <script src="js/api.js?v=6E1"></script>
+  <script src="js/leaderboard.js?v=6E1"></script>
+  <script>
+    (() => {
+      const clock = document.getElementById("projectorTime");
+      function tick() {
+        clock.textContent = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+      }
+      tick();
+      setInterval(tick, 10000);
+      window.FREEZE_LEADERBOARD.initialiseProjector();
+    })();
+  </script>
+</body>
+</html>

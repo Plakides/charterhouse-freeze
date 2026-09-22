@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=6D3">
-  <link rel="stylesheet" href="css/components.css?v=6D3">
-  <link rel="stylesheet" href="css/animations.css?v=6D3">
+  <link rel="stylesheet" href="css/main.css?v=6E1">
+  <link rel="stylesheet" href="css/components.css?v=6E1">
+  <link rel="stylesheet" href="css/animations.css?v=6E1">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -395,22 +395,269 @@
     <footer class="status-strip">
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
-      <span class="demo-badge">TASK 6D · FAST RECONNECT · BUILD 6D3</span>
+      <span class="demo-badge">TASK 6E · FIELD KIT + LIVE SCOREBOARD · BUILD 6E1</span>
     </footer>
   </div>
 
-  <script src="js/config.js?v=6D3"></script>
-  <script src="js/api.js?v=6D3"></script>
-  <script src="js/state.js?v=6D3"></script>
-  <script src="js/challenges/registry.js?v=6D3"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=6D3"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=6D3"></script>
-  <script src="js/challenges/challenge-03-language.js?v=6D3"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=6D3"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=6D3"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=6D3"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=6D3"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=6D3"></script>
-  <script src="js/app.js?v=6D3"></script>
+
+  <div class="modal-overlay field-kit-overlay" id="fieldKitOverlay" role="dialog" aria-modal="true" aria-labelledby="fieldKitTitle" hidden>
+    <div class="modal-window field-kit-window">
+      <header class="modal-header">
+        <div>
+          <p class="protocol protocol-dark">EXPEDITION CASE · FK-01</p>
+          <h2 id="fieldKitTitle">Field Kit</h2>
+          <p>Seven tools. Some are useful. Some are here because emergency procurement is complicated.</p>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Close Field Kit">×</button>
+      </header>
+
+      <div class="field-kit-layout">
+        <nav class="field-kit-nav" aria-label="Field Kit tools">
+          <button type="button" data-field-tool="caesar" aria-selected="true">
+            <span class="field-tool-number">01</span><strong>Caesar</strong><small>Cipher wheel</small>
+          </button>
+          <button type="button" data-field-tool="calculator" aria-selected="false">
+            <span class="field-tool-number">02</span><strong>Calculator</strong><small>Basic arithmetic</small>
+          </button>
+          <button type="button" data-field-tool="binary" aria-selected="false">
+            <span class="field-tool-number">03</span><strong>Binary</strong><small>8-bit converter</small>
+          </button>
+          <button type="button" data-field-tool="morse" aria-selected="false">
+            <span class="field-tool-number">04</span><strong>Morse</strong><small>Reference card</small>
+          </button>
+          <button type="button" data-field-tool="language" aria-selected="false">
+            <span class="field-tool-number">05</span><strong>Language</strong><small>EN · KZ · RU</small>
+          </button>
+          <button type="button" data-field-tool="compass" aria-selected="false">
+            <span class="field-tool-number">06</span><strong>Compass</strong><small>Direction guide</small>
+          </button>
+          <button type="button" data-field-tool="banana" aria-selected="false">
+            <span class="field-tool-number">07</span><strong>Emergency Banana</strong><small>Strategic asset</small>
+          </button>
+        </nav>
+
+        <div class="field-kit-panels">
+          <section class="field-tool-panel is-active" data-field-panel="caesar">
+            <div class="field-panel-heading">
+              <span>CIPHER WHEEL</span>
+              <h3>Caesar Decoder</h3>
+              <p>Enter encrypted text and choose the shift used to encode it.</p>
+            </div>
+
+            <label class="field-input-label" for="caesarInput">Encrypted text</label>
+            <textarea id="caesarInput" rows="4" placeholder="Paste or type the telegram here…"></textarea>
+
+            <div class="caesar-controls">
+              <span>SHIFT</span>
+              <button id="caesarMinus" type="button" aria-label="Decrease shift">−</button>
+              <input id="caesarShift" type="number" min="0" max="25" value="3" inputmode="numeric">
+              <button id="caesarPlus" type="button" aria-label="Increase shift">+</button>
+            </div>
+
+            <div class="field-output-card">
+              <span>DECODED MESSAGE</span>
+              <strong id="caesarOutput">Decoded text will appear here.</strong>
+            </div>
+          </section>
+
+          <section class="field-tool-panel" data-field-panel="calculator" hidden>
+            <div class="field-panel-heading">
+              <span>POCKET CALCULATOR</span>
+              <h3>Calculator</h3>
+              <p>Two numbers in. One hopefully sensible number out.</p>
+            </div>
+
+            <div class="calculator-grid">
+              <input id="calcA" type="number" step="any" placeholder="First number">
+              <select id="calcOperator" aria-label="Operation">
+                <option value="+">+</option>
+                <option value="-">−</option>
+                <option value="*">×</option>
+                <option value="/">÷</option>
+              </select>
+              <input id="calcB" type="number" step="any" placeholder="Second number">
+              <button class="button button-primary" id="calcButton" type="button">Calculate</button>
+            </div>
+
+            <div class="field-output-card">
+              <span>RESULT</span>
+              <strong id="calcResult">—</strong>
+            </div>
+          </section>
+
+          <section class="field-tool-panel" data-field-panel="binary" hidden>
+            <div class="field-panel-heading">
+              <span>8-BIT CONVERSION</span>
+              <h3>Binary Converter</h3>
+              <p>Convert unsigned values between decimal and 8-bit binary.</p>
+            </div>
+
+            <div class="binary-converter-grid">
+              <div class="binary-converter-card">
+                <label for="decimalInput">Decimal 0–255</label>
+                <input id="decimalInput" type="number" min="0" max="255" inputmode="numeric" placeholder="e.g. 42">
+                <button id="convertDecimalButton" class="button button-secondary" type="button">To binary</button>
+                <strong id="decimalBinaryOutput">00000000</strong>
+              </div>
+
+              <div class="binary-converter-card">
+                <label for="binaryInput">Binary, max 8 bits</label>
+                <input id="binaryInput" type="text" maxlength="8" inputmode="numeric" placeholder="e.g. 00101010">
+                <button id="convertBinaryButton" class="button button-secondary" type="button">To decimal</button>
+                <strong id="binaryDecimalOutput">0</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="field-tool-panel" data-field-panel="morse" hidden>
+            <div class="field-panel-heading">
+              <span>REFERENCE CARD</span>
+              <h3>Morse Code</h3>
+              <p>Dots and dashes. Nothing electronic, nothing suspicious.</p>
+            </div>
+
+            <div class="morse-grid" aria-label="Morse code reference">
+              <span><b>A</b> .−</span><span><b>B</b> −...</span><span><b>C</b> −.−.</span><span><b>D</b> −..</span><span><b>E</b> .</span><span><b>F</b> ..−.</span>
+              <span><b>G</b> −−.</span><span><b>H</b> ....</span><span><b>I</b> ..</span><span><b>J</b> .−−−</span><span><b>K</b> −.−</span><span><b>L</b> .−..</span>
+              <span><b>M</b> −−</span><span><b>N</b> −.</span><span><b>O</b> −−−</span><span><b>P</b> .−−.</span><span><b>Q</b> −−.−</span><span><b>R</b> .−.</span>
+              <span><b>S</b> ...</span><span><b>T</b> −</span><span><b>U</b> ..−</span><span><b>V</b> ...−</span><span><b>W</b> .−−</span><span><b>X</b> −..−</span>
+              <span><b>Y</b> −.−−</span><span><b>Z</b> −−..</span><span><b>0</b> −−−−−</span><span><b>1</b> .−−−−</span><span><b>2</b> ..−−−</span><span><b>3</b> ...−−</span>
+              <span><b>4</b> ....−</span><span><b>5</b> .....</span><span><b>6</b> −....</span><span><b>7</b> −−...</span><span><b>8</b> −−−..</span><span><b>9</b> −−−−.</span>
+            </div>
+          </section>
+
+          <section class="field-tool-panel" data-field-panel="language" hidden>
+            <div class="field-panel-heading">
+              <span>MINI LANGUAGE GUIDE</span>
+              <h3>English · Қазақша · Русский</h3>
+              <p>Enough vocabulary to help, not enough to replace your language teachers.</p>
+            </div>
+
+            <div class="language-table" role="table" aria-label="English Kazakh Russian language guide">
+              <div class="language-row is-heading" role="row"><span>English</span><span>Қазақша</span><span>Русский</span></div>
+              <div class="language-row" role="row"><span>mountain</span><span>тау</span><span>гора</span></div>
+              <div class="language-row" role="row"><span>snow</span><span>қар</span><span>снег</span></div>
+              <div class="language-row" role="row"><span>water</span><span>су</span><span>вода</span></div>
+              <div class="language-row" role="row"><span>book</span><span>кітап</span><span>книга</span></div>
+              <div class="language-row" role="row"><span>school</span><span>мектеп</span><span>школа</span></div>
+              <div class="language-row" role="row"><span>key</span><span>кілт</span><span>ключ</span></div>
+              <div class="language-row" role="row"><span>north</span><span>солтүстік</span><span>север</span></div>
+              <div class="language-row" role="row"><span>south</span><span>оңтүстік</span><span>юг</span></div>
+              <div class="language-row" role="row"><span>east</span><span>шығыс</span><span>восток</span></div>
+              <div class="language-row" role="row"><span>west</span><span>батыс</span><span>запад</span></div>
+            </div>
+          </section>
+
+          <section class="field-tool-panel" data-field-panel="compass" hidden>
+            <div class="field-panel-heading">
+              <span>DIRECTION REFERENCE</span>
+              <h3>Compass</h3>
+              <p>A reassuringly analogue solution to knowing which way is north.</p>
+            </div>
+
+            <div class="compass-wrap" aria-label="Compass showing north east south west">
+              <div class="compass-face">
+                <span class="compass-n">N</span>
+                <span class="compass-e">E</span>
+                <span class="compass-s">S</span>
+                <span class="compass-w">W</span>
+                <div class="compass-needle"><span></span></div>
+                <div class="compass-centre"></div>
+              </div>
+            </div>
+
+            <div class="direction-reference">
+              <span><b>N</b> North · солтүстік · север</span>
+              <span><b>E</b> East · шығыс · восток</span>
+              <span><b>S</b> South · оңтүстік · юг</span>
+              <span><b>W</b> West · батыс · запад</span>
+            </div>
+          </section>
+
+          <section class="field-tool-panel banana-panel" data-field-panel="banana" hidden>
+            <div class="field-panel-heading">
+              <span>CLASSIFIED EQUIPMENT</span>
+              <h3>Emergency Banana</h3>
+              <p>For situations where conventional educational technology has failed.</p>
+            </div>
+
+            <div class="banana-illustration" aria-hidden="true">🍌</div>
+            <button class="button button-primary button-large" id="bananaButton" type="button">DEPLOY BANANA</button>
+            <div class="banana-result" id="bananaResult">Emergency fruit remains on standby.</div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay leaderboard-overlay" id="leaderboardOverlay" role="dialog" aria-modal="true" aria-labelledby="leaderboardTitle" hidden>
+    <div class="modal-window leaderboard-window">
+      <header class="modal-header leaderboard-modal-header">
+        <div>
+          <p class="protocol protocol-dark">LIVE HOUSE COMPETITION</p>
+          <h2 id="leaderboardTitle">Mission Leaderboard</h2>
+          <p data-leader-status>Live scoreboard</p>
+        </div>
+
+        <div class="leaderboard-header-actions">
+          <button class="leader-refresh-button" type="button" data-leader-refresh>
+            <span aria-hidden="true">↻</span> Refresh
+          </button>
+          <button class="modal-close" type="button" data-close-modal aria-label="Close leaderboard">×</button>
+        </div>
+      </header>
+
+      <div class="leaderboard-summary">
+        <div><span>TEAMS ACTIVE</span><strong data-leader-team-count>0</strong></div>
+        <div><span>ESCAPED</span><strong data-leader-escaped-count>0</strong></div>
+        <div><span>REFRESH</span><strong>15s</strong></div>
+        <div><span>STATUS</span><strong data-leader-updated>Waiting…</strong></div>
+      </div>
+
+      <div class="leaderboard-tabs" role="tablist" aria-label="Leaderboard view">
+        <button type="button" class="is-active" data-leader-tab="teams" aria-selected="true">Teams</button>
+        <button type="button" data-leader-tab="houses" aria-selected="false">Houses</button>
+      </div>
+
+      <section class="leaderboard-panel" data-leader-panel="teams">
+        <div class="leaderboard-column-labels team-columns">
+          <span>RANK</span><span>TEAM</span><span>STATUS</span><span>RESULT</span>
+        </div>
+        <div class="leaderboard-list" data-leader-teams>
+          <div class="leader-empty"><strong>Loading scoreboard…</strong></div>
+        </div>
+      </section>
+
+      <section class="leaderboard-panel" data-leader-panel="houses" hidden>
+        <div class="leaderboard-column-labels house-columns">
+          <span>RANK</span><span>HOUSE</span><span>AVERAGE PROGRESS</span><span>DETAIL</span>
+        </div>
+        <div class="leaderboard-list" data-leader-houses>
+          <div class="leader-empty"><strong>Loading House standings…</strong></div>
+        </div>
+      </section>
+
+      <footer class="leaderboard-footer">
+        <span>Student names are never shown on the public scoreboard.</span>
+        <a href="leaderboard.html" target="_blank" rel="noopener">Open projector view ↗</a>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/config.js?v=6E1"></script>
+  <script src="js/api.js?v=6E1"></script>
+  <script src="js/state.js?v=6E1"></script>
+  <script src="js/challenges/registry.js?v=6E1"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=6E1"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=6E1"></script>
+  <script src="js/challenges/challenge-03-language.js?v=6E1"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=6E1"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=6E1"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=6E1"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=6E1"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=6E1"></script>
+  <script src="js/field-kit.js?v=6E1"></script>
+  <script src="js/leaderboard.js?v=6E1"></script>
+  <script src="js/app.js?v=6E1"></script>
 </body>
 </html>

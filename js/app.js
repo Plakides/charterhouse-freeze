@@ -1199,10 +1199,7 @@
   });
 
   challengeFieldKitButton.addEventListener("click", () => {
-    showDashboardToast(
-      "Field Kit",
-      "The expedition tools overlay arrives in Task 6E."
-    );
+    window.FREEZE_FIELD_KIT?.open();
   });
 
   challengeAnswerForm.addEventListener("submit", event => {
@@ -1226,11 +1223,11 @@
   });
 
   fieldKitButton.addEventListener("click", () => {
-    showDashboardToast("Field Kit", "The expedition tools overlay arrives in Task 6E.");
+    window.FREEZE_FIELD_KIT?.open();
   });
 
   leaderboardButton.addEventListener("click", () => {
-    showDashboardToast("Leaderboard", "The live Team and House leaderboard arrives in Task 6E.");
+    window.FREEZE_LEADERBOARD?.open("teams");
   });
 
   function applyResetQueryParameter() {
@@ -1353,6 +1350,9 @@
   });
 
   window.addEventListener("beforeunload", stopBackgroundSync);
+
+  window.FREEZE_FIELD_KIT?.initialise();
+  window.FREEZE_LEADERBOARD?.initialiseOverlay();
 
   applyResetQueryParameter();
   updateMemberControls();

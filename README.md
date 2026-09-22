@@ -105,3 +105,27 @@ Performance patch before Task 6E.
 - token authentication still required
 
 Meaningful mutations still update LastSeen normally.
+
+
+## Build 6E1 — Field Kit + live leaderboard
+Task 6E adds the two reusable live overlays and the standalone projector scoreboard.
+
+### Field Kit
+- Caesar decoder
+- basic calculator
+- unsigned 8-bit binary converter
+- Morse reference
+- English / Kazakh / Russian mini language guide
+- compass reference
+- Emergency Banana
+
+Useful and red-herring tools deliberately share the same visual treatment.
+
+### Leaderboard
+- live Team and House tabs
+- refreshes every 15 seconds while open
+- finished teams show rank and elapsed time
+- playing teams show seal progress
+- House standings show average progress, team count, escaped teams and average successful escape time
+- no student names are rendered
+- standalone `leaderboard.html` is included for projector use
