@@ -2580,3 +2580,425 @@ body.modal-open {
     flex-direction: column;
   }
 }
+
+
+/* ========================================================================== */
+/* TASK 6F — COMPLETION ROUTE, VAULT TRANSITION, VICTORY STATE               */
+/* ========================================================================== */
+
+.vault-route-overlay {
+  position: absolute;
+  z-index: 5;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  pointer-events: none;
+  overflow: visible;
+  opacity: 0;
+  transform: scale(.985);
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.freeze-board.has-final-route .vault-route-overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.vault-route-shadow,
+.vault-route-line {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vault-route-shadow {
+  stroke: rgba(9,33,64,.58);
+  stroke-width: 9;
+}
+
+.vault-route-line {
+  stroke: #d393a0;
+  stroke-width: 5;
+  filter: url(#routeGlow);
+  stroke-dasharray: 11 8;
+  animation: route-dash 8s linear infinite;
+}
+
+.vault-route-nodes circle {
+  fill: #092140;
+  stroke: #f7f4ee;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.vault-route-nodes text {
+  fill: #f7f4ee;
+  text-anchor: middle;
+  font-family: Consolas, monospace;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+@keyframes route-dash {
+  to { stroke-dashoffset: -95; }
+}
+
+.final-route-card {
+  border-left: 3px solid var(--ch-pink);
+  background:
+    linear-gradient(135deg, rgba(211,147,160,.10), rgba(255,255,255,.82));
+}
+
+.final-route-copy {
+  padding: 13px;
+}
+
+.final-route-copy strong {
+  display: block;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-size: 17px;
+}
+
+.final-route-copy p {
+  margin: 6px 0 12px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.final-route-button {
+  width: 100%;
+  min-height: 42px;
+}
+
+.freeze-board.has-final-route .challenge-tile.is-revealed .tile-status {
+  opacity: .92;
+}
+
+.freeze-board.has-final-route .board-centre .centre-window-label {
+  background: rgba(211,147,160,.9);
+  color: #092140;
+}
+
+.freeze-board.has-final-route .board-centre .centre-window-label strong {
+  color: #092140;
+}
+
+.vault-screen {
+  padding: 0;
+  background:
+    radial-gradient(circle at 68% 8%, rgba(221,235,242,.68), transparent 32%),
+    linear-gradient(180deg,#f7f4ee,#e9eff0);
+}
+
+.vault-shell {
+  width: min(1450px,100%);
+  min-height: calc(100vh - 126px);
+  margin: 0 auto;
+  padding: 20px clamp(18px,3vw,42px) 30px;
+}
+
+.vault-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 260px;
+  gap: 24px;
+  padding-top: 26px;
+}
+
+.vault-heading {
+  margin-bottom: 18px;
+}
+
+.vault-heading .protocol {
+  margin-bottom: 6px;
+  font-size: 8px;
+}
+
+.vault-heading h2 {
+  margin: 0;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-size: clamp(42px,5vw,64px);
+  font-weight: 500;
+  letter-spacing: -.04em;
+}
+
+.vault-heading > p:last-child {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.vault-console {
+  width: min(760px,100%);
+  margin: 0 auto;
+  padding: clamp(22px,3vw,34px);
+  border: 1px solid rgba(9,33,64,.2);
+  background:
+    linear-gradient(145deg,#173b60,#092140);
+  box-shadow:
+    0 24px 60px rgba(9,33,64,.2),
+    inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.vault-console-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: rgba(255,255,255,.58);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+
+.vault-console-top strong {
+  color: #d393a0;
+}
+
+.vault-display {
+  margin: 22px 0;
+  padding: 18px;
+  text-align: center;
+  border: 1px solid rgba(221,235,242,.24);
+  background: rgba(1,10,20,.48);
+  box-shadow: inset 0 0 28px rgba(0,0,0,.24);
+}
+
+.vault-display span {
+  display: block;
+  margin-bottom: 10px;
+  color: #a9becb;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+.vault-display strong {
+  color: #f7f4ee;
+  font-family: var(--mono);
+  font-size: clamp(30px,5vw,50px);
+  letter-spacing: .25em;
+}
+
+.vault-keypad-placeholder {
+  width: min(390px,100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+}
+
+.vault-keypad-placeholder button {
+  min-height: 58px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.075);
+  color: rgba(255,255,255,.46);
+  font-family: var(--mono);
+  font-size: 19px;
+}
+
+.vault-framework-note {
+  max-width: 540px;
+  margin: 20px auto 0;
+  padding: 12px 14px;
+  border-left: 3px solid var(--ch-pink);
+  background: rgba(247,244,238,.9);
+  color: #61717d;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.vault-framework-note strong,
+.vault-framework-note span {
+  display: block;
+}
+
+.vault-framework-note strong {
+  color: var(--ch-navy);
+}
+
+.vault-route-summary strong {
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: .07em;
+}
+
+.vault-route-summary p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.victory-screen {
+  min-height: calc(100vh - 126px);
+  padding: 0;
+  background: #092140;
+}
+
+.victory-shell {
+  min-height: calc(100vh - 126px);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 36px 24px;
+}
+
+.victory-campus {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(9,33,64,.78), rgba(9,33,64,.32) 52%, rgba(9,33,64,.62)),
+    url("../assets/game/final-scene-thawed.svg?v=6F1") center / cover no-repeat;
+  filter: saturate(.96);
+  transform: scale(1.02);
+}
+
+.victory-card {
+  position: relative;
+  z-index: 1;
+  width: min(620px,100%);
+  padding: clamp(30px,5vw,52px);
+  text-align: center;
+  border: 1px solid rgba(255,255,255,.34);
+  background: rgba(247,244,238,.94);
+  box-shadow: 0 28px 90px rgba(0,0,0,.34);
+}
+
+.victory-logo {
+  width: min(310px,78%);
+  margin-bottom: 22px;
+}
+
+.victory-status {
+  width: fit-content;
+  margin: 10px auto 14px;
+  padding: 7px 11px;
+  border: 1px solid rgba(66,109,86,.25);
+  background: rgba(75,139,104,.10);
+  color: #426d56;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+
+.victory-card h2 {
+  margin: 0;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-size: clamp(38px,5vw,58px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+
+.victory-team {
+  margin: 17px 0 0;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-size: 25px;
+}
+
+.victory-house {
+  margin: 3px 0 20px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .08em;
+}
+
+.victory-stats {
+  width: min(360px,100%);
+  margin: 0 auto 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(9,33,64,.14);
+  border-bottom: 1px solid rgba(9,33,64,.14);
+}
+
+.victory-stats > div {
+  padding: 14px 10px;
+}
+
+.victory-stats > div + div {
+  border-left: 1px solid rgba(9,33,64,.14);
+}
+
+.victory-stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+
+.victory-stats strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ch-navy);
+  font-family: var(--mono);
+  font-size: 21px;
+}
+
+.victory-message {
+  margin: 0;
+  color: #536372;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.victory-actions {
+  margin-top: 22px;
+}
+
+@media(max-width:850px) {
+  .vault-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .vault-rail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .vault-rail .dashboard-tool-button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media(max-width:620px) {
+  .vault-route-overlay {
+    inset: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+
+  .vault-layout,
+  .vault-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .vault-rail .dashboard-tool-button {
+    grid-column: auto;
+  }
+
+  .victory-shell {
+    padding: 18px 12px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .vault-route-line {
+    animation: none !important;
+  }
+
+  .vault-route-overlay,
+  .victory-campus {
+    transition: none !important;
+    transform: none !important;
+  }
+}

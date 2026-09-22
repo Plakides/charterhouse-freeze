@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=6E2">
-  <link rel="stylesheet" href="css/components.css?v=6E2">
-  <link rel="stylesheet" href="css/animations.css?v=6E2">
+  <link rel="stylesheet" href="css/main.css?v=6F1">
+  <link rel="stylesheet" href="css/components.css?v=6F1">
+  <link rel="stylesheet" href="css/animations.css?v=6F1">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -231,6 +231,23 @@
               </div>
 
               <div class="freeze-board" id="freezeBoard" aria-label="Eight frozen challenge tiles covering one continuous winter scene"><div class="final-scene-layer final-scene-snowy" aria-hidden="true"></div><div class="final-scene-layer final-scene-thawed" aria-hidden="true"></div>
+                <svg class="vault-route-overlay" id="vaultRouteOverlay" viewBox="0 0 300 300" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <filter id="routeGlow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                  </defs>
+                  <path class="vault-route-shadow" d="M150 50 L250 50 L50 50 L50 150 L250 150"/>
+                  <path class="vault-route-line" d="M150 50 L250 50 L50 50 L50 150 L250 150"/>
+                  <g class="vault-route-nodes">
+                    <circle cx="150" cy="50" r="10"/><text x="150" y="54">1</text>
+                    <circle cx="250" cy="50" r="10"/><text x="250" y="54">2</text>
+                    <circle cx="50" cy="50" r="10"/><text x="50" y="54">3</text>
+                    <circle cx="50" cy="150" r="10"/><text x="50" y="154">4</text>
+                    <circle cx="250" cy="150" r="10"/><text x="250" y="154">5</text>
+                  </g>
+                </svg>
                 <button class="challenge-tile" type="button" data-challenge="1" aria-label="Challenge 1: Logic">
                   <span class="tile-number">01</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 13h30v22H9zM14 18h8v8h-8zm12 0h8v4h-8zm0 8h8v4h-8zM14 30h20"/></svg></span><span class="tile-title">LOGIC</span><span class="tile-status">FROZEN</span>
                 </button>
@@ -283,6 +300,20 @@
                 </div>
               </section>
 
+              <section class="sidebar-card final-route-card" id="finalRouteCard" hidden>
+                <div class="sidebar-card-heading">
+                  <span>FINAL ROUTE</span>
+                  <small>UNLOCKED</small>
+                </div>
+                <div class="final-route-copy">
+                  <strong>All eight seals recovered.</strong>
+                  <p>Follow the pink route across the campus. Read the numbers on the five seals it passes, in order.</p>
+                  <button class="button button-primary final-route-button" id="proceedToVaultButton" type="button">
+                    Proceed to Vault <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </section>
+
               <div class="tool-buttons">
                 <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg></span><span><strong>Field Kit</strong><small>Tools & references</small></span><span class="tool-arrow" aria-hidden="true">→</span></button>
                 <button class="dashboard-tool-button" id="leaderboardButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 37V25h7v12m6 0V16h7v21m6 0V10h7v27M7 37h37"/></svg></span><span><strong>Leaderboard</strong><small>Teams & Houses</small></span><span class="tool-arrow" aria-hidden="true">→</span></button>
@@ -294,6 +325,110 @@
         </div>
 
         <div class="dashboard-toast" id="dashboardToast" role="status" aria-live="polite" hidden><strong id="dashboardToastTitle">Challenge content comes next.</strong><span id="dashboardToastText">Task 6A is the visual mission shell only.</span></div>
+      </section>
+
+      <section class="screen vault-screen" id="screenVault" aria-labelledby="vaultTitle" hidden>
+        <div class="vault-shell">
+          <header class="challenge-topbar vault-topbar">
+            <button class="challenge-back-button" id="vaultBackButton" type="button">
+              <span aria-hidden="true">←</span>
+              <span>Final route</span>
+            </button>
+
+            <div class="challenge-team-strip">
+              <span id="vaultTeamName">Team</span>
+              <i aria-hidden="true"></i>
+              <span id="vaultHouse">House</span>
+            </div>
+
+            <div class="challenge-timer-card">
+              <span>ELAPSED TIME</span>
+              <strong id="vaultTimer">0:00</strong>
+            </div>
+          </header>
+
+          <div class="vault-layout">
+            <main class="vault-stage">
+              <div class="vault-heading">
+                <p class="protocol protocol-dark">EMERGENCY CONTROL VAULT</p>
+                <h2 id="vaultTitle">The final lock</h2>
+                <p>Five digits stand between the school and functioning central heating.</p>
+              </div>
+
+              <div class="vault-console">
+                <div class="vault-console-top">
+                  <span>SECURITY VAULT · V-01</span>
+                  <strong>AWAITING CODE</strong>
+                </div>
+
+                <div class="vault-display">
+                  <span>ENTER 5-DIGIT RESTORATION CODE</span>
+                  <strong>• • • • •</strong>
+                </div>
+
+                <div class="vault-keypad-placeholder" aria-label="Vault keypad placeholder">
+                  <button type="button" disabled>1</button><button type="button" disabled>2</button><button type="button" disabled>3</button>
+                  <button type="button" disabled>4</button><button type="button" disabled>5</button><button type="button" disabled>6</button>
+                  <button type="button" disabled>7</button><button type="button" disabled>8</button><button type="button" disabled>9</button>
+                  <button type="button" disabled>⌫</button><button type="button" disabled>0</button><button type="button" disabled>↵</button>
+                </div>
+
+                <div class="vault-framework-note">
+                  <strong>Vault interface ready.</strong>
+                  <span>The working keypad and code submission are installed with the final-vault puzzle in Task 7I.</span>
+                </div>
+              </div>
+            </main>
+
+            <aside class="vault-rail">
+              <section class="challenge-rail-card">
+                <span class="challenge-rail-label">SECURITY SEALS</span>
+                <strong>8 / 8</strong>
+                <span>all recovered</span>
+              </section>
+
+              <section class="challenge-rail-card vault-route-summary">
+                <span class="challenge-rail-label">YOUR CLUE</span>
+                <strong>FOLLOW THE ROUTE</strong>
+                <p>Return to the board if you need to inspect the route and recovered seal numbers again.</p>
+              </section>
+
+              <button class="dashboard-tool-button" id="vaultFieldKitButton" type="button">
+                <span class="tool-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg>
+                </span>
+                <span><strong>Field Kit</strong><small>Tools & references</small></span>
+                <span class="tool-arrow" aria-hidden="true">→</span>
+              </button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen victory-screen" id="screenVictory" aria-labelledby="victoryTitle" hidden>
+        <div class="victory-shell">
+          <div class="victory-campus" aria-hidden="true"></div>
+
+          <div class="victory-card">
+            <img class="victory-logo" src="assets/branding/charterhouse-logo.png" alt="Charterhouse Almaty">
+            <p class="protocol protocol-dark">EMERGENCY CONTROL</p>
+            <div class="victory-status">SYSTEM RESTORED</div>
+            <h2 id="victoryTitle">The school is unfrozen.</h2>
+            <p class="victory-team" id="victoryTeamName">Emergency Team</p>
+            <p class="victory-house" id="victoryHouse">House</p>
+
+            <div class="victory-stats">
+              <div><span>FINAL TIME</span><strong id="victoryTime">0:00</strong></div>
+              <div><span>SEALS</span><strong>8 / 8</strong></div>
+            </div>
+
+            <p class="victory-message">Heating restored to an extravagant 19°C.<br>The snow leopard continues to deny involvement.</p>
+
+            <div class="victory-actions">
+              <button class="button button-secondary" id="victoryLeaderboardButton" type="button">View leaderboard</button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="screen challenge-screen" id="screenChallenge" aria-labelledby="challengeTitle" hidden>
@@ -395,7 +530,7 @@
     <footer class="status-strip">
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
-      <span class="demo-badge">TASK 6E · FIELD KIT + LIVE SCOREBOARD · BUILD 6E2</span>
+      <span class="demo-badge">TASK 6F · COMPLETION + VAULT TRANSITION · BUILD 6F1</span>
     </footer>
   </div>
 
@@ -644,20 +779,20 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=6E2"></script>
-  <script src="js/api.js?v=6E2"></script>
-  <script src="js/state.js?v=6E2"></script>
-  <script src="js/challenges/registry.js?v=6E2"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=6E2"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=6E2"></script>
-  <script src="js/challenges/challenge-03-language.js?v=6E2"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=6E2"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=6E2"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=6E2"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=6E2"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=6E2"></script>
-  <script src="js/field-kit.js?v=6E2"></script>
-  <script src="js/leaderboard.js?v=6E2"></script>
-  <script src="js/app.js?v=6E2"></script>
+  <script src="js/config.js?v=6F1"></script>
+  <script src="js/api.js?v=6F1"></script>
+  <script src="js/state.js?v=6F1"></script>
+  <script src="js/challenges/registry.js?v=6F1"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=6F1"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=6F1"></script>
+  <script src="js/challenges/challenge-03-language.js?v=6F1"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=6F1"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=6F1"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=6F1"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=6F1"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=6F1"></script>
+  <script src="js/field-kit.js?v=6F1"></script>
+  <script src="js/leaderboard.js?v=6F1"></script>
+  <script src="js/app.js?v=6F1"></script>
 </body>
 </html>

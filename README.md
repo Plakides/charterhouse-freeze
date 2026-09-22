@@ -141,3 +141,24 @@ Two issues corrected after live testing:
 2. Public leaderboard reads now use the Apps Script GET endpoint with a 12-second
    timeout instead of the generic POST helper. This makes the public scoreboard
    easier to test directly and prevents an endless "Contacting scoreboard..." state.
+
+
+## Build 6F1 — completion state + vault transition
+Task 6 is now feature-complete as an engine.
+
+### 8/8 seals, not yet escaped
+- all ice is cleared
+- the campus remains snowy
+- a pink final route appears across five seal locations
+- the sidebar exposes `Proceed to Vault`
+- `#vault` supports refresh and browser Back/Forward
+- the vault shell is present but the working keypad is intentionally deferred to Task 7I
+
+### Finished / escaped team
+- refresh goes directly to a real victory screen
+- the non-snowy Charterhouse Almaty campus is shown
+- final elapsed time and House are displayed
+- leaderboard remains accessible
+
+This corrects the story lifecycle: recovering all eight seals reveals the final route,
+but the school only visibly thaws after the final vault has actually been completed.

@@ -143,6 +143,9 @@
     },
     getLeaderboard(payload = {}) {
       return requestPublicGet("getLeaderboard", payload);
+    },
+    submitFinalCode(payload) {
+      return request("submitFinalCode", payload);
     }
   });
 

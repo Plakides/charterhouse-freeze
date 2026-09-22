@@ -15,6 +15,8 @@
     register: document.getElementById("screenRegister"),
     reveal: document.getElementById("screenReveal"),
     mission: document.getElementById("screenMission"),
+    vault: document.getElementById("screenVault"),
+    victory: document.getElementById("screenVictory"),
     challenge: document.getElementById("screenChallenge")
   };
 
@@ -53,6 +55,21 @@
   const bootMessage = document.getElementById("bootMessage");
   const retryConnectionButton = document.getElementById("retryConnectionButton");
   const statusCopy = document.getElementById("statusCopy");
+
+  const finalRouteCard = document.getElementById("finalRouteCard");
+  const proceedToVaultButton = document.getElementById("proceedToVaultButton");
+  const vaultRouteOverlay = document.getElementById("vaultRouteOverlay");
+
+  const vaultBackButton = document.getElementById("vaultBackButton");
+  const vaultTeamName = document.getElementById("vaultTeamName");
+  const vaultHouse = document.getElementById("vaultHouse");
+  const vaultTimer = document.getElementById("vaultTimer");
+  const vaultFieldKitButton = document.getElementById("vaultFieldKitButton");
+
+  const victoryTeamName = document.getElementById("victoryTeamName");
+  const victoryHouse = document.getElementById("victoryHouse");
+  const victoryTime = document.getElementById("victoryTime");
+  const victoryLeaderboardButton = document.getElementById("victoryLeaderboardButton");
 
   const challengeBackButton = document.getElementById("challengeBackButton");
   const challengeTeamName = document.getElementById("challengeTeamName");
@@ -302,6 +319,8 @@
       const display = formatElapsed(Number(team.elapsedSeconds));
       missionTimer.textContent = display;
       challengeTimer.textContent = display;
+      vaultTimer.textContent = display;
+      vaultTimer.textContent = display;
       return;
     }
 
@@ -310,6 +329,7 @@
     if (!Number.isFinite(startMs)) {
       missionTimer.textContent = "--:--";
       challengeTimer.textContent = "--:--";
+      vaultTimer.textContent = "--:--";
       return;
     }
 
@@ -382,7 +402,7 @@
         };
       });
       next.completedCount = next.completed.length;
-      next.finished = next.completed.length === 8;
+      next.finished = false;
     }
 
     if (thawDemoMode) {
@@ -490,6 +510,21 @@
     }
   }
 
+  function setFinalRouteVisible(visible) {
+    const show = Boolean(visible);
+
+    freezeBoard.classList.toggle("has-final-route", show);
+    finalRouteCard.hidden = !show;
+
+    const labelSpan = freezeBoard.querySelector(".centre-window-label span");
+    const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
+
+    if (show && labelSpan && labelStrong) {
+      labelSpan.textContent = "FINAL ROUTE";
+      labelStrong.textContent = "UNLOCKED";
+    }
+  }
+
   function setTileRevealed(tile, revealed, animate = false) {
     if (!tile) return;
 
@@ -524,6 +559,7 @@
       setTileRevealed(tile, false, false);
     });
     setFinalSceneThawed(false);
+    setFinalRouteVisible(false);
   }
 
   function renderSealGrid(team) {
@@ -610,8 +646,14 @@
 
     renderSealGrid(team);
 
-    if (team.finished || Number(team.completedCount) >= 8) {
+    const allSealsRecovered = Number(team.completedCount) >= 8;
+
+    if (team.finished) {
       setFinalSceneThawed(true);
+      setFinalRouteVisible(false);
+    } else if (allSealsRecovered) {
+      setFinalSceneThawed(false);
+      setFinalRouteVisible(true);
     }
   }
 
@@ -628,11 +670,53 @@
       return `PROGRESS DEMO: dashboard is simulating ${team.completedCount}/8 completed challenges.`;
     }
 
-    if (team.finished || Number(team.completedCount) >= 8) {
-      return "All eight seals are secure. The school is now fully unfrozen.";
+    if (team.finished) {
+      return "SYSTEM RESTORED. The school is fully unfrozen.";
+    }
+
+    if (Number(team.completedCount) >= 8) {
+      return "All eight seals are secure. Final route unlocked. The vault remains sealed.";
     }
 
     return bulletinLines[Math.floor(Math.random() * bulletinLines.length)];
+  }
+
+  function showVault(team, options = {}) {
+    if (!team || Number(team.completedCount) < 8 || team.finished) {
+      showMission(team);
+      return;
+    }
+
+    currentChallengeId = null;
+
+    const house = team.house || "";
+    const houseLabel = team.houseName || houseNames[house] || house;
+
+    vaultTeamName.textContent = team.teamName || "Emergency Team";
+    vaultHouse.textContent = `${houseLabel} House`;
+
+    startClientTimer(team);
+    showScreen("vault");
+    setStatus(`${team.teamName} has reached the emergency control vault.`);
+
+    if (options.pushHistory !== false && window.location.hash !== "#vault") {
+      window.history.pushState({ screen: "vault" }, "", "#vault");
+    }
+  }
+
+  function showVictory(team) {
+    currentChallengeId = null;
+    stopBackgroundSync();
+
+    const house = team.house || "";
+    const houseLabel = team.houseName || houseNames[house] || house;
+
+    victoryTeamName.textContent = team.teamName || "Emergency Team";
+    victoryHouse.textContent = `${houseLabel} House`;
+    victoryTime.textContent = formatElapsed(Number(team.elapsedSeconds) || 0);
+
+    showScreen("victory");
+    setStatus(`${team.teamName} restored the school systems.`);
   }
 
   function showMission(rawTeam, options = {}) {
@@ -640,6 +724,11 @@
     const previousTeam = options.previousTeam ? applyDemoOverrides(options.previousTeam) : null;
 
     currentTeam = team;
+
+    if (team.finished && options.forceBoard !== true) {
+      showVictory(team);
+      return;
+    }
 
     const house = team.house || "";
     const houseLabel = team.houseName || houseNames[house] || house;
@@ -660,9 +749,9 @@
 
     applyRealProgress(team, previousTeam, options.animateNew === true);
 
-    if (team.finished || completed >= 8) {
-      missionState.innerHTML = '<i aria-hidden="true"></i> COMPLETE';
-      setStatus(`${team.teamName} completed the mission.`);
+    if (completed >= 8) {
+      missionState.innerHTML = '<i aria-hidden="true"></i> VAULT READY';
+      setStatus(`${team.teamName} recovered all eight seals. Final vault unlocked.`);
     } else {
       missionState.innerHTML = '<i aria-hidden="true"></i> ACTIVE';
       setStatus(`${team.teamName} mission timer is running.`);
@@ -843,9 +932,28 @@
   }
 
   function routeFromCurrentHash() {
+    if (!currentTeam || !currentTeam.started) {
+      return false;
+    }
+
+    if (window.location.hash === "#vault") {
+      if (Number(currentTeam.completedCount) >= 8 && !currentTeam.finished) {
+        showVault(currentTeam, { pushHistory: false });
+        return true;
+      }
+
+      window.history.replaceState(
+        { screen: "mission" },
+        "",
+        window.location.pathname + window.location.search
+      );
+      showMission(currentTeam);
+      return false;
+    }
+
     const challengeId = readChallengeFromHash();
 
-    if (!challengeId || !currentTeam || !currentTeam.started) {
+    if (!challengeId) {
       return false;
     }
 
@@ -1151,10 +1259,11 @@
 
       if (remainingFrozen === 0) {
         window.setTimeout(() => {
-          setFinalSceneThawed(true);
+          setFinalSceneThawed(false);
+          setFinalRouteVisible(true);
           showDashboardToast(
-            "School unfrozen",
-            "All eight ice sections are clear. The board has switched to the non-snowy campus image."
+            "Final route unlocked",
+            "All eight ice sections are clear. Follow the pink route to the emergency vault."
           );
         }, 700);
       } else {
@@ -1210,6 +1319,12 @@
   window.addEventListener("popstate", () => {
     if (!currentTeam || !currentTeam.started) return;
 
+    if (window.location.hash === "#vault") {
+      challengeHistoryPushed = false;
+      showVault(currentTeam, { pushHistory: false });
+      return;
+    }
+
     const challengeId = readChallengeFromHash();
 
     if (challengeId) {
@@ -1220,6 +1335,28 @@
 
     currentChallengeId = null;
     showMission(currentTeam);
+  });
+
+  proceedToVaultButton.addEventListener("click", () => {
+    if (!currentTeam || Number(currentTeam.completedCount) < 8 || currentTeam.finished) return;
+    showVault(currentTeam);
+  });
+
+  vaultBackButton.addEventListener("click", () => {
+    window.history.replaceState(
+      { screen: "mission" },
+      "",
+      window.location.pathname + window.location.search
+    );
+    showMission(currentTeam, { forceBoard: true });
+  });
+
+  vaultFieldKitButton.addEventListener("click", () => {
+    window.FREEZE_FIELD_KIT?.open();
+  });
+
+  victoryLeaderboardButton.addEventListener("click", () => {
+    window.FREEZE_LEADERBOARD?.open("teams");
   });
 
   fieldKitButton.addEventListener("click", () => {
@@ -1251,11 +1388,16 @@
     if (currentTeam && currentTeam.started) {
       currentChallengeId = null;
       window.history.replaceState(
-        { screen: "mission" },
+        { screen: currentTeam.finished ? "victory" : "mission" },
         "",
         window.location.pathname + window.location.search
       );
-      showMission(currentTeam);
+
+      if (currentTeam.finished) {
+        showVictory(currentTeam);
+      } else {
+        showMission(currentTeam, { forceBoard: true });
+      }
       return;
     }
 
