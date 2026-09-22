@@ -129,3 +129,15 @@ Useful and red-herring tools deliberately share the same visual treatment.
 - House standings show average progress, team count, escaped teams and average successful escape time
 - no student names are rendered
 - standalone `leaderboard.html` is included for projector use
+
+
+## Build 6E2 hotfix
+Two issues corrected after live testing:
+
+1. The standalone projector page inherited the global `main { display:flex }`
+   rule from the student site, which compressed the scoreboard horizontally.
+   `leaderboard.html` now explicitly uses a normal block layout.
+
+2. Public leaderboard reads now use the Apps Script GET endpoint with a 12-second
+   timeout instead of the generic POST helper. This makes the public scoreboard
+   easier to test directly and prevents an endless "Contacting scoreboard..." state.

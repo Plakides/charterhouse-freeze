@@ -224,9 +224,12 @@
 
       const status = root.querySelector("[data-leader-status]");
       if (status) {
+        const timedOut = error && error.code === "API_TIMEOUT";
         status.textContent = lastData
           ? "Live refresh delayed · showing last result"
-          : "Scoreboard unavailable · retry";
+          : timedOut
+            ? "Scoreboard timed out · retry"
+            : "Scoreboard unavailable · retry";
       }
 
       if (!lastData) {
@@ -235,7 +238,7 @@
         const failure = `
           <div class="leader-empty">
             <strong>Could not reach the scoreboard.</strong>
-            <span>Your mission is unaffected. Retry in a moment.</span>
+            <span>The game backend is separate from this display. Use Refresh or test the public leaderboard endpoint directly.</span>
           </div>
         `;
         if (teamsTarget) teamsTarget.innerHTML = failure;
