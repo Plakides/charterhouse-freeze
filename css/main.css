@@ -103,7 +103,7 @@ input:focus-visible {
   background: var(--ch-pink);
 }
 
-main {
+.site-shell > main {
   flex: 1;
   display: flex;
   min-height: 0;
@@ -3005,8 +3005,48 @@ body.modal-open {
 
 
 /* ========================================================================== */
-/* TASK 7A — HOUSE OF CONFUSION                                               */
+/* TASK 7A2 — HOUSE OF CONFUSION                                              */
 /* ========================================================================== */
+
+/* Nested <main> elements are content regions, not the root app flex container. */
+.challenge-stage,
+.vault-stage {
+  display: block;
+  min-width: 0;
+}
+
+.challenge-screen .challenge-shell {
+  padding-top: 14px;
+}
+
+.challenge-screen .challenge-layout {
+  padding-top: 15px;
+}
+
+.challenge-screen .challenge-heading {
+  grid-template-columns: 62px minmax(0,1fr) 72px;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.challenge-screen .challenge-number-block {
+  width: 62px;
+  height: 62px;
+}
+
+.challenge-screen .challenge-heading-copy h2 {
+  font-size: clamp(31px,3vw,45px);
+}
+
+.challenge-screen .challenge-heading-copy > p:last-child {
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.challenge-screen .challenge-duration {
+  min-width: 72px;
+  padding: 8px;
+}
 
 .challenge-content-card.logic-challenge-content {
   min-height: 0;
@@ -3020,8 +3060,8 @@ body.modal-open {
 
 .logic-puzzle {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 290px;
-  min-height: 390px;
+  grid-template-columns: minmax(0,1fr) 270px;
+  min-height: 382px;
   border: 1px solid rgba(9,33,64,.15);
   background: rgba(255,255,255,.72);
   box-shadow: 0 14px 38px rgba(9,33,64,.06);
@@ -3029,25 +3069,25 @@ body.modal-open {
 
 .logic-scene {
   min-width: 0;
-  padding: 20px;
+  padding: 15px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(221,235,242,.52), transparent 34%),
-    rgba(247,244,238,.66);
+    radial-gradient(circle at 45% 0%, rgba(221,235,242,.58), transparent 35%),
+    rgba(247,244,238,.68);
 }
 
 .logic-scene-heading {
+  min-height: 43px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  margin-bottom: 7px;
+  gap: 16px;
 }
 
 .logic-scene-heading > div:first-child > span {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   color: #8d6070;
-  font-size: 7px;
+  font-size: 6px;
   font-weight: 900;
   letter-spacing: .15em;
 }
@@ -3056,49 +3096,54 @@ body.modal-open {
   margin: 0;
   color: var(--ch-navy);
   font-family: var(--serif);
-  font-size: 29px;
+  font-size: 25px;
   font-weight: 500;
 }
 
 .logic-key-icon {
-  width: 46px;
-  height: 46px;
-  padding: 7px;
+  width: 38px;
+  height: 38px;
+  padding: 6px;
   border: 1px solid rgba(9,33,64,.14);
-  background: rgba(255,255,255,.68);
+  background: rgba(255,255,255,.72);
   color: #547187;
 }
 
-.logic-key-icon svg {
+.logic-key-icon svg,
+.logic-evidence-icon svg,
+.logic-clue-icon svg {
   width: 100%;
   height: 100%;
   fill: none;
   stroke: currentColor;
-  stroke-width: 3.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
+.logic-key-icon svg {
+  stroke-width: 3.5;
+}
+
 .logic-brief {
-  max-width: 650px !important;
-  margin: 0 0 16px !important;
+  max-width: 680px !important;
+  margin: 4px 0 11px !important;
   color: var(--muted) !important;
-  font-size: 11px !important;
-  line-height: 1.45 !important;
+  font-size: 9px !important;
+  line-height: 1.4 !important;
 }
 
 .logic-suspects {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 9px;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 8px;
 }
 
 .logic-suspect {
   min-width: 0;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(9,33,64,.15);
-  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(9,33,64,.14);
+  background: rgba(255,255,255,.9);
   transition:
     opacity .18s ease,
     transform .18s ease,
@@ -3107,175 +3152,169 @@ body.modal-open {
 }
 
 .logic-suspect.is-selected {
-  border-color: rgba(211,147,160,.95);
+  border-color: rgba(211,147,160,.96);
   box-shadow:
-    0 0 0 2px rgba(211,147,160,.18),
-    0 10px 24px rgba(9,33,64,.08);
+    0 0 0 2px rgba(211,147,160,.20),
+    0 9px 22px rgba(9,33,64,.08);
   transform: translateY(-2px);
 }
 
+.logic-suspect.is-selected .logic-suspect-select {
+  background:
+    linear-gradient(180deg,rgba(211,147,160,.17),rgba(255,255,255,.7));
+}
+
 .logic-suspect.is-eliminated {
-  opacity: .38;
-  filter: grayscale(.75);
+  opacity: .35;
+  filter: grayscale(.72);
 }
 
 .logic-suspect.is-eliminated::after {
   content: "";
   position: absolute;
-  z-index: 4;
-  left: 8%;
-  top: 46%;
-  width: 84%;
-  height: 2px;
-  background: rgba(126,47,55,.8);
-  transform: rotate(-18deg);
+  z-index: 6;
+  left: 5%;
+  top: 42%;
+  width: 90%;
+  height: 3px;
+  background: rgba(126,47,55,.82);
+  transform: rotate(-17deg);
   pointer-events: none;
 }
 
 .logic-suspect-select {
   width: 100%;
   appearance: none;
-  padding: 12px 8px 10px;
+  padding: 6px 6px 7px;
   display: grid;
   justify-items: center;
   border: 0;
-  border-bottom: 1px solid rgba(9,33,64,.1);
+  border-bottom: 1px solid rgba(9,33,64,.09);
   background:
-    linear-gradient(180deg, rgba(221,235,242,.55), rgba(255,255,255,.25));
+    linear-gradient(180deg,rgba(221,235,242,.45),rgba(255,255,255,.4));
   color: var(--ch-navy);
 }
 
 .logic-suspect-select:hover {
   background:
-    linear-gradient(180deg, rgba(211,147,160,.15), rgba(255,255,255,.45));
+    linear-gradient(180deg,rgba(211,147,160,.14),rgba(255,255,255,.58));
 }
 
-.logic-avatar {
-  width: 58px;
-  height: 58px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  margin-bottom: 7px;
-  border: 1px solid rgba(9,33,64,.17);
-  border-radius: 50%;
-  overflow: hidden;
-  background: #e8f0f3;
-  color: rgba(9,33,64,.38);
-}
-
-.logic-avatar-head {
-  position: absolute;
-  width: 17px;
-  height: 17px;
-  top: 10px;
-  border-radius: 50%;
-  background: #7893a5;
-}
-
-.logic-avatar-body {
-  position: absolute;
-  width: 39px;
-  height: 29px;
-  top: 29px;
-  border-radius: 22px 22px 4px 4px;
-  background: #9db5c3;
-}
-
-.logic-avatar strong {
-  position: relative;
-  z-index: 2;
-  width: 21px;
-  height: 21px;
-  margin-top: 29px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: rgba(247,244,238,.9);
-  color: var(--ch-navy);
-  font-family: var(--serif);
-  font-size: 11px;
+.logic-student-portrait {
+  display: block;
+  width: 100%;
+  max-height: 116px;
+  margin-bottom: 3px;
 }
 
 .logic-name {
   font-family: var(--serif);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .logic-select-copy {
-  margin-top: 3px;
+  margin-top: 1px;
   color: #8c737d;
-  font-size: 6px;
+  font-size: 5px;
   font-weight: 900;
-  letter-spacing: .15em;
+  letter-spacing: .13em;
 }
 
-.logic-facts {
-  margin: 0;
-  padding: 8px 9px;
+.logic-evidence-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid rgba(9,33,64,.08);
 }
 
-.logic-facts > div {
-  min-height: 29px;
-  padding: 4px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  border-bottom: 1px solid rgba(9,33,64,.07);
-}
-
-.logic-facts > div:last-child {
-  border-bottom: 0;
-}
-
-.logic-facts dt {
-  color: #83909a;
-  font-size: 6px;
-  font-weight: 900;
-  letter-spacing: .1em;
-}
-
-.logic-facts dd {
-  margin: 0;
-  display: flex;
-  align-items: center;
+.logic-evidence-item {
+  min-width: 0;
+  padding: 6px 5px;
+  display: grid;
+  grid-template-columns: 24px minmax(0,1fr);
   gap: 5px;
+  align-items: center;
+  border-right: 1px solid rgba(9,33,64,.07);
+}
+
+.logic-evidence-item:last-child {
+  border-right: 0;
+}
+
+.logic-evidence-icon {
+  width: 23px;
+  height: 23px;
+  color: #58758a;
+}
+
+.logic-evidence-icon svg {
+  stroke-width: 2.3;
+}
+
+.logic-evidence-item small,
+.logic-fact-row small {
+  display: block;
+  color: #8a969f;
+  font-size: 5px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.logic-evidence-item strong,
+.logic-fact-row strong {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
   color: var(--ch-navy);
-  font-size: 9px;
-  font-weight: 800;
+  font-size: 8px;
+  line-height: 1.15;
+}
+
+.logic-fact-row {
+  min-height: 35px;
+  padding: 5px 6px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  align-items: center;
+}
+
+.logic-fact-row > span:first-child {
+  min-width: 0;
 }
 
 .logic-colour-dot {
   width: 8px;
   height: 8px;
+  flex: 0 0 auto;
   display: inline-block;
   border-radius: 50%;
   border: 1px solid rgba(9,33,64,.18);
 }
 
-.logic-colour-dot.is-blue { background: #6a94b2; }
-.logic-colour-dot.is-red { background: #b46970; }
+.logic-colour-dot.is-blue { background:#6090b0; }
+.logic-colour-dot.is-red { background:#b7656b; }
 
 .logic-locker {
   min-width: 22px;
   justify-content: center;
-  padding: 2px 5px;
+  padding: 3px 6px;
   background: var(--ch-navy);
-  color: white !important;
+  color: #fff !important;
   font-family: var(--mono);
+  font-size: 9px !important;
 }
 
 .logic-eliminate {
-  width: calc(100% - 16px);
-  min-height: 28px;
-  margin: 0 8px 9px;
+  width: calc(100% - 12px);
+  min-height: 24px;
+  margin: 0 6px 6px;
   appearance: none;
   border: 1px dashed rgba(9,33,64,.18);
   background: transparent;
   color: #697a86;
-  font-size: 7px;
+  font-size: 6px;
   font-weight: 850;
 }
 
@@ -3285,74 +3324,86 @@ body.modal-open {
 }
 
 .logic-clue-board {
-  padding: 18px 16px;
+  padding: 14px 13px;
   border-left: 1px solid rgba(9,33,64,.13);
   background:
-    linear-gradient(180deg, rgba(9,33,64,.035), transparent 50%),
+    linear-gradient(180deg,rgba(9,33,64,.035),transparent 52%),
     #eeeae2;
 }
 
 .logic-clue-heading {
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   border-bottom: 1px solid rgba(9,33,64,.14);
 }
 
 .logic-clue-heading span {
   display: block;
   color: #93606b;
-  font-size: 7px;
+  font-size: 6px;
   font-weight: 900;
   letter-spacing: .14em;
 }
 
 .logic-clue-heading strong {
   display: block;
-  margin-top: 3px;
+  margin-top: 2px;
   color: var(--ch-navy);
   font-family: var(--serif);
-  font-size: 19px;
+  font-size: 17px;
 }
 
 .logic-clues {
   margin: 0;
-  padding: 9px 0 0;
+  padding: 6px 0 0;
   list-style: none;
 }
 
 .logic-clues li {
-  min-height: 49px;
-  padding: 8px 0;
+  min-height: 50px;
+  padding: 7px 0;
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 38px 1fr;
   gap: 7px;
+  align-items: center;
   border-bottom: 1px solid rgba(9,33,64,.09);
 }
 
-.logic-clues li > span {
-  width: 25px;
-  height: 25px;
+.logic-clue-icon {
+  width: 34px;
+  height: 34px;
+  padding: 6px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(9,33,64,.13);
+  border: 1px solid rgba(9,33,64,.12);
   background: rgba(255,255,255,.62);
-  color: #8c6472;
+  color: #607e91;
+}
+
+.logic-clue-icon svg {
+  stroke-width: 2.4;
+}
+
+.logic-clues small {
+  display: block;
+  margin-bottom: 1px;
+  color: #a46a77;
   font-family: var(--mono);
-  font-size: 7px;
+  font-size: 6px;
   font-weight: 900;
 }
 
 .logic-clues p {
-  margin: 1px 0 0;
+  margin: 0;
   color: #42566a;
-  font-size: 10px;
-  line-height: 1.35;
+  font-size: 9px;
+  line-height: 1.3;
 }
 
 .logic-tip {
-  margin-top: 12px;
-  padding: 9px 10px;
+  margin-top: 9px;
+  padding: 8px 9px;
   border-left: 3px solid var(--ch-pink);
-  background: rgba(255,255,255,.58);
+  background: rgba(255,255,255,.62);
 }
 
 .logic-tip strong,
@@ -3362,23 +3413,40 @@ body.modal-open {
 
 .logic-tip strong {
   color: var(--ch-navy);
-  font-size: 9px;
+  font-size: 8px;
 }
 
 .logic-tip span {
   margin-top: 2px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 7px;
   line-height: 1.35;
 }
 
-@media(max-width:1050px) {
+.challenge-screen .challenge-answer-panel {
+  margin-top: 9px;
+  padding: 10px 12px;
+}
+
+.challenge-screen .challenge-answer-controls input {
+  min-height: 42px;
+}
+
+.challenge-screen .challenge-answer-controls .button {
+  min-height: 42px;
+}
+
+@media(max-width:1100px) {
   .logic-puzzle {
-    grid-template-columns: 1fr 250px;
+    grid-template-columns: 1fr 235px;
   }
 
   .logic-suspects {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .logic-student-portrait {
+    max-height: 130px;
   }
 }
 

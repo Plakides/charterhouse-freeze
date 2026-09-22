@@ -190,3 +190,17 @@ The student cards are interactive:
 ## Server validation
 No Apps Script update is required.
 The existing server-side Challenge 1 answer is `amina`, with case/whitespace normalisation.
+
+
+## Build 7A2 correction
+The first 7A build exposed a global CSS collision: the root site's `main` flex rule
+was also being applied to the nested challenge `<main>` element, which crushed the
+challenge into columns.
+
+7A2 fixes the selector at source and upgrades the puzzle visuals:
+- four distinct illustrated fictional student CCTV cards
+- visible scarf colours
+- visible backpack/satchel
+- visible book/compass evidence
+- visual clue icons alongside the written clues
+- more compact challenge header so the full puzzle reads properly at 1366×768
