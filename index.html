@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Great Charterhouse Freeze</title>
+  <meta name="description" content="Charterhouse Almaty House Challenge">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="site-shell" id="app">
+    <header class="brand-bar">
+      <button class="brand-home" id="brandHome" type="button" aria-label="Return to the opening screen">
+        <img src="assets/branding/charterhouse-logo.png" alt="Charterhouse Almaty">
+      </button>
+      <div class="brand-meta" aria-label="Game context">
+        <span class="eyebrow">HOUSE CHALLENGE</span>
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>ALMATY · SEPTEMBER 2026</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="screen boot-screen is-active" id="screenBoot" aria-labelledby="bootTitle">
+        <div class="boot-panel">
+          <div class="boot-mark" aria-hidden="true">CH</div>
+          <p class="protocol protocol-dark">EMERGENCY CONTROL</p>
+          <h1 id="bootTitle">Reconnecting systems</h1>
+          <p id="bootMessage">Checking this device for an existing emergency team…</p>
+          <div class="boot-spinner" aria-hidden="true"></div>
+          <button class="button button-secondary" id="retryConnectionButton" type="button" hidden>
+            Retry connection
+          </button>
+        </div>
+      </section>
+
+      <section class="screen" id="screenStart" aria-labelledby="startTitle" hidden>
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="protocol">EMERGENCY PROTOCOL 09</p>
+            <h1 id="startTitle">The Great<br>Charterhouse Freeze</h1>
+            <p class="hero-lede">
+              An unexplained systems failure has frozen Charterhouse Almaty.
+              Eight security seals are missing.
+            </p>
+            <div class="snow-leopard-note">
+              <span class="status-lamp" aria-hidden="true"></span>
+              <span>The snow leopard denies involvement.</span>
+            </div>
+            <button class="button button-primary button-large" id="beginButton" type="button">
+              Begin emergency response
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="freeze-orb">
+              <div class="freeze-orb-inner">
+                <span class="orb-label">SYSTEM STATUS</span>
+                <strong>73%</strong>
+                <span>FROZEN</span>
+              </div>
+            </div>
+            <div class="weather-card">
+              <span>EXTERNAL CONDITIONS</span>
+              <strong>Character-building</strong>
+            </div>
+          </div>
+        </div>
+        <div class="mountain-band" aria-hidden="true"></div>
+      </section>
+
+      <section class="screen registration-screen" id="screenRegister" aria-labelledby="registerTitle" hidden>
+        <div class="section-heading">
+          <p class="protocol protocol-dark">EMERGENCY RESPONSE TEAM</p>
+          <h2 id="registerTitle">Assemble your team</h2>
+          <p>Choose your House, then enter between two and four team members.</p>
+        </div>
+
+        <form id="registrationForm" novalidate>
+          <fieldset class="form-section">
+            <legend>
+              <span class="step-number">01</span>
+              Choose your House
+            </legend>
+
+            <div class="house-grid" role="radiogroup" aria-label="Choose your House">
+              <label class="house-card house-thackeray">
+                <input type="radio" name="house" value="thackeray">
+                <span class="house-card-inner">
+                  <img src="assets/branding/thackeray.png" alt="">
+                  <span class="house-name">Thackeray</span>
+                </span>
+              </label>
+
+              <label class="house-card house-baden-powell">
+                <input type="radio" name="house" value="baden-powell">
+                <span class="house-card-inner">
+                  <img src="assets/branding/baden-powell.png" alt="">
+                  <span class="house-name">Baden-Powell</span>
+                </span>
+              </label>
+
+              <label class="house-card house-wesley">
+                <input type="radio" name="house" value="wesley">
+                <span class="house-card-inner">
+                  <img src="assets/branding/wesley.png" alt="">
+                  <span class="house-name">Wesley</span>
+                </span>
+              </label>
+
+              <label class="house-card house-portman">
+                <input type="radio" name="house" value="portman">
+                <span class="house-card-inner">
+                  <img src="assets/branding/portman.png" alt="">
+                  <span class="house-name">Portman</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>
+              <span class="step-number">02</span>
+              Identify your team
+            </legend>
+
+            <div class="member-grid" id="memberGrid">
+              <label class="member-field">
+                <span>Student 1 <b>required</b></span>
+                <input type="text" name="student1" maxlength="50" autocomplete="off" placeholder="First name" required>
+              </label>
+              <label class="member-field">
+                <span>Student 2 <b>required</b></span>
+                <input type="text" name="student2" maxlength="50" autocomplete="off" placeholder="First name" required>
+              </label>
+              <label class="member-field optional-member is-hidden" data-member="3">
+                <span>Student 3 <i>optional</i></span>
+                <input type="text" name="student3" maxlength="50" autocomplete="off" placeholder="First name">
+              </label>
+              <label class="member-field optional-member is-hidden" data-member="4">
+                <span>Student 4 <i>optional</i></span>
+                <input type="text" name="student4" maxlength="50" autocomplete="off" placeholder="First name">
+              </label>
+            </div>
+
+            <div class="member-actions">
+              <button class="text-button" id="addMemberButton" type="button">+ Add another team member</button>
+              <span class="member-count" id="memberCount">2 of 4 spaces shown</span>
+            </div>
+          </fieldset>
+
+          <div class="registration-actions">
+            <p class="form-message" id="formMessage" role="alert" aria-live="polite"></p>
+            <button class="button button-primary" type="submit">
+              <span class="button-label">Assign team codename</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="screen reveal-screen" id="screenReveal" aria-labelledby="revealTitle" hidden>
+        <div class="reveal-panel">
+          <div class="seal-ring" aria-hidden="true">
+            <span>CH</span>
+          </div>
+          <p class="protocol protocol-dark">TEAM ASSIGNED</p>
+          <h2 id="revealTitle">Your emergency codename is</h2>
+          <p class="team-name" id="teamName">Suspicious Baursaks</p>
+
+          <div class="team-summary">
+            <div>
+              <span>HOUSE</span>
+              <strong id="summaryHouse">Baden-Powell</strong>
+            </div>
+            <div>
+              <span>TEAM</span>
+              <strong id="summaryMembers">3 students</strong>
+            </div>
+            <div>
+              <span>STATUS</span>
+              <strong>Ready</strong>
+            </div>
+          </div>
+
+          <div class="reveal-warning">
+            The timer does not begin until you press <strong>Start mission</strong>.
+          </div>
+
+          <p class="form-message reveal-error" id="startMissionError" role="alert" aria-live="polite" hidden></p>
+          <button class="button button-primary button-large" id="startMissionButton" type="button">
+            <span class="button-label">Start mission</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen mission-screen" id="screenMission" aria-labelledby="missionTitle" hidden>
+        <div class="mission-holding-card">
+          <div class="mission-status-row">
+            <span class="mission-live-dot" aria-hidden="true"></span>
+            <span id="missionState">MISSION ACTIVE</span>
+          </div>
+
+          <p class="protocol protocol-dark">EMERGENCY RESPONSE TEAM</p>
+          <h2 id="missionTitle">
+            <span id="missionTeamName">Suspicious Baursaks</span>
+          </h2>
+          <p class="mission-house" id="missionHouse">Baden-Powell House</p>
+
+          <div class="mission-timer-block">
+            <span>ELAPSED TIME</span>
+            <strong id="missionTimer">0:00</strong>
+          </div>
+
+          <p class="mission-progress" id="missionProgress">0/8 security seals recovered</p>
+
+          <div class="mission-placeholder">
+            <strong>Mission session secured.</strong>
+            <span>The frozen 3×3 challenge board is the next build stage.</span>
+          </div>
+
+          <p class="mission-refresh-note">
+            You can refresh or accidentally close this page. This device will reconnect to the same team and the timer will not reset.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="status-strip">
+      <span>CHARTERHOUSE ALMATY</span>
+      <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
+      <span class="demo-badge">TASK 5C · PERSISTENT SESSION</span>
+    </footer>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
