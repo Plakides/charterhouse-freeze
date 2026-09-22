@@ -78,6 +78,9 @@
   let currentTeam = null;
   let timerInterval = null;
   let restoring = false;
+  const urlParams = new URL(window.location.href).searchParams;
+  const iceDemoMode = urlParams.get("iceDemo") === "1";
+  const thawDemoMode = urlParams.get("thawDemo") === "1";
 
   function showScreen(name) {
     Object.entries(screens).forEach(([key, section]) => {
@@ -258,6 +261,59 @@
     timerInterval = window.setInterval(update, 1000);
   }
 
+  function setFinalSceneThawed(thawed) {
+    freezeBoard.classList.toggle("is-thawed", Boolean(thawed));
+
+    const labelSpan = freezeBoard.querySelector(".centre-window-label span");
+    const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
+
+    if (labelSpan && labelStrong) {
+      if (thawed) {
+        labelSpan.textContent = "SCHOOL STATUS";
+        labelStrong.textContent = "UNFROZEN";
+      } else {
+        labelSpan.textContent = "CONTROL CORE";
+        labelStrong.textContent = "VISIBLE";
+      }
+    }
+  }
+
+  function setTileRevealed(tile, revealed, animate = false) {
+    if (!tile) return;
+
+    const status = tile.querySelector(".tile-status");
+
+    if (!revealed) {
+      tile.classList.remove("is-revealed", "is-revealing");
+      tile.disabled = false;
+      tile.setAttribute("aria-disabled", "false");
+      if (status) status.textContent = "FROZEN";
+      return;
+    }
+
+    if (animate && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      tile.classList.add("is-revealing");
+      window.setTimeout(() => {
+        tile.classList.remove("is-revealing");
+        tile.classList.add("is-revealed");
+      }, 650);
+    } else {
+      tile.classList.remove("is-revealing");
+      tile.classList.add("is-revealed");
+    }
+
+    tile.disabled = true;
+    tile.setAttribute("aria-disabled", "true");
+    if (status) status.textContent = "SEAL RECOVERED";
+  }
+
+  function resetIceBoard() {
+    freezeBoard.querySelectorAll(".challenge-tile").forEach(tile => {
+      setTileRevealed(tile, false, false);
+    });
+    setFinalSceneThawed(false);
+  }
+
   function showMission(team) {
     currentTeam = team;
 
@@ -278,13 +334,14 @@
     }
     dashboardHouseMark.dataset.house = house;
 
-    freezeBoard.querySelectorAll(".challenge-tile").forEach(tile => {
-      tile.classList.remove("is-complete");
-      const status = tile.querySelector(".tile-status");
-      if (status) status.textContent = "FROZEN";
-    });
+    resetIceBoard();
 
-    if (team.finished) {
+    if (team.finished || completed >= 8 || thawDemoMode) {
+      setFinalSceneThawed(true);
+      freezeBoard.querySelectorAll(".challenge-tile").forEach(tile => setTileRevealed(tile, true, false));
+    }
+
+    if (team.finished || completed >= 8 || thawDemoMode) {
       missionState.innerHTML = '<i aria-hidden="true"></i> COMPLETE';
       setStatus(`${team.teamName} completed the mission.`);
     } else {
@@ -293,6 +350,15 @@
     }
 
     emergencyBulletin.textContent = bulletinLines[Math.floor(Math.random() * bulletinLines.length)];
+
+    if (iceDemoMode) {
+      emergencyBulletin.textContent = "6B ICE DEMO: click frozen tiles to preview the reveal animation. Backend progress is untouched.";
+    }
+
+    if (thawDemoMode) {
+      emergencyBulletin.textContent = "6B THAW DEMO: the school is fully unfrozen and the non-snowy campus image is now showing.";
+    }
+
     startClientTimer(team);
     showScreen("mission");
   }
@@ -387,9 +453,36 @@
   freezeBoard.addEventListener("click", event => {
     const tile = event.target.closest(".challenge-tile");
     if (!tile) return;
+
     const challengeNumber = tile.dataset.challenge || "?";
     const title = tile.querySelector(".tile-title")?.textContent || "Challenge";
-    showDashboardToast(`Challenge ${challengeNumber}: ${title}`, "Challenge navigation arrives in Task 6D.");
+
+    if (iceDemoMode) {
+      setTileRevealed(tile, true, true);
+
+      const remainingFrozen = freezeBoard.querySelectorAll(".challenge-tile:not(.is-revealed):not(.is-revealing)").length;
+
+      if (remainingFrozen === 0) {
+        window.setTimeout(() => {
+          setFinalSceneThawed(true);
+          showDashboardToast(
+            "School unfrozen",
+            "All eight ice sections are clear. The board has switched to the non-snowy campus image."
+          );
+        }, 700);
+      } else {
+        showDashboardToast(
+          `Ice section ${challengeNumber} released`,
+          "6B visual demo only. No backend progress was changed."
+        );
+      }
+      return;
+    }
+
+    showDashboardToast(
+      `Challenge ${challengeNumber}: ${title}`,
+      "Challenge navigation arrives in Task 6D."
+    );
   });
 
   fieldKitButton.addEventListener("click", () => {

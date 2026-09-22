@@ -772,3 +772,301 @@ main {
 @media(max-width:1100px){.dashboard-main{grid-template-columns:minmax(0,1fr) 245px;gap:14px}.freeze-board{height:clamp(360px,calc(100vh - 330px),445px)}.seal-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:850px){.dashboard-shell{min-height:auto}.dashboard-main{grid-template-columns:1fr}.freeze-board{height:auto;aspect-ratio:1.55}.mission-sidebar{grid-template-columns:1fr 1fr}.tool-buttons,.emergency-card{grid-column:1/-1}.seal-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:620px){.dashboard-topbar{height:auto;min-height:68px;align-items:flex-start}.dashboard-house-mark{width:48px;height:48px;flex-basis:48px}.dashboard-house-mark img{width:38px;height:40px}.dashboard-timer-card{min-width:95px;padding-inline:8px}.dashboard-timer-card strong{font-size:25px}.freeze-board{aspect-ratio:.84}.challenge-tile{padding:7px}.tile-icon{width:23px;height:23px}.tile-title{font-size:8px}.tile-status{font-size:6px}.mission-sidebar{grid-template-columns:1fr}.tool-buttons,.emergency-card{grid-column:auto}}
+
+
+/* ========================================================================== */
+/* TASK 6B — ONE CONTINUOUS FINAL SCENE + ICE REVEAL SYSTEM                  */
+/* ========================================================================== */
+
+.freeze-board {
+  isolation: isolate;
+  background: #adc5d2;
+}
+
+.final-scene-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 7px;
+  pointer-events: none;
+  background:
+    url("../assets/game/final-scene-snowy.svg?v=6B4") center center / 100% 100% no-repeat;
+  opacity: 1;
+  transition: opacity .65s ease;
+  filter: saturate(.9) contrast(1.02);
+}
+
+.final-scene-thawed {
+  background: url("../assets/game/final-scene-thawed.svg?v=6B4") center center / 100% 100% no-repeat;
+  opacity: 0;
+}
+
+.freeze-board.is-thawed .final-scene-snowy {
+  opacity: 0;
+}
+
+.freeze-board.is-thawed .final-scene-thawed {
+  opacity: 1;
+}
+
+.freeze-board.is-thawed {
+  box-shadow:
+    0 18px 45px rgba(9,33,64,.08),
+    inset 0 0 0 1px rgba(255,255,255,.8),
+    0 0 0 2px rgba(211,147,160,.18);
+}
+
+.freeze-board.is-thawed::before {
+  opacity: .08;
+}
+
+.freeze-board.is-thawed .board-centre {
+  box-shadow:
+    inset 0 0 0 1px rgba(247,244,238,.46),
+    inset 0 0 22px rgba(247,244,238,.08);
+}
+
+.freeze-board.is-thawed .centre-window-label {
+  background: rgba(79,139,106,.86);
+}
+
+.freeze-board.is-thawed .centre-window-label strong {
+  color: #f7f4ee;
+}
+
+.freeze-board::before {
+  z-index: 1;
+  opacity: .2;
+  background:
+    radial-gradient(circle at 48% 43%, rgba(255,255,255,.15), transparent 36%),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(9,33,64,.04));
+}
+
+.challenge-tile,
+.board-centre {
+  z-index: 2;
+}
+
+/* The tile is an actual ice cover. The scene is not duplicated inside tiles. */
+.challenge-tile {
+  --ice-opacity: 1;
+  border-color: rgba(255,255,255,.64);
+  background:
+    linear-gradient(145deg,
+      rgba(242,249,252,.91),
+      rgba(183,211,224,.86) 48%,
+      rgba(114,151,173,.83)),
+    rgba(205,225,234,.92);
+  box-shadow:
+    inset 0 0 32px rgba(255,255,255,.58),
+    inset 0 -18px 30px rgba(71,105,130,.18),
+    0 0 0 1px rgba(58,92,116,.11);
+  backdrop-filter: blur(1.2px) saturate(.78);
+  -webkit-backdrop-filter: blur(1.2px) saturate(.78);
+  transition:
+    transform .16s ease,
+    box-shadow .16s ease,
+    border-color .16s ease,
+    background-color .4s ease,
+    opacity .55s ease,
+    filter .45s ease;
+}
+
+.challenge-tile::before {
+  width: auto;
+  height: auto;
+  inset: 0;
+  transform: none;
+  background:
+    url("../assets/game/ice-cracks.svg?v=6B4") center / 118% 118% no-repeat;
+  box-shadow: none;
+  opacity: .82;
+  transition: opacity .45s ease, transform .55s ease;
+}
+
+.challenge-tile::after {
+  inset: 0;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255,255,255,.86) 0 1px, transparent 2px),
+    radial-gradient(circle at 69% 31%, rgba(255,255,255,.64) 0 1px, transparent 2px),
+    radial-gradient(circle at 88% 78%, rgba(255,255,255,.52) 0 1px, transparent 2px),
+    linear-gradient(118deg, transparent 0 34%, rgba(255,255,255,.28) 35%, transparent 36% 100%);
+  background-size: 45px 45px, 73px 73px, 91px 91px, 100% 100%;
+  opacity: .78;
+  transition: opacity .4s ease;
+}
+
+.tile-number {
+  padding: 3px 5px;
+  margin: -3px 0 0 -3px;
+  background: rgba(247,244,238,.56);
+  border: 1px solid rgba(9,33,64,.08);
+}
+
+.tile-title {
+  text-shadow: 0 1px rgba(255,255,255,.45);
+}
+
+.tile-status::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #7293a7;
+  vertical-align: 1px;
+}
+
+/* Centre is simply a window through the ONE background image. */
+.board-centre {
+  overflow: hidden;
+  border: 1px solid rgba(247,244,238,.58);
+  background: transparent;
+  box-shadow:
+    inset 0 0 0 1px rgba(9,33,64,.2),
+    inset 0 0 26px rgba(9,33,64,.14);
+}
+
+.board-centre::before {
+  display: none;
+}
+
+.centre-window-label {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 18px);
+  padding: 6px 10px 5px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  background: rgba(9,33,64,.82);
+  border: 1px solid rgba(247,244,238,.4);
+  box-shadow: 0 5px 18px rgba(9,33,64,.18);
+  color: var(--cream);
+}
+
+.centre-window-label span {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.centre-window-label strong {
+  color: var(--ch-pink);
+  font-size: 8px;
+  letter-spacing: .14em;
+}
+
+/* Prepared solved/revealed state. Task 6C will apply this from backend state. */
+.challenge-tile.is-revealing {
+  pointer-events: none;
+  animation: ice-release .72s cubic-bezier(.2,.75,.25,1) both;
+}
+
+.challenge-tile.is-revealed {
+  cursor: default;
+  border-color: rgba(247,244,238,.42);
+  background: rgba(221,235,242,.055);
+  box-shadow:
+    inset 0 0 0 1px rgba(247,244,238,.18),
+    0 0 0 1px rgba(9,33,64,.06);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.challenge-tile.is-revealed::before,
+.challenge-tile.is-revealed::after {
+  opacity: 0;
+}
+
+.challenge-tile.is-revealed .tile-icon,
+.challenge-tile.is-revealed .tile-title {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.challenge-tile.is-revealed .tile-number {
+  color: rgba(247,244,238,.94);
+  background: rgba(9,33,64,.66);
+  border-color: rgba(247,244,238,.22);
+}
+
+.challenge-tile.is-revealed .tile-status {
+  justify-self: start;
+  width: auto;
+  padding: 5px 7px;
+  border: 1px solid rgba(247,244,238,.32);
+  background: rgba(9,33,64,.72);
+  color: #f7f4ee;
+  text-shadow: none;
+}
+
+.challenge-tile.is-revealed .tile-status::before {
+  background: #b8d8c6;
+}
+
+.challenge-tile.is-revealed:hover {
+  transform: none;
+  filter: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(247,244,238,.18),
+    0 0 0 1px rgba(9,33,64,.06);
+}
+
+.freeze-board.is-thawed .challenge-tile.is-revealed {
+  background: rgba(255,255,255,.02);
+}
+
+.challenge-tile.is-revealed .tile-icon,
+.challenge-tile.is-revealed .tile-title,
+.challenge-tile.is-revealed .tile-status {
+  transition: opacity .32s ease, transform .32s ease;
+}
+
+@keyframes ice-release {
+  0% {
+    filter: brightness(1) saturate(1);
+  }
+  28% {
+    filter: brightness(1.22) saturate(.72);
+    transform: scale(1.012);
+  }
+  54% {
+    filter: brightness(1.1) saturate(.6);
+  }
+  100% {
+    filter: brightness(1) saturate(1);
+    transform: scale(1);
+  }
+}
+
+/* A brief fracture flash, created without an extra image per tile. */
+.challenge-tile.is-revealing::before {
+  animation: crack-flash .72s ease both;
+}
+
+@keyframes crack-flash {
+  0% { opacity: .82; filter: brightness(1); transform: scale(1); }
+  24% { opacity: 1; filter: brightness(1.9); transform: scale(1.035); }
+  56% { opacity: .72; filter: brightness(1.25); transform: scale(1.06); }
+  100% { opacity: 0; filter: brightness(1); transform: scale(1.09); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .challenge-tile.is-revealing,
+  .challenge-tile.is-revealing::before {
+    animation: none !important;
+  }
+}
+
+@media(max-width:620px) {
+  .centre-window-label {
+    padding: 4px 6px;
+    gap: 5px;
+  }
+  .centre-window-label span { font-size: 6px; }
+  .centre-window-label strong { font-size: 7px; }
+}
