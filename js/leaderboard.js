@@ -2,7 +2,7 @@
   "use strict";
 
   const api = window.FREEZE_API;
-  const REFRESH_MS = 15000;
+  const REFRESH_MS = 0;
 
   const houseMeta = {
     "thackeray": {
@@ -217,7 +217,7 @@
 
       const status = root.querySelector("[data-leader-status]");
       if (status) {
-        status.textContent = "Live scoreboard";
+        status.textContent = "Local preview · shared leaderboard sync arrives in Task 8E";
       }
     } catch (error) {
       console.error("Leaderboard refresh failed:", error);
@@ -253,7 +253,10 @@
   function startRefresh(root = overlay || document) {
     stopRefresh();
     refresh(root);
-    refreshTimer = window.setInterval(() => refresh(root), REFRESH_MS);
+
+    if (REFRESH_MS > 0) {
+      refreshTimer = window.setInterval(() => refresh(root), REFRESH_MS);
+    }
   }
 
   function stopRefresh() {

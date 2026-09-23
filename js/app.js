@@ -269,6 +269,8 @@
         return "The codename generator has run out of ideas. Please tell your tutor.";
       case "MISSION_ALREADY_FINISHED":
         return "This team has already completed the mission.";
+      case "OFFLINE_VALIDATION_PENDING":
+        return "Task 8A proves the offline foundation. Local challenge checking is switched on in Tasks 8B/8C.";
       case "NETWORK_ERROR":
         return "The emergency network could not be reached. Check Wi-Fi and try again.";
       default:
@@ -1016,6 +1018,13 @@
       return;
     }
 
+    if (window.FREEZE_CONFIG?.OFFLINE_ANSWER_ENGINE_READY !== true) {
+      challengeMessage.textContent =
+        "8A foundation test: registration, Start Mission and refresh are now fully local. Puzzle answer checking moves local in 8B/8C.";
+      challengeMessage.classList.remove("is-success");
+      return;
+    }
+
     const answer = challengeAnswerInput.value.trim();
 
     if (!answer) {
@@ -1145,67 +1154,21 @@
       return;
     }
 
-    const cachedTeam = stateStore.loadSnapshot(currentSession.teamId);
-
-    // Instant restore: render the last safe, non-sensitive team snapshot before
-    // waiting for Apps Script / Google Sheets. Backend remains authoritative.
-    if (cachedTeam) {
-      currentTeam = cachedTeam;
-
-      if (cachedTeam.started) {
-        showMission(cachedTeam);
-        setStatus(`${cachedTeam.teamName} restored locally. Checking live state…`);
-      } else {
-        revealTeam(cachedTeam);
-        setStatus(`${cachedTeam.teamName} restored locally. Checking registration…`);
-      }
-    } else {
-      bootMessage.textContent = "Existing team found. Reconnecting to Charterhouse emergency control…";
-      showScreen("boot");
-      setStatus("Reconnecting to live mission state…");
-    }
-
     try {
       const team = await api.getTeamState(currentSession);
-      const previousTeam = currentTeam;
-
       currentTeam = team;
       persistTeamSnapshot(team);
 
       if (team.started) {
-        showMission(team, {
-          previousTeam,
-          animateNew: false
-        });
+        showMission(team, { animateNew: false });
+        setStatus(`${team.teamName} restored instantly from this device.`);
       } else {
         revealTeam(team);
-        setStatus(`${team.teamName} session restored. Timer has not started.`);
+        setStatus(`${team.teamName} restored from this device. Timer has not started.`);
       }
     } catch (error) {
-      console.error("Session restore failed:", error);
-
-      if (isDeadSessionError(error)) {
-        clearSessionAndReturnHome("Saved session was no longer valid. Start a new team.");
-        return;
-      }
-
-      if (cachedTeam) {
-        // Keep the immediately restored screen visible. Do not punish the team
-        // with a blocking reconnect page just because Google is slow.
-        setStatus("Live check is slow. Using the saved team state for now.");
-
-        if (cachedTeam.started) {
-          emergencyBulletin.textContent =
-            "Emergency network is slow. Your saved mission state is still available on this device.";
-        }
-
-        return;
-      }
-
-      bootMessage.textContent =
-        "The saved team is still on this device, but the emergency network could not be reached.";
-      retryConnectionButton.hidden = false;
-      setStatus("Could not reconnect. Saved team has not been erased.");
+      console.error("Local session restore failed:", error);
+      clearSessionAndReturnHome("The saved local team could not be restored. Start a new team.");
     } finally {
       restoring = false;
     }
@@ -1226,51 +1189,22 @@
   }
 
   async function syncTeamStateSilently() {
-    if (!currentSession || syncInFlight || !dashboardVisible || iceDemoMode) return;
-
-    if (!currentTeam || !currentTeam.started || currentTeam.finished) {
-      return;
-    }
-
-    syncInFlight = true;
+    // Task 8A: canonical gameplay state already lives on this device.
+    // No polling and no network request is required.
+    if (!currentSession || !dashboardVisible) return;
 
     try {
       const team = await api.getTeamState(currentSession);
-      const previousTeam = currentTeam;
-
       currentTeam = team;
       persistTeamSnapshot(team);
-
-      showMission(team, {
-        skipScreen: true,
-        previousTeam,
-        animateNew: true
-      });
     } catch (error) {
-      console.warn("Silent mission sync failed:", error);
-
-      if (isDeadSessionError(error)) {
-        clearSessionAndReturnHome("Team session expired. Please register again.");
-      }
-    } finally {
-      syncInFlight = false;
+      console.warn("Local state refresh failed:", error);
     }
   }
 
   function startBackgroundSync() {
+    // Intentionally empty in the offline-first foundation.
     stopBackgroundSync();
-
-    if (
-      !currentSession ||
-      !dashboardVisible ||
-      iceDemoMode ||
-      thawDemoMode ||
-      Boolean(progressDemoRaw)
-    ) return;
-
-    if (!currentTeam || !currentTeam.started || currentTeam.finished) return;
-
-    syncInterval = window.setInterval(syncTeamStateSilently, 30000);
   }
 
   function stopBackgroundSync() {
@@ -1467,7 +1401,7 @@
 
     formMessage.textContent = "";
     setRegistrationBusy(true);
-    setStatus("Contacting Charterhouse emergency network…");
+    setStatus("Creating this team on this device…");
 
     try {
       const team = await api.registerTeam({
@@ -1497,7 +1431,7 @@
     if (!currentSession || startMissionButton.disabled) return;
 
     setStartBusy(true);
-    setStatus("Starting mission timer…");
+    setStatus("Starting mission timer on this device…");
 
     try {
       const team = await api.startMission(currentSession);

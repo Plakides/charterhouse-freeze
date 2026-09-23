@@ -212,3 +212,45 @@ challenge into columns.
 - Challenge 1 clues still resolve uniquely to **Amina**.
 - Correct answers now apply an immediate optimistic reveal on the mission board, then silently reconcile with the backend.
 - API requests now retry once if Apps Script returns a temporary unreadable response.
+
+
+# V2 / Task 8A — Offline-first foundation
+
+This build deliberately removes Google Apps Script and Google Sheets from the
+gameplay path.
+
+## What is authoritative now
+
+The current device stores one versioned game record:
+
+`charterhouseFreeze.v2.game`
+
+It contains:
+- local team ID and private local token
+- generated team codename
+- House
+- first names (device only)
+- registration/start times
+- completed challenge IDs
+- recovered seals
+- finish state
+- a placeholder sync section for the later Cloudflare leaderboard queue
+
+## What works with zero network after the page itself has loaded
+
+- register a new team
+- generate a team codename
+- reveal the team
+- start the mission timer
+- enter the mission dashboard
+- refresh/reopen the page and restore the same team instantly
+- local timer recovery from the stored start timestamp
+- local leaderboard preview for the current device
+
+## Intentionally NOT switched on yet
+
+Challenge-answer checking remains disabled in 8A. That is the next local-engine
+step (8B/8C). Cloud leaderboard sync is also deliberately absent until 8D–8G.
+
+There are no `fetch()` calls in `api.js`, no Google Apps Script URL, and no
+30-second remote gameplay polling.
