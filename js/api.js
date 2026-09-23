@@ -3,9 +3,14 @@
 
   const config = window.FREEZE_CONFIG || {};
   const stateStore = window.FREEZE_STATE;
+  const answerEngine = window.FREEZE_ANSWER_ENGINE;
 
   if (!stateStore) {
     throw new Error("FREEZE_STATE must load before FREEZE_API.");
+  }
+
+  if (!answerEngine) {
+    throw new Error("FREEZE_ANSWER_ENGINE must load before FREEZE_API.");
   }
 
   class FreezeApiError extends Error {
@@ -35,24 +40,6 @@
     7: Object.freeze({ challengeId: 7, symbol: "key", number: 9, label: "Key" }),
     8: Object.freeze({ challengeId: 8, symbol: "compass", number: 3, label: "Compass" })
   });
-
-  function normaliseAnswer(value) {
-    return String(value || "")
-      .normalize("NFKC")
-      .trim()
-      .replace(/\s+/g, " ")
-      .toLocaleLowerCase("en-GB");
-  }
-
-  function isLocallyAcceptedAnswer(challengeId, answer) {
-    // Task 8B only proves the mutation pipeline with the one completed puzzle.
-    // Task 8C replaces this temporary direct check with the generic answer engine.
-    if (Number(challengeId) === 1) {
-      return normaliseAnswer(answer) === "amina";
-    }
-
-    return false;
-  }
 
   const adjectives = Object.freeze([
     "Suspicious", "Frozen", "Brave", "Mysterious", "Clever", "Slightly-Lost",
@@ -265,14 +252,16 @@
       };
     }
 
-    if (challengeId !== 1) {
+    const verdict = await answerEngine.validate(challengeId, answer);
+
+    if (!verdict.known) {
       throw new FreezeApiError(
         "CHALLENGE_NOT_READY",
-        "This challenge is not authored yet."
+        "This challenge does not have a local answer definition yet."
       );
     }
 
-    if (!isLocallyAcceptedAnswer(challengeId, answer)) {
+    if (!verdict.correct) {
       return {
         correct: false,
         alreadySolved: false,

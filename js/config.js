@@ -15,7 +15,7 @@
     SYNC_ENABLED: false,
     SYNC_URL: null,
 
-    // Task 8B proves end-to-end local challenge completion and persistence.
+    // Task 8C uses the generic normalized/hashed local answer engine.
     // Challenge 01 is currently the only authored/active puzzle.
     OFFLINE_ANSWER_ENGINE_READY: true,
     LOCAL_PROGRESS_ENGINE_READY: true

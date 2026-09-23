@@ -284,3 +284,35 @@ There is still no network request anywhere in gameplay.
 
 Task 8C will replace the temporary direct Challenge 01 answer comparison with
 the reusable normalized/hashed offline answer system for all puzzle types.
+
+
+# Task 8C — Generic local answer engine
+
+8B is frozen.
+
+Challenge validation is no longer hard-coded inside `api.js`.
+
+New module:
+`js/answer-engine.js`
+
+It provides:
+- Unicode NFKC normalisation
+- case-insensitive text answers
+- collapsed whitespace
+- reusable `text`, `compact`, and `digits` normalisation modes
+- SHA-256 fingerprints
+- per-challenge pepper values
+- multiple accepted hashes per challenge when aliases are needed
+- a single async `validate(challengeId, rawAnswer)` API
+- no network requests
+
+Challenge 01 is the first registered definition.
+
+Important: hashing is only an obfuscation layer. Browser-side answers can never
+be made genuinely secret from a determined user because the browser itself must
+be capable of deciding whether an answer is correct. The goal is reliability
+and avoiding an obvious plaintext answer table, not pretending client-side
+validation is a secure server.
+
+Future puzzle work should add its accepted answer fingerprints to the answer
+engine rather than adding special-case answer code to `api.js`.
