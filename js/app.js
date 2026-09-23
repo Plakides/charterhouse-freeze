@@ -269,8 +269,10 @@
         return "The codename generator has run out of ideas. Please tell your tutor.";
       case "MISSION_ALREADY_FINISHED":
         return "This team has already completed the mission.";
-      case "OFFLINE_VALIDATION_PENDING":
-        return "Task 8A proves the offline foundation. Local challenge checking is switched on in Tasks 8B/8C.";
+      case "CHALLENGE_NOT_READY":
+        return "That challenge has not been built yet.";
+      case "MISSION_NOT_STARTED":
+        return "Start the mission before submitting answers.";
       case "NETWORK_ERROR":
         return "The emergency network could not be reached. Check Wi-Fi and try again.";
       default:
@@ -1020,7 +1022,7 @@
 
     if (window.FREEZE_CONFIG?.OFFLINE_ANSWER_ENGINE_READY !== true) {
       challengeMessage.textContent =
-        "8A foundation test: registration, Start Mission and refresh are now fully local. Puzzle answer checking moves local in 8B/8C.";
+        "Local challenge engine is not ready in this build.";
       challengeMessage.classList.remove("is-success");
       return;
     }
@@ -1062,9 +1064,10 @@
       challengeSubmitLabel.textContent = "Access granted";
 
       const previousTeam = currentTeam;
-      const optimisticTeam = buildOptimisticSolvedTeam(currentTeam, currentChallengeId);
-      currentTeam = optimisticTeam;
-      persistTeamSnapshot(optimisticTeam);
+      const updatedTeam = result.team || await api.getTeamState(currentSession);
+
+      currentTeam = updatedTeam;
+      persistTeamSnapshot(updatedTeam);
 
       window.setTimeout(() => {
         currentChallengeId = null;
@@ -1073,21 +1076,11 @@
           "",
           window.location.pathname + window.location.search
         );
-        showMission(optimisticTeam, {
+        showMission(updatedTeam, {
           previousTeam,
           animateNew: true
         });
-      }, 650);
-
-      api.getTeamState(currentSession)
-        .then(refreshed => {
-          currentTeam = refreshed;
-          persistTeamSnapshot(refreshed);
-          showMission(refreshed, { skipScreen: true });
-        })
-        .catch(error => {
-          console.warn("Post-submit team sync failed:", error);
-        });
+      }, 300);
     } catch (error) {
       console.error("Challenge submission failed:", error);
       challengeMessage.textContent = mapApiError(error);

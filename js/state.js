@@ -208,6 +208,50 @@
     return saveGame(result || draft);
   }
 
+
+  function completeChallenge(challengeId, seal) {
+    const id = Number(challengeId);
+
+    if (!Number.isInteger(id) || id < 1 || id > 8) {
+      throw new Error("Invalid challenge ID.");
+    }
+
+    if (
+      !seal ||
+      Number(seal.challengeId) !== id ||
+      !String(seal.symbol || "").trim() ||
+      !Number.isFinite(Number(seal.number))
+    ) {
+      throw new Error("Invalid security seal.");
+    }
+
+    return updateGame(draft => {
+      if (!draft.team.started) {
+        throw new Error("Mission has not started.");
+      }
+
+      const completed = new Set(normaliseCompleted(draft.team.completed));
+      completed.add(id);
+      draft.team.completed = Array.from(completed).sort((a, b) => a - b);
+
+      const seals = normaliseSeals(draft.team.seals)
+        .filter(existing => Number(existing.challengeId) !== id);
+
+      seals.push({
+        challengeId: id,
+        symbol: String(seal.symbol),
+        number: Number(seal.number),
+        label: String(seal.label || "")
+      });
+
+      seals.sort((a, b) => a.challengeId - b.challengeId);
+      draft.team.seals = seals;
+      draft.team.status = draft.team.completed.length >= 8 ? "VAULT_READY" : "ACTIVE";
+
+      return draft;
+    });
+  }
+
   function toPublicTeam(team) {
     const value = normaliseTeam(team);
     if (!value) return null;
@@ -324,6 +368,7 @@
     saveGame,
     createGame,
     updateGame,
+    completeChallenge,
     toPublicTeam,
 
     // Existing UI compatibility

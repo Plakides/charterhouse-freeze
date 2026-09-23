@@ -15,8 +15,9 @@
     SYNC_ENABLED: false,
     SYNC_URL: null,
 
-    // Task 8A proves registration/start/restore without network.
-    // Local challenge validation arrives in Tasks 8B/8C.
-    OFFLINE_ANSWER_ENGINE_READY: false
+    // Task 8B proves end-to-end local challenge completion and persistence.
+    // Challenge 01 is currently the only authored/active puzzle.
+    OFFLINE_ANSWER_ENGINE_READY: true,
+    LOCAL_PROGRESS_ENGINE_READY: true
   });
 })();

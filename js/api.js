@@ -24,6 +24,36 @@
     "portman": "Portman"
   });
 
+
+  const sealDefinitions = Object.freeze({
+    1: Object.freeze({ challengeId: 1, symbol: "snow-leopard", number: 4, label: "Snow Leopard" }),
+    2: Object.freeze({ challengeId: 2, symbol: "mountain", number: 8, label: "Mountain" }),
+    3: Object.freeze({ challengeId: 3, symbol: "book", number: 2, label: "Book" }),
+    4: Object.freeze({ challengeId: 4, symbol: "teapot", number: 7, label: "Teapot" }),
+    5: Object.freeze({ challengeId: 5, symbol: "eagle", number: 5, label: "Eagle" }),
+    6: Object.freeze({ challengeId: 6, symbol: "snowflake", number: 1, label: "Snowflake" }),
+    7: Object.freeze({ challengeId: 7, symbol: "key", number: 9, label: "Key" }),
+    8: Object.freeze({ challengeId: 8, symbol: "compass", number: 3, label: "Compass" })
+  });
+
+  function normaliseAnswer(value) {
+    return String(value || "")
+      .normalize("NFKC")
+      .trim()
+      .replace(/\s+/g, " ")
+      .toLocaleLowerCase("en-GB");
+  }
+
+  function isLocallyAcceptedAnswer(challengeId, answer) {
+    // Task 8B only proves the mutation pipeline with the one completed puzzle.
+    // Task 8C replaces this temporary direct check with the generic answer engine.
+    if (Number(challengeId) === 1) {
+      return normaliseAnswer(answer) === "amina";
+    }
+
+    return false;
+  }
+
   const adjectives = Object.freeze([
     "Suspicious", "Frozen", "Brave", "Mysterious", "Clever", "Slightly-Lost",
     "Rapid", "Secret", "Icy", "Unreasonably-Calm", "Heroic", "Sneaky",
@@ -204,12 +234,62 @@
   }
 
   async function submitAnswer(payload = {}) {
-    assertSession(payload);
+    const game = assertSession(payload);
 
-    throw new FreezeApiError(
-      "OFFLINE_VALIDATION_PENDING",
-      "Task 8A is testing offline registration, mission start and refresh recovery. Local puzzle answer checking is added in Tasks 8B/8C."
-    );
+    if (!game.team.started) {
+      throw new FreezeApiError(
+        "MISSION_NOT_STARTED",
+        "Start the mission before submitting challenge answers."
+      );
+    }
+
+    const challengeId = Number(payload.challengeId);
+    const answer = String(payload.answer || "");
+
+    if (!Number.isInteger(challengeId) || challengeId < 1 || challengeId > 8) {
+      throw new FreezeApiError(
+        "INVALID_CHALLENGE",
+        "That challenge number is not valid."
+      );
+    }
+
+    const alreadySolved = Array.isArray(game.team.completed) &&
+      game.team.completed.map(Number).includes(challengeId);
+
+    if (alreadySolved) {
+      return {
+        correct: true,
+        alreadySolved: true,
+        seal: sealDefinitions[challengeId],
+        team: publicTeam(game)
+      };
+    }
+
+    if (challengeId !== 1) {
+      throw new FreezeApiError(
+        "CHALLENGE_NOT_READY",
+        "This challenge is not authored yet."
+      );
+    }
+
+    if (!isLocallyAcceptedAnswer(challengeId, answer)) {
+      return {
+        correct: false,
+        alreadySolved: false,
+        seal: null,
+        team: publicTeam(game)
+      };
+    }
+
+    const seal = sealDefinitions[challengeId];
+    const saved = stateStore.completeChallenge(challengeId, seal);
+
+    return {
+      correct: true,
+      alreadySolved: false,
+      seal,
+      team: publicTeam(saved)
+    };
   }
 
   async function submitFinalCode(payload = {}) {

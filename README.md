@@ -254,3 +254,33 @@ step (8B/8C). Cloud leaderboard sync is also deliberately absent until 8D–8G.
 
 There are no `fetch()` calls in `api.js`, no Google Apps Script URL, and no
 30-second remote gameplay polling.
+
+
+# Task 8B — Local gameplay state
+
+8A is frozen.
+
+8B proves the next critical path: a correct challenge answer commits progress
+directly to the local canonical game state and the dashboard immediately
+reflects it.
+
+Current authored puzzle:
+- Challenge 01 — House of Confusion
+- accepted answer for this temporary 8B proof: `Amina`
+- awarded seal: Snow Leopard / 4
+
+The completion mutation itself is generic:
+`FREEZE_STATE.completeChallenge(challengeId, seal)`
+
+That mutation:
+- atomically adds the challenge to the completed set
+- atomically records/replaces its seal
+- keeps challenge IDs/seals sorted
+- prevents duplicate progress
+- updates status to ACTIVE / VAULT_READY
+- persists immediately to `charterhouseFreeze.v2.game`
+
+There is still no network request anywhere in gameplay.
+
+Task 8C will replace the temporary direct Challenge 01 answer comparison with
+the reusable normalized/hashed offline answer system for all puzzle types.
