@@ -87,9 +87,25 @@
   }
 
   function newSyncState(existing = {}) {
+    const queue = Array.isArray(existing.queue)
+      ? existing.queue
+          .filter(item => item && typeof item === "object")
+          .map(item => ({ ...item }))
+      : [];
+
+    const maxQueuedSeq = queue.reduce(
+      (maximum, item) => Math.max(maximum, Number(item.seq) || 0),
+      0
+    );
+
     return {
       enabled: Boolean(existing.enabled),
-      queue: Array.isArray(existing.queue) ? existing.queue : [],
+      nextSeq: Math.max(
+        1,
+        Number(existing.nextSeq) || 1,
+        maxQueuedSeq + 1
+      ),
+      queue,
       lastAttempt: existing.lastAttempt || null,
       lastSuccess: existing.lastSuccess || null,
       lastError: existing.lastError || null
@@ -188,6 +204,7 @@
       team: normalisedTeam,
       sync: {
         enabled: false,
+        nextSeq: 1,
         queue: [],
         lastAttempt: null,
         lastSuccess: null,

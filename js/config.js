@@ -10,8 +10,8 @@
     MODE: "offline-first",
     SCHEMA_VERSION: 2,
 
-    // Cloud sync is deliberately OFF in Task 8A.
-    // It will be introduced later as optional leaderboard-only sync.
+    // Task 8D records outbound leaderboard updates locally.
+    // Transport remains OFF until the Cloudflare receiver is added in 8E.
     SYNC_ENABLED: false,
     SYNC_URL: null,
 

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Charterhouse Freeze · 8E Receiver Test</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #092140; background: #f7f4ee; }
+    body { margin: 0; padding: 32px; }
+    main { max-width: 900px; margin: auto; }
+    h1 { font-family: Georgia, serif; font-size: 42px; margin-bottom: 8px; }
+    p { line-height: 1.5; }
+    label { display: grid; gap: 7px; margin: 24px 0; font-weight: 800; }
+    input { padding: 12px; font: inherit; border: 1px solid #7893a5; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+    button { padding: 11px 16px; border: 0; background: #092140; color: white; font-weight: 800; cursor: pointer; }
+    button.secondary { background: #d393a0; color: #20171a; }
+    pre { margin-top: 24px; min-height: 260px; padding: 18px; overflow: auto; background: #081a31; color: #eef6fa; }
+    .status { margin-top: 16px; font-weight: 800; }
+  </style>
+</head>
+<body>
+<main>
+  <p>Task 8E1 · Cloudflare Receiver Test</p>
+  <h1>Leaderboard receiver</h1>
+  <p>This page is only for infrastructure testing. It is not part of the student game.</p>
+
+  <label>
+    Worker base URL
+    <input id="url" placeholder="https://charterhouse-freeze-leaderboard.YOURSUBDOMAIN.workers.dev">
+  </label>
+
+  <div class="buttons">
+    <button id="health">1. Test health</button>
+    <button id="send" class="secondary">2. Send same event 5×</button>
+    <button id="board">3. Read leaderboard</button>
+  </div>
+
+  <div class="status" id="status">Waiting.</div>
+  <pre id="output"></pre>
+</main>
+
+<script>
+const output = document.getElementById("output");
+const status = document.getElementById("status");
+const urlInput = document.getElementById("url");
+
+function baseUrl() {
+  return urlInput.value.trim().replace(/\/+$/, "");
+}
+
+async function showRequest(label, fn) {
+  const url = baseUrl();
+  if (!url) {
+    status.textContent = "Enter the Worker URL first.";
+    return;
+  }
+
+  status.textContent = label + "…";
+  try {
+    const result = await fn(url);
+    output.textContent = JSON.stringify(result, null, 2);
+    status.textContent = label + " passed.";
+  } catch (error) {
+    output.textContent = String(error && error.stack || error);
+    status.textContent = label + " failed.";
+  }
+}
+
+document.getElementById("health").addEventListener("click", () =>
+  showRequest("Health", async url => {
+    const response = await fetch(url + "/health", { cache: "no-store" });
+    return response.json();
+  })
+);
+
+document.getElementById("send").addEventListener("click", () =>
+  showRequest("Duplicate-event test", async url => {
+    const event = {
+      eventId: "CF-Q7N2K4M8-1-BROWSER-DEMO",
+      seq: 1,
+      type: "REGISTER",
+      createdAt: new Date().toISOString(),
+      teamId: "CF-Q7N2K4M8",
+      teamName: "Suspicious Baursaks",
+      house: "baden-powell",
+      completedCount: 0,
+      elapsedSeconds: 0,
+      finished: false,
+      finishTime: null
+    };
+
+    const responses = [];
+    for (let i = 0; i < 5; i += 1) {
+      const response = await fetch(url + "/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ events: [event] })
+      });
+      responses.push(await response.json());
+    }
+    return responses;
+  })
+);
+
+document.getElementById("board").addEventListener("click", () =>
+  showRequest("Leaderboard read", async url => {
+    const response = await fetch(url + "/leaderboard", { cache: "no-store" });
+    return response.json();
+  })
+);
+</script>
+</body>
+</html>

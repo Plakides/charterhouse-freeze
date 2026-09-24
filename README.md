@@ -316,3 +316,69 @@ validation is a secure server.
 
 Future puzzle work should add its accepted answer fingerprints to the answer
 engine rather than adding special-case answer code to `api.js`.
+
+
+# Task 8D — Persistent outbound leaderboard queue
+
+8C is frozen.
+
+New module:
+`js/sync-queue.js`
+
+Gameplay is still 100% local. Nothing is transmitted in this build.
+
+Meaningful local changes now create tiny leaderboard-safe queue records:
+- `REGISTER`
+- `START`
+- `PROGRESS`
+- `FINISH` (supported by the queue ready for the vault stage)
+
+Each record has:
+- unique `eventId`
+- increasing `seq`
+- event type/time
+- team ID/codename
+- House
+- completed challenge count
+- elapsed seconds
+- finish state
+
+It explicitly does NOT include:
+- student names
+- local session token
+- answer attempts
+- puzzle answers
+
+`PROGRESS` coalesces: if several progress changes happen before the network can
+send anything, only the latest unsent progress snapshot is retained. This keeps
+the queue tiny even during a long outage.
+
+The queue lives inside the canonical V2 game record and therefore survives
+refresh/reopen. 8E will add the Cloudflare receiver; 8F will add opportunistic
+background flushing.
+
+
+# Task 8E — Cloudflare leaderboard receiver
+
+8D is frozen.
+
+This build adds the remote receiver as a separate `cloudflare-worker/` folder.
+The student game still has `SYNC_ENABLED: false`, so gameplay remains exactly
+as reliable/offline as 8D until Task 8F deliberately connects the queue.
+
+Receiver properties:
+- Cloudflare Worker + D1
+- `POST /sync` accepts one or a batch of events
+- prepared D1 statements
+- team row upsert
+- strictly newer `seq` wins
+- stale/duplicate events are harmless
+- progress cannot decrease
+- finished state cannot regress
+- CORS defaults to `https://plakides.github.io`
+- `GET /health`
+- `GET /leaderboard` for testing/future 8G use
+
+The repository also contains `cloudflare-test.html`, an unlinked test page that
+can health-check the deployed Worker, send the same event five times, and read
+the leaderboard.

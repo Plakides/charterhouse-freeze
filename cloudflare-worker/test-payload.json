@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "eventId": "CF-Q7N2K4M8-1-DEMO01",
+      "seq": 1,
+      "type": "REGISTER",
+      "createdAt": "2026-09-23T12:00:00.000Z",
+      "teamId": "CF-Q7N2K4M8",
+      "teamName": "Suspicious Baursaks",
+      "house": "baden-powell",
+      "completedCount": 0,
+      "elapsedSeconds": 0,
+      "finished": false,
+      "finishTime": null
+    }
+  ]
+}

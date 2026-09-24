@@ -4,6 +4,7 @@
   const config = window.FREEZE_CONFIG || {};
   const stateStore = window.FREEZE_STATE;
   const answerEngine = window.FREEZE_ANSWER_ENGINE;
+  const syncQueue = window.FREEZE_SYNC_QUEUE;
 
   if (!stateStore) {
     throw new Error("FREEZE_STATE must load before FREEZE_API.");
@@ -11,6 +12,10 @@
 
   if (!answerEngine) {
     throw new Error("FREEZE_ANSWER_ENGINE must load before FREEZE_API.");
+  }
+
+  if (!syncQueue) {
+    throw new Error("FREEZE_SYNC_QUEUE must load before FREEZE_API.");
   }
 
   class FreezeApiError extends Error {
@@ -192,15 +197,19 @@
     };
 
     const game = stateStore.createGame(team);
+    syncQueue.enqueue("REGISTER");
+    const saved = stateStore.loadGame();
 
     return {
-      ...publicTeam(game),
-      token: game.team.token
+      ...publicTeam(saved),
+      token: saved.team.token
     };
   }
 
   async function startMission(payload = {}) {
     assertSession(payload);
+
+    const wasStarted = Boolean(stateStore.loadGame()?.team?.started);
 
     const saved = stateStore.updateGame(draft => {
       if (!draft.team.startTime) {
@@ -212,7 +221,11 @@
       return draft;
     });
 
-    return publicTeam(saved);
+    if (!wasStarted) {
+      syncQueue.enqueue("START");
+    }
+
+    return publicTeam(stateStore.loadGame() || saved);
   }
 
   async function getTeamState(payload = {}) {
@@ -272,12 +285,14 @@
 
     const seal = sealDefinitions[challengeId];
     const saved = stateStore.completeChallenge(challengeId, seal);
+    syncQueue.enqueue("PROGRESS");
+    const queuedState = stateStore.loadGame() || saved;
 
     return {
       correct: true,
       alreadySolved: false,
       seal,
-      team: publicTeam(saved)
+      team: publicTeam(queuedState)
     };
   }
 
