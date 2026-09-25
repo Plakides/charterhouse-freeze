@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Charterhouse Freeze · 8J Load Test</title>
+  <style>
+    :root{font-family:system-ui,sans-serif;color:#092140;background:#eef3f6}*{box-sizing:border-box}
+    body{margin:0;padding:28px}main{max-width:1080px;margin:auto}h1,h2{font-family:Georgia,serif}h1{font-size:48px;margin:6px 0 12px}
+    .eyebrow{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#627789}
+    .panel{background:white;border:1px solid rgba(9,33,64,.12);box-shadow:0 14px 38px rgba(9,33,64,.08);padding:20px;margin:18px 0}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}label{display:grid;gap:6px;font-weight:800}
+    input,select{width:100%;padding:10px 12px;font:inherit;border:1px solid #9aaab5;background:white}.warning{background:#fff4df;border-left:4px solid #b98532;padding:12px 14px;line-height:1.45;margin-top:14px}
+    .confirm{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;margin-top:14px}.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    button{border:0;padding:11px 16px;font:inherit;font-weight:900;cursor:pointer;background:#092140;color:white}button.secondary{background:#d393a0;color:#20171a}button.ghost{background:#dfe8ed;color:#092140}button:disabled{opacity:.45;cursor:not-allowed}
+    .status{margin-top:14px;font-weight:900;min-height:1.5em}.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:16px}
+    .metric{background:#f7f4ee;padding:12px;min-height:88px;border:1px solid rgba(9,33,64,.08)}.metric strong{display:block;font-size:24px;font-family:Georgia,serif}.metric span{font-size:12px;color:#647484}
+    table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}th,td{padding:9px 8px;text-align:left;border-bottom:1px solid #dfe6ea}th{font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+    .pass{color:#2e724a;font-weight:900}.fail{color:#974343;font-weight:900}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:14px;background:#071a33;color:#edf5fa;min-height:100px;max-height:420px;overflow:auto}
+    .cleanup{font-family:Consolas,monospace;background:#f7f4ee;border:1px solid #d6dde2;padding:12px;overflow-wrap:anywhere}@media(max-width:820px){.grid,.metrics{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Task 8J1 · infrastructure test only</div>
+  <h1>Load & resilience test</h1>
+  <p>This creates synthetic teams in the real D1 database, sends duplicates and stale updates, then verifies the final shared state.</p>
+  <section class="panel">
+    <h2>1. Settings</h2>
+    <div class="grid">
+      <label>Worker base URL<input id="workerUrl" value="https://charterhouse-freeze-leaderboard.p-plakides.workers.dev"></label>
+      <label>Synthetic teams<select id="teamCount"><option value="50" selected>50 teams</option><option value="100">100 teams</option></select></label>
+      <label>Concurrent requests<select id="concurrency"><option value="2">2</option><option value="4" selected>4</option><option value="6">6</option></select></label>
+    </div>
+    <div class="warning"><strong>This writes test rows to the real leaderboard database.</strong> A run-specific cleanup SQL command is generated afterwards.</div>
+    <label class="confirm"><input type="checkbox" id="confirmWrite"><span>I understand this will create synthetic LOADTEST teams in D1.</span></label>
+    <div class="buttons"><button id="runButton" disabled>Run full 8J test</button><button id="healthButton" class="ghost">Health only</button><button id="boardButton" class="ghost">Read leaderboard only</button></div>
+    <div class="status" id="status">Waiting.</div>
+  </section>
+  <section class="panel">
+    <h2>2. Results</h2>
+    <div class="metrics">
+      <div class="metric"><strong id="metricTeams">—</strong><span>teams tested</span></div>
+      <div class="metric"><strong id="metricRequests">—</strong><span>HTTP requests</span></div>
+      <div class="metric"><strong id="metricEvents">—</strong><span>events sent</span></div>
+      <div class="metric"><strong id="metricTime">—</strong><span>total time</span></div>
+      <div class="metric"><strong id="metricVerdict">—</strong><span>overall verdict</span></div>
+    </div>
+    <table><thead><tr><th>Phase</th><th>Events</th><th>Expected</th><th>Observed</th><th>Time</th><th>Result</th></tr></thead><tbody id="phaseRows"><tr><td colspan="6">No test run yet.</td></tr></tbody></table>
+    <h2 style="margin-top:22px">Verification log</h2><pre id="log">No output yet.</pre>
+  </section>
+  <section class="panel">
+    <h2>3. Cleanup</h2>
+    <p>Copy this into Cloudflare → D1 → charterhouse-freeze → Console after each run.</p>
+    <div class="cleanup" id="cleanupSql">Run a test first.</div>
+    <div class="buttons"><button id="copyCleanup" class="secondary" disabled>Copy cleanup SQL</button></div>
+  </section>
+</main>
+<script src="js/config.js?v=8J1"></script>
+<script src="js/load-test.js?v=8J1"></script>
+</body></html>

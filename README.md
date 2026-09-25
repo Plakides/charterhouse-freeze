@@ -515,3 +515,10 @@ base36 and a checksum. It contains no pupil names. Finished teams show the code
 on the victory screen; the teacher panel can show/copy it at any time.
 
 The code is a recovery/reference aid, not authentication.
+
+
+# Task 8J — Load and resilience validation
+
+8I is frozen.
+
+New unlinked page: `load-test.html`. It creates synthetic `LOADTEST-*` rows only after explicit confirmation, exercises 50/100-team bursts, duplicate sequence numbers, stale/out-of-order updates, finish-state regression protection and invalid input rejection, then verifies the final shared leaderboard and generates run-specific cleanup SQL. Student gameplay is unchanged.
