@@ -419,3 +419,34 @@ temporarily unavailable, or the school internet drops out.
 
 Task 8G will switch the projector leaderboard from its current local preview to
 the shared Cloudflare `/leaderboard` feed.
+
+
+# Task 8G — Shared live projector leaderboard
+
+8F is frozen.
+
+The game and the projector now use the same shared Cloudflare leaderboard:
+
+`https://charterhouse-freeze-leaderboard.p-plakides.workers.dev/leaderboard`
+
+Important architecture:
+- student gameplay remains fully local-first
+- student devices do NOT poll the leaderboard in the background
+- the in-game leaderboard overlay only fetches while the user has it open
+- `leaderboard.html` is the projector display and refreshes every 15 seconds
+- a 4-second read timeout prevents a bad connection hanging the display
+- the last successful leaderboard is cached in localStorage
+- if Cloudflare/internet drops out, the projector keeps showing the last-good
+  board and labels it as delayed/cached
+- when the connection returns, the next refresh replaces the cached board
+
+Client transformation:
+- finished teams are ranked by elapsed time
+- active teams follow, ordered by completed seals
+- House rank is based primarily on average team completion percentage
+- House display includes team count, escaped-team count, and average escape time
+- all four Houses remain visible even when one currently has no teams
+
+The projector page no longer loads the local gameplay/session/API modules. It
+loads only `config.js` and `leaderboard.js`, reducing unnecessary work and
+keeping its role purely read-only.

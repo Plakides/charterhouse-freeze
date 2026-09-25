@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Great Charterhouse Freeze · Live Leaderboard</title>
-  <link rel="stylesheet" href="css/main.css?v=8F1">
-  <link rel="stylesheet" href="css/components.css?v=8F1">
+  <title>The Great Charterhouse Freeze · Shared Live Leaderboard</title>
+  <link rel="stylesheet" href="css/main.css?v=8G1">
+  <link rel="stylesheet" href="css/components.css?v=8G1">
   <style>
     body { overflow: hidden; background:#071a33; }
     .projector-shell {
@@ -81,6 +81,9 @@
       font-size:10px;
     }
     .projector-meta strong { color:white; font-family:Consolas,monospace; }
+    .projector-meta [data-leader-status][data-state="live"] { color:#c8e8d4; }
+    .projector-meta [data-leader-status][data-state="cached"] { color:#f2d9a8; }
+    .projector-meta [data-leader-status][data-state="error"] { color:#efb8b8; }
     .projector-board {
       width:100%;
       height:calc(100vh - 180px);
@@ -129,7 +132,7 @@
       <div class="projector-meta">
         <span>ACTIVE <strong data-leader-team-count>0</strong></span>
         <span>ESCAPED <strong data-leader-escaped-count>0</strong></span>
-        <span data-leader-status>Live scoreboard</span>
+        <span data-leader-status>Connecting to shared scoreboard…</span>
         <button class="leader-refresh-button" type="button" data-leader-refresh>↻ Refresh</button>
       </div>
     </div>
@@ -155,13 +158,8 @@
     </section>
   </main>
 
-  <script src="js/config.js?v=8F1"></script>
-  <script src="js/state.js?v=8F1"></script>
-  <script src="js/answer-engine.js?v=8F1"></script>
-  <script src="js/sync-queue.js?v=8F1"></script>
-  <script src="js/sync-transport.js?v=8F1"></script>
-  <script src="js/api.js?v=8F1"></script>
-  <script src="js/leaderboard.js?v=8F1"></script>
+  <script src="js/config.js?v=8G1"></script>
+  <script src="js/leaderboard.js?v=8G1"></script>
   <script>
     (() => {
       const clock = document.getElementById("projectorTime");

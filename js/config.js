@@ -16,6 +16,11 @@
     SYNC_TIMEOUT_MS: 2500,
     SYNC_INTERVAL_MS: 45000,
 
+    // Task 8G: projector/leaderboard overlay read the shared Cloudflare board.
+    LEADERBOARD_URL: "https://charterhouse-freeze-leaderboard.p-plakides.workers.dev/leaderboard",
+    LEADERBOARD_REFRESH_MS: 15000,
+    LEADERBOARD_TIMEOUT_MS: 4000,
+
     // Task 8C uses the generic normalized/hashed local answer engine.
     // Challenge 01 is currently the only authored/active puzzle.
     OFFLINE_ANSWER_ENGINE_READY: true,
