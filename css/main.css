@@ -3623,3 +3623,19 @@ body.modal-open { overflow: hidden; }
   .diagnostics-reset-zone { grid-template-columns: 1fr; }
   .diagnostics-reset-controls { flex-wrap: wrap; }
 }
+
+
+/* Task 9A2 · universal wrong-answer penalty */
+.challenge-message.is-penalty {
+  color: #8a5a17;
+}
+
+.challenge-answer-panel:has(.challenge-message.is-penalty) {
+  border-color: rgba(185,133,50,.34);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,244,223,.72),
+      rgba(255,255,255,.76)
+    );
+}

@@ -8,6 +8,11 @@
 
   const api = window.FREEZE_API;
   const stateStore = window.FREEZE_STATE;
+  const cooldown = window.FREEZE_COOLDOWN;
+
+  if (!cooldown) {
+    throw new Error("FREEZE_COOLDOWN failed to load.");
+  }
 
   const screens = {
     boot: document.getElementById("screenBoot"),
@@ -141,6 +146,7 @@
   let dashboardVisible = false;
   let currentChallengeId = null;
   let challengeSubmitInFlight = false;
+  let challengeCooldownInterval = null;
   let challengeHistoryPushed = false;
 
   const urlParams = new URL(window.location.href).searchParams;
@@ -832,6 +838,99 @@
     return getCompletedSet(team).has(id);
   }
 
+  function stopChallengeCooldownTimer() {
+    if (!challengeCooldownInterval) return;
+
+    window.clearInterval(challengeCooldownInterval);
+    challengeCooldownInterval = null;
+  }
+
+  function renderChallengeCooldown(definition, team, options = {}) {
+    stopChallengeCooldownTimer();
+
+    if (
+      !definition ||
+      !team?.teamId ||
+      !definition.submission?.enabled ||
+      isChallengeComplete(team, definition.id)
+    ) {
+      return false;
+    }
+
+    const update = () => {
+      if (
+        currentChallengeId !== definition.id ||
+        !currentTeam ||
+        currentTeam.teamId !== team.teamId
+      ) {
+        stopChallengeCooldownTimer();
+        return;
+      }
+
+      const seconds = cooldown.remainingSeconds(
+        team.teamId,
+        definition.id
+      );
+
+      if (seconds <= 0) {
+        cooldown.clear(team.teamId, definition.id);
+        stopChallengeCooldownTimer();
+
+        if (!isChallengeComplete(currentTeam, definition.id)) {
+          challengeAnswerInput.disabled = false;
+          challengeSubmitButton.disabled = false;
+          challengeSubmitLabel.textContent = "Submit answer";
+          challengeAnswerHelp.textContent =
+            "Submit one team answer when you are confident.";
+
+          challengeMessage.classList.remove(
+            "is-success",
+            "is-penalty"
+          );
+
+          if (options.showExpiryMessage !== false) {
+            challengeMessage.textContent =
+              "Penalty complete. You can submit again.";
+          }
+        }
+
+        return;
+      }
+
+      challengeAnswerInput.disabled = false;
+      challengeSubmitButton.disabled = true;
+      challengeSubmitLabel.textContent =
+        `Try again in ${seconds}s`;
+      challengeAnswerHelp.textContent =
+        "You can change your answer while the penalty counts down.";
+
+      challengeMessage.classList.remove("is-success");
+      challengeMessage.classList.add("is-penalty");
+      challengeMessage.textContent =
+        `Wrong answer · ${seconds}-second penalty. ` +
+        "Review the puzzle before trying again.";
+    };
+
+    if (
+      cooldown.remainingSeconds(team.teamId, definition.id) <= 0
+    ) {
+      return false;
+    }
+
+    update();
+    challengeCooldownInterval = window.setInterval(update, 250);
+
+    return true;
+  }
+
+  function startWrongAnswerCooldown(definition, team) {
+    cooldown.start(team.teamId, definition.id);
+
+    return renderChallengeCooldown(definition, team, {
+      showExpiryMessage: true
+    });
+  }
+
   function updateChallengeChrome(team) {
     if (!team || !currentChallengeId) return;
 
@@ -863,8 +962,9 @@
     challengeAnswerLabel.textContent = submission.label || "Security answer";
     challengeAnswerInput.placeholder = submission.placeholder || "Challenge answer";
     challengeAnswerInput.value = "";
+    stopChallengeCooldownTimer();
     challengeMessage.textContent = "";
-    challengeMessage.classList.remove("is-success");
+    challengeMessage.classList.remove("is-success", "is-penalty");
 
     const enabled = Boolean(submission.enabled) && !solved;
     challengeAnswerInput.disabled = !enabled;
@@ -877,6 +977,12 @@
         : "Answer submission will activate when this puzzle is installed.";
 
     challengeSubmitLabel.textContent = solved ? "Completed" : "Submit answer";
+
+    if (enabled) {
+      renderChallengeCooldown(definition, team, {
+        showExpiryMessage: false
+      });
+    }
   }
 
   function renderChallenge(definition, team) {
@@ -953,6 +1059,7 @@
   }
 
   function returnToMissionBoard(options = {}) {
+    stopChallengeCooldownTimer();
     currentChallengeId = null;
     showMission(currentTeam);
 
@@ -1033,6 +1140,15 @@
       return;
     }
 
+    if (
+      cooldown.isActive(currentTeam.teamId, currentChallengeId)
+    ) {
+      renderChallengeCooldown(definition, currentTeam, {
+        showExpiryMessage: true
+      });
+      return;
+    }
+
     const answer = challengeAnswerInput.value.trim();
 
     if (!answer) {
@@ -1056,16 +1172,17 @@
       });
 
       if (!result.correct) {
-        challengeMessage.textContent = "Not quite. Check the evidence and try again.";
-        challengeMessage.classList.remove("is-success");
         challengeAnswerInput.disabled = false;
-        challengeSubmitButton.disabled = false;
-        challengeSubmitLabel.textContent = "Submit answer";
+        startWrongAnswerCooldown(definition, currentTeam);
         challengeAnswerInput.select();
         return;
       }
 
+      cooldown.clear(currentTeam.teamId, currentChallengeId);
+      stopChallengeCooldownTimer();
+
       challengeMessage.textContent = "ACCESS GRANTED · Security seal recovered.";
+      challengeMessage.classList.remove("is-penalty");
       challengeMessage.classList.add("is-success");
       challengeSubmitLabel.textContent = "Access granted";
 
@@ -1092,8 +1209,17 @@
       challengeMessage.textContent = mapApiError(error);
       challengeMessage.classList.remove("is-success");
       challengeAnswerInput.disabled = false;
-      challengeSubmitButton.disabled = false;
-      challengeSubmitLabel.textContent = "Submit answer";
+
+      if (
+        cooldown.isActive(currentTeam.teamId, currentChallengeId)
+      ) {
+        renderChallengeCooldown(definition, currentTeam, {
+          showExpiryMessage: true
+        });
+      } else {
+        challengeSubmitButton.disabled = false;
+        challengeSubmitLabel.textContent = "Submit answer";
+      }
     } finally {
       challengeSubmitInFlight = false;
     }
@@ -1107,6 +1233,7 @@
   function clearSessionAndReturnHome(message) {
     stopTimer();
     stopBackgroundSync();
+    stopChallengeCooldownTimer();
     stateStore.clearSession();
     currentSession = null;
     currentTeam = null;
@@ -1480,6 +1607,7 @@
 
   window.addEventListener("beforeunload", () => {
     stopBackgroundSync();
+    stopChallengeCooldownTimer();
     window.FREEZE_SYNC_TRANSPORT?.stop();
   });
 

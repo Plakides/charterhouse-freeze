@@ -522,3 +522,67 @@ The code is a recovery/reference aid, not authentication.
 8I is frozen.
 
 New unlinked page: `load-test.html`. It creates synthetic `LOADTEST-*` rows only after explicit confirmation, exercises 50/100-team bursts, duplicate sequence numbers, stale/out-of-order updates, finish-state regression protection and invalid input rejection, then verifies the final shared leaderboard and generates run-specific cleanup SQL. Student gameplay is unchanged.
+
+
+# Task 9A — Challenge 01 content freeze
+
+Tasks 8A–8J infrastructure are frozen.
+
+Challenge 01 is now content-frozen:
+
+- Title: `House of Confusion`
+- Type: visual deduction
+- Target time: ~4 minutes
+- Suspects: Amina, Timur, Sofia, Daniyar
+- Clue 1: key holder wears a blue scarf
+- Clue 2: key is inside a backpack, not a satchel
+- Clue 3: locker number is odd
+- Clue 4: key holder is not carrying the compass
+- Unique solution: `Amina`
+- Awarded seal: `Snow Leopard`
+- Seal code number: `4`
+
+The redundant fifth line ("Exactly one student matches every clue") has been
+moved out of the clue list and replaced by clearer team-strategy guidance.
+
+Interaction/accessibility freeze:
+- clicking a student selects that answer
+- typed answers still work
+- cards can be enlarged
+- students can mark/undo eliminations
+- selected/eliminated controls expose `aria-pressed`
+- wrong answers do not alter progress
+- correct answer commits locally before any network activity
+- completion persists through refresh/offline use
+
+The current card artwork/layout is intentionally NOT being redesigned in 9A.
+The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
+for Phase 10A–10C so all eight puzzles can be improved consistently.
+
+
+# Task 9A2 — Universal 30-second wrong-answer penalty
+
+Challenge 01 remains content-frozen from 9A1.
+
+A generic wrong-answer cooldown now applies to every current/future puzzle that
+uses the standard challenge submission flow.
+
+Rules:
+- blank submissions do not trigger it
+- technical errors do not trigger it
+- every genuinely wrong answer triggers exactly 30 seconds
+- answer field remains editable during the countdown
+- Submit is disabled during the countdown
+- button displays `Try again in Ns`
+- penalty survives refresh, leaving/reopening a puzzle, and closing/reopening
+  the page because it is stored as an absolute timestamp
+- pressing Enter cannot bypass it because the submit handler checks the
+  cooldown independently
+- cooldown is local-only and never sent to Cloudflare
+- each team/challenge has an independent timer
+
+Storage key:
+`charterhouseFreeze.v2.wrongAnswerCooldowns`
+
+Future challenges inherit this globally. Individual puzzle files must not
+implement their own penalty timers.

@@ -1,6 +1,10 @@
 (() => {
   "use strict";
 
+  // CONTENT FREEZE: Task 9A2
+  // Solution: Amina · Seal: Snow Leopard · Code number: 4
+  // Major visual/layout redesign is deliberately deferred to Phase 10.
+
   const suspects = Object.freeze([
     Object.freeze({
       name: "Amina",
@@ -40,17 +44,16 @@
     Object.freeze({ icon: "01", text: "The key holder is wearing a blue scarf." }),
     Object.freeze({ icon: "02", text: "The emergency key is inside a backpack, not a satchel." }),
     Object.freeze({ icon: "03", text: "The key holder’s locker number is odd." }),
-    Object.freeze({ icon: "04", text: "The key holder is not carrying the compass." }),
-    Object.freeze({ icon: "05", text: "Exactly one student matches every clue." })
+    Object.freeze({ icon: "04", text: "The key holder is not carrying the compass." })
   ]);
 
   function suspectCard(person) {
     return `
       <article class="logic-suspect" data-suspect="${person.name}">
-        <button class="logic-suspect-select" type="button" data-select-suspect="${person.name}" aria-label="Select ${person.name} as the key holder">
+        <button class="logic-suspect-select" type="button" data-select-suspect="${person.name}" aria-label="Select ${person.name} as the key holder" aria-pressed="false">
           <img class="logic-student-card" src="${person.image}" alt="Evidence card for ${person.name}">
           <span class="logic-nameplate">${person.name}</span>
-          <span class="logic-select-copy">Tap card to select</span>
+          <span class="logic-select-copy">Select this student</span>
         </button>
 
         <div class="logic-suspect-meta" aria-label="Quick summary for ${person.name}">
@@ -62,7 +65,7 @@
 
         <div class="logic-suspect-actions">
           <button class="logic-view-card" type="button" data-view-suspect="${person.name}">Enlarge card</button>
-          <button class="logic-eliminate" type="button" data-eliminate="${person.name}">Mark eliminated</button>
+          <button class="logic-eliminate" type="button" data-eliminate="${person.name}" aria-pressed="false">Mark eliminated</button>
         </div>
       </article>
     `;
@@ -84,7 +87,8 @@
 
           <p class="logic-brief">
             Four students were seen near the emergency locker just before the heating system froze.
-            Use the evidence cards and the clue panel to identify the only possible key holder.
+            Compare every evidence card with all four security notes. Eliminate anyone who fails even one clue,
+            then select the only student left.
           </p>
 
           <div class="logic-suspects">
@@ -108,8 +112,8 @@
           </ol>
 
           <div class="logic-tip">
-            <strong>Correct answer check</strong>
-            <span>Blue scarf + backpack + odd locker + not carrying the compass should leave one student.</span>
+            <strong>Team strategy</strong>
+            <span>Do not guess. Check one clue at a time and eliminate any student who fails it. Only one student should remain.</span>
           </div>
         </aside>
       </div>
@@ -134,6 +138,11 @@
       container.querySelectorAll(".logic-suspect").forEach(card => {
         const selected = card.dataset.suspect.toLowerCase() === chosen;
         card.classList.toggle("is-selected", selected);
+
+        const selectButton = card.querySelector("[data-select-suspect]");
+        if (selectButton) {
+          selectButton.setAttribute("aria-pressed", String(selected));
+        }
       });
     }
 
@@ -193,6 +202,7 @@
 
         const eliminated = card.classList.toggle("is-eliminated");
         button.textContent = eliminated ? "Undo elimination" : "Mark eliminated";
+        button.setAttribute("aria-pressed", String(eliminated));
 
         if (
           eliminated &&
@@ -215,8 +225,8 @@
     title: "House of Confusion",
     eyebrow: "VISUAL DEDUCTION",
     duration: "4 min",
-    intro: "Four students. One emergency key. Several extremely inconvenient clues.",
-    brief: "Use the illustrated CCTV cards and security notes to work out who has the key.",
+    intro: "Four students. One emergency key. Four security clues.",
+    brief: "Compare each evidence card with all four notes. Eliminate anyone who fails a clue, then select the only student left.",
     submission: {
       kind: "text",
       label: "Who has the emergency key?",
