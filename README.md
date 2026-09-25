@@ -382,3 +382,40 @@ Receiver properties:
 The repository also contains `cloudflare-test.html`, an unlinked test page that
 can health-check the deployed Worker, send the same event five times, and read
 the leaderboard.
+
+
+# Task 8F — Opportunistic Cloudflare sync
+
+8E is frozen.
+
+The student game is now connected to:
+
+`https://charterhouse-freeze-leaderboard.p-plakides.workers.dev`
+
+The network is still NOT part of the gameplay transaction.
+
+Order of operations remains:
+
+1. validate/save locally
+2. update the student UI locally
+3. queue a leaderboard-safe snapshot
+4. request a background Cloudflare flush
+
+The API never awaits the Cloudflare request.
+
+Transport behaviour:
+- 2.5 second request timeout
+- 45 second periodic retry
+- retry when the browser comes back online
+- retry when the tab/window regains focus
+- retry when the document becomes visible
+- queued events stay local after any failure
+- events are removed only after the Worker acknowledges them
+- a newly queued event that arrived during a successful request is retried shortly after
+- POST uses `text/plain` JSON to avoid a separate CORS preflight request
+
+The game therefore continues normally even if the Worker is slow, blocked,
+temporarily unavailable, or the school internet drops out.
+
+Task 8G will switch the projector leaderboard from its current local preview to
+the shared Cloudflare `/leaderboard` feed.

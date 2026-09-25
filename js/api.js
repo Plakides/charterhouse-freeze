@@ -5,6 +5,7 @@
   const stateStore = window.FREEZE_STATE;
   const answerEngine = window.FREEZE_ANSWER_ENGINE;
   const syncQueue = window.FREEZE_SYNC_QUEUE;
+  const syncTransport = window.FREEZE_SYNC_TRANSPORT;
 
   if (!stateStore) {
     throw new Error("FREEZE_STATE must load before FREEZE_API.");
@@ -16,6 +17,10 @@
 
   if (!syncQueue) {
     throw new Error("FREEZE_SYNC_QUEUE must load before FREEZE_API.");
+  }
+
+  if (!syncTransport) {
+    throw new Error("FREEZE_SYNC_TRANSPORT must load before FREEZE_API.");
   }
 
   class FreezeApiError extends Error {
@@ -198,6 +203,7 @@
 
     const game = stateStore.createGame(team);
     syncQueue.enqueue("REGISTER");
+    syncTransport.requestFlush(0);
     const saved = stateStore.loadGame();
 
     return {
@@ -223,6 +229,7 @@
 
     if (!wasStarted) {
       syncQueue.enqueue("START");
+      syncTransport.requestFlush(0);
     }
 
     return publicTeam(stateStore.loadGame() || saved);
@@ -286,6 +293,7 @@
     const seal = sealDefinitions[challengeId];
     const saved = stateStore.completeChallenge(challengeId, seal);
     syncQueue.enqueue("PROGRESS");
+    syncTransport.requestFlush(0);
     const queuedState = stateStore.loadGame() || saved;
 
     return {

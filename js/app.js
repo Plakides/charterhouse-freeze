@@ -1456,8 +1456,12 @@
     }
   });
 
-  window.addEventListener("beforeunload", stopBackgroundSync);
+  window.addEventListener("beforeunload", () => {
+    stopBackgroundSync();
+    window.FREEZE_SYNC_TRANSPORT?.stop();
+  });
 
+  window.FREEZE_SYNC_TRANSPORT?.start();
   window.FREEZE_FIELD_KIT?.initialise();
   window.FREEZE_LEADERBOARD?.initialiseOverlay();
 
