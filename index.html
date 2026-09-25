@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.webmanifest?v=8H1">
+  <meta name="theme-color" content="#092140">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=8G1">
-  <link rel="stylesheet" href="css/components.css?v=8G1">
-  <link rel="stylesheet" href="css/animations.css?v=8G1">
+  <link rel="stylesheet" href="css/main.css?v=8H1">
+  <link rel="stylesheet" href="css/components.css?v=8H1">
+  <link rel="stylesheet" href="css/animations.css?v=8H1">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -48,6 +50,13 @@
             <div class="snow-leopard-note">
               <span class="status-lamp" aria-hidden="true"></span>
               <span>The snow leopard denies involvement.</span>
+            </div>
+            <div class="offline-readiness-card is-checking" id="offlineReadiness" role="status" aria-live="polite" title="This checks whether the complete game has been saved to this browser for offline use.">
+              <span class="offline-readiness-dot" aria-hidden="true"></span>
+              <span class="offline-readiness-copy">
+                <strong id="offlineReadinessTitle">PREPARING OFFLINE COPY…</strong>
+                <small id="offlineReadinessDetail">Keep this page open for a moment.</small>
+              </span>
             </div>
             <button class="button button-primary button-large" id="beginButton" type="button">
               Begin emergency response
@@ -530,7 +539,7 @@
     <footer class="status-strip">
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
-      <span class="demo-badge">TASK 8G · SHARED LIVE LEADERBOARD · BUILD 8G1</span>
+      <span class="demo-badge">TASK 8H · OFFLINE ASSET CACHE · BUILD 8H1</span>
     </footer>
   </div>
 
@@ -779,23 +788,24 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=8G1"></script>
-  <script src="js/state.js?v=8G1"></script>
-  <script src="js/answer-engine.js?v=8G1"></script>
-  <script src="js/sync-queue.js?v=8G1"></script>
-  <script src="js/sync-transport.js?v=8G1"></script>
-  <script src="js/api.js?v=8G1"></script>
-  <script src="js/challenges/registry.js?v=8G1"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=8G1"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=8G1"></script>
-  <script src="js/challenges/challenge-03-language.js?v=8G1"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=8G1"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=8G1"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=8G1"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=8G1"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=8G1"></script>
-  <script src="js/field-kit.js?v=8G1"></script>
-  <script src="js/leaderboard.js?v=8G1"></script>
-  <script src="js/app.js?v=8G1"></script>
+  <script src="js/config.js?v=8H1"></script>
+  <script src="js/state.js?v=8H1"></script>
+  <script src="js/answer-engine.js?v=8H1"></script>
+  <script src="js/sync-queue.js?v=8H1"></script>
+  <script src="js/sync-transport.js?v=8H1"></script>
+  <script src="js/api.js?v=8H1"></script>
+  <script src="js/challenges/registry.js?v=8H1"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=8H1"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=8H1"></script>
+  <script src="js/challenges/challenge-03-language.js?v=8H1"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=8H1"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=8H1"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=8H1"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=8H1"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=8H1"></script>
+  <script src="js/field-kit.js?v=8H1"></script>
+  <script src="js/leaderboard.js?v=8H1"></script>
+  <script src="js/pwa.js?v=8H1"></script>
+  <script src="js/app.js?v=8H1"></script>
 </body>
 </html>

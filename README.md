@@ -450,3 +450,14 @@ Client transformation:
 The projector page no longer loads the local gameplay/session/API modules. It
 loads only `config.js` and `leaderboard.js`, reducing unnecessary work and
 keeping its role purely read-only.
+
+
+# Task 8H — Full offline asset cache / PWA foundation
+
+8G is frozen.
+
+New files: `service-worker.js`, `manifest.webmanifest`, `js/pwa.js`.
+
+After one successful online visit, the complete runtime is pre-cached. The start screen shows `GAME READY FOR OFFLINE USE ✓` when this browser has the full 8H1 build saved. Gameplay remains local-first; Cloudflare `/sync` and `/leaderboard` are deliberately outside the service-worker cache.
+
+Cache name: `charterhouse-freeze-static-8H1`. Future builds use a new cache name; old Freeze caches are removed on activation.

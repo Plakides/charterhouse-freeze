@@ -1,0 +1,10 @@
+{
+  "name": "The Great Charterhouse Freeze",
+  "short_name": "Charterhouse Freeze",
+  "description": "Charterhouse Almaty House Challenge",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071a33",
+  "theme_color": "#092140"
+}
