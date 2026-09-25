@@ -461,3 +461,57 @@ New files: `service-worker.js`, `manifest.webmanifest`, `js/pwa.js`.
 After one successful online visit, the complete runtime is pre-cached. The start screen shows `GAME READY FOR OFFLINE USE ✓` when this browser has the full 8H1 build saved. Gameplay remains local-first; Cloudflare `/sync` and `/leaderboard` are deliberately outside the service-worker cache.
 
 Cache name: `charterhouse-freeze-static-8H1`. Future builds use a new cache name; old Freeze caches are removed on activation.
+
+
+# Task 8I — Failure recovery / teacher diagnostics
+
+8H is frozen.
+
+Task 8I adds three independent recovery layers without putting network access
+back into the gameplay path.
+
+## 1. Rolling local backup
+
+The canonical local game state now uses schema 3. Existing schema-2 missions
+migrate automatically.
+
+Before each valid local write, the previous valid state is copied to:
+
+`charterhouseFreeze.v2.backup`
+
+If the primary state becomes invalid JSON or an invalid structure, the game
+tries the backup automatically. A damaged primary is quarantined under:
+
+`charterhouseFreeze.v2.corrupt`
+
+Future-schema state is not guessed at, quarantined, downgraded or destructively rewritten. A recent migration/recovery notice is retained for the teacher diagnostics panel.
+
+## 2. Teacher diagnostics
+
+The footer contains a discreet `TEACHER DIAGNOSTICS` button. Keyboard shortcut:
+
+`Ctrl + Alt + D`
+
+The panel shows local-state health, automatic recovery status, offline asset
+readiness, browser connectivity, queued leaderboard updates, last sync
+attempt/success/error, current team/progress and device/build information.
+
+It can also:
+- retry Cloudflare sync manually
+- copy a privacy-safe diagnostic report
+- copy an emergency result summary
+- reset the local mission, but only after typing `RESET`
+
+Reset does not remove the PWA/offline asset cache.
+
+## 3. Emergency result reference
+
+`js/recovery.js` creates a short checked reference such as:
+
+`R1-BP-1-K4M8-02F-7X`
+
+It contains House, progress, a four-character team-ID fragment, elapsed time in
+base36 and a checksum. It contains no pupil names. Finished teams show the code
+on the victory screen; the teacher panel can show/copy it at any time.
+
+The code is a recovery/reference aid, not authentication.

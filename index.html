@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.webmanifest?v=8H1">
+  <link rel="manifest" href="manifest.webmanifest?v=8I1">
   <meta name="theme-color" content="#092140">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=8H1">
-  <link rel="stylesheet" href="css/components.css?v=8H1">
-  <link rel="stylesheet" href="css/animations.css?v=8H1">
+  <link rel="stylesheet" href="css/main.css?v=8I1">
+  <link rel="stylesheet" href="css/components.css?v=8I1">
+  <link rel="stylesheet" href="css/animations.css?v=8I1">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -433,7 +433,14 @@
 
             <p class="victory-message">Heating restored to an extravagant 19°C.<br>The snow leopard continues to deny involvement.</p>
 
+            <div class="victory-result-reference">
+              <span>EMERGENCY RESULT REFERENCE</span>
+              <strong id="victoryResultCode">NO-RESULT</strong>
+              <small>Keep this code if the shared leaderboard has not updated.</small>
+            </div>
+
             <div class="victory-actions">
+              <button class="button button-secondary" id="victoryCopyResultButton" type="button">Copy result</button>
               <button class="button button-secondary" id="victoryLeaderboardButton" type="button">View leaderboard</button>
             </div>
           </div>
@@ -539,7 +546,8 @@
     <footer class="status-strip">
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
-      <span class="demo-badge">TASK 8H · OFFLINE ASSET CACHE · BUILD 8H1</span>
+      <button class="teacher-tools-button" id="teacherDiagnosticsButton" type="button" title="Teacher diagnostics · Ctrl+Alt+D">TEACHER DIAGNOSTICS</button>
+      <span class="demo-badge">TASK 8I · FAILURE RECOVERY · BUILD 8I1</span>
     </footer>
   </div>
 
@@ -788,24 +796,116 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=8H1"></script>
-  <script src="js/state.js?v=8H1"></script>
-  <script src="js/answer-engine.js?v=8H1"></script>
-  <script src="js/sync-queue.js?v=8H1"></script>
-  <script src="js/sync-transport.js?v=8H1"></script>
-  <script src="js/api.js?v=8H1"></script>
-  <script src="js/challenges/registry.js?v=8H1"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=8H1"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=8H1"></script>
-  <script src="js/challenges/challenge-03-language.js?v=8H1"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=8H1"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=8H1"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=8H1"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=8H1"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=8H1"></script>
-  <script src="js/field-kit.js?v=8H1"></script>
-  <script src="js/leaderboard.js?v=8H1"></script>
-  <script src="js/pwa.js?v=8H1"></script>
-  <script src="js/app.js?v=8H1"></script>
+
+
+  <div class="modal-overlay diagnostics-overlay" id="teacherDiagnosticsOverlay" role="dialog" aria-modal="true" aria-labelledby="teacherDiagnosticsTitle" hidden>
+    <div class="modal-window diagnostics-window">
+      <header class="modal-header diagnostics-header">
+        <div>
+          <p class="protocol protocol-dark">TEACHER RECOVERY PANEL · 8I</p>
+          <h2 id="teacherDiagnosticsTitle">Mission diagnostics</h2>
+          <p>Local game health, offline readiness and leaderboard sync. Student gameplay never waits for this panel.</p>
+        </div>
+        <button class="modal-close" type="button" data-diagnostics-close aria-label="Close diagnostics">×</button>
+      </header>
+
+      <div class="diagnostics-grid">
+        <section class="diagnostics-card diagnostics-card-wide">
+          <span class="diagnostics-label">CURRENT TEAM</span>
+          <div class="diagnostics-team-grid">
+            <div><span>TEAM</span><strong data-diagnostic-value="team">Checking…</strong></div>
+            <div><span>HOUSE</span><strong data-diagnostic-value="house">—</strong></div>
+            <div><span>PROGRESS</span><strong data-diagnostic-value="progress">—</strong></div>
+            <div><span>STATUS</span><strong data-diagnostic-value="status">—</strong></div>
+          </div>
+        </section>
+
+        <section class="diagnostics-card">
+          <span class="diagnostics-label">LOCAL STATE</span>
+          <strong data-diagnostic-value="local">Checking…</strong>
+          <small data-diagnostic-value="recovery">—</small>
+        </section>
+
+        <section class="diagnostics-card">
+          <span class="diagnostics-label">OFFLINE ASSETS</span>
+          <strong data-diagnostic-value="offline">Checking…</strong>
+          <small>Service-worker cache</small>
+        </section>
+
+        <section class="diagnostics-card">
+          <span class="diagnostics-label">NETWORK</span>
+          <strong data-diagnostic-value="network">Checking…</strong>
+          <small data-diagnostic-value="transport">—</small>
+        </section>
+
+        <section class="diagnostics-card">
+          <span class="diagnostics-label">SYNC QUEUE</span>
+          <strong data-diagnostic-value="queue">Checking…</strong>
+          <small>Last success: <b data-diagnostic-value="lastSync">—</b></small>
+        </section>
+
+        <section class="diagnostics-card diagnostics-card-wide diagnostics-sync-detail">
+          <div><span>LAST ATTEMPT</span><strong data-diagnostic-value="lastAttempt">—</strong></div>
+          <div><span>LAST ERROR</span><strong data-diagnostic-value="lastError">—</strong></div>
+        </section>
+
+        <section class="diagnostics-card diagnostics-card-wide diagnostics-reference-card">
+          <div>
+            <span class="diagnostics-label">EMERGENCY RESULT / RECOVERY REFERENCE</span>
+            <strong class="diagnostics-result-code" id="diagnosticsResultCode">NO-RESULT</strong>
+            <small>This contains no pupil names. Keep it with the team codename if leaderboard sync fails.</small>
+          </div>
+          <button class="button button-secondary" id="diagnosticsCopyResultButton" type="button">Copy result summary</button>
+        </section>
+
+        <section class="diagnostics-card diagnostics-card-wide diagnostics-technical">
+          <div><span>BUILD</span><strong data-diagnostic-value="build">8I1</strong></div>
+          <div><span>DEVICE ID</span><strong data-diagnostic-value="device">—</strong></div>
+        </section>
+      </div>
+
+      <div class="diagnostics-actions">
+        <button class="button button-secondary" id="diagnosticsRefreshButton" type="button">Refresh checks</button>
+        <button class="button button-primary" id="diagnosticsSyncButton" type="button">Retry sync now</button>
+        <button class="button button-secondary" id="diagnosticsCopyButton" type="button">Copy diagnostic report</button>
+      </div>
+
+      <p class="diagnostics-message" id="diagnosticsMessage" role="status" aria-live="polite"></p>
+
+      <section class="diagnostics-reset-zone">
+        <div>
+          <span>RESET THIS DEVICE</span>
+          <strong>Only use this between teams.</strong>
+          <p>This removes the local mission, rolling backup and quarantined state. It does not remove the offline game files.</p>
+        </div>
+        <div class="diagnostics-reset-controls">
+          <input id="diagnosticsResetInput" type="text" autocomplete="off" spellcheck="false" placeholder="Type RESET">
+          <button class="button button-danger" id="diagnosticsResetButton" type="button" disabled>Reset local mission</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/config.js?v=8I1"></script>
+  <script src="js/state.js?v=8I1"></script>
+  <script src="js/recovery.js?v=8I1"></script>
+  <script src="js/answer-engine.js?v=8I1"></script>
+  <script src="js/sync-queue.js?v=8I1"></script>
+  <script src="js/sync-transport.js?v=8I1"></script>
+  <script src="js/api.js?v=8I1"></script>
+  <script src="js/challenges/registry.js?v=8I1"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=8I1"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=8I1"></script>
+  <script src="js/challenges/challenge-03-language.js?v=8I1"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=8I1"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=8I1"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=8I1"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=8I1"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=8I1"></script>
+  <script src="js/field-kit.js?v=8I1"></script>
+  <script src="js/leaderboard.js?v=8I1"></script>
+  <script src="js/pwa.js?v=8I1"></script>
+  <script src="js/diagnostics.js?v=8I1"></script>
+  <script src="js/app.js?v=8I1"></script>
 </body>
 </html>

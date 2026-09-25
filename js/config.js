@@ -8,7 +8,7 @@
 
     // V2 foundation: gameplay state is authoritative on this device.
     MODE: "offline-first",
-    SCHEMA_VERSION: 2,
+    SCHEMA_VERSION: 3,
 
     // Task 8F: gameplay stays local; only the tiny leaderboard queue syncs.
     SYNC_ENABLED: true,

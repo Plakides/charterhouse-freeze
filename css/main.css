@@ -520,7 +520,7 @@ input:focus-visible {
   min-height: 42px;
   padding: 8px clamp(18px, 4vw, 56px);
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
   gap: 24px;
   background: #071a33;
@@ -3442,3 +3442,184 @@ body.modal-open { overflow: hidden; }
 .offline-readiness-card.is-error{border-color:rgba(151,67,67,.24);background:rgba(248,232,232,.84)}.offline-readiness-card.is-error .offline-readiness-dot{background:#974343;box-shadow:0 0 0 4px rgba(151,67,67,.12)}
 @keyframes offline-readiness-pulse{0%,100%{transform:scale(.88);opacity:.72}50%{transform:scale(1.12);opacity:1}}
 @media(prefers-reduced-motion:reduce){.offline-readiness-card.is-updating .offline-readiness-dot,.offline-readiness-card.is-checking .offline-readiness-dot{animation:none}}
+
+
+/* Task 8I · teacher failure recovery */
+.teacher-tools-button {
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.24);
+  padding: 4px 0;
+  background: transparent;
+  color: rgba(255,255,255,.64);
+  font: inherit;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  cursor: pointer;
+}
+
+.teacher-tools-button:hover,
+.teacher-tools-button:focus-visible {
+  color: white;
+  border-bottom-color: var(--ch-pink);
+}
+
+.victory-result-reference {
+  margin: 20px auto 4px;
+  padding: 14px 18px;
+  max-width: 500px;
+  border: 1px solid rgba(9,33,64,.15);
+  background: rgba(247,244,238,.72);
+  display: grid;
+  gap: 5px;
+  text-align: center;
+}
+
+.victory-result-reference span,
+.diagnostics-label {
+  color: #8c6570;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+
+.victory-result-reference strong,
+.diagnostics-result-code {
+  font-family: Consolas, "SFMono-Regular", monospace;
+  letter-spacing: .08em;
+}
+
+.victory-result-reference strong { font-size: 19px; color: var(--ch-navy); }
+.victory-result-reference small { color: var(--muted); font-size: 10px; }
+
+.diagnostics-window {
+  width: min(940px, calc(100vw - 40px));
+  max-height: min(92vh, 820px);
+  overflow: auto;
+}
+
+.diagnostics-grid {
+  padding: 22px 24px 4px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.diagnostics-card {
+  border: 1px solid rgba(9,33,64,.12);
+  background: #fbfaf6;
+  padding: 15px 16px;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.diagnostics-card-wide { grid-column: 1 / -1; }
+.diagnostics-card > strong { color: var(--ch-navy); font-size: 14px; overflow-wrap: anywhere; }
+.diagnostics-card > small { color: var(--muted); line-height: 1.45; overflow-wrap: anywhere; }
+
+.diagnostics-card [data-state="good"] { color: #2f7349; }
+.diagnostics-card [data-state="warning"] { color: #9a671e; }
+.diagnostics-card [data-state="bad"] { color: #9b3f3f; }
+
+.diagnostics-team-grid,
+.diagnostics-sync-detail,
+.diagnostics-technical {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+}
+
+.diagnostics-sync-detail,
+.diagnostics-technical { grid-template-columns: repeat(2, minmax(0,1fr)); }
+
+.diagnostics-team-grid > div,
+.diagnostics-sync-detail > div,
+.diagnostics-technical > div {
+  display: grid;
+  gap: 4px;
+}
+
+.diagnostics-team-grid span,
+.diagnostics-sync-detail span,
+.diagnostics-technical span {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .11em;
+}
+
+.diagnostics-team-grid strong,
+.diagnostics-sync-detail strong,
+.diagnostics-technical strong {
+  color: var(--ch-navy);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.diagnostics-reference-card {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.diagnostics-reference-card > div { display: grid; gap: 6px; }
+.diagnostics-result-code { font-size: 20px; color: var(--ch-navy); }
+
+.diagnostics-actions {
+  padding: 16px 24px 10px;
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.diagnostics-message {
+  min-height: 18px;
+  margin: 0;
+  padding: 0 24px 12px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.diagnostics-reset-zone {
+  margin: 4px 24px 24px;
+  padding: 16px;
+  border: 1px solid rgba(151,67,67,.25);
+  background: rgba(248,232,232,.58);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.diagnostics-reset-zone > div:first-child { display: grid; gap: 4px; }
+.diagnostics-reset-zone span { color: #984b4b; font-size: 9px; font-weight: 850; letter-spacing: .11em; }
+.diagnostics-reset-zone strong { color: var(--ch-navy); }
+.diagnostics-reset-zone p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
+.diagnostics-reset-controls { display: flex; gap: 8px; align-items: center; }
+.diagnostics-reset-controls input {
+  width: 110px;
+  padding: 10px;
+  border: 1px solid rgba(9,33,64,.18);
+  background: white;
+  font: inherit;
+}
+
+.button-danger {
+  border: 1px solid #934747;
+  background: #934747;
+  color: white;
+}
+.button-danger:disabled { opacity: .42; cursor: not-allowed; }
+
+@media (max-width: 760px) {
+  .status-strip { grid-template-columns: 1fr auto; }
+  .teacher-tools-button { display: none; }
+  .diagnostics-grid { grid-template-columns: 1fr; }
+  .diagnostics-card-wide { grid-column: auto; }
+  .diagnostics-team-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .diagnostics-reference-card,
+  .diagnostics-reset-zone { grid-template-columns: 1fr; }
+  .diagnostics-reset-controls { flex-wrap: wrap; }
+}

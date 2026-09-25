@@ -69,6 +69,8 @@
   const victoryTeamName = document.getElementById("victoryTeamName");
   const victoryHouse = document.getElementById("victoryHouse");
   const victoryTime = document.getElementById("victoryTime");
+  const victoryResultCode = document.getElementById("victoryResultCode");
+  const victoryCopyResultButton = document.getElementById("victoryCopyResultButton");
   const victoryLeaderboardButton = document.getElementById("victoryLeaderboardButton");
 
   const challengeBackButton = document.getElementById("challengeBackButton");
@@ -748,6 +750,10 @@
     victoryHouse.textContent = `${houseLabel} House`;
     victoryTime.textContent = formatElapsed(Number(team.elapsedSeconds) || 0);
 
+    if (victoryResultCode && window.FREEZE_RECOVERY) {
+      victoryResultCode.textContent = window.FREEZE_RECOVERY.createResultCode(team);
+    }
+
     showScreen("victory");
     setStatus(`${team.teamName} restored the school systems.`);
   }
@@ -1318,6 +1324,22 @@
 
   vaultFieldKitButton.addEventListener("click", () => {
     window.FREEZE_FIELD_KIT?.open();
+  });
+
+  victoryCopyResultButton?.addEventListener("click", async () => {
+    if (!currentTeam || !window.FREEZE_RECOVERY) return;
+
+    const summary = window.FREEZE_RECOVERY.createRecoverySummary(currentTeam);
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      victoryCopyResultButton.textContent = "Result copied ✓";
+      window.setTimeout(() => {
+        victoryCopyResultButton.textContent = "Copy result";
+      }, 1800);
+    } catch {
+      setStatus("Clipboard blocked. Keep the visible emergency result reference.");
+    }
   });
 
   victoryLeaderboardButton.addEventListener("click", () => {

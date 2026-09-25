@@ -4,12 +4,59 @@
   const config = window.FREEZE_CONFIG || {};
   const SCHEMA_VERSION = Number(config.SCHEMA_VERSION) || 2;
   const GAME_KEY = "charterhouseFreeze.v2.game";
+  const BACKUP_KEY = "charterhouseFreeze.v2.backup";
+  const QUARANTINE_KEY = "charterhouseFreeze.v2.corrupt";
+  const RECOVERY_INFO_KEY = "charterhouseFreeze.v2.recoveryInfo";
   const DEVICE_KEY = "charterhouseFreeze.v2.device";
+
+  let lastRecoveryInfo = {
+    status: "not-checked",
+    source: null,
+    migratedFrom: null,
+    recoveredAt: null,
+    issue: null
+  };
 
   const LEGACY_KEYS = [
     "charterhouseFreeze.session.v1",
     "charterhouseFreeze.snapshot.v1"
   ];
+
+  function setRecoveryInfo(info) {
+    lastRecoveryInfo = {
+      status: info?.status || "ok",
+      source: info?.source || null,
+      migratedFrom: info?.migratedFrom ?? null,
+      recoveredAt: info?.recoveredAt || null,
+      issue: info?.issue || null
+    };
+
+    try {
+      window.localStorage.setItem(
+        RECOVERY_INFO_KEY,
+        JSON.stringify(lastRecoveryInfo)
+      );
+    } catch (error) {
+      console.warn("Could not persist recovery information:", error);
+    }
+
+    return lastRecoveryInfo;
+  }
+
+  function restoreRecoveryInfo() {
+    try {
+      const raw = window.localStorage.getItem(RECOVERY_INFO_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        lastRecoveryInfo = { ...lastRecoveryInfo, ...parsed };
+      }
+    } catch (error) {
+      console.warn("Could not restore recovery information:", error);
+    }
+  }
+
+  restoreRecoveryInfo();
 
   function nowIso() {
     return new Date().toISOString();
@@ -115,6 +162,13 @@
   function normaliseGame(value) {
     if (!value || typeof value !== "object") return null;
 
+    const incomingSchema = Number(value.schemaVersion || 1);
+
+    // Never guess how to interpret data written by a future build.
+    if (!Number.isFinite(incomingSchema) || incomingSchema > SCHEMA_VERSION) {
+      return null;
+    }
+
     const team = normaliseTeam(value.team);
     if (!team) return null;
 
@@ -157,6 +211,72 @@
     ).join("");
   }
 
+  function tryParseGame(raw) {
+    if (!raw) {
+      return { ok: false, reason: "missing", game: null, incomingSchema: null };
+    }
+
+    try {
+      const parsed = JSON.parse(raw);
+      const incomingSchema = Number(parsed?.schemaVersion || 1);
+
+      if (Number.isFinite(incomingSchema) && incomingSchema > SCHEMA_VERSION) {
+        return {
+          ok: false,
+          reason: "future-schema",
+          game: null,
+          incomingSchema
+        };
+      }
+
+      const game = normaliseGame(parsed);
+      if (!game) {
+        return {
+          ok: false,
+          reason: "invalid-shape",
+          game: null,
+          incomingSchema
+        };
+      }
+
+      return {
+        ok: true,
+        reason: incomingSchema < SCHEMA_VERSION ? "migrated" : "ok",
+        game,
+        incomingSchema
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        reason: "invalid-json",
+        game: null,
+        incomingSchema: null,
+        error
+      };
+    }
+  }
+
+  function quarantineRaw(raw, reason) {
+    if (!raw) return;
+
+    try {
+      window.localStorage.setItem(
+        QUARANTINE_KEY,
+        JSON.stringify({
+          quarantinedAt: nowIso(),
+          reason: String(reason || "unknown"),
+          raw: String(raw)
+        })
+      );
+    } catch (error) {
+      console.warn("Could not quarantine damaged local state:", error);
+    }
+  }
+
+  function writeCanonicalGame(game) {
+    window.localStorage.setItem(GAME_KEY, JSON.stringify(game));
+  }
+
   function saveGame(value) {
     const game = normaliseGame(value);
 
@@ -165,26 +285,140 @@
     }
 
     game.updatedAt = nowIso();
-    window.localStorage.setItem(GAME_KEY, JSON.stringify(game));
+
+    // Preserve the previous valid snapshot before every meaningful write.
+    // If the new primary value is later damaged, the last-known-good copy is
+    // at most one local mutation behind.
+    try {
+      const currentRaw = window.localStorage.getItem(GAME_KEY);
+      const current = tryParseGame(currentRaw);
+
+      if (current.ok) {
+        window.localStorage.setItem(
+          BACKUP_KEY,
+          JSON.stringify(current.game)
+        );
+      }
+    } catch (error) {
+      console.warn("Could not update local backup:", error);
+    }
+
+    writeCanonicalGame(game);
+    if (!["recovered", "migrated", "unsupported-future"].includes(lastRecoveryInfo.status)) {
+      setRecoveryInfo({
+        status: "ok",
+        source: "primary",
+        migratedFrom: null,
+        recoveredAt: null,
+        issue: null
+      });
+    }
+
     return deepClone(game);
   }
 
   function loadGame() {
+    let primaryRaw = null;
+    let backupRaw = null;
+
     try {
-      const raw = window.localStorage.getItem(GAME_KEY);
-      if (!raw) return null;
+      primaryRaw = window.localStorage.getItem(GAME_KEY);
+      backupRaw = window.localStorage.getItem(BACKUP_KEY);
 
-      const parsed = JSON.parse(raw);
-      const game = normaliseGame(parsed);
+      const primary = tryParseGame(primaryRaw);
 
-      if (!game) {
-        window.localStorage.removeItem(GAME_KEY);
+      if (primary.ok) {
+        const migratedFrom =
+          primary.incomingSchema < SCHEMA_VERSION
+            ? primary.incomingSchema
+            : null;
+
+        if (migratedFrom !== null) {
+          // Upgrade older valid state in place without disturbing the backup.
+          writeCanonicalGame(primary.game);
+        }
+
+        if (migratedFrom !== null) {
+          setRecoveryInfo({
+            status: "migrated",
+            source: "primary",
+            migratedFrom,
+            recoveredAt: nowIso(),
+            issue: null
+          });
+        } else if (!["recovered", "migrated"].includes(lastRecoveryInfo.status)) {
+          setRecoveryInfo({
+            status: "ok",
+            source: "primary",
+            migratedFrom: null,
+            recoveredAt: null,
+            issue: null
+          });
+        }
+
+        return deepClone(primary.game);
+      }
+
+      if (primary.reason === "future-schema") {
+        setRecoveryInfo({
+          status: "unsupported-future",
+          source: "primary",
+          migratedFrom: primary.incomingSchema,
+          recoveredAt: null,
+          issue: "future-schema"
+        });
         return null;
       }
 
-      return game;
+      const backup = tryParseGame(backupRaw);
+
+      if (backup.ok) {
+        if (primaryRaw) {
+          quarantineRaw(primaryRaw, primary.reason);
+        }
+
+        // Restore directly, rather than calling saveGame(), so the damaged
+        // primary cannot replace the good backup.
+        writeCanonicalGame(backup.game);
+
+        setRecoveryInfo({
+          status: "recovered",
+          source: "backup",
+          migratedFrom:
+            backup.incomingSchema < SCHEMA_VERSION
+              ? backup.incomingSchema
+              : null,
+          recoveredAt: nowIso(),
+          issue: primary.reason
+        });
+
+        return deepClone(backup.game);
+      }
+
+      if (primaryRaw) {
+        quarantineRaw(primaryRaw, primary.reason);
+      }
+
+      setRecoveryInfo({
+        status: primaryRaw || backupRaw ? "unrecoverable" : "empty",
+        source: null,
+        migratedFrom: null,
+        recoveredAt: null,
+        issue: primaryRaw ? primary.reason : null
+      });
+
+      return null;
     } catch (error) {
       console.warn("Could not read local game state:", error);
+
+      setRecoveryInfo({
+        status: "error",
+        source: null,
+        migratedFrom: null,
+        recoveredAt: null,
+        issue: String(error?.message || error)
+      });
+
       return null;
     }
   }
@@ -369,10 +603,58 @@
     return toPublicTeam(saved.team);
   }
 
+  function getRecoveryInfo() {
+    return deepClone(lastRecoveryInfo);
+  }
+
+  function inspectStorage() {
+    let primaryRaw = null;
+    let backupRaw = null;
+    let quarantineRawValue = null;
+
+    try {
+      primaryRaw = window.localStorage.getItem(GAME_KEY);
+      backupRaw = window.localStorage.getItem(BACKUP_KEY);
+      quarantineRawValue = window.localStorage.getItem(QUARANTINE_KEY);
+    } catch (error) {
+      return {
+        ok: false,
+        schemaVersion: SCHEMA_VERSION,
+        primary: "unavailable",
+        backup: "unavailable",
+        quarantine: false,
+        recovery: getRecoveryInfo(),
+        error: String(error?.message || error)
+      };
+    }
+
+    const primary = tryParseGame(primaryRaw);
+    const backup = tryParseGame(backupRaw);
+
+    return {
+      ok: primary.ok || backup.ok || (!primaryRaw && !backupRaw),
+      schemaVersion: SCHEMA_VERSION,
+      primary: primaryRaw ? (primary.ok ? "valid" : primary.reason) : "empty",
+      backup: backupRaw ? (backup.ok ? "valid" : backup.reason) : "empty",
+      quarantine: Boolean(quarantineRawValue),
+      recovery: getRecoveryInfo()
+    };
+  }
+
   function clearGame() {
     try {
       window.localStorage.removeItem(GAME_KEY);
+      window.localStorage.removeItem(BACKUP_KEY);
+      window.localStorage.removeItem(QUARANTINE_KEY);
+      window.localStorage.removeItem(RECOVERY_INFO_KEY);
       LEGACY_KEYS.forEach(key => window.localStorage.removeItem(key));
+      lastRecoveryInfo = {
+        status: "empty",
+        source: null,
+        migratedFrom: null,
+        recoveredAt: null,
+        issue: null
+      };
     } catch (error) {
       console.warn("Could not clear local Freeze state:", error);
     }
@@ -387,6 +669,8 @@
     updateGame,
     completeChallenge,
     toPublicTeam,
+    inspectStorage,
+    getRecoveryInfo,
 
     // Existing UI compatibility
     loadSession,
