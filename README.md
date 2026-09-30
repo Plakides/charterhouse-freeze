@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9B-D1 — Universal 30-second wrong-answer penalty
+# Task 9C-B1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9B-D1 — Screenshot-led layout correction
+# Task 9C-B1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -661,3 +661,34 @@ Migration:
 - if a tester had `verified:true` stored from 9B-C, the exact route is preserved
 - because 9B-C did not award a seal, 9B-D clears only the old verified flag and
   requires one fresh `Check route` click to record the real completion
+
+
+# Task 9C-B — Secret Message UI
+
+9C-A logic is frozen.
+
+Frozen puzzle:
+- three intercepted notes: Kazakh, Russian, English
+- six cards: Book, Mountain, Snow Leopard, Key, Eagle, Teapot
+- decoder rail: 2 · 4 · 1 · 3 · 5 · 2
+- unique intended order:
+  Book → Mountain → Snow Leopard → Key → Eagle → Teapot
+- extracted message: TULPAR
+- target solve time: 6–8 minutes
+- eventual reward: Book seal / code 2
+
+9C-B installs the complete visual/interaction layer:
+- three paper-style multilingual transmission sheets
+- built-in emergency glossaries
+- six scrambled security cards
+- click-to-select + click-position placement
+- desktop drag/drop support
+- filled positions can be picked up and moved
+- slot-specific TAKE LETTER numbers
+- live extracted-letter rail
+- arrangement persists per team through refresh/offline use
+- Clear arrangement / Restore scramble controls
+
+The final answer input is deliberately disabled in 9C-B. 9C-C will register the
+accepted answer fingerprint(s), enable submission, inherit the global
+30-second wrong-answer penalty, and award Book seal 2.
