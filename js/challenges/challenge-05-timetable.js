@@ -602,7 +602,7 @@
       label: "Period 3 subject",
       placeholder: "Enter the subject in Period 3",
       inputEnabled: true,
-      enabled: false
+      enabled: true
     },
     render
   });

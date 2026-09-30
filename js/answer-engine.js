@@ -39,6 +39,13 @@
       hashes: Object.freeze([
         "e71e37ae183bd327bafdc6ac015535f88e9b759b67261207d041e47a82a34de5"
       ])
+    }),
+    5: Object.freeze({
+      mode: "text",
+      pepper: "CF9EC-C05-timetable-E5-M3",
+      hashes: Object.freeze([
+        "07536f005dcbe8db072146e8405b8c1df997d853af94ec3d91ba537127763d0c"
+      ])
     })
   });
 

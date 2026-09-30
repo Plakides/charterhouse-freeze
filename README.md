@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9E-B1 — Universal 30-second wrong-answer penalty
+# Task 9E-D1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9E-B1 — Screenshot-led layout correction
+# Task 9E-D1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9E-B1 — Manual extraction correction
+# Task 9E-D1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9E-B1 — Card readability pass
+# Task 9E-D1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9E-B1 — Caesar shift changed to 8
+# Task 9E-D1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -951,3 +951,71 @@ Frozen puzzle:
 - Submit remains disabled until 9E-C
 
 The UI does not automatically check or reveal the correct timetable.
+
+
+# Task 9E-C — Impossible Timetable answer/reward integration
+
+9E-B1 is frozen.
+
+Challenge 05 now uses the standard answer engine and canonical completion flow.
+
+Accepted answer:
+- `MUSIC` (case and surrounding whitespace tolerant through normal text normalization)
+
+The timetable UI remains intentionally non-validating:
+- students may arrange cards freely
+- the website does NOT confirm whether the timetable itself is correct
+- the website does NOT reveal the Period 3 answer
+- students must use the five clues, decide the unique schedule, and submit the
+  final Period 3 subject themselves
+
+Wrong submitted answers use the existing persistent 30-second cooldown.
+
+Correct submission:
+- completes Challenge 05
+- awards Eagle seal / code number 5
+- increments local mission progress
+- queues the normal PROGRESS sync event
+- persists offline
+- syncs opportunistically on reconnect
+- locks the solved challenge through existing completion behaviour
+
+
+# Task 9E-D — Final regression / freeze
+
+Challenge 05 is now frozen.
+
+Frozen specification:
+- title: The Impossible Timetable
+- target solve time: 5–7 minutes
+- five subjects:
+  Art, Science, Music, Maths, Computing
+- five rules:
+  1. Computing is immediately after Maths.
+  2. Science is neither first nor last.
+  3. Music is later than Science.
+  4. Art is earlier than Maths.
+  5. Music is earlier than Maths.
+- unique timetable:
+  P1 Art
+  P2 Science
+  P3 Music
+  P4 Maths
+  P5 Computing
+- final question:
+  Which subject is in Period 3?
+- accepted answer:
+  MUSIC
+- wrong answer:
+  persistent 30-second cooldown
+- reward:
+  Eagle seal / code number 5
+- arrangement:
+  free placement/moving/swapping; no automatic correctness feedback
+- completion:
+  canonical local state + queued PROGRESS sync
+- offline:
+  local puzzle state + answer validation + persistence required
+
+9E-D introduces no gameplay or visual changes from the approved 9E-C1 build.
+It marks the final tested/frozen state before Challenge 06.
