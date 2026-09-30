@@ -66,28 +66,28 @@
       name: "Botanical Gardens",
       short: "Botanical",
       image: "assets/challenge-2/botanical-gardens.png",
-      x: 11, y: 77
+      x: 11, y: 73
     }),
     Object.freeze({
       id: "museum",
       name: "Central State Museum",
       short: "State Museum",
       image: "assets/challenge-2/central-state-museum.png",
-      x: 35, y: 76
+      x: 35, y: 73
     }),
     Object.freeze({
       id: "koktobe",
       name: "Kok Tobe",
       short: "Kok Tobe",
       image: "assets/challenge-2/kok-tobe.png",
-      x: 81, y: 76
+      x: 81, y: 72
     }),
     Object.freeze({
       id: "medeu",
       name: "Medeu",
       short: "Medeu",
       image: "assets/challenge-2/medeu.png",
-      x: 81, y: 94
+      x: 81, y: 87
     })
   ]);
 
@@ -357,15 +357,34 @@
     function renderRoute() {
       routeLine.setAttribute("points", routePoints());
 
-      routeStrip.innerHTML = state.route.map((id, index) => {
-        const location = byId.get(id);
-        return `
-          <span class="almaty-route-chip">
-            <b>${index + 1}</b>
-            ${location.short}
-          </span>
-        `;
-      }).join('<span class="almaty-route-arrow" aria-hidden="true">→</span>');
+      const routeRows = [];
+      const stopsPerRow = 5;
+
+      for (let start = 0; start < state.route.length; start += stopsPerRow) {
+        routeRows.push(
+          state.route.slice(start, start + stopsPerRow)
+            .map((id, rowIndex) => {
+              const index = start + rowIndex;
+              const location = byId.get(id);
+
+              return `
+                <span class="almaty-route-chip">
+                  <b>${index + 1}</b>
+                  ${location.short}
+                </span>
+              `;
+            })
+            .join('<span class="almaty-route-arrow" aria-hidden="true">→</span>')
+        );
+      }
+
+      routeStrip.innerHTML = routeRows
+        .map((row, index) => `
+          <div class="almaty-route-row" data-route-row="${index + 1}">
+            ${row}
+          </div>
+        `)
+        .join("");
 
       routeCount.textContent =
         `${state.route.length} ${state.route.length === 1 ? "stop" : "stops"}`;

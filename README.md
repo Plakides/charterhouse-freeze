@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9B-C1 — Universal 30-second wrong-answer penalty
+# Task 9B-C2 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -618,3 +618,19 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 
 9B-C deliberately stops short of awarding the Mountain seal. A verified route
 is connected to actual game completion in 9B-D.
+
+
+# Task 9B-C2 — Screenshot-led layout correction
+
+Based on the 1536×960 Chrome screenshot:
+
+- landmark artwork is slightly smaller so images + labels remain inside the map
+- Botanical Gardens, Central State Museum and Kok Tobe are moved upward
+- Medeu is moved substantially upward and rendered slightly smaller
+- route history now renders in rows of maximum five stops
+- the complete correct 10-stop route therefore appears as two neat rows
+- horizontal scrolling is removed from the route history
+- custom Challenge 02 submission now forcibly hides the generic answer form,
+  fixing the stray disabled "Route check" panel visible below the puzzle
+
+No puzzle logic, correct route, landmark artwork or cooldown behaviour changed.

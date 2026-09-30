@@ -92,6 +92,8 @@ input:focus-visible {
   letter-spacing: .13em;
   color: #5e6872;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .brand-meta .eyebrow { color: var(--ch-navy); }
@@ -3625,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9B-C1 · universal wrong-answer penalty */
+/* Task 9B-C2 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3642,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9B-C1 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 9B-C2 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -3815,7 +3817,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .almaty-landmark {
-  --landmark-size: clamp(72px, 8.2vw, 112px);
+  --landmark-size: clamp(66px, 7.2vw, 96px);
   position: absolute;
   z-index: 5;
   left: calc(var(--x) * 1%);
@@ -3841,8 +3843,8 @@ body.modal-open { overflow: hidden; }
 
 .almaty-landmark > span {
   display: inline-block;
-  max-width: 112px;
-  margin-top: -8px;
+  max-width: 118px;
+  margin-top: -7px;
   padding: 3px 6px 4px;
   border: 1px solid rgba(9,33,64,.15);
   background: rgba(247,244,238,.94);
@@ -3996,16 +3998,28 @@ body.modal-open { overflow: hidden; }
 
 .almaty-route-strip {
   margin-top: 6px;
+  display: grid;
+  gap: 5px;
+  overflow: visible;
+  padding-bottom: 1px;
+}
+
+.almaty-route-row {
+  min-width: 0;
   display: flex;
   gap: 5px;
   align-items: center;
-  overflow-x: auto;
-  padding-bottom: 2px;
-  scrollbar-width: thin;
+  flex-wrap: nowrap;
+}
+
+.almaty-route-row + .almaty-route-row {
+  padding-top: 5px;
+  border-top: 1px dashed rgba(9,33,64,.12);
 }
 
 .almaty-route-chip {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -4031,8 +4045,9 @@ body.modal-open { overflow: hidden; }
 }
 
 .almaty-route-arrow {
+  flex: 0 0 auto;
   color: #8a9ba7;
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .almaty-dispatch {
@@ -4191,5 +4206,40 @@ body.modal-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .almaty-landmark img {
     transition: none;
+  }
+}
+
+
+/* Task 9B-C2 · screenshot-led map-fit corrections */
+.almaty-landmark[data-landmark="medeu"] {
+  --landmark-size: clamp(60px, 6.2vw, 82px);
+}
+
+.almaty-landmark[data-landmark="koktobe"] {
+  --landmark-size: clamp(62px, 6.6vw, 88px);
+}
+
+.almaty-landmark[data-landmark="botanical"],
+.almaty-landmark[data-landmark="museum"] {
+  --landmark-size: clamp(64px, 6.8vw, 90px);
+}
+
+/* Component display rules elsewhere must never resurrect a hidden custom form. */
+.challenge-answer-panel[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 1180px) {
+  .almaty-landmark {
+    --landmark-size: clamp(60px, 6.6vw, 84px);
+  }
+
+  .almaty-landmark[data-landmark="medeu"] {
+    --landmark-size: clamp(54px, 5.8vw, 74px);
+  }
+
+  .almaty-route-chip {
+    padding-inline: 5px;
+    font-size: 7px;
   }
 }

@@ -961,6 +961,7 @@
     const customSubmission = String(submission.kind || "").toLowerCase() === "custom";
 
     challengeAnswerForm.hidden = customSubmission;
+    challengeAnswerForm.style.display = customSubmission ? "none" : "";
 
     challengeAnswerLabel.textContent = submission.label || "Security answer";
     challengeAnswerInput.placeholder = submission.placeholder || "Challenge answer";
