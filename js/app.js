@@ -1003,7 +1003,8 @@
     if (typeof definition.render === "function") {
       definition.render(challengeContent, {
         team,
-        challengeId: definition.id
+        challengeId: definition.id,
+        complete: answer => completeCustomChallenge(definition, answer)
       });
     }
 
@@ -1119,6 +1120,86 @@
 
     openChallenge(challengeId, { pushHistory: false });
     return true;
+  }
+
+  async function completeCustomChallenge(definition, answer) {
+    if (
+      !definition ||
+      !currentSession ||
+      !currentTeam ||
+      !currentChallengeId ||
+      Number(definition.id) !== Number(currentChallengeId) ||
+      challengeSubmitInFlight
+    ) {
+      return {
+        correct: false,
+        error: "Challenge completion is not currently available."
+      };
+    }
+
+    if (window.FREEZE_CONFIG?.OFFLINE_ANSWER_ENGINE_READY !== true) {
+      return {
+        correct: false,
+        error: "Local challenge engine is not ready in this build."
+      };
+    }
+
+    challengeSubmitInFlight = true;
+
+    try {
+      const result = await api.submitAnswer({
+        ...currentSession,
+        challengeId: currentChallengeId,
+        answer: String(answer || "")
+      });
+
+      if (!result.correct) {
+        return {
+          correct: false,
+          error: "The local completion proof was rejected."
+        };
+      }
+
+      cooldown.clear(currentTeam.teamId, currentChallengeId);
+      stopChallengeCooldownTimer();
+
+      const previousTeam = currentTeam;
+      const updatedTeam =
+        result.team ||
+        await api.getTeamState(currentSession);
+
+      currentTeam = updatedTeam;
+      persistTeamSnapshot(updatedTeam);
+      updateChallengeChrome(updatedTeam);
+
+      window.setTimeout(() => {
+        currentChallengeId = null;
+        window.history.replaceState(
+          { screen: "mission" },
+          "",
+          window.location.pathname + window.location.search
+        );
+
+        showMission(updatedTeam, {
+          previousTeam,
+          animateNew: true
+        });
+      }, 850);
+
+      return {
+        ...result,
+        team: updatedTeam
+      };
+    } catch (error) {
+      console.error("Custom challenge completion failed:", error);
+
+      return {
+        correct: false,
+        error: mapApiError(error)
+      };
+    } finally {
+      challengeSubmitInFlight = false;
+    }
   }
 
   async function submitCurrentChallengeAnswer() {

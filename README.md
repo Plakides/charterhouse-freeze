@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9B-C2 — Universal 30-second wrong-answer penalty
+# Task 9B-D1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9B-C2 — Screenshot-led layout correction
+# Task 9B-D1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -634,3 +634,30 @@ Based on the 1536×960 Chrome screenshot:
   fixing the stray disabled "Route check" panel visible below the puzzle
 
 No puzzle logic, correct route, landmark artwork or cooldown behaviour changed.
+
+
+# Task 9B-D — Lost in Almaty completion integration
+
+9B-C is frozen.
+
+The correct route now completes Challenge 02 through the SAME local completion
+pipeline used by standard answer puzzles:
+
+1. custom map UI proves the full route locally
+2. an internal Challenge 02 proof is submitted to `FREEZE_API.submitAnswer`
+3. `answer-engine.js` validates its SHA-256 fingerprint
+4. canonical game state records Challenge 02 complete
+5. Mountain seal / code number 8 is added
+6. a normal PROGRESS event is queued
+7. opportunistic Cloudflare sync runs in the background
+8. the UI returns to the mission board and animates the newly recovered seal
+
+This avoids a second completion/state system for custom puzzles.
+
+The internal proof is not a student-facing answer. As with all browser-local
+validation, it is obfuscation rather than a security boundary.
+
+Migration:
+- if a tester had `verified:true` stored from 9B-C, the exact route is preserved
+- because 9B-C did not award a seal, 9B-D clears only the old verified flag and
+  requires one fresh `Check route` click to record the real completion

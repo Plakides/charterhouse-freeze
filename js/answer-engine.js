@@ -17,6 +17,13 @@
       hashes: Object.freeze([
         "0e363e9e9e028e6a3ea4af49b2f6a1c47440dee4c28805e7b66ebd50637fbe7a"
       ])
+    }),
+    2: Object.freeze({
+      mode: "text",
+      pepper: "CF9BD-C02-map-M8-K2P7",
+      hashes: Object.freeze([
+        "8e77f4424de05ffa757bf007c0dab4f233fa456816f4da666c4d866a2ac3a9f9"
+      ])
     })
   });
 

@@ -127,6 +127,11 @@
     "medeu"
   ]);
 
+  // Internal completion proof. Students never type this.
+  // It is validated through the same hashed offline answer engine as Challenge 01.
+  const completionProof =
+    "almaty-route:abai>republic>astana>panfilov>green>hotel>abai>museum>koktobe>medeu";
+
   const directions = Object.freeze([
     "Start at Abai Square, facing SOUTH towards the mountains. Turn RIGHT and travel one road.",
     "Face NORTH. Travel one road. Turn RIGHT and travel one more road.",
@@ -204,6 +209,16 @@
     const teamId = team.teamId || "unknown";
     const cooldown = window.FREEZE_COOLDOWN;
     const state = loadState(teamId);
+    const alreadyCompleted =
+      Array.isArray(team.completed) &&
+      team.completed.map(Number).includes(challengeId);
+
+    // 9B-C allowed route verification before the seal was wired in.
+    // Preserve the route, but require one fresh Check route click in 9B-D.
+    if (state.verified && !alreadyCompleted) {
+      state.verified = false;
+      saveState(teamId, state);
+    }
 
     let penaltyTimer = null;
 
@@ -316,10 +331,10 @@
           </p>
 
           <div class="almaty-build-note">
-            <strong>9B-C interaction build</strong>
+            <strong>MISSION REWARD</strong>
             <span>
-              A correct route is verified here. The Mountain seal is connected
-              to the game in 9B-D.
+              A fully correct route recovers the Mountain security seal.
+              Wrong routes trigger the standard 30-second penalty.
             </span>
           </div>
         </aside>
@@ -503,7 +518,7 @@
       renderRoute();
     });
 
-    checkButton.addEventListener("click", () => {
+    checkButton.addEventListener("click", async () => {
       if (state.verified) return;
 
       if (cooldown?.isActive(teamId, challengeId)) {
@@ -519,15 +534,40 @@
       }
 
       if (routeMatches(state.route)) {
+        checkButton.disabled = true;
+        checkButton.textContent = "Verifying route…";
+        message.classList.remove("is-penalty");
+        message.classList.add("is-success");
+        message.textContent =
+          "ROUTE CORRECT · Recovering the Mountain security seal…";
+
+        const result =
+          typeof context?.complete === "function"
+            ? await context.complete(completionProof)
+            : {
+                correct: false,
+                error: "Completion bridge unavailable."
+              };
+
+        if (!result?.correct) {
+          checkButton.disabled = false;
+          checkButton.textContent = "Check route";
+          message.classList.remove("is-success");
+          message.textContent =
+            result?.error ||
+            "Route was correct, but the seal could not be recorded. Try again.";
+          return;
+        }
+
         state.verified = true;
         saveState(teamId, state);
 
         message.classList.remove("is-penalty");
         message.classList.add("is-success");
         message.textContent =
-          "ROUTE VERIFIED · Mission Control confirms the navigation sequence.";
+          "ROUTE VERIFIED · Mountain seal recovered · Code number 8.";
 
-        checkButton.textContent = "Route verified";
+        checkButton.textContent = "Mountain seal recovered";
         renderRoute();
         return;
       }
