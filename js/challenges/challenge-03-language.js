@@ -140,14 +140,6 @@
     `;
   }
 
-  function extractedLetter(cardId, slotIndex) {
-    const card = byId.get(cardId);
-    if (!card) return "";
-
-    const take = TAKE_PATTERN[slotIndex];
-    return card.code.charAt(take - 1) || "";
-  }
-
   function render(container, context) {
     const team = context?.team || {};
     const teamId = team.teamId || "unknown";
@@ -292,24 +284,32 @@
                   TAKE LETTER <b>${take}</b>
                 </span>
 
-                <span class="secret-extract" data-extracted-letter>
-                  —
-                </span>
               </button>
             `).join("")}
           </div>
 
-          <div class="secret-extraction-console">
+          <div class="secret-extraction-console is-manual">
             <div>
-              <span>EXTRACTED MESSAGE</span>
-              <strong data-extraction-status>
-                Fill all six positions to reveal the transmission.
+              <span>FINAL DECODER INSTRUCTION</span>
+              <strong>
+                Once all six cards are in the correct order, extract the letters
+                yourself. The website will NOT reveal them for you.
               </strong>
             </div>
 
-            <div class="secret-extracted-word" data-extracted-word>
-              ${TAKE_PATTERN.map(() => `<b>—</b>`).join("")}
+            <div class="secret-manual-pattern" aria-label="Manual extraction pattern">
+              <span><b>1</b> 2nd letter</span>
+              <span><b>2</b> 4th letter</span>
+              <span><b>3</b> 1st letter</span>
+              <span><b>4</b> 3rd letter</span>
+              <span><b>5</b> 5th letter</span>
+              <span><b>6</b> 2nd letter</span>
             </div>
+
+            <p class="secret-manual-instruction">
+              Write the six letters together, then type the six-letter message
+              in the <strong>Decoded message</strong> box below.
+            </p>
           </div>
 
           <div class="secret-workbench-actions">
@@ -342,8 +342,6 @@
       container.querySelectorAll("[data-secret-slot]")
     );
     const status = container.querySelector("[data-secret-status]");
-    const extractedWord = container.querySelector("[data-extracted-word]");
-    const extractionStatus = container.querySelector("[data-extraction-status]");
     const clearButton = container.querySelector("[data-secret-clear]");
     const resetButton = container.querySelector("[data-secret-reset]");
 
@@ -431,12 +429,6 @@
       );
     }
 
-    function extraction() {
-      return state.slots.map((id, index) =>
-        id ? extractedLetter(id, index) : ""
-      );
-    }
-
     function renderWorkbench() {
       const available = bankIds();
 
@@ -484,9 +476,6 @@
       slotButtons.forEach((slotButton, index) => {
         const cardId = state.slots[index];
         const cardTarget = slotButton.querySelector("[data-slot-card]");
-        const extractedTarget =
-          slotButton.querySelector("[data-extracted-letter]");
-
         slotButton.classList.toggle("is-filled", Boolean(cardId));
         slotButton.classList.toggle(
           "is-selected-source",
@@ -502,11 +491,8 @@
             }
           );
 
-          extractedTarget.textContent =
-            extractedLetter(cardId, index);
         } else {
           cardTarget.innerHTML = `<span>PLACE CARD</span>`;
-          extractedTarget.textContent = "—";
         }
 
         slotButton.onclick = event => {
@@ -554,18 +540,14 @@
         };
       });
 
-      const letters = extraction();
-      const complete = letters.every(Boolean);
+      const filledCount = state.slots.filter(Boolean).length;
 
-      extractedWord.innerHTML = letters
-        .map(letter => `<b>${letter || "—"}</b>`)
-        .join("");
-
-      extractedWord.classList.toggle("is-complete", complete);
-
-      extractionStatus.textContent = complete
-        ? "Read the six extracted letters from left to right."
-        : `${letters.filter(Boolean).length}/6 positions filled`;
+      if (filledCount === 6) {
+        setStatus(
+          "All six positions are filled. Now apply the decoder pattern yourself and type the six-letter message below.",
+          "complete"
+        );
+      }
 
       clearButton.disabled =
         !state.slots.some(Boolean) && !state.selectedId;
@@ -593,7 +575,6 @@
 
     window.FREEZE_SECRET_MESSAGE = Object.freeze({
       getSlots: () => [...state.slots],
-      getExtraction: () => extraction().join(""),
       reset: () => {
         state.slots = Array(6).fill(null);
         state.selectedId = null;
@@ -612,11 +593,12 @@
     intro:
       "The translation relay froze mid-transmission. Six security cards have been scrambled across three intercepted messages.",
     brief:
-      "Decode only the words you need, reconstruct the card order, then use the numbered decoder rail to reveal the hidden six-letter message.",
+      "Decode only the words you need, reconstruct the card order, then manually take the specified letter from each card and type the hidden six-letter message.",
     submission: {
       kind: "text",
       label: "Decoded message",
       placeholder: "Enter the six-letter message",
+      inputEnabled: true,
       enabled: false
     },
     render

@@ -971,14 +971,19 @@
     challengeMessage.classList.remove("is-success", "is-penalty");
 
     const enabled = Boolean(submission.enabled) && !solved;
-    challengeAnswerInput.disabled = !enabled;
+    const inputEnabled =
+      (Boolean(submission.inputEnabled) || enabled) && !solved;
+
+    challengeAnswerInput.disabled = !inputEnabled;
     challengeSubmitButton.disabled = !enabled;
 
     challengeAnswerHelp.textContent = solved
       ? "This challenge is already complete."
       : enabled
         ? "Submit one team answer when you are confident."
-        : "Answer submission will activate when this puzzle is installed.";
+        : inputEnabled
+          ? "Work out the message yourself and type it here."
+          : "Answer submission will activate when this puzzle is installed.";
 
     challengeSubmitLabel.textContent = solved ? "Completed" : "Submit answer";
 
