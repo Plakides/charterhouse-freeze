@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-B2 · universal wrong-answer penalty */
+/* Task 9C-B3 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9C-B2 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 9C-B3 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-B2 · screenshot-led map-fit corrections */
+/* Task 9C-B3 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9C-B2 — SECRET MESSAGE UI                                             */
+/* TASK 9C-B3 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4607,55 +4607,55 @@ body.modal-open { overflow: hidden; }
   display: block;
   overflow: hidden;
   color: var(--ch-navy);
-  font-size: 8px;
-  letter-spacing: .055em;
+  font-size: 11px;
+  letter-spacing: .045em;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .secret-card-copy > span {
   display: block;
-  margin-top: 1px;
-  color: #8b989f;
-  font-size: 6px;
+  margin-top: 2px;
+  color: #788994;
+  font-size: 8px;
   letter-spacing: .04em;
 }
 
 .secret-card code {
-  margin-top: 9px;
+  margin-top: 10px;
   display: flex;
-  gap: 2px;
+  gap: 4px;
   font-family: var(--mono);
 }
 
 .secret-card code b {
-  min-width: 17px;
-  height: 21px;
+  min-width: 24px;
+  height: 29px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(9,33,64,.13);
+  border: 1px solid rgba(9,33,64,.18);
   background: white;
-  color: #435c6e;
-  font-size: 9px;
-  font-weight: 900;
+  color: #203f57;
+  font-size: 13px;
+  font-weight: 950;
 }
 
 .secret-card.is-compact {
-  min-height: 75px;
-  padding: 6px;
-  grid-template-columns: 25px minmax(0,1fr);
-  gap: 5px;
+  min-height: 91px;
+  padding: 7px;
+  grid-template-columns: 30px minmax(0,1fr);
+  gap: 7px;
   box-shadow: none;
 }
 
 .secret-card.is-compact .secret-card-seal {
-  width: 25px;
-  height: 25px;
-  font-size: 9px;
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
 }
 
 .secret-card.is-compact .secret-card-copy > strong {
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .secret-card.is-compact .secret-card-copy > span {
@@ -4663,13 +4663,14 @@ body.modal-open { overflow: hidden; }
 }
 
 .secret-card.is-compact code {
-  margin-top: 6px;
+  margin-top: 8px;
+  gap: 3px;
 }
 
 .secret-card.is-compact code b {
-  min-width: 14px;
-  height: 18px;
-  font-size: 8px;
+  min-width: 21px;
+  height: 26px;
+  font-size: 12px;
 }
 
 .secret-slots-heading {
@@ -4681,9 +4682,9 @@ body.modal-open { overflow: hidden; }
 }
 
 .secret-slots-heading strong {
-  color: #647682;
-  font-size: 8px;
-  font-weight: 800;
+  color: #465d6c;
+  font-size: 10px;
+  font-weight: 900;
 }
 
 .secret-slots {
@@ -4696,7 +4697,7 @@ body.modal-open { overflow: hidden; }
 .secret-slot {
   position: relative;
   min-width: 0;
-  min-height: 154px;
+  min-height: 184px;
   padding: 7px;
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -4722,9 +4723,9 @@ body.modal-open { overflow: hidden; }
 .secret-slot-position {
   display: flex;
   align-items: center;
-  gap: 5px;
-  color: #71838e;
-  font-size: 6px;
+  gap: 6px;
+  color: #617481;
+  font-size: 8px;
   font-weight: 950;
   letter-spacing: .09em;
 }
@@ -4743,7 +4744,7 @@ body.modal-open { overflow: hidden; }
 
 .secret-slot-card {
   min-width: 0;
-  min-height: 78px;
+  min-height: 96px;
   display: grid;
   align-items: stretch;
 }
@@ -4760,20 +4761,31 @@ body.modal-open { overflow: hidden; }
 }
 
 .secret-take {
+  min-height: 34px;
+  padding: 6px 7px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  color: #788994;
-  font-size: 6px;
-  font-weight: 900;
-  letter-spacing: .08em;
+  gap: 7px;
+  border-top: 2px solid rgba(211,147,160,.72);
+  background: rgba(211,147,160,.10);
+  color: #435966;
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: .075em;
 }
 
 .secret-take b {
-  color: #8d6070;
+  min-width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ch-pink);
+  color: white;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 12px;
+  box-shadow: 0 2px 5px rgba(9,33,64,.12);
 }
 
 .secret-extract {
@@ -4913,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-B2 · manual extraction — the site must not solve TULPAR for students */
+/* Task 9C-B3 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4925,7 +4937,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .secret-manual-pattern span {
-  min-height: 40px;
+  min-height: 46px;
   padding: 5px 4px;
   display: grid;
   grid-template-columns: 22px 1fr;
@@ -4934,9 +4946,9 @@ body.modal-open { overflow: hidden; }
   border: 1px solid rgba(255,255,255,.22);
   background: rgba(255,255,255,.07);
   color: #dce6ec;
-  font-size: 7px;
-  font-weight: 800;
-  line-height: 1.18;
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1.2;
 }
 
 .secret-manual-pattern b {
@@ -4978,5 +4990,39 @@ body.modal-open { overflow: hidden; }
 
   .secret-manual-instruction {
     grid-column: 1;
+  }
+}
+
+
+/* Task 9C-B3 · readability refinements from live 1536px screenshot */
+.secret-slot.is-filled {
+  background: rgba(255,255,255,.88);
+}
+
+.secret-slot.is-filled .secret-card {
+  border-color: rgba(9,33,64,.20);
+}
+
+.secret-slot.is-filled .secret-take {
+  color: var(--ch-navy);
+}
+
+.secret-slot-card > span {
+  font-size: 9px;
+}
+
+@media (max-width: 1180px) {
+  .secret-card.is-compact .secret-card-copy > strong {
+    font-size: 9px;
+  }
+
+  .secret-card.is-compact code b {
+    min-width: 19px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .secret-take {
+    font-size: 8px;
   }
 }

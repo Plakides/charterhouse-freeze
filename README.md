@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9C-B2 — Universal 30-second wrong-answer penalty
+# Task 9C-B3 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9C-B2 — Screenshot-led layout correction
+# Task 9C-B3 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9C-B2 — Manual extraction correction
+# Task 9C-B3 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -719,3 +719,24 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 30-second penalties and Book seal 2.
 
 The Kazakh wording is unchanged.
+
+
+# Task 9C-B3 — Card readability pass
+
+Based directly on live-browser screenshot feedback.
+
+No puzzle logic changed.
+
+Readability changes:
+- card titles enlarged
+- five-letter code characters enlarged substantially
+- code boxes enlarged and spaced further apart
+- placed-card layout enlarged
+- slot height increased to prevent crowding
+- POSITION labels enlarged slightly
+- TAKE LETTER instruction transformed into a prominent pink-accent strip
+- extraction number displayed as a larger pink circular badge
+- decoder heading enlarged
+- manual decoder pattern enlarged
+
+The UI still does not calculate or reveal TULPAR.
