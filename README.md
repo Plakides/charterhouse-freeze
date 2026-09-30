@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9C-C1 — Universal 30-second wrong-answer penalty
+# Task 9C-D1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9C-C1 — Screenshot-led layout correction
+# Task 9C-D1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9C-C1 — Manual extraction correction
+# Task 9C-D1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9C-C1 — Card readability pass
+# Task 9C-D1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -769,3 +769,35 @@ Correct submission:
 - persists offline
 - syncs opportunistically when connectivity is available
 - locks the solved challenge using the existing completion behaviour
+
+
+# Task 9C-D — Final regression / freeze
+
+Challenge 03 is now frozen.
+
+Frozen specification:
+- title: Құпия хабар / Secret Message
+- target solve time: 6–8 minutes
+- three intercepted notes: Kazakh, Russian, English
+- six cards: Book, Mountain, Snow Leopard, Key, Eagle, Teapot
+- intended order:
+  Book → Mountain → Snow Leopard → Key → Eagle → Teapot
+- decoder rail:
+  2 · 4 · 1 · 3 · 5 · 2
+- students must perform extraction manually
+- website must NOT calculate or reveal the final word
+- accepted final answers:
+  TULPAR
+  ТҰЛПАР
+- wrong answer:
+  existing persistent 30-second cooldown
+- reward:
+  Book seal / code number 2
+- completion:
+  canonical local state + queued PROGRESS sync
+- refresh/offline persistence:
+  required and preserved
+
+9C-D introduces no gameplay or visual changes from the approved 9C-C1 build.
+It exists only to mark the final tested/frozen state and provide a final
+regression checkpoint before work begins on Challenge 04.

@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-C1 · universal wrong-answer penalty */
+/* Task 9C-D1 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9C-C1 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 9C-D1 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-C1 · screenshot-led map-fit corrections */
+/* Task 9C-D1 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9C-C1 — SECRET MESSAGE UI                                             */
+/* TASK 9C-D1 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-C1 · manual extraction — the site must not solve TULPAR for students */
+/* Task 9C-D1 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-C1 · readability refinements from live 1536px screenshot */
+/* Task 9C-D1 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
