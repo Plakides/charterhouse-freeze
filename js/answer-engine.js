@@ -46,6 +46,13 @@
       hashes: Object.freeze([
         "07536f005dcbe8db072146e8405b8c1df997d853af94ec3d91ba537127763d0c"
       ])
+    }),
+    6: Object.freeze({
+      mode: "text",
+      pepper: "CF9FC-C06-brainfreeze-S1-8367",
+      hashes: Object.freeze([
+        "0e176773e40f2d2e5dce7558f57c4839e0d44d6ec7ab7231f455729084433f52"
+      ])
     })
   });
 

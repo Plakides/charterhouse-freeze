@@ -334,7 +334,7 @@
       label: "Four-digit defrost code",
       placeholder: "Enter A B C D as four digits",
       inputEnabled: true,
-      enabled: false
+      enabled: true
     },
     render
   });

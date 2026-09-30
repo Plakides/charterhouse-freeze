@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9F-B1 — Universal 30-second wrong-answer penalty
+# Task 9F-D1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9F-B1 — Screenshot-led layout correction
+# Task 9F-D1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9F-B1 — Manual extraction correction
+# Task 9F-D1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9F-B1 — Card readability pass
+# Task 9F-D1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9F-B1 — Caesar shift changed to 8
+# Task 9F-D1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1058,3 +1058,66 @@ Frozen puzzle:
 - Submit remains disabled until 9F-C
 
 The UI never calculates or displays the final code.
+
+
+# Task 9F-C — Brain Freeze answer/reward integration
+
+9F-B1 is frozen.
+
+Challenge 06 now uses the standard answer engine and canonical completion flow.
+
+Accepted answer:
+- `8367` (surrounding whitespace tolerant through normal text normalization)
+
+The approved Brain Freeze UI remains unchanged:
+- Panel A sequence
+- Panel B winter symbol equations
+- Panel C number grid
+- Panel D odd/even riddle
+- no per-panel correctness checking
+- no automatic final-code reveal
+- riddle hint remains optional
+
+Wrong submitted answers use the existing persistent 30-second cooldown.
+
+Correct submission:
+- completes Challenge 06
+- awards Snowflake seal / code number 1
+- increments local mission progress
+- queues the normal PROGRESS sync event
+- persists offline
+- syncs opportunistically on reconnect
+- locks the solved challenge through existing completion behaviour
+
+
+# Task 9F-D — Final regression / freeze
+
+Challenge 06 is now frozen.
+
+Frozen specification:
+- title: Brain Freeze
+- target solve time: 5–7 minutes
+- four independent panels:
+  A. sequence -> 8
+  B. winter symbol equations -> 3
+  C. number grid -> 6
+  D. odd/even spelling riddle -> 7
+- final code:
+  8367
+- riddle hint:
+  Think about how number names are spelled in English.
+- no per-panel correctness checking
+- no automatic final code reveal
+- accepted final answer:
+  8367
+- wrong answer:
+  persistent 30-second cooldown
+- reward:
+  Snowflake seal / code number 1
+- completion:
+  canonical local state + queued PROGRESS sync
+- offline:
+  full local validation / persistence required
+
+9F-D introduces no gameplay or visual changes from the approved 9F-C1 build.
+It marks the final tested/frozen state before Challenge 07.
