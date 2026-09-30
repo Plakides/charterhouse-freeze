@@ -216,7 +216,7 @@
       label: "Telegram password",
       placeholder: "Enter the password from the decoded message",
       inputEnabled: true,
-      enabled: false
+      enabled: true
     },
     render
   });

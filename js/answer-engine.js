@@ -32,6 +32,13 @@
         "437babb8e3bc64c770f7b723b423ddb16366b5e84643a32407d3747f1f9d3b9f",
         "eb93863da84b2344dbc73855feaa02fec72b8eed11da99e5dc999c828da72243"
       ])
+    }),
+    4: Object.freeze({
+      mode: "text",
+      pepper: "CF9DC-C04-caesar-T7-W8",
+      hashes: Object.freeze([
+        "e71e37ae183bd327bafdc6ac015535f88e9b759b67261207d041e47a82a34de5"
+      ])
     })
   });
 

@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9D-B2 — Universal 30-second wrong-answer penalty
+# Task 9D-D1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9D-B2 — Screenshot-led layout correction
+# Task 9D-D1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9D-B2 — Manual extraction correction
+# Task 9D-D1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9D-B2 — Card readability pass
+# Task 9D-D1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9D-B2 — Caesar shift changed to 8
+# Task 9D-D1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -845,3 +845,63 @@ Frozen 9D-A logic is therefore revised to:
 - students decode using shift 8 in the Field Kit
 - no shift value is shown on the challenge page
 - final answer remains WINTER
+
+
+# Task 9D-C — Charterhouse Telegram answer/reward integration
+
+9D-B2 is frozen.
+
+Challenge 04 now uses the standard answer engine and canonical completion flow.
+
+Accepted answer:
+- `WINTER` (case and surrounding whitespace tolerant through normal text normalization)
+
+The approved UI/cipher is unchanged:
+- Caesar shift remains 8
+- challenge page does not reveal shift 8
+- hint only points to Field Kit → Caesar Shift
+- students decode the message themselves
+
+Wrong submitted answers use the existing persistent 30-second cooldown.
+
+Correct submission:
+- completes Challenge 04
+- awards Teapot seal / code number 7
+- increments local mission progress
+- queues the normal PROGRESS sync event
+- persists offline
+- syncs opportunistically on reconnect
+- locks the solved challenge through existing completion behaviour
+
+
+# Task 9D-D — Final regression / freeze
+
+Challenge 04 is now frozen.
+
+Frozen specification:
+- title: The Charterhouse Telegram
+- target solve time: 4–6 minutes
+- Caesar cipher
+- plaintext encrypted with shift +8
+- students discover the shift using Field Kit → Caesar Shift
+- challenge hint does NOT reveal the number 8
+- ciphertext:
+  BPM PMIBQVO KWVBZWT ZWWU QA TWKSML.
+  BPM XIAAEWZL QA EQVBMZ.
+- plaintext:
+  THE HEATING CONTROL ROOM IS LOCKED.
+  THE PASSWORD IS WINTER.
+- accepted answer:
+  WINTER
+- wrong answer:
+  persistent 30-second cooldown
+- reward:
+  Teapot seal / code number 7
+- completion:
+  canonical local state + queued PROGRESS sync
+- offline:
+  full local validation/persistence required
+
+9D-D introduces no gameplay or visual changes from the approved 9D-C1 build.
+It only marks the final tested/frozen state and provides a final regression
+checkpoint before Challenge 05.
