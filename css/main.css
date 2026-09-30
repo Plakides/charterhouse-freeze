@@ -3625,7 +3625,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9A2 · universal wrong-answer penalty */
+/* Task 9B-C1 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3638,4 +3638,558 @@ body.modal-open { overflow: hidden; }
       rgba(255,244,223,.72),
       rgba(255,255,255,.76)
     );
+}
+
+
+/* ========================================================================== */
+/* TASK 9B-C1 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* ========================================================================== */
+
+.challenge-content-card.almaty-challenge-content {
+  min-height: 0;
+  padding: 0;
+  display: block;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+}
+
+.almaty-puzzle {
+  min-height: 610px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(300px, .72fr);
+  border: 1px solid rgba(9,33,64,.16);
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 14px 38px rgba(9,33,64,.07);
+  overflow: hidden;
+}
+
+.almaty-map-panel {
+  min-width: 0;
+  padding: 14px 14px 12px;
+  background:
+    radial-gradient(circle at 76% 92%, rgba(192,218,232,.85), transparent 34%),
+    linear-gradient(180deg, #e9f3f7 0%, #f7f4ee 63%, #edf2f4 100%);
+}
+
+.almaty-map-heading {
+  min-height: 52px;
+  padding: 0 2px 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.almaty-map-heading > div:first-child > span,
+.almaty-dispatch-heading > span {
+  display: block;
+  color: #8e6070;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .16em;
+}
+
+.almaty-map-heading h3,
+.almaty-dispatch-heading h3 {
+  margin: 2px 0 0;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-weight: 500;
+}
+
+.almaty-map-heading h3 {
+  font-size: 29px;
+}
+
+.almaty-facing-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5a7282;
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
+.almaty-compass-mini {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(9,33,64,.18);
+  border-radius: 50%;
+  background: rgba(255,255,255,.74);
+  color: var(--ch-navy);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 950;
+}
+
+.almaty-map {
+  position: relative;
+  min-height: 490px;
+  aspect-ratio: 1.44 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(9,33,64,.16);
+  background:
+    radial-gradient(circle at 80% 86%, rgba(139,166,184,.30), transparent 23%),
+    linear-gradient(180deg, rgba(255,255,255,.88), rgba(226,238,243,.82));
+}
+
+.almaty-map::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: auto -6% -10% 35%;
+  height: 29%;
+  background:
+    linear-gradient(140deg, transparent 16%, rgba(148,169,184,.20) 17% 19%, transparent 20%),
+    linear-gradient(40deg, transparent 16%, rgba(148,169,184,.16) 17% 19%, transparent 20%);
+  opacity: .68;
+  pointer-events: none;
+}
+
+.almaty-mountains {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31%;
+  overflow: hidden;
+  opacity: .44;
+  pointer-events: none;
+}
+
+.almaty-mountains span {
+  position: absolute;
+  bottom: -40%;
+  width: 36%;
+  aspect-ratio: 1;
+  transform: rotate(45deg);
+  border: 1px solid rgba(88,116,135,.18);
+  background: rgba(183,207,220,.34);
+}
+
+.almaty-mountains span:nth-child(1) { left: 18%; }
+.almaty-mountains span:nth-child(2) { left: 42%; bottom: -35%; }
+.almaty-mountains span:nth-child(3) { left: 61%; bottom: -42%; }
+.almaty-mountains span:nth-child(4) { left: 78%; bottom: -46%; }
+
+.almaty-road-layer {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.almaty-road {
+  vector-effect: non-scaling-stroke;
+  stroke: rgba(75,99,115,.48);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+
+.almaty-road::before {
+  stroke: white;
+}
+
+.almaty-road.is-blocked {
+  stroke: rgba(141,57,67,.72);
+  stroke-width: 6.5;
+  stroke-dasharray: 8 7;
+}
+
+.almaty-route-line {
+  vector-effect: non-scaling-stroke;
+  fill: none;
+  stroke: #d393a0;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgba(9,33,64,.28));
+}
+
+.almaty-landmark {
+  --landmark-size: clamp(72px, 8.2vw, 112px);
+  position: absolute;
+  z-index: 5;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: var(--landmark-size);
+  min-height: 74px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 0;
+  background: transparent;
+  color: var(--ch-navy);
+  cursor: pointer;
+}
+
+.almaty-landmark img {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 8px rgba(9,33,64,.19));
+  transition: transform .15s ease, filter .15s ease;
+}
+
+.almaty-landmark > span {
+  display: inline-block;
+  max-width: 112px;
+  margin-top: -8px;
+  padding: 3px 6px 4px;
+  border: 1px solid rgba(9,33,64,.15);
+  background: rgba(247,244,238,.94);
+  box-shadow: 0 3px 8px rgba(9,33,64,.08);
+  font-size: 7px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: .02em;
+}
+
+.almaty-landmark:hover img,
+.almaty-landmark:focus-visible img {
+  transform: translateY(-3px) scale(1.045);
+  filter:
+    drop-shadow(0 10px 10px rgba(9,33,64,.21))
+    drop-shadow(0 0 8px rgba(211,147,160,.34));
+}
+
+.almaty-landmark:focus-visible {
+  outline: 2px solid var(--ch-pink);
+  outline-offset: 3px;
+}
+
+.almaty-landmark.is-visited > span {
+  border-color: rgba(211,147,160,.72);
+}
+
+.almaty-landmark.is-current img {
+  filter:
+    drop-shadow(0 9px 10px rgba(9,33,64,.22))
+    drop-shadow(0 0 8px rgba(211,147,160,.90));
+}
+
+.almaty-landmark b {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  min-width: 23px;
+  min-height: 23px;
+  padding: 2px 4px;
+  display: none;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--ch-pink);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(9,33,64,.25);
+  font-family: var(--mono);
+  font-size: 7px;
+  font-style: normal;
+  line-height: 1;
+}
+
+.almaty-landmark.is-visited b {
+  display: grid;
+}
+
+.almaty-landmark:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.almaty-blocked-badge {
+  position: absolute;
+  z-index: 7;
+  left: 81.5%;
+  top: 60%;
+  transform: translate(-50%,-50%) rotate(-5deg);
+  min-width: 44px;
+  padding: 4px 7px;
+  display: grid;
+  justify-items: center;
+  border: 2px solid #8d3943;
+  background: #fff4e7;
+  color: #8d3943;
+  box-shadow: 0 4px 10px rgba(9,33,64,.14);
+  font-size: 7px;
+  font-weight: 950;
+  letter-spacing: .08em;
+  pointer-events: none;
+}
+
+.almaty-blocked-badge span {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.almaty-compass {
+  position: absolute;
+  z-index: 8;
+  left: 94%;
+  top: 9%;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%,-50%);
+  border: 1px solid rgba(9,33,64,.25);
+  border-radius: 50%;
+  background: rgba(247,244,238,.88);
+  box-shadow: 0 4px 12px rgba(9,33,64,.12);
+  color: var(--ch-navy);
+  font-family: var(--mono);
+  font-size: 7px;
+  font-weight: 950;
+  pointer-events: none;
+}
+
+.almaty-compass span {
+  position: absolute;
+}
+
+.almaty-compass .north { top: 2px; left: 50%; transform: translateX(-50%); }
+.almaty-compass .south { bottom: 2px; left: 50%; transform: translateX(-50%); }
+.almaty-compass .east { right: 3px; top: 50%; transform: translateY(-50%); }
+.almaty-compass .west { left: 3px; top: 50%; transform: translateY(-50%); }
+
+.almaty-compass i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 27px;
+  transform: translate(-50%,-58%);
+  transform-origin: 50% 58%;
+  clip-path: polygon(50% 0,100% 70%,50% 60%,0 70%);
+  background: linear-gradient(180deg,#8d3943 0 51%,#607d91 52% 100%);
+}
+
+.almaty-route-console {
+  margin-top: 9px;
+  min-height: 62px;
+  padding: 8px 10px;
+  border: 1px solid rgba(9,33,64,.14);
+  background: rgba(255,255,255,.74);
+}
+
+.almaty-route-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #6c7d88;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.almaty-route-title strong {
+  color: var(--ch-navy);
+  font-family: var(--mono);
+  letter-spacing: 0;
+}
+
+.almaty-route-strip {
+  margin-top: 6px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.almaty-route-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px;
+  border: 1px solid rgba(9,33,64,.12);
+  background: #f7f4ee;
+  color: var(--ch-navy);
+  font-size: 8px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.almaty-route-chip b {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ch-pink);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 7px;
+}
+
+.almaty-route-arrow {
+  color: #8a9ba7;
+  font-size: 10px;
+}
+
+.almaty-dispatch {
+  min-width: 0;
+  padding: 15px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(9,33,64,.14);
+  background:
+    linear-gradient(rgba(247,244,238,.97),rgba(247,244,238,.97)),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 21px,
+      rgba(9,33,64,.05) 22px
+    );
+}
+
+.almaty-dispatch-heading h3 {
+  font-size: 25px;
+}
+
+.almaty-dispatch-heading p {
+  margin: 5px 0 10px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.almaty-directions {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 5px;
+  list-style: none;
+}
+
+.almaty-directions li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 7px;
+  align-items: start;
+  padding: 5px 0;
+  border-top: 1px solid rgba(9,33,64,.09);
+}
+
+.almaty-directions li > span {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(9,33,64,.16);
+  color: #8d6070;
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.almaty-directions p {
+  margin: 1px 0 0;
+  color: #435666;
+  font-size: 9px;
+  line-height: 1.34;
+}
+
+.almaty-route-actions {
+  margin-top: auto;
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.almaty-route-actions .button {
+  min-height: 38px;
+  padding: 7px 8px;
+  font-size: 8px;
+}
+
+.almaty-check-route {
+  grid-column: 1 / -1;
+  min-height: 44px !important;
+  font-size: 10px !important;
+}
+
+.almaty-route-message {
+  min-height: 31px;
+  margin: 8px 0 0;
+  color: #5d6e79;
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.almaty-route-message.is-penalty {
+  color: #8a5a17;
+}
+
+.almaty-route-message.is-success {
+  color: #326849;
+  font-weight: 900;
+}
+
+.almaty-build-note {
+  margin-top: 7px;
+  padding: 7px 9px;
+  display: grid;
+  gap: 2px;
+  border-left: 3px solid var(--ch-pink);
+  background: rgba(230,235,236,.65);
+  color: #697985;
+  font-size: 7px;
+  line-height: 1.3;
+}
+
+.almaty-build-note strong {
+  color: var(--ch-navy);
+}
+
+@media (max-width: 1180px) {
+  .almaty-puzzle {
+    grid-template-columns: minmax(0,1fr) 280px;
+  }
+
+  .almaty-landmark {
+    --landmark-size: clamp(64px, 7.2vw, 92px);
+  }
+}
+
+@media (max-width: 940px) {
+  .almaty-puzzle {
+    grid-template-columns: 1fr;
+  }
+
+  .almaty-dispatch {
+    border-left: 0;
+    border-top: 1px solid rgba(9,33,64,.14);
+  }
+
+  .almaty-directions {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 3px 10px;
+  }
+
+  .almaty-route-actions {
+    margin-top: 10px;
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .almaty-check-route {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .almaty-landmark img {
+    transition: none;
+  }
 }

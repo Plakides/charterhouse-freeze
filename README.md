@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9A2 — Universal 30-second wrong-answer penalty
+# Task 9B-C1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -586,3 +586,35 @@ Storage key:
 
 Future challenges inherit this globally. Individual puzzle files must not
 implement their own penalty timers.
+
+
+# Task 9B-C — Lost in Almaty interactive map/UI
+
+9B-A logic and 9B-B landmark artwork are frozen.
+
+This build installs the actual interactive route-building interface for
+Challenge 02.
+
+Frozen route:
+`Abai Square → Republic Square → Astana Square → Panfilov Park → Green Bazaar
+→ Hotel Kazakhstan → Abai Square → Central State Museum → Kok Tobe → Medeu`
+
+Interaction:
+- Abai Square is preselected as route stop 1
+- clicking a landmark appends it to the route
+- landmarks may be revisited
+- route line and numbered visit badges update immediately
+- route is shown as a readable strip below the map
+- Undo last and Clear route are available
+- Check route compares the entire sequence only
+- no per-step right/wrong feedback is given
+- wrong whole-route checks use the existing persistent 30-second cooldown
+- route remains editable while the penalty counts down
+- route + verified state persist locally per team
+- refresh/leave/reopen cannot clear the route or bypass the cooldown
+
+Challenge 02 uses a custom submission UI, so the generic text-answer panel is
+hidden only for this challenge. Challenge 01 remains unchanged.
+
+9B-C deliberately stops short of awarding the Mountain seal. A verified route
+is connected to actual game completion in 9B-D.

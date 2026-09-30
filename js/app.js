@@ -958,6 +958,9 @@
   function configureChallengeSubmission(definition, team) {
     const solved = isChallengeComplete(team, definition.id);
     const submission = definition.submission || {};
+    const customSubmission = String(submission.kind || "").toLowerCase() === "custom";
+
+    challengeAnswerForm.hidden = customSubmission;
 
     challengeAnswerLabel.textContent = submission.label || "Security answer";
     challengeAnswerInput.placeholder = submission.placeholder || "Challenge answer";

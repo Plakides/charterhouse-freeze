@@ -1,6 +1,6 @@
-const BUILD = "9A2";
+const BUILD = "9B-C1";
 const CACHE_PREFIX = "charterhouse-freeze-static-";
-const CACHE_NAME = "charterhouse-freeze-static-9A2";
+const CACHE_NAME = "charterhouse-freeze-static-9B-C1";
 const PRECACHE_URLS = [
   "./",
   "./assets/branding/baden-powell.png",
@@ -12,6 +12,18 @@ const PRECACHE_URLS = [
   "./assets/challenge-1/daniyar-card.png",
   "./assets/challenge-1/sofia-card.png",
   "./assets/challenge-1/timur-card.png",
+  "./assets/challenge-2/abai-square.png",
+  "./assets/challenge-2/republic-square.png",
+  "./assets/challenge-2/astana-square.png",
+  "./assets/challenge-2/panfilov-park.png",
+  "./assets/challenge-2/green-bazaar.png",
+  "./assets/challenge-2/hotel-kazakhstan.png",
+  "./assets/challenge-2/central-stadium.png",
+  "./assets/challenge-2/arbat-panfilov-street.png",
+  "./assets/challenge-2/central-state-museum.png",
+  "./assets/challenge-2/botanical-gardens.png",
+  "./assets/challenge-2/kok-tobe.png",
+  "./assets/challenge-2/medeu.png",
   "./assets/game/final-scene-snowy.svg",
   "./assets/game/final-scene-thawed.svg",
   "./assets/game/final-scene.svg",
