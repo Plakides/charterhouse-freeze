@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9E-D1 — Universal 30-second wrong-answer penalty
+# Task 9F-B1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9E-D1 — Screenshot-led layout correction
+# Task 9F-B1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9E-D1 — Manual extraction correction
+# Task 9F-B1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9E-D1 — Card readability pass
+# Task 9F-B1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9E-D1 — Caesar shift changed to 8
+# Task 9F-B1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1019,3 +1019,42 @@ Frozen specification:
 
 9E-D introduces no gameplay or visual changes from the approved 9E-C1 build.
 It marks the final tested/frozen state before Challenge 06.
+
+
+# Task 9F-B — Brain Freeze UI
+
+9F-A logic is frozen.
+
+Frozen puzzle:
+- Panel A: `1 · 1 · 2 · 3 · 5 · ?` -> 8
+- Panel B:
+  Mitten + Mitten + Mitten = 18
+  Mitten + Mug + Mug = 14
+  Mug + Snowflake = 7
+  Snowflake = ? -> 3
+- Panel C:
+  1 | 4 | 4
+  2 | 3 | 6
+  3 | 2 | ? -> 6
+- Panel D:
+  I am an odd number.
+  Remove one letter and I become even.
+  What number am I?
+  -> SEVEN -> 7
+- final code: 8367
+- target solve time: 5–7 minutes
+- eventual reward: Snowflake seal / code 1
+
+9F-B installs the visual / interaction layer:
+- four distinct A–D puzzle panels in a 2×2 cognition-test grid
+- inline SVG winter symbols for Panel B
+- no trick symbol variations
+- riddle hint toggle:
+  `Think about how number names are spelled in English.`
+- hint state persists per team
+- no per-panel correctness checks
+- final A → B → C → D instruction strip
+- four-digit answer field typeable for testing
+- Submit remains disabled until 9F-C
+
+The UI never calculates or displays the final code.
