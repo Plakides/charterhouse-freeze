@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-D1 · universal wrong-answer penalty */
+/* Task 9D-B2 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9C-D1 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 9D-B2 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-D1 · screenshot-led map-fit corrections */
+/* Task 9D-B2 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9C-D1 — SECRET MESSAGE UI                                             */
+/* TASK 9D-B2 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-D1 · manual extraction — the site must not solve TULPAR for students */
+/* Task 9D-B2 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9C-D1 · readability refinements from live 1536px screenshot */
+/* Task 9D-B2 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5024,5 +5024,440 @@ body.modal-open { overflow: hidden; }
 
   .secret-take {
     font-size: 8px;
+  }
+}
+
+
+/* ========================================================================== */
+/* TASK 9D-B2 — CHARTERHOUSE TELEGRAM UI                                      */
+/* ========================================================================== */
+
+.challenge-content-card.telegram-challenge-content {
+  min-height: 0;
+  padding: 0;
+  display: block;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+}
+
+.telegram-puzzle {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(300px, .72fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.telegram-desk,
+.telegram-side-panel {
+  min-width: 0;
+}
+
+.telegram-desk {
+  padding: 16px;
+  border: 1px solid rgba(9,33,64,.16);
+  background:
+    radial-gradient(circle at 88% 10%, rgba(211,147,160,.10), transparent 26%),
+    linear-gradient(145deg, #edf3f5, #f7f4ee 62%, #eef3f5);
+  box-shadow: 0 14px 34px rgba(9,33,64,.07);
+}
+
+.telegram-desk-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.telegram-kicker,
+.telegram-panel-kicker,
+.telegram-task-strip > div > span {
+  display: block;
+  color: #8d6070;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .15em;
+}
+
+.telegram-desk-top h3,
+.telegram-help-card h3,
+.telegram-checklist h3 {
+  margin: 3px 0 4px;
+  color: var(--ch-navy);
+  font-family: var(--serif);
+  font-weight: 500;
+}
+
+.telegram-desk-top h3 {
+  font-size: 30px;
+}
+
+.telegram-desk-top p {
+  max-width: 720px;
+  margin: 0;
+  color: #657783;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.telegram-signal-badge {
+  min-width: 94px;
+  padding: 8px 10px;
+  display: grid;
+  gap: 2px;
+  border: 1px solid rgba(9,33,64,.15);
+  background: rgba(255,255,255,.68);
+  text-align: center;
+}
+
+.telegram-signal-badge span {
+  color: #71838e;
+  font-size: 7px;
+  font-weight: 950;
+  letter-spacing: .11em;
+}
+
+.telegram-signal-badge strong {
+  color: var(--ch-navy);
+  font-family: var(--mono);
+  font-size: 16px;
+}
+
+.telegram-sheet {
+  position: relative;
+  min-height: 350px;
+  padding: 18px 20px 16px;
+  overflow: hidden;
+  border: 1px solid rgba(91,73,47,.24);
+  background:
+    linear-gradient(rgba(251,247,236,.97),rgba(244,238,222,.98)),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 27px,
+      rgba(77,62,43,.035) 28px
+    );
+  box-shadow:
+    0 12px 22px rgba(9,33,64,.09),
+    inset 0 0 28px rgba(120,92,48,.05);
+}
+
+.telegram-sheet::before,
+.telegram-sheet::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.telegram-sheet::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(129,104,66,.035), transparent 18%, transparent 84%, rgba(129,104,66,.04)),
+    radial-gradient(circle at 16% 15%, rgba(255,255,255,.55), transparent 18%);
+}
+
+.telegram-sheet::after {
+  right: -25px;
+  bottom: -28px;
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(117,82,65,.12);
+  border-radius: 50%;
+}
+
+.telegram-sheet-header {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.6fr .7fr .8fr;
+  gap: 10px;
+}
+
+.telegram-sheet-header > div {
+  min-width: 0;
+  padding: 7px 8px;
+  border: 1px solid rgba(74,61,45,.13);
+  background: rgba(255,255,255,.42);
+}
+
+.telegram-sheet-header span,
+.telegram-sheet-footer span,
+.telegram-cipher-block > span {
+  display: block;
+  color: #806d57;
+  font-family: var(--mono);
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .11em;
+}
+
+.telegram-sheet-header strong {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #433b31;
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.telegram-rule {
+  position: relative;
+  z-index: 1;
+  height: 1px;
+  margin: 16px 0;
+  background: rgba(75,59,39,.22);
+}
+
+.telegram-cipher-block {
+  position: relative;
+  z-index: 1;
+  padding: 8px 0 14px;
+}
+
+.telegram-ciphertext {
+  margin-top: 12px;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(67,56,43,.17);
+  background: rgba(255,255,255,.46);
+  box-shadow: inset 0 0 0 4px rgba(128,107,78,.035);
+}
+
+.telegram-ciphertext p {
+  margin: 0;
+  color: #202c35;
+  font-family: var(--mono);
+  font-size: clamp(20px, 2.2vw, 31px);
+  font-weight: 850;
+  line-height: 1.5;
+  letter-spacing: .055em;
+  word-spacing: .12em;
+}
+
+.telegram-ciphertext p + p {
+  margin-top: 10px;
+}
+
+.telegram-sheet-footer {
+  position: absolute;
+  z-index: 1;
+  left: 20px;
+  right: 20px;
+  bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.telegram-stamp {
+  position: absolute;
+  z-index: 0;
+  right: 28px;
+  bottom: 52px;
+  padding: 8px 12px;
+  transform: rotate(-10deg);
+  border: 4px double rgba(137,71,78,.16);
+  color: rgba(137,71,78,.16);
+  font-family: var(--mono);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 950;
+  letter-spacing: .08em;
+}
+
+.telegram-task-strip {
+  margin-top: 10px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: minmax(180px,.62fr) 1fr;
+  gap: 12px;
+  align-items: center;
+  border-left: 4px solid var(--ch-pink);
+  background: rgba(255,255,255,.72);
+}
+
+.telegram-task-strip strong {
+  display: block;
+  margin-top: 2px;
+  color: var(--ch-navy);
+  font-size: 12px;
+}
+
+.telegram-task-strip p {
+  margin: 0;
+  color: #5d6f7b;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.telegram-side-panel {
+  display: grid;
+  gap: 10px;
+  grid-template-rows: auto auto 1fr;
+}
+
+.telegram-help-card,
+.telegram-checklist,
+.telegram-b-stage-note {
+  padding: 14px;
+  border: 1px solid rgba(9,33,64,.14);
+  background: rgba(247,244,238,.94);
+  box-shadow: 0 10px 24px rgba(9,33,64,.05);
+}
+
+.telegram-help-card h3,
+.telegram-checklist h3 {
+  font-size: 22px;
+}
+
+.telegram-help-card > p {
+  margin: 4px 0 10px;
+  color: #647681;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.telegram-hint-button {
+  width: 100%;
+  min-height: 42px;
+  font-size: 9px;
+}
+
+.telegram-hint {
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid rgba(211,147,160,.42);
+  background: rgba(211,147,160,.09);
+}
+
+.telegram-hint > span {
+  display: block;
+  color: #8d6070;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .14em;
+}
+
+.telegram-hint > strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--ch-navy);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.telegram-hint > p {
+  margin: 5px 0 9px;
+  color: #5e707c;
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.telegram-open-tool {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--ch-navy);
+  background: var(--ch-navy);
+  color: white;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  cursor: pointer;
+}
+
+.telegram-open-tool:hover,
+.telegram-open-tool:focus-visible {
+  background: #12345a;
+}
+
+.telegram-checklist ol {
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 7px;
+  list-style: none;
+}
+
+.telegram-checklist li {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 7px;
+  align-items: start;
+  padding-top: 7px;
+  border-top: 1px solid rgba(9,33,64,.09);
+}
+
+.telegram-checklist li b {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ch-navy);
+  color: white;
+  font-family: var(--mono);
+  font-size: 8px;
+}
+
+.telegram-checklist li span {
+  margin-top: 2px;
+  color: #556975;
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+.telegram-b-stage-note {
+  align-self: end;
+  display: grid;
+  gap: 3px;
+  border-left: 3px solid var(--ch-pink);
+  color: #70818c;
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+.telegram-b-stage-note strong {
+  color: var(--ch-navy);
+}
+
+@media (max-width: 1080px) {
+  .telegram-puzzle {
+    grid-template-columns: 1fr;
+  }
+
+  .telegram-side-panel {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .telegram-b-stage-note {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .telegram-desk-top,
+  .telegram-task-strip {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .telegram-sheet-header {
+    grid-template-columns: 1fr;
+  }
+
+  .telegram-side-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .telegram-b-stage-note {
+    grid-column: auto;
+  }
+
+  .telegram-ciphertext p {
+    font-size: 18px;
+    overflow-wrap: anywhere;
   }
 }

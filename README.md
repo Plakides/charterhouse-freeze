@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9C-D1 — Universal 30-second wrong-answer penalty
+# Task 9D-B2 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9C-D1 — Screenshot-led layout correction
+# Task 9D-B2 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9C-D1 — Manual extraction correction
+# Task 9D-B2 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9C-D1 — Card readability pass
+# Task 9D-B2 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -801,3 +801,47 @@ Frozen specification:
 9C-D introduces no gameplay or visual changes from the approved 9C-C1 build.
 It exists only to mark the final tested/frozen state and provide a final
 regression checkpoint before work begins on Challenge 04.
+
+
+# Task 9D-B — Charterhouse Telegram UI
+
+9D-A logic is frozen.
+
+Frozen puzzle:
+- Caesar cipher
+- plaintext encrypted by shifting letters +8
+- students decrypt by shifting -8
+- ciphertext:
+  `BPM PMIBQVO KWVBZWT ZWWU QA TWKSML.`
+  `BPM XIAAEWZL QA EQVBMZ.`
+- plaintext:
+  `THE HEATING CONTROL ROOM IS LOCKED.`
+  `THE PASSWORD IS WINTER.`
+- final answer: WINTER
+- target solve time: 4–6 minutes
+- eventual reward: Teapot seal / code 7
+
+9D-B installs:
+- heritage-style emergency telegram
+- large monospaced ciphertext
+- Show hint / Hide hint control
+- hint: `Open Field Kit → Caesar Shift.`
+- direct button to open the Caesar Shift tool
+- hint state persistence per team
+- typeable final password field
+- Submit disabled until 9D-C
+
+The challenge page itself does not reveal the shift value or decoded plaintext.
+
+
+# Task 9D-B2 — Caesar shift changed to 8
+
+Reason for revision:
+- the Field Kit Caesar tool defaults to shift 3
+- Challenge 04 now uses shift 8 so students must actually adjust/test the tool
+
+Frozen 9D-A logic is therefore revised to:
+- plaintext encrypted +8
+- students decode using shift 8 in the Field Kit
+- no shift value is shown on the challenge page
+- final answer remains WINTER
