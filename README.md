@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9C-B3 — Universal 30-second wrong-answer penalty
+# Task 9C-C1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9C-B3 — Screenshot-led layout correction
+# Task 9C-C1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9C-B3 — Manual extraction correction
+# Task 9C-C1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9C-B3 — Card readability pass
+# Task 9C-C1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -740,3 +740,32 @@ Readability changes:
 - manual decoder pattern enlarged
 
 The UI still does not calculate or reveal TULPAR.
+
+
+# Task 9C-C — Secret Message answer/reward integration
+
+9C-B3 is frozen.
+
+Challenge 03 now uses the standard answer engine and canonical completion path.
+
+Accepted answers:
+- `TULPAR` (case/whitespace tolerant through normal text normalization)
+- `ТҰЛПАР` (Kazakh Cyrillic equivalent)
+
+The website still does NOT calculate or reveal the answer from the arranged
+cards. Students must:
+1. solve the order
+2. manually apply 2 · 4 · 1 · 3 · 5 · 2
+3. type the six-letter message themselves
+4. submit it
+
+Wrong submitted answers use the existing persistent 30-second cooldown.
+
+Correct submission:
+- completes Challenge 03
+- awards Book seal / code number 2
+- increments local mission progress
+- queues the normal PROGRESS sync event
+- persists offline
+- syncs opportunistically when connectivity is available
+- locks the solved challenge using the existing completion behaviour

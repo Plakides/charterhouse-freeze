@@ -599,7 +599,7 @@
       label: "Decoded message",
       placeholder: "Enter the six-letter message",
       inputEnabled: true,
-      enabled: false
+      enabled: true
     },
     render
   });

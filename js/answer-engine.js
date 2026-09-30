@@ -24,6 +24,14 @@
       hashes: Object.freeze([
         "8e77f4424de05ffa757bf007c0dab4f233fa456816f4da666c4d866a2ac3a9f9"
       ])
+    }),
+    3: Object.freeze({
+      mode: "text",
+      pepper: "CF9CC-C03-language-B2-T6",
+      hashes: Object.freeze([
+        "437babb8e3bc64c770f7b723b423ddb16366b5e84643a32407d3747f1f9d3b9f",
+        "eb93863da84b2344dbc73855feaa02fec72b8eed11da99e5dc999c828da72243"
+      ])
     })
   });
 
