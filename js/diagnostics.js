@@ -145,7 +145,7 @@
     }
 
     setValue("device", stateStore?.getDeviceId?.() || "Unavailable");
-    setValue("build", "9D-D1 · schema 3");
+    setValue("build", "9E-B1 · schema 3");
   }
 
   function open() {
@@ -179,7 +179,7 @@
 
     return JSON.stringify({
       generatedAt: new Date().toISOString(),
-      build: "9D-D1",
+      build: "9E-B1",
       schemaVersion: stateStore?.schemaVersion || null,
       browserOnline: navigator.onLine,
       storage,

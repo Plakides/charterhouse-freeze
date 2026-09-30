@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9D-D1 — Universal 30-second wrong-answer penalty
+# Task 9E-B1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9D-D1 — Screenshot-led layout correction
+# Task 9E-B1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9D-D1 — Manual extraction correction
+# Task 9E-B1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9D-D1 — Card readability pass
+# Task 9E-B1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9D-D1 — Caesar shift changed to 8
+# Task 9E-B1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -905,3 +905,49 @@ Frozen specification:
 9D-D introduces no gameplay or visual changes from the approved 9D-C1 build.
 It only marks the final tested/frozen state and provides a final regression
 checkpoint before Challenge 05.
+
+
+# Task 9E-B — Impossible Timetable UI
+
+9E-A logic is frozen.
+
+Frozen puzzle:
+- five lessons:
+  Art, Science, Music, Maths, Computing
+- five clues:
+  1. Computing is immediately after Maths.
+  2. Science is neither first nor last.
+  3. Music is later than Science.
+  4. Art is earlier than Maths.
+  5. Music is earlier than Maths.
+- unique intended timetable:
+  P1 Art
+  P2 Science
+  P3 Music
+  P4 Maths
+  P5 Computing
+- final question:
+  Which subject is in Period 3?
+- final answer:
+  MUSIC
+- target solve time:
+  5–7 minutes
+- eventual reward:
+  Eagle seal / code 5
+
+9E-B installs the complete interaction layer:
+- scheduling-console visual
+- five displaced subject cards
+- five Period 1–5 timetable slots
+- click-to-select + click-period placement
+- desktop drag/drop
+- move and swap placed lessons
+- no per-placement correctness feedback
+- five scheduling rules shown prominently
+- final Period 3 question shown prominently
+- arrangement persists per team through refresh/offline
+- Clear timetable / Restore scramble controls
+- final answer field typeable for UI testing
+- Submit remains disabled until 9E-C
+
+The UI does not automatically check or reveal the correct timetable.
