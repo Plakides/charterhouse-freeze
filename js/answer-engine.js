@@ -53,6 +53,13 @@
       hashes: Object.freeze([
         "0e176773e40f2d2e5dce7558f57c4839e0d44d6ec7ab7231f455729084433f52"
       ])
+    }),
+    7: Object.freeze({
+      mode: "text",
+      pepper: "CF9GC-C07-crossword-K9-SUMMIT",
+      hashes: Object.freeze([
+        "a058aa72a47b7a83b2bea482c0cc7e8ef9eae72977a84090c3ca68134cbfd8b0"
+      ])
     })
   });
 

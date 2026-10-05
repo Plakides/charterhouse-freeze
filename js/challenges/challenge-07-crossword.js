@@ -59,7 +59,7 @@
     "row": 6,
     "col": 3,
     "length": 5,
-    "clue": "A five-letter Charterhouse activity name — it sounds more like banking than school."
+    "clue": "Our Charterhouse word for homework."
   },
   {
     "id": "7D",
@@ -104,32 +104,32 @@
   {
     "row": 8,
     "col": 3,
-    "number": 1
+    "label": "A"
   },
   {
     "row": 1,
     "col": 2,
-    "number": 2
+    "label": "B"
   },
   {
     "row": 3,
     "col": 6,
-    "number": 3
+    "label": "C"
   },
   {
     "row": 13,
     "col": 3,
-    "number": 4
+    "label": "D"
   },
   {
     "row": 4,
     "col": 4,
-    "number": 5
+    "label": "E"
   },
   {
     "row": 10,
     "col": 2,
-    "number": 6
+    "label": "F"
   }
 ].map(item => Object.freeze(item))
   );
@@ -176,10 +176,10 @@
     });
   });
 
-  const extractionNumberByKey = new Map(
+  const extractionLabelByKey = new Map(
     extractionCells.map(item => [
       keyFor(item.row, item.col),
-      item.number
+      item.label
     ])
   );
 
@@ -263,22 +263,22 @@
         }
 
         const clueNumber = startNumbers.get(key);
-        const extractionNumber = extractionNumberByKey.get(key);
+        const extractionLabel = extractionLabelByKey.get(key);
 
         gridMarkup.push(`
           <div
-            class="crossword-cell${extractionNumber ? " is-extraction" : ""}"
+            class="crossword-cell${extractionLabel ? " is-extraction" : ""}"
             data-crossword-cell="${key}"
           >
             ${clueNumber ? `
               <span class="crossword-clue-number">${clueNumber}</span>
             ` : ""}
 
-            ${extractionNumber ? `
+            ${extractionLabel ? `
               <span
                 class="crossword-extraction-number"
-                title="Frozen extraction cell ${extractionNumber}"
-              >${extractionNumber}</span>
+                title="Frozen extraction cell ${extractionLabel}"
+              >${extractionLabel}</span>
             ` : ""}
 
             <input
@@ -386,17 +386,17 @@
           <div class="crossword-extraction-strip">
             <div class="crossword-extraction-copy">
               <span>FINAL STEP</span>
-              <strong>Read the six numbered frozen cells from 1 → 6.</strong>
+              <strong>Read the six lettered frozen cells from A → F.</strong>
               <p>
                 Do the extraction yourself. The system will not collect or check
                 individual crossword letters for you.
               </p>
             </div>
 
-            <div class="crossword-extraction-boxes" aria-label="Extraction order 1 to 6">
-              ${[1,2,3,4,5,6].map(number => `
+            <div class="crossword-extraction-boxes" aria-label="Extraction order A to F">
+              ${["A","B","C","D","E","F"].map(label => `
                 <span>
-                  <b>${number}</b>
+                  <b>${label}</b>
                   <i>?</i>
                 </span>
               `).join("")}
@@ -427,7 +427,7 @@
             <span>FROZEN CELLS</span>
             <h3>Look for 1–6</h3>
             <p>
-              Six cells have icy numbered badges. Their letters form the final
+              Six cells have icy lettered badges. Their letters form the final
               six-letter security word when read in numerical order.
             </p>
           </section>
@@ -757,7 +757,7 @@
       label: "Six-letter security word",
       placeholder: "Enter the six-letter extraction",
       inputEnabled: true,
-      enabled: false
+      enabled: true
     },
     render
   });

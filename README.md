@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9G-B1 — Universal 30-second wrong-answer penalty
+# Task 9H-B1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9G-B1 — Screenshot-led layout correction
+# Task 9H-B1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9G-B1 — Manual extraction correction
+# Task 9H-B1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9G-B1 — Card readability pass
+# Task 9H-B1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9G-B1 — Caesar shift changed to 8
+# Task 9H-B1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1140,7 +1140,7 @@ Approved answer set:
 - ECOSYSTEM
 
 The ten entries form one connected crossword with genuine shared crossing
-letters. Six manually numbered icy cells extract the final word SUMMIT.
+letters. Six manually lettered icy cells (A–F) extract the final word SUMMIT.
 
 9G-B installs the interaction layer only:
 - proper 14 x 9 connected crossword grid
@@ -1152,7 +1152,7 @@ letters. Six manually numbered icy cells extract the final word SUMMIT.
 - Backspace clear/back behaviour
 - Space switches direction at a crossing
 - crossing letters are genuinely shared cells
-- six extraction cells marked 1–6
+- six extraction cells marked A–F
 - no clue-by-clue right/wrong checking
 - no automatic extraction
 - grid letters persist per team through refresh/offline
@@ -1161,3 +1161,132 @@ letters. Six manually numbered icy cells extract the final word SUMMIT.
 
 Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
+
+
+# Task 9H-B1 — Extraction labels and BANCO clue refinement
+
+Changes from 9G-B1:
+- extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
+  be confused with crossword clue numbering
+- extraction instruction now reads A → F
+- BANCO clue revised to:
+  `Our Charterhouse word for homework.`
+
+No crossword layout, crossings, extraction letters, answer logic or other clues
+have changed.
+
+
+# Task 9G-C — Frozen Crossword answer/reward integration
+
+9G-B2 is frozen.
+
+Challenge 07 now uses the standard answer engine and canonical completion flow.
+
+Accepted answer:
+- `SUMMIT` (case and surrounding whitespace tolerant through normal text normalization)
+
+The approved crossword UI remains unchanged:
+- 10 connected entries
+- 5 Across / 5 Down
+- extraction cells labelled A–F
+- BANCO clue: `Our Charterhouse word for homework.`
+- no clue-by-clue correctness feedback
+- no automatic extraction
+- students manually read A → F and submit the final six-letter word
+
+Wrong submitted answers use the existing persistent 30-second cooldown.
+
+Correct submission:
+- completes Challenge 07
+- awards Key seal / code number 9
+- increments local mission progress
+- queues the normal PROGRESS sync event
+- persists offline
+- syncs opportunistically on reconnect
+- locks the solved challenge through existing completion behaviour
+
+
+# Task 9G-D — Final regression / freeze
+
+Challenge 07 is now frozen.
+
+Frozen specification:
+- title: The Frozen Crossword
+- target solve time: 7–9 minutes
+- 10 connected entries:
+  PRIME
+  EQUATOR
+  BINARY
+  FLOREAT
+  PIXEL
+  BANCO
+  KOKTOBE
+  ECOSYSTEM
+  MEDEU
+  ELEMENT
+- clues mix Charterhouse terminology, Almaty knowledge and familiar school concepts
+- BANCO clue:
+  Our Charterhouse word for homework.
+- crossword interaction:
+  clue selection/highlighting
+  keyboard letter entry
+  arrow-key movement
+  Backspace clear/back
+  Space switches direction at a crossing
+  genuine shared crossing cells
+- extraction:
+  six icy cells labelled A–F
+  students manually read A → F
+  website does not auto-extract the letters
+- final word:
+  SUMMIT
+- wrong answer:
+  persistent 30-second cooldown
+- reward:
+  Key seal / code number 9
+- completion:
+  canonical local state + queued PROGRESS sync
+- offline:
+  crossword state, answer validation and completion persistence required
+
+9G-D introduces no gameplay or visual changes from the approved 9G-C1 build.
+It marks the final tested/frozen state before Challenge 08.
+
+
+# Task 9H-B — Snow Leopard Memory Test UI
+
+Challenge 08 replaces the placeholder with the approved memory-test interface.
+
+9H-B interaction:
+- team starts the test manually
+- first observation window is exactly 30 seconds
+- absolute timestamps prevent refresh/reopen from resetting that timer
+- nine evidence objects:
+  blue scarf
+  Medeu ticket at 19:45
+  FLOREAT book
+  Green Bazaar receipt for 2,800 ₸
+  compass pointing East
+  red mitten
+  brass key tagged A315
+  white mug with snow-leopard paw
+  Kok Tobe postcard in the lower-right
+- six multiple-choice memory questions
+- every answer option carries a vault digit
+- no question is marked right or wrong
+- one optional 10-second second look
+- second-look timer also survives refresh/reopen
+- selected answers persist per team
+- final instruction is to read selected vault digits from Q1 to Q6
+- final six-digit answer field is typeable
+- Submit remains disabled until 9H-C
+
+Recovery design:
+The challenge exposes `FREEZE_MEMORY_TEST.grantRecoveryReview()`.
+9H-C will connect this to the existing wrong-answer cooldown so every wrong
+final submission eventually grants another 10-second evidence review.
+Memory therefore affects completion time but can never permanently lock a team
+out of the game.
+
+Target solve time: 6–8 minutes.
+Eventual reward: Compass seal / code 3.
