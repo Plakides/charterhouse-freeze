@@ -187,6 +187,7 @@
       reviewEndsAt: null,
       reviewKind: null,
       recoveryReviewCredits: 0,
+      recoveryAvailableAt: null,
       selections: {}
     };
   }
@@ -225,6 +226,11 @@
       0,
       Math.min(20, Math.floor(Number(raw.recoveryReviewCredits) || 0))
     );
+
+    state.recoveryAvailableAt =
+      Number.isFinite(Number(raw.recoveryAvailableAt))
+        ? Number(raw.recoveryAvailableAt)
+        : null;
 
     const selections = {};
 
@@ -276,6 +282,18 @@
         state.reviewKind = null;
         changed = true;
       }
+    }
+
+    if (
+      state.recoveryAvailableAt &&
+      now >= state.recoveryAvailableAt
+    ) {
+      state.recoveryReviewCredits = Math.min(
+        20,
+        state.recoveryReviewCredits + 1
+      );
+      state.recoveryAvailableAt = null;
+      changed = true;
     }
 
     return changed;
@@ -433,7 +451,40 @@
     function grantRecoveryReview() {
       clampExpiredState(state);
       state.recoveryReviewCredits = Math.min(20, state.recoveryReviewCredits + 1);
+      state.recoveryAvailableAt = null;
       saveState(teamId, state);
+
+      if (state.phase === "questions") {
+        renderStage();
+      }
+
+      return state.recoveryReviewCredits;
+    }
+
+    function scheduleRecoveryReview(availableAt) {
+      const timestamp = Number(availableAt);
+
+      if (!Number.isFinite(timestamp)) return false;
+
+      state.recoveryAvailableAt = Math.max(Date.now(), timestamp);
+      saveState(teamId, state);
+
+      if (clampExpiredState(state)) {
+        saveState(teamId, state);
+      }
+
+      if (state.phase === "questions") {
+        renderStage();
+      }
+
+      return true;
+    }
+
+    function unlockPendingRecoveryReview() {
+      const changed = clampExpiredState(state);
+      if (changed) {
+        saveState(teamId, state);
+      }
 
       if (state.phase === "questions") {
         renderStage();
@@ -584,8 +635,12 @@
     }
 
     function questionsMarkup() {
+      clampExpiredState(state);
       const optionalReviewAvailable = !state.secondLookUsed;
       const recoveryAvailable = state.recoveryReviewCredits > 0;
+      const recoveryPending =
+        Boolean(state.recoveryAvailableAt) &&
+        Date.now() < Number(state.recoveryAvailableAt);
 
       let reviewButton = `
         <button
@@ -621,13 +676,17 @@
 
       const reviewHeading = recoveryAvailable
         ? "A recovery review is available."
-        : optionalReviewAvailable
-          ? "Your team has one optional second look."
-          : "No optional second look remains.";
+        : recoveryPending
+          ? "Recovery review unlocks when the penalty ends."
+          : optionalReviewAvailable
+            ? "Your team has one optional second look."
+            : "No optional second look remains.";
 
       const reviewCopy = recoveryAvailable
         ? "Use the 10-second review, then try the final code again."
-        : "In the live challenge, a wrong final code will never lock you out: after the normal penalty, another 10-second recovery review becomes available.";
+        : recoveryPending
+          ? "You can change your answers while the 30-second penalty counts down."
+          : "A wrong final code will never lock you out: after the normal penalty, another 10-second recovery review becomes available.";
 
       return `
         <section class="memory-questions-shell">
@@ -678,9 +737,6 @@
             ${reviewButton}
           </div>
 
-          <p class="memory-stage-note">
-            9H-B interface build · Final code submission activates in 9H-C.
-          </p>
         </section>
       `;
     }
@@ -724,9 +780,9 @@
             <div class="memory-safety-rule">
               <strong>You cannot get permanently stuck.</strong>
               <span>
-                You get one optional 10-second second look. In 9H-C, each wrong
-                final code will also unlock another 10-second recovery review
-                after the normal 30-second penalty.
+                You get one optional 10-second second look. Each wrong final code
+                unlocks another 10-second recovery review after the normal
+                30-second penalty.
               </span>
             </div>
           </aside>
@@ -778,6 +834,8 @@
     window.FREEZE_MEMORY_TEST = Object.freeze({
       getState: () => JSON.parse(JSON.stringify(state)),
       grantRecoveryReview,
+      scheduleRecoveryReview,
+      unlockPendingRecoveryReview,
       startRecoveryReview: () => startReview("recovery"),
       resetForTesting: () => {
         Object.assign(state, blankState());
@@ -802,7 +860,13 @@
       label: "Six-digit vault code",
       placeholder: "Enter the six vault digits",
       inputEnabled: true,
-      enabled: false
+      enabled: true,
+      onWrongAnswer: ({ cooldownUntil }) => {
+        window.FREEZE_MEMORY_TEST?.scheduleRecoveryReview?.(cooldownUntil);
+      },
+      onCooldownExpired: () => {
+        window.FREEZE_MEMORY_TEST?.unlockPendingRecoveryReview?.();
+      }
     },
     render
   });

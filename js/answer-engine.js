@@ -60,6 +60,13 @@
       hashes: Object.freeze([
         "a058aa72a47b7a83b2bea482c0cc7e8ef9eae72977a84090c3ca68134cbfd8b0"
       ])
+    }),
+    8: Object.freeze({
+      mode: "digits",
+      pepper: "CF9HC-C08-memory-C3-648237",
+      hashes: Object.freeze([
+        "898b64bc9f7eff1ef41954de01cf95fd3bb90aed9164536aa48a9e5512ff46d6"
+      ])
     })
   });
 

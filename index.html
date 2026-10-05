@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.webmanifest?v=9H-B1">
+  <link rel="manifest" href="manifest.webmanifest?v=9I-B1">
   <meta name="theme-color" content="#092140">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=9H-B1">
-  <link rel="stylesheet" href="css/components.css?v=9H-B1">
-  <link rel="stylesheet" href="css/animations.css?v=9H-B1">
+  <link rel="stylesheet" href="css/main.css?v=9I-B1">
+  <link rel="stylesheet" href="css/components.css?v=9I-B1">
+  <link rel="stylesheet" href="css/animations.css?v=9I-B1">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -316,7 +316,7 @@
                 </div>
                 <div class="final-route-copy">
                   <strong>All eight seals recovered.</strong>
-                  <p>Follow the pink route across the campus. Read the numbers on the five seals it passes, in order.</p>
+                  <p>The Emergency Route is available inside the vault. Use the seal clues to build the five-step route and recover the restoration code.</p>
                   <button class="button button-primary final-route-button" id="proceedToVaultButton" type="button">
                     Proceed to Vault <span aria-hidden="true">→</span>
                   </button>
@@ -361,32 +361,10 @@
               <div class="vault-heading">
                 <p class="protocol protocol-dark">EMERGENCY CONTROL VAULT</p>
                 <h2 id="vaultTitle">The final lock</h2>
-                <p>Five digits stand between the school and functioning central heating.</p>
+                <p>Use the eight recovered seals to reconstruct the five-step emergency route.</p>
               </div>
 
-              <div class="vault-console">
-                <div class="vault-console-top">
-                  <span>SECURITY VAULT · V-01</span>
-                  <strong>AWAITING CODE</strong>
-                </div>
-
-                <div class="vault-display">
-                  <span>ENTER 5-DIGIT RESTORATION CODE</span>
-                  <strong>• • • • •</strong>
-                </div>
-
-                <div class="vault-keypad-placeholder" aria-label="Vault keypad placeholder">
-                  <button type="button" disabled>1</button><button type="button" disabled>2</button><button type="button" disabled>3</button>
-                  <button type="button" disabled>4</button><button type="button" disabled>5</button><button type="button" disabled>6</button>
-                  <button type="button" disabled>7</button><button type="button" disabled>8</button><button type="button" disabled>9</button>
-                  <button type="button" disabled>⌫</button><button type="button" disabled>0</button><button type="button" disabled>↵</button>
-                </div>
-
-                <div class="vault-framework-note">
-                  <strong>Vault interface ready.</strong>
-                  <span>The working keypad and code submission are installed with the final-vault puzzle in Task 7I.</span>
-                </div>
-              </div>
+              <div id="finalVaultMount" class="final-vault-mount" aria-live="polite"></div>
             </main>
 
             <aside class="vault-rail">
@@ -397,9 +375,9 @@
               </section>
 
               <section class="challenge-rail-card vault-route-summary">
-                <span class="challenge-rail-label">YOUR CLUE</span>
-                <strong>FOLLOW THE ROUTE</strong>
-                <p>Return to the board if you need to inspect the route and recovered seal numbers again.</p>
+                <span class="challenge-rail-label">FINAL PROTOCOL</span>
+                <strong>BUILD THE ROUTE</strong>
+                <p>Place one recovered seal beside each clue. Then read the five seal numbers in route order and enter them on the vault keypad.</p>
               </section>
 
               <button class="dashboard-tool-button" id="vaultFieldKitButton" type="button">
@@ -547,7 +525,7 @@
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
       <button class="teacher-tools-button" id="teacherDiagnosticsButton" type="button" title="Teacher diagnostics · Ctrl+Alt+D">TEACHER DIAGNOSTICS</button>
-      <span class="demo-badge">TASK 9H-B · SNOW LEOPARD MEMORY UI · BUILD 9H-B1</span>
+      <span class="demo-badge">TASK 9I-B · FINAL VAULT UI · BUILD 9I-B1</span>
     </footer>
   </div>
 
@@ -859,7 +837,7 @@
         </section>
 
         <section class="diagnostics-card diagnostics-card-wide diagnostics-technical">
-          <div><span>BUILD</span><strong data-diagnostic-value="build">9H-B1</strong></div>
+          <div><span>BUILD</span><strong data-diagnostic-value="build">9I-B1</strong></div>
           <div><span>DEVICE ID</span><strong data-diagnostic-value="device">—</strong></div>
         </section>
       </div>
@@ -886,27 +864,28 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=9H-B1"></script>
-  <script src="js/state.js?v=9H-B1"></script>
-  <script src="js/recovery.js?v=9H-B1"></script>
-  <script src="js/answer-engine.js?v=9H-B1"></script>
-  <script src="js/sync-queue.js?v=9H-B1"></script>
-  <script src="js/sync-transport.js?v=9H-B1"></script>
-  <script src="js/api.js?v=9H-B1"></script>
-  <script src="js/challenges/registry.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-03-language.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=9H-B1"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=9H-B1"></script>
-  <script src="js/field-kit.js?v=9H-B1"></script>
-  <script src="js/leaderboard.js?v=9H-B1"></script>
-  <script src="js/pwa.js?v=9H-B1"></script>
-  <script src="js/diagnostics.js?v=9H-B1"></script>
-  <script src="js/cooldown.js?v=9H-B1"></script>
-  <script src="js/app.js?v=9H-B1"></script>
+  <script src="js/config.js?v=9I-B1"></script>
+  <script src="js/state.js?v=9I-B1"></script>
+  <script src="js/recovery.js?v=9I-B1"></script>
+  <script src="js/answer-engine.js?v=9I-B1"></script>
+  <script src="js/sync-queue.js?v=9I-B1"></script>
+  <script src="js/sync-transport.js?v=9I-B1"></script>
+  <script src="js/api.js?v=9I-B1"></script>
+  <script src="js/challenges/registry.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-03-language.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=9I-B1"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=9I-B1"></script>
+  <script src="js/field-kit.js?v=9I-B1"></script>
+  <script src="js/leaderboard.js?v=9I-B1"></script>
+  <script src="js/pwa.js?v=9I-B1"></script>
+  <script src="js/diagnostics.js?v=9I-B1"></script>
+  <script src="js/cooldown.js?v=9I-B1"></script>
+  <script src="js/final-vault.js?v=9I-B1"></script>
+  <script src="js/app.js?v=9I-B1"></script>
 </body>
 </html>

@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9H-B1 — Universal 30-second wrong-answer penalty
+# Task 9I-B1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9H-B1 — Screenshot-led layout correction
+# Task 9I-B1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9H-B1 — Manual extraction correction
+# Task 9I-B1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9H-B1 — Card readability pass
+# Task 9I-B1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9H-B1 — Caesar shift changed to 8
+# Task 9I-B1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1163,7 +1163,7 @@ Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
 
 
-# Task 9H-B1 — Extraction labels and BANCO clue refinement
+# Task 9I-B1 — Extraction labels and BANCO clue refinement
 
 Changes from 9G-B1:
 - extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
@@ -1290,3 +1290,127 @@ out of the game.
 
 Target solve time: 6–8 minutes.
 Eventual reward: Compass seal / code 3.
+
+
+# Task 9H-C — Memory answer/reward + recovery integration
+
+9H-B1 is frozen.
+
+Challenge 08 now uses the standard answer engine and canonical completion flow.
+
+Accepted final code:
+- `648237`
+- digit-normalised, so formatting such as `648 237` or `648-237` is also accepted
+
+Correct submission:
+- completes Challenge 08
+- awards Compass seal / code number 3
+- increments local mission progress
+- queues the normal PROGRESS sync event
+- persists offline
+- locks the challenge as solved
+
+Wrong submission:
+- starts the existing persistent 30-second cooldown
+- immediately records a pending recovery review for the cooldown expiry time
+- when the cooldown expires, a 10-second RECOVERY REVIEW becomes available
+- leaving/reopening the challenge cannot lose that recovery entitlement
+- refreshing after the penalty has already expired converts the pending review
+  into an available review automatically
+- every further wrong answer creates another recovery-review entitlement
+
+This means memory affects completion time only; it can never permanently prevent
+a team from finishing the game.
+
+
+# Task 9H-D — Final regression / freeze
+
+Challenge 08 is now frozen.
+
+Frozen specification:
+- title: The Snow Leopard’s Memory Test
+- target solve time: 6–8 minutes
+- first observation:
+  30 seconds
+  absolute timestamp so refresh/reopen cannot restart the timer
+- nine evidence items:
+  Blue scarf
+  Medeu ticket / 19:45
+  FLOREAT book
+  Green Bazaar receipt / 2,800 ₸
+  compass pointing East
+  red mitten
+  brass key / A315
+  white mug / snow-leopard paw
+  Kok Tobe postcard in lower-right
+- six multiple-choice memory questions
+- every answer option carries a vault digit
+- no per-question correctness feedback
+- one optional 10-second SECOND LOOK
+- selected answers persist per team
+- final code:
+  648237
+- final-code validation:
+  digit-normalised
+- wrong answer:
+  persistent 30-second cooldown
+- recovery rule:
+  after every wrong final code and after the 30-second cooldown ends,
+  another 10-second RECOVERY REVIEW becomes available
+- recovery entitlement survives refresh / leave / reopen
+- optional second look remains independent of recovery reviews
+- reward:
+  Compass seal / code number 3
+- completion:
+  canonical local state + queued PROGRESS sync
+- offline:
+  complete local timers, review recovery, validation and persistence
+
+9H-D introduces no gameplay or visual changes from the approved 9H-C1 build.
+It marks the final tested/frozen state before the Final Vault stage.
+
+
+# Task 9I-B — Final Vault UI / animation framework
+
+9I-A is frozen.
+
+Final Vault interface:
+- only reached after all 8 challenge seals are recovered
+- all 8 recovered seals shown around a central circular emergency vault
+- seal labels and numbers remain visible
+- five clue-driven route steps:
+  1. Begin at the highest place.
+  2. Next, choose something that can be opened without a key.
+  3. Then find the creature that leaves tracks in the snow.
+  4. Choose the object that pours but never drinks.
+  5. Finish beneath the wings of Kazakhstan.
+- click-based route placement is the accessibility baseline
+- drag/drop is also supported
+- a seal can only occupy one route slot at a time
+- the system does not mark route choices correct/incorrect
+- once all five route slots are filled, the keypad activates
+- keypad accepts five digits and Backspace
+- VERIFY remains disabled until 9I-C
+- route and keypad state persist per team through refresh/offline
+
+Animation framework:
+- subtle frost shimmer while the vault is idle
+- selected seal lift/highlight
+- seal docking animation
+- route trace animates when all five steps are filled
+- keypad depress animation
+- complete staged victory preview:
+  route seals illuminate in order
+  vault ring/wheel rotate
+  frost cracks appear
+  warm light spreads
+  thawed campus appears
+  heating-restored result card fades in
+  subtle snow-leopard paw print appears
+- reduced-motion users get an immediate simplified reveal
+
+For visual QA only, after filling all five route slots run:
+`FREEZE_FINAL_VAULT.previewVictory()`
+
+This preview does NOT finish the game or write a FINISH event.
+9I-C will connect code validation, cooldown and the real finish/victory flow.

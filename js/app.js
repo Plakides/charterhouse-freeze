@@ -350,6 +350,7 @@
       const display = formatElapsed(elapsed);
       missionTimer.textContent = display;
       challengeTimer.textContent = display;
+      vaultTimer.textContent = display;
     };
 
     update();
@@ -561,7 +562,7 @@
     const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
 
     if (show && labelSpan && labelStrong) {
-      labelSpan.textContent = "FINAL ROUTE";
+      labelSpan.textContent = "FINAL VAULT";
       labelStrong.textContent = "UNLOCKED";
     }
   }
@@ -738,6 +739,7 @@
 
     startClientTimer(team);
     showScreen("vault");
+    window.FREEZE_FINAL_VAULT?.mount?.({ team });
     setStatus(`${team.teamName} has reached the emergency control vault.`);
 
     if (options.pushHistory !== false && window.location.hash !== "#vault") {
@@ -747,6 +749,7 @@
 
   function showVictory(team) {
     currentChallengeId = null;
+    window.FREEZE_FINAL_VAULT?.unmount?.();
     stopBackgroundSync();
 
     const house = team.house || "";
@@ -765,6 +768,7 @@
   }
 
   function showMission(rawTeam, options = {}) {
+    window.FREEZE_FINAL_VAULT?.unmount?.();
     const team = applyDemoOverrides(rawTeam);
     const previousTeam = options.previousTeam ? applyDemoOverrides(options.previousTeam) : null;
 
@@ -876,6 +880,11 @@
         cooldown.clear(team.teamId, definition.id);
         stopChallengeCooldownTimer();
 
+        runSubmissionHook(definition, "onCooldownExpired", {
+          teamId: team.teamId,
+          challengeId: definition.id
+        });
+
         if (!isChallengeComplete(currentTeam, definition.id)) {
           challengeAnswerInput.disabled = false;
           challengeSubmitButton.disabled = false;
@@ -923,8 +932,26 @@
     return true;
   }
 
+  function runSubmissionHook(definition, hookName, payload = {}) {
+    const hook = definition?.submission?.[hookName];
+
+    if (typeof hook !== "function") return;
+
+    try {
+      hook(payload);
+    } catch (error) {
+      console.warn(`Challenge submission hook ${hookName} failed:`, error);
+    }
+  }
+
   function startWrongAnswerCooldown(definition, team) {
     cooldown.start(team.teamId, definition.id);
+
+    runSubmissionHook(definition, "onWrongAnswer", {
+      teamId: team.teamId,
+      challengeId: definition.id,
+      cooldownUntil: cooldown.getUntil(team.teamId, definition.id)
+    });
 
     return renderChallengeCooldown(definition, team, {
       showExpiryMessage: true
@@ -1451,7 +1478,7 @@
           setFinalRouteVisible(true);
           showDashboardToast(
             "Final route unlocked",
-            "All eight ice sections are clear. Follow the pink route to the emergency vault."
+            "All eight ice sections are clear. The final vault and Emergency Route are unlocked."
           );
         }, 700);
       } else {
