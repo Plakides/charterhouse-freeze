@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9F-D1 — Universal 30-second wrong-answer penalty
+# Task 9G-B1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9F-D1 — Screenshot-led layout correction
+# Task 9G-B1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9F-D1 — Manual extraction correction
+# Task 9G-B1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9F-D1 — Card readability pass
+# Task 9G-B1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9F-D1 — Caesar shift changed to 8
+# Task 9G-B1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1121,3 +1121,43 @@ Frozen specification:
 
 9F-D introduces no gameplay or visual changes from the approved 9F-C1 build.
 It marks the final tested/frozen state before Challenge 07.
+
+
+# Task 9G-B — Frozen Crossword UI
+
+9G-A is frozen.
+
+Approved answer set:
+- FLOREAT
+- BANCO
+- MEDEU
+- KOKTOBE
+- BINARY
+- PIXEL
+- PRIME
+- EQUATOR
+- ELEMENT
+- ECOSYSTEM
+
+The ten entries form one connected crossword with genuine shared crossing
+letters. Six manually numbered icy cells extract the final word SUMMIT.
+
+9G-B installs the interaction layer only:
+- proper 14 x 9 connected crossword grid
+- five Across and five Down clues
+- click a clue to highlight/focus its word
+- one-letter keyboard input
+- automatic advance within the selected word
+- arrow-key movement
+- Backspace clear/back behaviour
+- Space switches direction at a crossing
+- crossing letters are genuinely shared cells
+- six extraction cells marked 1–6
+- no clue-by-clue right/wrong checking
+- no automatic extraction
+- grid letters persist per team through refresh/offline
+- final six-letter answer field is typeable for UI testing
+- Submit remains disabled until 9G-C
+
+Target solve time: 7–9 minutes.
+Eventual reward: Key seal / code 9.
