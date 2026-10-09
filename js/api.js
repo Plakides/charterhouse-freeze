@@ -305,12 +305,96 @@
   }
 
   async function submitFinalCode(payload = {}) {
-    assertSession(payload);
+    const game = assertSession(payload);
 
-    throw new FreezeApiError(
-      "OFFLINE_VALIDATION_PENDING",
-      "The local final-vault engine is not enabled in Task 8A."
+    if (!game.team.started) {
+      throw new FreezeApiError(
+        "MISSION_NOT_STARTED",
+        "Start the mission before using the final vault."
+      );
+    }
+
+    const completed = Array.isArray(game.team.completed)
+      ? Array.from(new Set(
+          game.team.completed
+            .map(Number)
+            .filter(value =>
+              Number.isInteger(value) &&
+              value >= 1 &&
+              value <= 8
+            )
+        ))
+      : [];
+
+    if (completed.length < 8) {
+      throw new FreezeApiError(
+        "VAULT_LOCKED",
+        "Recover all eight security seals before opening the final vault."
+      );
+    }
+
+    if (game.team.finished) {
+      return {
+        correct: true,
+        alreadyFinished: true,
+        team: publicTeam(game)
+      };
+    }
+
+    const verdict = await answerEngine.validate(
+      9,
+      String(payload.code || payload.answer || "")
     );
+
+    if (!verdict.known) {
+      throw new FreezeApiError(
+        "FINAL_CODE_NOT_READY",
+        "The local final-vault validator is not available."
+      );
+    }
+
+    if (!verdict.correct) {
+      return {
+        correct: false,
+        alreadyFinished: false,
+        team: publicTeam(game)
+      };
+    }
+
+    const finishDate = new Date();
+    const finishTime = finishDate.toISOString();
+    const startMs = new Date(game.team.startTime).getTime();
+    const elapsedSeconds = Number.isFinite(startMs)
+      ? Math.max(
+          0,
+          Math.floor((finishDate.getTime() - startMs) / 1000)
+        )
+      : 0;
+
+    const saved = stateStore.updateGame(draft => {
+      // Idempotent local finish. A repeated correct submit must not move
+      // the finish timestamp or create a faster/slower duplicate result.
+      if (draft.team.finished || draft.team.finishTime) {
+        return draft;
+      }
+
+      draft.team.finished = true;
+      draft.team.finishTime = finishTime;
+      draft.team.elapsedSeconds = elapsedSeconds;
+      draft.team.status = "FINISHED";
+      return draft;
+    });
+
+    const finishedGame = stateStore.loadGame() || saved;
+
+    syncQueue.enqueue("FINISH");
+    syncTransport.requestFlush(0);
+
+    return {
+      correct: true,
+      alreadyFinished: false,
+      team: publicTeam(stateStore.loadGame() || finishedGame)
+    };
   }
 
   async function getLeaderboard() {

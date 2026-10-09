@@ -150,13 +150,6 @@
               <li><b>3</b><span>Type only that password in the answer box below.</span></li>
             </ol>
           </section>
-
-          <div class="telegram-b-stage-note">
-            <strong>9D-B interface build</strong>
-            <span>
-              The answer box below is typeable for testing. Submit activates in 9D-C.
-            </span>
-          </div>
         </aside>
       </div>
     `;

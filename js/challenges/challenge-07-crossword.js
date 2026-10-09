@@ -425,10 +425,10 @@
 
           <section class="crossword-side-card is-ice">
             <span>FROZEN CELLS</span>
-            <h3>Look for 1–6</h3>
+            <h3>Look for A–F</h3>
             <p>
               Six cells have icy lettered badges. Their letters form the final
-              six-letter security word when read in numerical order.
+              six-letter security word when read from A to F.
             </p>
           </section>
 
@@ -440,13 +440,6 @@
               decide when the grid makes sense.
             </p>
           </section>
-
-          <div class="crossword-b-stage-note">
-            <strong>9G-B interface build</strong>
-            <span>
-              The final word field below is typeable for testing. Submit activates in 9G-C.
-            </span>
-          </div>
         </aside>
       </div>
     `;

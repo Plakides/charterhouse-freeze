@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9I-B1 · universal wrong-answer penalty */
+/* Task 10A1 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10A1 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9I-B1 · screenshot-led map-fit corrections */
+/* Task 10A1 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — SECRET MESSAGE UI                                             */
+/* TASK 10A1 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9I-B1 · manual extraction — the site must not solve TULPAR for students */
+/* Task 10A1 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 9I-B1 · readability refinements from live 1536px screenshot */
+/* Task 10A1 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10A1 — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10A1 — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — BRAIN FREEZE UI                                              */
+/* TASK 10A1 — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — FROZEN CROSSWORD UI                                          */
+/* TASK 10A1 — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10A1 — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 9I-B1 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10A1 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8788,5 +8788,466 @@ body.modal-open { overflow: hidden; }
   .final-vault-machine.is-open .vault-door {
     transform: none;
     opacity: .24;
+  }
+}
+
+
+/* ========================================================================== */
+/* TASK 10A1 — LIVE FINAL VAULT SUBMISSION                                  */
+/* ========================================================================== */
+
+.final-vault-experience.is-finalizing [data-vault-preview-reset] {
+  display: none;
+}
+
+.final-vault-machine.is-code-rejected .vault-door-ring,
+.final-vault-machine.is-code-rejected .final-vault-code-display {
+  animation: vault-code-rejected .58s ease both;
+}
+
+.final-vault-machine.is-code-rejected .vault-machine-frost {
+  opacity: .52;
+}
+
+@keyframes vault-code-rejected {
+  0%,100% {
+    transform: translateX(0);
+    border-color: inherit;
+  }
+  20% {
+    transform: translateX(-5px);
+    border-color: rgba(170,67,76,.90);
+  }
+  40% {
+    transform: translateX(5px);
+    border-color: rgba(170,67,76,.90);
+  }
+  60% {
+    transform: translateX(-3px);
+    border-color: rgba(170,67,76,.72);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-vault-machine.is-code-rejected .vault-door-ring,
+  .final-vault-machine.is-code-rejected .final-vault-code-display {
+    animation: none !important;
+  }
+}
+
+
+/* ========================================================================== */
+/* PHASE 10A1 — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
+/* Reclaims chrome/heading height while preserving puzzle readability.         */
+/* ========================================================================== */
+
+@media
+  (min-width: 960px)
+  and (max-width: 1280px)
+  and (max-height: 760px) {
+
+  /* Shared masthead ------------------------------------------------------- */
+  .brand-bar {
+    min-height: 68px;
+    padding: 7px 30px;
+  }
+
+  .brand-home img {
+    width: 252px;
+  }
+
+  .brand-meta {
+    font-size: 8px;
+    gap: 8px;
+  }
+
+  /* Opening screen -------------------------------------------------------- */
+  .hero {
+    min-height: calc(100vh - 68px);
+    grid-template-columns: minmax(0,1.12fr) minmax(300px,.88fr);
+    gap: 42px;
+    padding: 28px 66px 62px;
+  }
+
+  .hero .protocol {
+    margin-bottom: 10px;
+    font-size: 10px;
+  }
+
+  .hero h1 {
+    font-size: 64px;
+    line-height: .92;
+  }
+
+  .hero-lede {
+    margin: 18px 0 12px;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .snow-leopard-note {
+    margin-bottom: 12px;
+    padding: 7px 11px;
+    font-size: 11px;
+  }
+
+  .offline-readiness-card {
+    margin: 9px 0 11px;
+    padding: 7px 10px;
+  }
+
+  .hero .button-large {
+    min-height: 48px;
+    font-size: 14px;
+  }
+
+  .hero-visual {
+    gap: 14px;
+  }
+
+  .freeze-orb {
+    width: min(276px,78%);
+  }
+
+  .freeze-orb-inner strong {
+    font-size: 54px;
+  }
+
+  .freeze-orb-inner > span:last-child {
+    margin-top: 5px;
+    font-size: 10px;
+  }
+
+  .orb-label {
+    margin-bottom: 8px;
+    font-size: 8px;
+  }
+
+  .weather-card {
+    min-width: min(300px,86%);
+    padding: 11px 15px;
+  }
+
+  .weather-card strong {
+    font-size: 18px;
+  }
+
+  .mountain-band {
+    bottom: 41px;
+    height: 120px;
+  }
+
+  /* Registration / codename reveal -------------------------------------- */
+  .registration-screen,
+  .reveal-screen,
+  .ready-screen,
+  .boot-screen,
+  .mission-screen {
+    padding-top: 22px;
+    padding-bottom: 34px;
+  }
+
+  .registration-screen::before,
+  .reveal-screen::before,
+  .ready-screen::before,
+  .mission-screen::before {
+    height: 10px;
+    margin: -4px 0 17px;
+    background-size: auto 22px;
+  }
+
+  .reveal-panel {
+    width: min(720px,100%);
+  }
+
+  .seal-ring {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 13px;
+    box-shadow: 0 0 0 5px rgba(211,147,160,.13);
+    font-size: 18px;
+  }
+
+  .reveal-panel .protocol {
+    margin-bottom: 9px;
+    font-size: 9px;
+  }
+
+  .reveal-panel h2 {
+    font-size: 35px;
+  }
+
+  .team-name {
+    margin: 11px 0 17px;
+    font-size: 54px;
+  }
+
+  .team-summary {
+    margin-bottom: 13px;
+  }
+
+  .team-summary > div {
+    padding: 10px 12px;
+  }
+
+  .team-summary span {
+    margin-bottom: 3px;
+    font-size: 8px;
+  }
+
+  .team-summary strong {
+    font-size: 14px;
+  }
+
+  .reveal-warning {
+    margin-bottom: 12px;
+    padding: 9px 13px;
+    font-size: 12px;
+  }
+
+  .reveal-panel .button-large {
+    min-height: 48px;
+    font-size: 14px;
+  }
+
+  /* Mission board: already strong at 1204×680; only reclaim masthead space. */
+  .dashboard-shell {
+    min-height: calc(100vh - 68px);
+    padding-top: 8px;
+  }
+
+  .dashboard-topbar {
+    height: 64px;
+  }
+
+  /* Shared challenge chrome ---------------------------------------------- */
+  .challenge-shell {
+    min-height: calc(100vh - 68px);
+    padding: 8px 28px 20px;
+  }
+
+  .challenge-topbar {
+    min-height: 52px;
+    gap: 16px;
+    padding-bottom: 8px;
+  }
+
+  .challenge-back-button {
+    min-height: 36px;
+    padding: 6px 10px;
+  }
+
+  .challenge-team-strip {
+    font-size: 9px;
+  }
+
+  .challenge-timer-card {
+    min-width: 112px;
+    padding-left: 14px;
+  }
+
+  .challenge-timer-card strong {
+    font-size: 24px;
+  }
+
+  .challenge-layout {
+    grid-template-columns: minmax(0,1fr) 250px;
+    gap: 16px;
+    padding-top: 11px;
+  }
+
+  .challenge-screen .challenge-shell {
+    padding-top: 8px;
+  }
+
+  .challenge-screen .challenge-layout {
+    padding-top: 11px;
+  }
+
+  .challenge-screen .challenge-heading {
+    grid-template-columns: 54px minmax(0,1fr) 66px;
+    gap: 11px;
+    margin-bottom: 9px;
+  }
+
+  .challenge-screen .challenge-number-block {
+    width: 54px;
+    height: 54px;
+  }
+
+  .challenge-screen .challenge-number-block strong {
+    font-size: 19px;
+  }
+
+  .challenge-screen .challenge-heading-copy h2 {
+    font-size: 34px;
+  }
+
+  .challenge-screen .challenge-heading-copy > p:last-child {
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .challenge-screen .challenge-duration {
+    min-width: 66px;
+    padding: 6px;
+  }
+
+  .challenge-rail {
+    gap: 9px;
+  }
+
+  .challenge-rail-card {
+    padding: 11px 12px;
+  }
+
+  /* Challenge 1: preserve portrait art but expose more of the evidence area. */
+  .logic-puzzle {
+    grid-template-columns: minmax(0,1fr) 252px;
+  }
+
+  .logic-scene {
+    padding: 12px;
+  }
+
+  .logic-scene-heading {
+    min-height: 37px;
+  }
+
+  .logic-scene-heading h3 {
+    font-size: 29px;
+  }
+
+  /* Challenge 2: keep the map readable while gaining vertical room. */
+  .almaty-map-heading,
+  .almaty-dispatch-heading {
+    min-height: 51px;
+  }
+
+  .almaty-map-heading h3,
+  .almaty-dispatch-heading h3 {
+    font-size: 27px;
+  }
+
+  /* Challenge 3: compact briefing chrome, not the actual language cards. */
+  .secret-briefing {
+    padding: 10px 13px;
+  }
+
+  .secret-briefing-heading h3 {
+    font-size: 27px;
+  }
+
+  .secret-workflow {
+    gap: 5px;
+  }
+
+  /* Challenge 6 / 7: slightly denser side instructions. */
+  .brain-freeze-side,
+  .crossword-side {
+    gap: 8px;
+  }
+
+  .crossword-console-header,
+  .brain-freeze-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Final Vault ----------------------------------------------------------- */
+  .vault-shell {
+    min-height: calc(100vh - 68px);
+    padding: 8px 28px 20px;
+  }
+
+  .vault-layout {
+    grid-template-columns: minmax(0,1fr) 238px;
+    gap: 16px;
+    padding-top: 12px;
+  }
+
+  .vault-heading {
+    margin-bottom: 10px;
+  }
+
+  .vault-heading h2 {
+    font-size: 46px;
+  }
+
+  .vault-heading > p:last-child {
+    margin-top: 4px;
+    font-size: 11px;
+  }
+
+  .final-vault-experience {
+    grid-template-columns: minmax(390px,.94fr) minmax(450px,1.06fr);
+    gap: 12px;
+  }
+
+  .final-route-builder {
+    padding: 11px;
+  }
+
+  .final-route-builder-header {
+    margin-bottom: 7px;
+  }
+
+  .final-route-builder-header h3 {
+    font-size: 22px;
+  }
+
+  .final-route-step {
+    min-height: 58px;
+    padding: 5px 6px;
+    grid-template-columns: 28px minmax(0,1fr) 132px;
+    gap: 6px;
+  }
+
+  .final-route-slot {
+    min-height: 43px;
+  }
+
+  .final-vault-machine {
+    min-height: 470px;
+  }
+
+  .vault-orbit {
+    width: 410px;
+    height: 410px;
+  }
+
+  .vault-orbit-pos-1 { --seal-x: 0px; --seal-y: -178px; }
+  .vault-orbit-pos-2 { --seal-x: 126px; --seal-y: -126px; }
+  .vault-orbit-pos-3 { --seal-x: 178px; --seal-y: 0px; }
+  .vault-orbit-pos-4 { --seal-x: 126px; --seal-y: 126px; }
+  .vault-orbit-pos-5 { --seal-x: 0px; --seal-y: 178px; }
+  .vault-orbit-pos-6 { --seal-x: -126px; --seal-y: 126px; }
+  .vault-orbit-pos-7 { --seal-x: -178px; --seal-y: 0px; }
+  .vault-orbit-pos-8 { --seal-x: -126px; --seal-y: -126px; }
+
+  .vault-orbit-seal {
+    width: 74px;
+    min-height: 70px;
+  }
+
+  .vault-door {
+    width: 278px;
+    min-height: 356px;
+    padding-top: 16px;
+  }
+
+  .vault-door-ring {
+    width: 136px;
+    height: 136px;
+  }
+
+  .vault-wheel {
+    width: 86px;
+    height: 86px;
   }
 }

@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 9I-B1 — Universal 30-second wrong-answer penalty
+# Task 10A1 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 9I-B1 — Screenshot-led layout correction
+# Task 10A1 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 9I-B1 — Manual extraction correction
+# Task 10A1 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 9I-B1 — Card readability pass
+# Task 10A1 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 9I-B1 — Caesar shift changed to 8
+# Task 10A1 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1163,7 +1163,7 @@ Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
 
 
-# Task 9I-B1 — Extraction labels and BANCO clue refinement
+# Task 10A1 — Extraction labels and BANCO clue refinement
 
 Changes from 9G-B1:
 - extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
@@ -1414,3 +1414,131 @@ For visual QA only, after filling all five route slots run:
 
 This preview does NOT finish the game or write a FINISH event.
 9I-C will connect code validation, cooldown and the real finish/victory flow.
+
+
+# Task 9I-C — Live Final Vault / canonical finish
+
+9I-B1 is frozen.
+
+The Final Vault is now live.
+
+Validation:
+- intended five-step route remains:
+  Mountain → Book → Snow Leopard → Teapot → Eagle
+- students manually read the five seal numbers
+- accepted final code is locally hash-validated
+- digit formatting is normalised
+- route choices themselves are not checked by the application
+
+Wrong final code:
+- uses the shared persistent 30-second cooldown under local vault ID 9
+- VERIFY becomes `TRY AGAIN IN Ns`
+- route and keypad code remain editable during the penalty
+- refresh / leave / reopen cannot bypass the penalty
+- a brief vault-rejection animation runs
+- no mission-finish state is written
+
+Correct final code:
+- freezes the canonical local elapsed time immediately
+- marks the local team FINISHED before any network request
+- queues canonical `FINISH`
+- requests opportunistic Cloudflare sync
+- plays the real staged vault-unlock animation
+- then opens the existing victory screen with team, House, final time,
+  8/8 seals and result reference
+- if the browser is closed/reloaded during the animation, the saved FINISHED
+  state causes the victory screen to restore on next load
+
+The existing 9I-B preview remains available:
+`FREEZE_FINAL_VAULT.previewVictory()`
+It still does not finish the game.
+
+
+# Task 9I-D — Final Vault regression / freeze
+
+The Final Vault is now frozen.
+
+Frozen specification:
+- unlock condition:
+  all 8 challenge seals recovered
+- route clues:
+  1. Begin at the highest place.
+  2. Next, choose something that can be opened without a key.
+  3. Then find the creature that leaves tracks in the snow.
+  4. Choose the object that pours but never drinks.
+  5. Finish beneath the wings of Kazakhstan.
+- intended route:
+  Mountain → Book → Snow Leopard → Teapot → Eagle
+- visible seal numbers:
+  8 → 2 → 4 → 7 → 5
+- final vault code:
+  82475
+- route interaction:
+  click-to-place + drag/drop
+  no route-by-route correctness feedback
+  duplicate seal prevention
+  route persistence
+- keypad:
+  locked until five route slots are filled
+  five-digit input
+  Backspace
+  physical keyboard support
+  persistence
+- wrong code:
+  persistent 30-second cooldown
+  route and code remain editable
+  refresh/reopen cannot bypass
+- correct code:
+  local hash validation
+  local FINISHED state written immediately
+  elapsed time frozen immediately
+  canonical FINISH event queued
+  opportunistic sync requested
+- victory choreography:
+  five route seals illuminate in order
+  vault ring/wheel rotate
+  frost cracks
+  warm light
+  thawed campus
+  HEATING RESTORED result
+  snow-leopard paw detail
+  then normal victory screen
+- result text:
+  Heating restored to an extravagant 19°C.
+  The snow leopard continues to deny involvement.
+- resilience:
+  correct finish works offline
+  closing/reloading during victory animation restores FINISHED state
+  finish timestamp is idempotent and does not move
+- preview:
+  FREEZE_FINAL_VAULT.previewVictory()
+  remains visual-only and never writes FINISH
+
+9I-D introduces no gameplay or visual changes from the passed 9I-C1 build.
+It marks the Final Vault and all of Phase 9 as frozen.
+
+
+# Phase 10A1 — MacBook Neo responsive QA
+
+Target test viewport:
+- 1204 × 680 CSS px
+- Chrome page zoom 100%
+- emulator scale 100%
+- DPR 2 if available
+
+This pass deliberately does NOT alter puzzle logic.
+
+Changes:
+- compact Charterhouse masthead at short 1204px-class laptop viewports
+- opening screen CTA brought above the fold
+- codename / Start Mission flow compacted above the fold
+- mission board preserved with only modest chrome reduction
+- challenge top bar, heading and right rail compacted
+- puzzle content itself kept readable rather than globally scaled down
+- Final Vault heading, route builder and machine tightened for 1204 × 680
+- remaining Frozen Crossword side-panel wording corrected from 1–6 to A–F
+- obsolete B-stage development notes removed from Challenges 4, 5, 6 and 7
+- explicit PNG favicon added to remove Chrome's automatic favicon.ico 404 during QA
+
+All Phase 9 puzzle answers, cooldowns, seals, persistence, offline logic,
+Final Vault code and FINISH flow remain unchanged.

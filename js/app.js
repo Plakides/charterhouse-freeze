@@ -739,12 +739,66 @@
 
     startClientTimer(team);
     showScreen("vault");
-    window.FREEZE_FINAL_VAULT?.mount?.({ team });
+    window.FREEZE_FINAL_VAULT?.mount?.({
+      team,
+      onSubmit: submitFinalVaultCode,
+      onFinished: finishFinalVault
+    });
     setStatus(`${team.teamName} has reached the emergency control vault.`);
 
     if (options.pushHistory !== false && window.location.hash !== "#vault") {
       window.history.pushState({ screen: "vault" }, "", "#vault");
     }
+  }
+
+  async function submitFinalVaultCode(code) {
+    if (
+      !currentSession ||
+      !currentTeam ||
+      Number(currentTeam.completedCount) < 8
+    ) {
+      return {
+        correct: false,
+        error: "The final vault is not available for this team."
+      };
+    }
+
+    try {
+      const result = await api.submitFinalCode({
+        ...currentSession,
+        code: String(code || "")
+      });
+
+      if (result?.team) {
+        currentTeam = result.team;
+        persistTeamSnapshot(result.team);
+      }
+
+      return result;
+    } catch (error) {
+      console.warn("Final vault submission failed:", error);
+
+      return {
+        correct: false,
+        error: friendlyError(error)
+      };
+    }
+  }
+
+  function finishFinalVault(team) {
+    if (team?.teamId) {
+      currentTeam = team;
+      persistTeamSnapshot(team);
+    }
+
+    const cleanUrl = window.location.pathname + window.location.search;
+    window.history.replaceState(
+      { screen: "victory" },
+      "",
+      cleanUrl
+    );
+
+    showVictory(currentTeam || team);
   }
 
   function showVictory(team) {

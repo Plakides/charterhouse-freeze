@@ -67,6 +67,13 @@
       hashes: Object.freeze([
         "898b64bc9f7eff1ef41954de01cf95fd3bb90aed9164536aa48a9e5512ff46d6"
       ])
+    }),
+    9: Object.freeze({
+      mode: "digits",
+      pepper: "CF9IC-V09-final-vault-82475",
+      hashes: Object.freeze([
+        "0d53debdc633bbb4d92b1df8248e44ea73de21b0bd4a06dc933fa72d45ef46ff"
+      ])
     })
   });
 

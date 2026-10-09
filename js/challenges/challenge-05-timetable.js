@@ -331,13 +331,6 @@
               rule after each change.
             </p>
           </section>
-
-          <div class="timetable-b-stage-note">
-            <strong>9E-B interface build</strong>
-            <span>
-              The answer box below is typeable for testing. Submit activates in 9E-C.
-            </span>
-          </div>
         </aside>
       </div>
     `;

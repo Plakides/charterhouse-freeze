@@ -277,13 +277,6 @@
               Enter A, then B, then C, then D in the answer box below.
             </p>
           </section>
-
-          <div class="brain-freeze-b-stage-note">
-            <strong>9F-B interface build</strong>
-            <span>
-              The code field below is typeable for testing. Submit activates in 9F-C.
-            </span>
-          </div>
         </aside>
       </div>
     `;

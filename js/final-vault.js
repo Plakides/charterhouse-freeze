@@ -3,6 +3,8 @@
 
   const STORAGE_PREFIX = "charterhouseFreeze.v2.finalVault.";
   const ROUTE_LENGTH = 5;
+  const VAULT_COOLDOWN_ID = 9;
+  const cooldown = window.FREEZE_COOLDOWN;
 
   const clues = Object.freeze([
     Object.freeze({
@@ -29,6 +31,7 @@
 
   let mountedRoot = null;
   let previewTimers = [];
+  let cooldownTimer = null;
 
   function storageKey(teamId) {
     return `${STORAGE_PREFIX}${String(teamId || "unknown")}`;
@@ -127,7 +130,7 @@
     return Array.from({ length: 5 }, (_, index) => digits[index] || "•").join(" ");
   }
 
-  function mount({ team } = {}) {
+  function mount({ team, onSubmit, onFinished } = {}) {
     const root = document.getElementById("finalVaultMount");
     if (!root || !team) return;
 
@@ -149,6 +152,20 @@
     const validSealIds = new Set(seals.map(seal => seal.challengeId));
     const teamId = team.teamId || "unknown";
     const state = loadState(teamId, validSealIds);
+    const submitFinalCode =
+      typeof onSubmit === "function"
+        ? onSubmit
+        : async () => ({
+            correct: false,
+            error: "Final-code submission is unavailable."
+          });
+    const finishMission =
+      typeof onFinished === "function"
+        ? onFinished
+        : () => {};
+
+    let submitInFlight = false;
+    let victoryRunning = false;
 
     function routeFilled() {
       return state.route.every(Boolean);
@@ -162,8 +179,40 @@
       saveState(teamId, state);
     }
 
+    function cooldownSeconds() {
+      if (!cooldown) return 0;
+      return cooldown.remainingSeconds(teamId, VAULT_COOLDOWN_ID);
+    }
+
+    function cooldownActive() {
+      return cooldownSeconds() > 0;
+    }
+
+    function verifyReady() {
+      return (
+        routeFilled() &&
+        state.code.length === 5 &&
+        !cooldownActive() &&
+        !submitInFlight &&
+        !victoryRunning
+      );
+    }
+
     function statusText() {
       const filled = state.route.filter(Boolean).length;
+      const remaining = cooldownSeconds();
+
+      if (remaining > 0) {
+        return `Security lockout: ${remaining}s. You can still edit the route and keypad code while you wait.`;
+      }
+
+      if (submitInFlight) {
+        return "Checking restoration code…";
+      }
+
+      if (victoryRunning) {
+        return "Restoration code accepted. Emergency systems are unlocking…";
+      }
 
       if (routeFilled()) {
         return "Route complete. Read the five seal numbers in step order, then enter the restoration code.";
@@ -239,9 +288,24 @@
         }
 
         if (key === "enter") {
+          const remaining = cooldownSeconds();
+          const label = remaining > 0
+            ? `TRY AGAIN IN ${remaining}s`
+            : submitInFlight
+              ? "CHECKING…"
+              : victoryRunning
+                ? "UNLOCKING…"
+                : "VERIFY";
+
           return `
-            <button type="button" class="final-keypad-key is-enter" data-vault-key="enter" disabled aria-label="Verify code disabled until 9I-C">
-              VERIFY
+            <button
+              type="button"
+              class="final-keypad-key is-enter"
+              data-vault-key="enter"
+              ${verifyReady() ? "" : "disabled"}
+              aria-label="Verify five-digit restoration code"
+            >
+              ${label}
             </button>
           `;
         }
@@ -286,8 +350,8 @@
             </div>
 
             <div class="final-vault-b-note">
-              <strong>9I-B interface build</strong>
-              <span>The route builder and keypad are live. Final code verification activates in 9I-C.</span>
+              <strong>FINAL VAULT LIVE</strong>
+              <span>Build the route, derive the five digits, then verify the restoration code.</span>
             </div>
           </section>
 
@@ -352,6 +416,62 @@
       `;
 
       bindInteractions();
+      updateCooldownUi();
+
+      if (cooldownActive()) {
+        startCooldownTimer();
+      }
+    }
+
+    function setVaultStatus(message) {
+      const status = root.querySelector("[data-final-route-status]");
+      if (status && message) {
+        status.textContent = message;
+      }
+    }
+
+    function clearCooldownTimer() {
+      if (!cooldownTimer) return;
+      window.clearInterval(cooldownTimer);
+      cooldownTimer = null;
+    }
+
+    function updateCooldownUi() {
+      if (!mountedRoot) return;
+
+      const remaining = cooldownSeconds();
+      const verifyButton = root.querySelector('[data-vault-key="enter"]');
+
+      if (verifyButton) {
+        verifyButton.disabled = !verifyReady();
+        verifyButton.textContent = remaining > 0
+          ? `TRY AGAIN IN ${remaining}s`
+          : submitInFlight
+            ? "CHECKING…"
+            : victoryRunning
+              ? "UNLOCKING…"
+              : "VERIFY";
+      }
+
+      if (remaining > 0) {
+        setVaultStatus(
+          `Security lockout: ${remaining}s. You can still edit the route and keypad code while you wait.`
+        );
+      } else if (!submitInFlight && !victoryRunning) {
+        clearCooldownTimer();
+        setVaultStatus(statusText());
+      }
+    }
+
+    function startCooldownTimer() {
+      clearCooldownTimer();
+      updateCooldownUi();
+
+      if (!cooldownActive()) return;
+
+      cooldownTimer = window.setInterval(() => {
+        updateCooldownUi();
+      }, 250);
     }
 
     function updateWithoutFullRender(message = null) {
@@ -365,6 +485,8 @@
     }
 
     function selectSeal(id) {
+      if (victoryRunning || submitInFlight) return;
+
       const sealId = Number(id);
       if (!validSealIds.has(sealId)) return;
 
@@ -387,6 +509,8 @@
     }
 
     function placeSeal(slotIndex, sealId = state.selectedSealId) {
+      if (victoryRunning || submitInFlight) return;
+
       const index = Number(slotIndex);
       const id = Number(sealId);
 
@@ -414,6 +538,8 @@
     }
 
     function liftSlot(slotIndex) {
+      if (victoryRunning || submitInFlight) return;
+
       const index = Number(slotIndex);
       const currentId = Number(state.route[index]);
 
@@ -428,27 +554,82 @@
       );
     }
 
-    function handleKeypad(key) {
-      if (!routeFilled()) return;
+    async function submitCode() {
+      if (!verifyReady()) {
+        updateCooldownUi();
+        return;
+      }
+
+      submitInFlight = true;
+      updateCooldownUi();
+      setVaultStatus("Checking restoration code…");
+
+      const result = await submitFinalCode(state.code);
+
+      if (!result || result.correct !== true) {
+        submitInFlight = false;
+
+        if (result?.error) {
+          setVaultStatus(result.error);
+          updateCooldownUi();
+          return;
+        }
+
+        const machine = root.querySelector(".final-vault-machine");
+        machine?.classList.add("is-code-rejected");
+        window.setTimeout(() => {
+          machine?.classList.remove("is-code-rejected");
+        }, 620);
+
+        if (cooldown) {
+          cooldown.start(teamId, VAULT_COOLDOWN_ID);
+        }
+
+        startCooldownTimer();
+        return;
+      }
+
+      submitInFlight = false;
+      victoryRunning = true;
+      cooldown?.clear(teamId, VAULT_COOLDOWN_ID);
+      clearCooldownTimer();
+      updateCooldownUi();
+
+      const animation = playVictory(() => {
+        finishMission(result.team || team);
+      });
+
+      if (!animation.ok) {
+        finishMission(result.team || team);
+      }
+    }
+
+    async function handleKeypad(key) {
+      if (!routeFilled() || victoryRunning) return;
 
       if (key === "back") {
+        if (submitInFlight) return;
+
         state.code = state.code.slice(0, -1);
         persist();
         const display = root.querySelector("[data-vault-code-display]");
         if (display) display.textContent = displayCode(state.code);
+        updateCooldownUi();
         return;
       }
 
       if (key === "enter") {
+        await submitCode();
         return;
       }
 
-      if (/^\d$/.test(key) && state.code.length < 5) {
+      if (/^\d$/.test(key) && state.code.length < 5 && !submitInFlight) {
         state.code += key;
         persist();
 
         const display = root.querySelector("[data-vault-code-display]");
         if (display) display.textContent = displayCode(state.code);
+        updateCooldownUi();
       }
     }
 
@@ -501,6 +682,8 @@
 
       root.querySelector("[data-vault-clear-route]")
         ?.addEventListener("click", () => {
+          if (submitInFlight || victoryRunning) return;
+
           const hasProgress = state.route.some(Boolean) || state.code;
 
           if (
@@ -522,7 +705,7 @@
             const key = button.dataset.vaultKey;
             button.classList.add("is-pressed");
             window.setTimeout(() => button.classList.remove("is-pressed"), 120);
-            handleKeypad(key);
+            void handleKeypad(key);
           });
         });
 
@@ -537,7 +720,12 @@
 
         if (event.key === "Backspace") {
           event.preventDefault();
-          handleKeypad("back");
+          void handleKeypad("back");
+        }
+
+        if (event.key === "Enter") {
+          event.preventDefault();
+          void handleKeypad("enter");
         }
       });
 
@@ -555,7 +743,7 @@
       if (!mountedRoot) return;
 
       mountedRoot.querySelector(".final-vault-experience")
-        ?.classList.remove("is-previewing");
+        ?.classList.remove("is-previewing", "is-finalizing");
 
       mountedRoot.querySelector(".final-vault-machine")
         ?.classList.remove("is-unlocking", "is-open");
@@ -617,6 +805,26 @@
       return { ok: true, reducedMotion: false };
     }
 
+    function playVictory(onComplete) {
+      const result = previewVictory();
+
+      if (!result.ok) return result;
+
+      mountedRoot
+        ?.querySelector(".final-vault-experience")
+        ?.classList.add("is-finalizing");
+
+      const delay = result.reducedMotion ? 1500 : 5600;
+
+      previewTimers.push(window.setTimeout(() => {
+        if (typeof onComplete === "function") {
+          onComplete();
+        }
+      }, delay));
+
+      return result;
+    }
+
     render();
 
     window.FREEZE_FINAL_VAULT = Object.freeze({
@@ -624,6 +832,7 @@
       unmount,
       getState: () => JSON.parse(JSON.stringify(state)),
       previewVictory,
+      playVictory,
       resetPreview
     });
   }
@@ -631,6 +840,11 @@
   function unmount() {
     previewTimers.forEach(timer => window.clearTimeout(timer));
     previewTimers = [];
+
+    if (cooldownTimer) {
+      window.clearInterval(cooldownTimer);
+      cooldownTimer = null;
+    }
 
     if (mountedRoot) {
       mountedRoot.classList.remove("is-previewing");
@@ -643,6 +857,10 @@
     mount,
     unmount,
     previewVictory: () => ({
+      ok: false,
+      message: "Open the Final Vault first."
+    }),
+    playVictory: () => ({
       ok: false,
       message: "Open the Final Vault first."
     })
