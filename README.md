@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 10A1 — Universal 30-second wrong-answer penalty
+# Task 10A2 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 10A1 — Screenshot-led layout correction
+# Task 10A2 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 10A1 — Manual extraction correction
+# Task 10A2 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 10A1 — Card readability pass
+# Task 10A2 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 10A1 — Caesar shift changed to 8
+# Task 10A2 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1163,7 +1163,7 @@ Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
 
 
-# Task 10A1 — Extraction labels and BANCO clue refinement
+# Task 10A2 — Extraction labels and BANCO clue refinement
 
 Changes from 9G-B1:
 - extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
@@ -1518,7 +1518,7 @@ Frozen specification:
 It marks the Final Vault and all of Phase 9 as frozen.
 
 
-# Phase 10A1 — MacBook Neo responsive QA
+# Phase 10A2 — MacBook Neo responsive QA
 
 Target test viewport:
 - 1204 × 680 CSS px
@@ -1542,3 +1542,32 @@ Changes:
 
 All Phase 9 puzzle answers, cooldowns, seals, persistence, offline logic,
 Final Vault code and FINISH flow remain unchanged.
+
+
+# Phase 10A2 — Single-screen game shell
+
+10A1 is superseded. This is a structural responsive redesign rather than a compression pass.
+
+At 1204×680 and larger desktop widths:
+- gameplay masthead is 50px
+- student footer is removed from the active game screens
+- Mission Board sidebar becomes a compact horizontal mission deck
+- challenge right rail is removed entirely
+- progress, status, Field Kit and timer sit in the top utility bar
+- challenge stage uses the full remaining width and height
+- submission controls stay visible at the bottom of the stage
+- Final Vault right rail is removed
+- puzzle-specific single-screen layouts are used for all eight challenges
+
+Puzzle layout changes:
+1. House of Confusion: four suspects in one row; four clue tiles across the top.
+2. Lost in Almaty: large map + fixed route sheet, no overlap.
+3. Secret Message: transmissions + six cards + six decoder positions in one stage.
+4. Telegram: telegram + compact hint/check panel.
+5. Timetable: rules left; five subjects and five periods across the workspace.
+6. Brain Freeze: true 2×2 A/B/C/D grid; permanent side cards removed.
+7. Crossword: crossword + Across/Down + A–F extraction simultaneously.
+8. Memory: observation fills the stage; questions use a 3×2 grid.
+Final Vault: route builder and circular vault fill the entire stage.
+
+No puzzle answers, validation rules, cooldowns, seals, persistence, offline logic, or FINISH flow were changed.

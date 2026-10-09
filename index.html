@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.webmanifest?v=10A1">
+  <link rel="manifest" href="manifest.webmanifest?v=10A2">
   <meta name="theme-color" content="#092140">
   <link rel="icon" type="image/png" href="assets/branding/charterhouse-logo.png">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=10A1">
-  <link rel="stylesheet" href="css/components.css?v=10A1">
-  <link rel="stylesheet" href="css/animations.css?v=10A1">
+  <link rel="stylesheet" href="css/main.css?v=10A2">
+  <link rel="stylesheet" href="css/components.css?v=10A2">
+  <link rel="stylesheet" href="css/animations.css?v=10A2">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -295,41 +295,38 @@
               <div class="board-instruction"><span class="instruction-mark" aria-hidden="true">i</span><span>Choose challenges in any order. Each recovered seal melts one section of the same hidden scene.</span></div>
             </section>
 
-            <aside class="mission-sidebar" aria-label="Mission controls">
-              <section class="sidebar-card status-card">
-                <div class="sidebar-card-heading"><span>MISSION STATUS</span><span class="mission-live" id="missionState"><i aria-hidden="true"></i> ACTIVE</span></div>
+            <aside class="mission-sidebar mission-toolbar" aria-label="Mission controls">
+              <section class="mission-toolbar-status">
+                <div class="mission-toolbar-status-copy">
+                  <span id="missionState" class="mission-live"><i aria-hidden="true"></i> ACTIVE</span>
+                  <strong id="sidebarProgress">0 / 8</strong>
+                  <small>SEALS</small>
+                </div>
                 <div class="status-meter" aria-hidden="true"><span id="statusMeterFill" style="width:0%"></span></div>
-                <div class="status-numbers"><strong id="sidebarProgress">0 / 8</strong><span>security seals</span></div>
               </section>
 
-              <section class="sidebar-card seals-card">
-                <div class="sidebar-card-heading"><span>RECOVERED SEALS</span><small>SECURE</small></div>
-                <div class="seal-grid" id="sealGrid" aria-label="Recovered security seals">
+              <section class="mission-toolbar-seals" aria-label="Recovered security seals">
+                <span class="mission-toolbar-label">RECOVERED SEALS</span>
+                <div class="seal-grid" id="sealGrid">
                   <div class="seal-slot"><span>?</span><small>01</small></div><div class="seal-slot"><span>?</span><small>02</small></div><div class="seal-slot"><span>?</span><small>03</small></div><div class="seal-slot"><span>?</span><small>04</small></div>
                   <div class="seal-slot"><span>?</span><small>05</small></div><div class="seal-slot"><span>?</span><small>06</small></div><div class="seal-slot"><span>?</span><small>07</small></div><div class="seal-slot"><span>?</span><small>08</small></div>
                 </div>
               </section>
 
-              <section class="sidebar-card final-route-card" id="finalRouteCard" hidden>
-                <div class="sidebar-card-heading">
-                  <span>FINAL ROUTE</span>
-                  <small>UNLOCKED</small>
-                </div>
-                <div class="final-route-copy">
-                  <strong>All eight seals recovered.</strong>
-                  <p>The Emergency Route is available inside the vault. Use the seal clues to build the five-step route and recover the restoration code.</p>
-                  <button class="button button-primary final-route-button" id="proceedToVaultButton" type="button">
-                    Proceed to Vault <span aria-hidden="true">→</span>
-                  </button>
-                </div>
-              </section>
-
-              <div class="tool-buttons">
-                <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg></span><span><strong>Field Kit</strong><small>Tools & references</small></span><span class="tool-arrow" aria-hidden="true">→</span></button>
-                <button class="dashboard-tool-button" id="leaderboardButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 37V25h7v12m6 0V16h7v21m6 0V10h7v27M7 37h37"/></svg></span><span><strong>Leaderboard</strong><small>Teams & Houses</small></span><span class="tool-arrow" aria-hidden="true">→</span></button>
+              <div class="mission-toolbar-tools">
+                <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg></span><span><strong>Field Kit</strong><small>Tools</small></span></button>
+                <button class="dashboard-tool-button" id="leaderboardButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 37V25h7v12m6 0V16h7v21m6 0V10h7v27M7 37h37"/></svg></span><span><strong>Leaderboard</strong><small>Live</small></span></button>
               </div>
 
-              <section class="sidebar-card emergency-card"><span>EMERGENCY BULLETIN</span><p id="emergencyBulletin">Indoor temperature: increasingly character-building.</p></section>
+              <section class="mission-toolbar-bulletin"><span>BULLETIN</span><p id="emergencyBulletin">Indoor temperature: increasingly character-building.</p></section>
+
+              <section class="final-route-card mission-toolbar-final" id="finalRouteCard" hidden>
+                <div class="final-route-copy">
+                  <strong>FINAL VAULT UNLOCKED</strong>
+                  <p>All eight seals recovered.</p>
+                  <button class="button button-primary final-route-button" id="proceedToVaultButton" type="button">Proceed to Vault <span aria-hidden="true">→</span></button>
+                </div>
+              </section>
             </aside>
           </div>
         </div>
@@ -340,20 +337,12 @@
       <section class="screen vault-screen" id="screenVault" aria-labelledby="vaultTitle" hidden>
         <div class="vault-shell">
           <header class="challenge-topbar vault-topbar">
-            <button class="challenge-back-button" id="vaultBackButton" type="button">
-              <span aria-hidden="true">←</span>
-              <span>Final route</span>
-            </button>
-
-            <div class="challenge-team-strip">
-              <span id="vaultTeamName">Team</span>
-              <i aria-hidden="true"></i>
-              <span id="vaultHouse">House</span>
-            </div>
-
-            <div class="challenge-timer-card">
-              <span>ELAPSED TIME</span>
-              <strong id="vaultTimer">0:00</strong>
+            <button class="challenge-back-button" id="vaultBackButton" type="button"><span aria-hidden="true">←</span><span>Final route</span></button>
+            <div class="challenge-team-strip"><span id="vaultTeamName">Team</span><i aria-hidden="true"></i><span id="vaultHouse">House</span></div>
+            <div class="challenge-utility-strip vault-utility-strip">
+              <div class="challenge-mini-progress"><span>SEALS</span><strong>8 / 8</strong></div>
+              <button class="challenge-top-tool" id="vaultFieldKitButton" type="button" aria-label="Open Field Kit"><span aria-hidden="true">▣</span><strong>Field Kit</strong></button>
+              <div class="challenge-timer-card"><span>ELAPSED</span><strong id="vaultTimer">0:00</strong></div>
             </div>
           </header>
 
@@ -367,28 +356,6 @@
 
               <div id="finalVaultMount" class="final-vault-mount" aria-live="polite"></div>
             </main>
-
-            <aside class="vault-rail">
-              <section class="challenge-rail-card">
-                <span class="challenge-rail-label">SECURITY SEALS</span>
-                <strong>8 / 8</strong>
-                <span>all recovered</span>
-              </section>
-
-              <section class="challenge-rail-card vault-route-summary">
-                <span class="challenge-rail-label">FINAL PROTOCOL</span>
-                <strong>BUILD THE ROUTE</strong>
-                <p>Place one recovered seal beside each clue. Then read the five seal numbers in route order and enter them on the vault keypad.</p>
-              </section>
-
-              <button class="dashboard-tool-button" id="vaultFieldKitButton" type="button">
-                <span class="tool-icon" aria-hidden="true">
-                  <svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg>
-                </span>
-                <span><strong>Field Kit</strong><small>Tools & references</small></span>
-                <span class="tool-arrow" aria-hidden="true">→</span>
-              </button>
-            </aside>
           </div>
         </div>
       </section>
@@ -430,19 +397,18 @@
         <div class="challenge-shell">
           <header class="challenge-topbar">
             <button class="challenge-back-button" id="challengeBackButton" type="button">
-              <span aria-hidden="true">←</span>
-              <span>Mission board</span>
+              <span aria-hidden="true">←</span><span>Board</span>
             </button>
 
             <div class="challenge-team-strip">
-              <span id="challengeTeamName">Team</span>
-              <i aria-hidden="true"></i>
-              <span id="challengeHouse">House</span>
+              <span id="challengeTeamName">Team</span><i aria-hidden="true"></i><span id="challengeHouse">House</span>
             </div>
 
-            <div class="challenge-timer-card">
-              <span>ELAPSED TIME</span>
-              <strong id="challengeTimer">0:00</strong>
+            <div class="challenge-utility-strip">
+              <div class="challenge-mini-progress" title="Mission progress"><span>SEALS</span><strong id="challengeProgress">0 / 8</strong></div>
+              <div class="challenge-mini-status"><strong id="challengeStatus">UNSOLVED</strong><span id="challengeStatusText">Recover its seal.</span></div>
+              <button class="challenge-top-tool" id="challengeFieldKitButton" type="button" aria-label="Open Field Kit"><span aria-hidden="true">▣</span><strong>Field Kit</strong></button>
+              <div class="challenge-timer-card"><span>ELAPSED</span><strong id="challengeTimer">0:00</strong></div>
             </div>
           </header>
 
@@ -450,7 +416,7 @@
             <main class="challenge-stage">
               <div class="challenge-heading">
                 <div class="challenge-number-block">
-                  <span>CHALLENGE</span>
+                  <span>CH</span>
                   <strong id="challengeNumberLabel">01</strong>
                 </div>
 
@@ -487,36 +453,6 @@
                 <p class="challenge-message" id="challengeMessage" role="status" aria-live="polite"></p>
               </form>
             </main>
-
-            <aside class="challenge-rail">
-              <section class="challenge-rail-card">
-                <span class="challenge-rail-label">MISSION PROGRESS</span>
-                <strong id="challengeProgress">0 / 8</strong>
-                <span>security seals recovered</span>
-              </section>
-
-              <section class="challenge-rail-card challenge-status-card">
-                <span class="challenge-rail-label">THIS CHALLENGE</span>
-                <strong id="challengeStatus">UNSOLVED</strong>
-                <span id="challengeStatusText">Recover its seal to clear this section of ice.</span>
-              </section>
-
-              <button class="dashboard-tool-button challenge-field-kit-button" id="challengeFieldKitButton" type="button">
-                <span class="tool-icon" aria-hidden="true">
-                  <svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg>
-                </span>
-                <span>
-                  <strong>Field Kit</strong>
-                  <small>Tools & references</small>
-                </span>
-                <span class="tool-arrow" aria-hidden="true">→</span>
-              </button>
-
-              <section class="challenge-rail-card challenge-tip-card">
-                <span class="challenge-rail-label">MISSION NOTE</span>
-                <p>You can return to the board at any time. The mission timer keeps running.</p>
-              </section>
-            </aside>
           </div>
         </div>
       </section>
@@ -526,7 +462,7 @@
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
       <button class="teacher-tools-button" id="teacherDiagnosticsButton" type="button" title="Teacher diagnostics · Ctrl+Alt+D">TEACHER DIAGNOSTICS</button>
-      <span class="demo-badge">PHASE 10A · MACBOOK NEO QA · BUILD 10A1</span>
+      <span class="demo-badge">PHASE 10A2 · SINGLE-SCREEN GAME SHELL · BUILD 10A2</span>
     </footer>
   </div>
 
@@ -838,7 +774,7 @@
         </section>
 
         <section class="diagnostics-card diagnostics-card-wide diagnostics-technical">
-          <div><span>BUILD</span><strong data-diagnostic-value="build">10A1</strong></div>
+          <div><span>BUILD</span><strong data-diagnostic-value="build">10A2</strong></div>
           <div><span>DEVICE ID</span><strong data-diagnostic-value="device">—</strong></div>
         </section>
       </div>
@@ -865,28 +801,28 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=10A1"></script>
-  <script src="js/state.js?v=10A1"></script>
-  <script src="js/recovery.js?v=10A1"></script>
-  <script src="js/answer-engine.js?v=10A1"></script>
-  <script src="js/sync-queue.js?v=10A1"></script>
-  <script src="js/sync-transport.js?v=10A1"></script>
-  <script src="js/api.js?v=10A1"></script>
-  <script src="js/challenges/registry.js?v=10A1"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=10A1"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=10A1"></script>
-  <script src="js/challenges/challenge-03-language.js?v=10A1"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=10A1"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=10A1"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=10A1"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=10A1"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=10A1"></script>
-  <script src="js/field-kit.js?v=10A1"></script>
-  <script src="js/leaderboard.js?v=10A1"></script>
-  <script src="js/pwa.js?v=10A1"></script>
-  <script src="js/diagnostics.js?v=10A1"></script>
-  <script src="js/cooldown.js?v=10A1"></script>
-  <script src="js/final-vault.js?v=10A1"></script>
-  <script src="js/app.js?v=10A1"></script>
+  <script src="js/config.js?v=10A2"></script>
+  <script src="js/state.js?v=10A2"></script>
+  <script src="js/recovery.js?v=10A2"></script>
+  <script src="js/answer-engine.js?v=10A2"></script>
+  <script src="js/sync-queue.js?v=10A2"></script>
+  <script src="js/sync-transport.js?v=10A2"></script>
+  <script src="js/api.js?v=10A2"></script>
+  <script src="js/challenges/registry.js?v=10A2"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=10A2"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=10A2"></script>
+  <script src="js/challenges/challenge-03-language.js?v=10A2"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=10A2"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=10A2"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=10A2"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=10A2"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=10A2"></script>
+  <script src="js/field-kit.js?v=10A2"></script>
+  <script src="js/leaderboard.js?v=10A2"></script>
+  <script src="js/pwa.js?v=10A2"></script>
+  <script src="js/diagnostics.js?v=10A2"></script>
+  <script src="js/cooldown.js?v=10A2"></script>
+  <script src="js/final-vault.js?v=10A2"></script>
+  <script src="js/app.js?v=10A2"></script>
 </body>
 </html>

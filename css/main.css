@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A1 · universal wrong-answer penalty */
+/* Task 10A2 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10A2 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A1 · screenshot-led map-fit corrections */
+/* Task 10A2 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — SECRET MESSAGE UI                                             */
+/* TASK 10A2 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A1 · manual extraction — the site must not solve TULPAR for students */
+/* Task 10A2 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A1 · readability refinements from live 1536px screenshot */
+/* Task 10A2 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10A2 — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10A2 — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — BRAIN FREEZE UI                                              */
+/* TASK 10A2 — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — FROZEN CROSSWORD UI                                          */
+/* TASK 10A2 — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10A2 — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10A2 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8793,7 +8793,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A1 — LIVE FINAL VAULT SUBMISSION                                  */
+/* TASK 10A2 — LIVE FINAL VAULT SUBMISSION                                  */
 /* ========================================================================== */
 
 .final-vault-experience.is-finalizing [data-vault-preview-reset] {
@@ -8840,7 +8840,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A1 — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* PHASE 10A2 — MACBOOK NEO 1204px RESPONSIVE QA                             */
 /* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
 /* Reclaims chrome/heading height while preserving puzzle readability.         */
 /* ========================================================================== */
@@ -9250,4 +9250,544 @@ body.modal-open { overflow: hidden; }
     width: 86px;
     height: 86px;
   }
+}
+
+
+/* ========================================================================== */
+/* PHASE 10A2 — SINGLE-SCREEN GAME SHELL                                     */
+/* Structural pass: use width, not scroll. Target 1204×680 and larger.        */
+/* ========================================================================== */
+
+.sr-only {
+  position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;
+  margin:-1px !important;overflow:hidden !important;clip:rect(0,0,0,0) !important;
+  white-space:nowrap !important;border:0 !important;
+}
+
+/* Opening/reveal screens: actual viewport compositions, no accidental footer push. */
+.site-shell:has(#screenStart:not([hidden])),
+.site-shell:has(#screenReveal:not([hidden])),
+.site-shell:has(#screenMission:not([hidden])),
+.site-shell:has(#screenChallenge:not([hidden])),
+.site-shell:has(#screenVault:not([hidden])),
+.site-shell:has(#screenVictory:not([hidden])) {
+  height:100dvh;
+  min-height:0;
+  overflow:hidden;
+}
+
+.site-shell:has(#screenStart:not([hidden])) > .status-strip,
+.site-shell:has(#screenReveal:not([hidden])) > .status-strip,
+.site-shell:has(#screenMission:not([hidden])) > .status-strip,
+.site-shell:has(#screenChallenge:not([hidden])) > .status-strip,
+.site-shell:has(#screenVault:not([hidden])) > .status-strip,
+.site-shell:has(#screenVictory:not([hidden])) > .status-strip {
+  display:none;
+}
+
+.site-shell:has(#screenMission:not([hidden])) .brand-bar,
+.site-shell:has(#screenChallenge:not([hidden])) .brand-bar,
+.site-shell:has(#screenVault:not([hidden])) .brand-bar {
+  min-height:50px;
+  height:50px;
+  padding:5px clamp(18px,3vw,38px);
+}
+.site-shell:has(#screenMission:not([hidden])) .brand-home img,
+.site-shell:has(#screenChallenge:not([hidden])) .brand-home img,
+.site-shell:has(#screenVault:not([hidden])) .brand-home img { width:188px; }
+.site-shell:has(#screenMission:not([hidden])) .brand-meta,
+.site-shell:has(#screenChallenge:not([hidden])) .brand-meta,
+.site-shell:has(#screenVault:not([hidden])) .brand-meta { font-size:7px; }
+
+.site-shell:has(#screenStart:not([hidden])) .brand-bar,
+.site-shell:has(#screenReveal:not([hidden])) .brand-bar { min-height:68px;height:68px;padding:8px clamp(22px,4vw,52px); }
+.site-shell:has(#screenStart:not([hidden])) .brand-home img,
+.site-shell:has(#screenReveal:not([hidden])) .brand-home img { width:245px; }
+
+#screenStart .hero {
+  height:calc(100dvh - 68px);
+  min-height:0;
+  padding:clamp(28px,5dvh,58px) clamp(46px,7vw,108px) 64px;
+  align-items:center;
+}
+#screenStart .hero h1 { font-size:clamp(58px,6vw,88px); }
+#screenStart .hero-lede { margin:18px 0 12px; }
+#screenStart .mountain-band { bottom:0;height:108px; }
+#screenStart .offline-readiness-card { margin:10px 0; }
+#screenStart .button-large { min-height:48px; }
+#screenStart .freeze-orb { width:min(330px,78%); }
+#screenStart .weather-card { padding:10px 14px; }
+
+#screenReveal.reveal-screen { height:calc(100dvh - 68px);min-height:0;padding:18px 24px;display:grid;place-items:center; }
+#screenReveal .reveal-panel { max-height:100%; }
+#screenReveal .seal-ring { width:58px;height:58px;margin-bottom:9px; }
+#screenReveal .reveal-panel h2 { font-size:32px; }
+#screenReveal .team-name { margin:8px 0 12px;font-size:clamp(46px,5vw,64px); }
+#screenReveal .team-summary { margin-bottom:10px; }
+#screenReveal .team-summary > div { padding:8px 12px; }
+#screenReveal .reveal-warning { margin-bottom:9px;padding:8px 12px; }
+
+/* Mission board ----------------------------------------------------------- */
+#screenMission { height:calc(100dvh - 50px);overflow:hidden; }
+.dashboard-shell { width:min(1500px,100%);height:100%;min-height:0;padding:7px clamp(16px,2.3vw,32px) 9px;display:grid;grid-template-rows:56px minmax(0,1fr); }
+.dashboard-topbar { height:56px;padding-bottom:6px; }
+.dashboard-house-mark { width:44px;height:44px;flex-basis:44px; }
+.dashboard-house-mark img { width:34px;height:37px; }
+.dashboard-team h2 { font-size:26px; }
+.dashboard-team p { font-size:9px; }
+.dashboard-timer-card { min-width:112px;padding:3px 10px; }
+.dashboard-timer-card strong { font-size:25px; }
+.dashboard-main { min-height:0;display:grid;grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:7px;padding-top:7px; }
+.mission-toolbar { grid-row:1;display:grid;grid-template-columns:118px minmax(390px,1fr) auto minmax(170px,.55fr) auto;gap:7px;align-items:center; }
+.mission-board-panel { grid-row:2;min-height:0;display:grid;grid-template-rows:38px minmax(0,1fr) 20px; }
+.board-heading-row { height:38px;margin:0 0 5px;align-items:center; }
+.board-heading-row .protocol { display:none; }
+.board-heading-row h3 { font-size:24px; }
+.board-progress-pill { display:none; }
+.freeze-board { width:100%;max-width:none;height:100%;min-height:0;margin:0; }
+.board-instruction { max-width:none;margin:4px 0 0;font-size:8px; }
+
+.mission-toolbar-status,
+.mission-toolbar-seals,
+.mission-toolbar-bulletin,
+.mission-toolbar-final { min-width:0;height:48px;border:1px solid rgba(9,33,64,.13);background:rgba(255,255,255,.68); }
+.mission-toolbar-status { padding:5px 8px;display:grid;grid-template-rows:auto 4px;gap:4px; }
+.mission-toolbar-status-copy { display:flex;align-items:center;gap:6px; }
+.mission-toolbar-status-copy strong { margin-left:auto;color:var(--ch-navy);font-family:var(--mono);font-size:14px; }
+.mission-toolbar-status-copy small { color:var(--muted);font-size:6px;font-weight:900; }
+.mission-toolbar-status .status-meter { height:4px;margin:0; }
+.mission-toolbar-seals { padding:4px 6px;display:grid;grid-template-columns:auto 1fr;gap:7px;align-items:center; }
+.mission-toolbar-label { color:var(--muted);font-size:6px;font-weight:900;letter-spacing:.08em; }
+.mission-toolbar-seals .seal-grid { padding:0;display:grid;grid-template-columns:repeat(8,1fr);gap:3px; }
+.mission-toolbar-seals .seal-slot { width:32px;height:32px;aspect-ratio:auto; }
+.mission-toolbar-seals .seal-slot span { font-size:12px; }
+.mission-toolbar-seals .seal-slot small { font-size:5px; }
+.mission-toolbar-tools { display:flex;gap:5px; }
+.mission-toolbar-tools .dashboard-tool-button { min-width:105px;width:auto;height:48px;min-height:48px;padding:5px 8px;grid-template-columns:25px 1fr;gap:6px; }
+.mission-toolbar-tools .tool-icon { width:24px;height:24px;padding:4px; }
+.mission-toolbar-tools .tool-arrow { display:none; }
+.mission-toolbar-tools .dashboard-tool-button strong { font-size:11px; }
+.mission-toolbar-tools .dashboard-tool-button small { font-size:6px; }
+.mission-toolbar-bulletin { padding:6px 8px;overflow:hidden; }
+.mission-toolbar-bulletin > span { color:#93606b;font-size:6px;font-weight:900;letter-spacing:.10em; }
+.mission-toolbar-bulletin p { margin:2px 0 0;color:#596672;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.mission-toolbar-final { padding:4px; }
+.mission-toolbar-final .final-route-copy { height:100%;display:flex;align-items:center;gap:6px; }
+.mission-toolbar-final .final-route-copy strong { display:none; }
+.mission-toolbar-final .final-route-copy p { display:none; }
+.mission-toolbar-final .button { min-height:38px;padding:6px 10px;font-size:8px; }
+
+/* Challenge shell --------------------------------------------------------- */
+body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), body:has(#screenMission:not([hidden])) { overflow:hidden; }
+#screenChallenge { height:calc(100dvh - 50px);overflow:hidden; }
+.challenge-shell { width:min(1500px,100%);height:100%;min-height:0;padding:5px clamp(14px,2vw,28px) 8px;display:grid;grid-template-rows:42px minmax(0,1fr); }
+.challenge-topbar { min-height:42px;height:42px;padding:0 0 5px;display:grid;grid-template-columns:auto minmax(190px,.7fr) minmax(0,1.3fr);gap:12px;align-items:center; }
+.challenge-back-button { min-height:32px;padding:5px 9px;font-size:10px; }
+.challenge-team-strip { justify-self:start;font-size:8px; }
+.challenge-utility-strip { min-width:0;justify-self:end;display:flex;align-items:center;gap:5px; }
+.challenge-mini-progress { min-width:72px;height:32px;padding:3px 7px;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid rgba(9,33,64,.13);background:rgba(255,255,255,.65); }
+.challenge-mini-progress span { color:var(--muted);font-size:6px;font-weight:900;letter-spacing:.08em; }
+.challenge-mini-progress strong { color:var(--ch-navy);font-family:var(--mono);font-size:12px; }
+.challenge-mini-status { min-width:86px;height:32px;padding:4px 7px;display:grid;align-content:center;border:1px solid rgba(9,33,64,.13);background:rgba(255,255,255,.65); }
+.challenge-mini-status strong { color:var(--ch-navy);font-size:8px;letter-spacing:.07em; }
+.challenge-mini-status span { max-width:160px;color:var(--muted);font-size:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.challenge-top-tool { height:32px;appearance:none;padding:4px 8px;display:flex;align-items:center;gap:5px;border:1px solid rgba(9,33,64,.14);background:rgba(255,255,255,.72);color:var(--ch-navy);font-size:8px; }
+.challenge-top-tool span { color:#7893a5; }
+.challenge-timer-card { min-width:84px;height:32px;padding:3px 7px;border-left:0;border:1px solid rgba(9,33,64,.13);text-align:center; }
+.challenge-timer-card span { font-size:6px; }
+.challenge-timer-card strong { font-size:17px; }
+
+.challenge-layout { min-height:0;display:block;padding-top:5px; }
+.challenge-stage { height:100%;min-height:0;display:grid;grid-template-rows:54px minmax(0,1fr) auto;gap:6px; }
+.challenge-heading { height:54px;margin:0;display:grid;grid-template-columns:45px minmax(0,1fr) 62px;gap:9px;align-items:center; }
+.challenge-number-block { width:45px;height:45px; }
+.challenge-number-block span { font-size:6px; }
+.challenge-number-block strong { font-size:17px; }
+.challenge-heading-copy .protocol { margin-bottom:1px;font-size:6px; }
+.challenge-heading-copy h2 { font-size:clamp(26px,2.35vw,34px);line-height:.98; }
+.challenge-heading-copy > p:last-child { margin:2px 0 0;max-width:none;font-size:8px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.challenge-duration { min-width:62px;padding:4px 5px; }
+.challenge-duration span { font-size:6px; }
+.challenge-duration strong { font-size:9px; }
+.challenge-content-card { min-height:0;height:100%;overflow:hidden; }
+.challenge-answer-panel { min-height:48px;margin:0;padding:6px 8px;grid-template-columns:150px minmax(0,1fr);gap:8px; }
+.challenge-answer-copy label { font-size:9px; }
+.challenge-answer-copy p { margin:2px 0 0;font-size:6px;line-height:1.15; }
+.challenge-answer-controls { grid-template-columns:minmax(0,1fr) 155px; }
+.challenge-answer-controls input { min-height:36px;height:36px;padding:6px 10px;font-size:13px; }
+.challenge-answer-controls .button { min-height:36px;height:36px;padding:6px 12px;font-size:10px; }
+.challenge-message { min-height:0;margin:0;grid-column:1/-1;font-size:7px; }
+.challenge-rail { display:none !important; }
+
+/* Challenge 1 — four suspects in one row, clues across the top. */
+.logic-puzzle { height:100%;min-height:0;display:grid;grid-template-rows:72px minmax(0,1fr);grid-template-columns:1fr;gap:6px;border:0;background:transparent;box-shadow:none; }
+.logic-clue-board { grid-row:1;grid-column:1;padding:7px 9px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px;align-items:center;border:1px solid rgba(9,33,64,.14);background:rgba(247,244,238,.94); }
+.logic-clue-heading strong { font-size:16px; }
+.logic-clue-heading span { font-size:6px; }
+.logic-clues { margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:5px; }
+.logic-clues li { min-height:52px;padding:5px;display:grid;grid-template-columns:24px 1fr;gap:5px;align-items:center;border:1px solid rgba(9,33,64,.09); }
+.logic-clue-icon { width:22px;height:22px;font-size:7px; }
+.logic-clues p { margin:0;font-size:8px;line-height:1.25; }
+.logic-tip { display:none; }
+.logic-scene { grid-row:2;grid-column:1;min-height:0;padding:7px;border:1px solid rgba(9,33,64,.14);background:rgba(255,255,255,.74); }
+.logic-scene-heading { min-height:31px;margin-bottom:3px; }
+.logic-scene-heading h3 { font-size:22px; }
+.logic-scene-heading > div > span { font-size:6px; }
+.logic-key-icon { width:31px;height:31px; }
+.logic-brief { margin:0 0 5px;font-size:7px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.logic-suspects { height:calc(100% - 39px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px; }
+.logic-suspect { height:100%;display:grid;grid-template-rows:minmax(0,1fr) auto auto; }
+.logic-suspect-select { min-height:0;padding:0;position:relative;overflow:hidden; }
+.logic-student-card { width:100%;height:100%;min-height:0;object-fit:cover;object-position:top center;display:block; }
+.logic-nameplate { position:absolute;left:6px;bottom:6px;padding:3px 6px;background:rgba(247,244,238,.92);font-size:13px; }
+.logic-select-copy { display:none; }
+.logic-suspect-meta { padding:4px 5px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;border-bottom:1px solid rgba(9,33,64,.08); }
+.logic-suspect-meta small { font-size:5px; }
+.logic-suspect-meta strong { margin-top:0;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.logic-suspect-actions { padding:4px 5px;display:grid;grid-template-columns:1fr 1fr;gap:4px; }
+.logic-view-card,.logic-eliminate { min-height:25px;padding:4px;font-size:6px; }
+
+/* Challenge 2 — map + route sheet side-by-side, zero overlap. */
+.almaty-puzzle { height:100%;min-height:0;grid-template-columns:minmax(0,2.15fr) minmax(315px,.85fr);overflow:hidden; }
+.almaty-map-panel { min-height:0;padding:7px;display:flex;flex-direction:column; }
+.almaty-map-heading { min-height:32px;padding:0 0 4px; }
+.almaty-map-heading h3 { font-size:22px; }
+.almaty-facing-note strong { font-size:6px; }
+.almaty-compass-mini { width:28px;height:28px; }
+.almaty-map { flex:1;min-height:0;height:auto;aspect-ratio:auto; }
+.almaty-route-console { min-height:43px;margin-top:5px;padding:5px 7px; }
+.almaty-route-title span,.almaty-route-title strong { font-size:6px; }
+.almaty-route-strip { gap:3px; }
+.almaty-dispatch { min-height:0;padding:7px 8px;overflow:hidden;border-left:1px solid rgba(9,33,64,.14);border-top:0; }
+.almaty-dispatch-heading { min-height:0; }
+.almaty-dispatch-heading h3 { margin:1px 0;font-size:20px; }
+.almaty-dispatch-heading p { margin:2px 0 4px;font-size:7px;line-height:1.2; }
+.almaty-directions { margin:0;display:grid;gap:0; }
+.almaty-directions li { min-height:0;padding:4px 0;grid-template-columns:22px 1fr;gap:5px; }
+.almaty-directions li > span { width:20px;height:20px;font-size:6px; }
+.almaty-directions p { margin:0;font-size:7px;line-height:1.24; }
+.almaty-route-actions { margin-top:auto;display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:4px; }
+.almaty-route-actions .button { min-height:30px;padding:4px;font-size:7px; }
+.almaty-route-message { min-height:18px;margin:3px 0 0;font-size:6px;line-height:1.2; }
+.almaty-build-note { display:none; }
+
+/* Challenge 3 — transmissions + compact horizontal workbench. */
+.secret-message-puzzle { height:100%;min-height:0;display:grid;grid-template-rows:42px 112px minmax(0,1fr);gap:5px; }
+.secret-briefing { padding:5px 8px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center; }
+.secret-briefing-heading > span { font-size:6px; }
+.secret-briefing-heading h3 { margin:0;font-size:18px; }
+.secret-briefing-heading p { display:none; }
+.secret-workflow { display:grid;grid-template-columns:repeat(4,96px);gap:3px; }
+.secret-workflow span { min-height:28px;padding:4px;font-size:6px; }
+.secret-workflow b { width:16px;height:16px;font-size:6px; }
+.secret-transmissions { min-height:0;grid-template-columns:repeat(3,1fr);gap:5px; }
+.secret-note { min-height:0;padding:6px 8px;overflow:hidden; }
+.secret-note header { padding-bottom:3px; }
+.secret-note header span,.secret-note header strong { font-size:6px; }
+.secret-note blockquote { margin:5px 0 4px;font-size:13px;line-height:1.22; }
+.secret-glossary { gap:2px; }
+.secret-glossary span { padding:1px 3px;font-size:5px; }
+.secret-operator-note { margin-top:5px;padding:4px 5px;font-size:6px; }
+.secret-stamp { width:44px;height:44px;right:-5px;bottom:-8px;border-width:3px;font-size:15px; }
+.secret-card-workbench { min-height:0;padding:6px 8px;display:grid;grid-template-rows:26px 61px 19px minmax(0,1fr) 45px 25px;gap:3px;overflow:hidden; }
+.secret-section-heading { align-items:center; }
+.secret-section-heading h3 { font-size:16px; }
+.secret-section-heading > p { font-size:6px; }
+.secret-card-bank { min-height:0;height:61px;margin:0;padding:3px;grid-template-columns:repeat(6,1fr);gap:3px; }
+.secret-card { min-height:0;height:54px;padding:4px;grid-template-columns:22px 1fr;gap:4px; }
+.secret-card-seal { width:22px;height:22px;font-size:8px; }
+.secret-card-copy > strong { font-size:7px; }
+.secret-card-copy > span { display:none; }
+.secret-card code { margin-top:3px;gap:2px; }
+.secret-card code b { min-width:16px;height:18px;font-size:8px; }
+.secret-slots-heading { margin:0;font-size:6px; }
+.secret-slots-heading strong { font-size:7px; }
+.secret-slots { margin:0;grid-template-columns:repeat(6,1fr);gap:3px; }
+.secret-slot { min-height:0;height:100%;padding:3px;grid-template-rows:18px minmax(0,1fr) 24px;gap:2px; }
+.secret-slot-position { gap:3px;font-size:5px; }
+.secret-slot-position b { width:17px;height:17px;font-size:6px; }
+.secret-slot-card { min-height:0; }
+.secret-slot-card > span { min-height:0;height:100%;font-size:5px; }
+.secret-card.is-compact { min-height:0;height:100%;padding:3px;grid-template-columns:20px 1fr;gap:3px; }
+.secret-card.is-compact .secret-card-seal { width:20px;height:20px;font-size:7px; }
+.secret-card.is-compact .secret-card-copy > strong { font-size:6px; }
+.secret-card.is-compact code { margin-top:2px;gap:1px; }
+.secret-card.is-compact code b { min-width:14px;height:17px;font-size:7px; }
+.secret-take { min-height:24px;padding:2px;font-size:6px;gap:3px; }
+.secret-take b { min-width:18px;height:18px;font-size:7px; }
+.secret-extraction-console.is-manual { margin:0;padding:4px 6px;display:grid;grid-template-columns:150px 1fr;gap:5px; }
+.secret-extraction-console > div:first-child strong { font-size:6px; }
+.secret-manual-pattern { grid-template-columns:repeat(6,1fr);gap:2px; }
+.secret-manual-pattern span { min-height:30px;padding:2px;grid-template-columns:16px 1fr;gap:2px;font-size:6px; }
+.secret-manual-pattern b { width:16px;height:16px;font-size:6px; }
+.secret-manual-instruction { display:none; }
+.secret-workbench-actions { margin:0;gap:4px; }
+.secret-workbench-actions .button { min-height:24px;padding:3px 6px;font-size:6px; }
+.secret-message-status { min-height:0;margin:0;font-size:6px; }
+
+/* Challenge 4 — telegram fills the stage; help is a compact side strip. */
+.telegram-puzzle { height:100%;min-height:0;grid-template-columns:minmax(0,2.3fr) minmax(260px,.7fr);gap:6px; }
+.telegram-desk { min-height:0;padding:7px;display:grid;grid-template-rows:42px minmax(0,1fr) 42px;gap:5px; }
+.telegram-desk-top { margin:0; }
+.telegram-desk-top h3 { margin:0;font-size:20px; }
+.telegram-desk-top p { font-size:7px;line-height:1.2; }
+.telegram-signal-badge { min-width:76px;padding:5px; }
+.telegram-sheet { min-height:0;height:100%;padding:8px 10px; }
+.telegram-sheet-header > div { padding:4px 5px; }
+.telegram-sheet-header span,.telegram-sheet-footer span,.telegram-cipher-block > span { font-size:5px; }
+.telegram-sheet-header strong { font-size:6px; }
+.telegram-rule { margin:7px 0; }
+.telegram-cipher-block { padding:3px 0 8px; }
+.telegram-ciphertext { margin-top:5px;padding:10px; }
+.telegram-ciphertext p { font-size:clamp(19px,2vw,27px);line-height:1.35; }
+.telegram-sheet-footer { left:10px;right:10px;bottom:6px; }
+.telegram-stamp { right:16px;bottom:30px;font-size:14px; }
+.telegram-task-strip { margin:0;padding:5px 7px;grid-template-columns:170px 1fr;gap:6px; }
+.telegram-task-strip strong { font-size:9px; }
+.telegram-task-strip p { font-size:6px; }
+.telegram-side-panel { min-height:0;display:grid;grid-template-rows:auto 1fr;gap:6px; }
+.telegram-help-card,.telegram-checklist { padding:8px; }
+.telegram-help-card h3,.telegram-checklist h3 { font-size:16px; }
+.telegram-help-card > p { margin:2px 0 5px;font-size:7px; }
+.telegram-hint-button { min-height:30px;font-size:7px; }
+.telegram-hint { margin-top:5px;padding:6px; }
+.telegram-hint > strong { font-size:9px; }
+.telegram-hint > p { margin:3px 0 5px;font-size:6px; }
+.telegram-open-tool { min-height:28px;font-size:6px; }
+.telegram-checklist ol { margin:4px 0 0;gap:2px; }
+.telegram-checklist li { padding-top:4px;grid-template-columns:20px 1fr;gap:4px; }
+.telegram-checklist li b { width:18px;height:18px;font-size:6px; }
+.telegram-checklist li span { margin-top:1px;font-size:6px; }
+
+/* Challenge 5 — rules left; subjects and periods across the width. */
+.timetable-puzzle { height:100%;min-height:0;display:grid;grid-template-columns:300px minmax(0,1fr);gap:6px; }
+.timetable-clue-panel { grid-column:1;grid-row:1;min-height:0;gap:5px;grid-template-rows:minmax(0,1fr) auto; }
+.timetable-console { grid-column:2;grid-row:1;min-height:0;padding:7px;display:grid;grid-template-rows:40px minmax(0,1fr) 30px 18px;gap:4px; }
+.timetable-console-header { margin:0; }
+.timetable-console-header h3 { margin:0;font-size:20px; }
+.timetable-console-header p { font-size:7px;line-height:1.2; }
+.timetable-status-badge { min-width:76px;padding:5px; }
+.timetable-board { min-height:0;display:grid;grid-template-columns:1fr;grid-template-rows:88px minmax(0,1fr);gap:5px; }
+.timetable-bank-panel,.timetable-grid-panel { padding:5px; }
+.timetable-section-heading,.timetable-grid-heading { min-height:20px; }
+.timetable-section-heading strong,.timetable-grid-heading strong { font-size:7px; }
+.timetable-subject-bank { margin-top:3px;display:grid;grid-template-columns:repeat(5,1fr);gap:3px; }
+.timetable-subject-card { min-height:52px;height:52px;padding:4px;grid-template-columns:28px 1fr;gap:4px; }
+.timetable-subject-icon { width:26px;height:26px; }
+.timetable-subject-icon svg { width:17px;height:17px; }
+.timetable-subject-copy strong { font-size:7px; }
+.timetable-subject-copy span { font-size:5px; }
+.timetable-subject-copy code { display:none; }
+.timetable-bank-help { display:none; }
+.timetable-slots { margin-top:3px;display:grid;grid-template-columns:repeat(5,1fr);gap:3px; }
+.timetable-slot { min-height:0;height:100%;padding:4px;display:grid;grid-template-columns:1fr;grid-template-rows:27px minmax(0,1fr);gap:3px;text-align:center; }
+.timetable-period-label { min-height:0;display:flex;align-items:center;justify-content:center;gap:4px;border-right:0;border-bottom:1px solid rgba(9,33,64,.10); }
+.timetable-period-label b { font-size:17px; }
+.timetable-period-label small { font-size:5px; }
+.timetable-slot-card { min-height:0;height:100%; }
+.timetable-slot-card > span { min-height:0;height:100%;font-size:6px; }
+.timetable-subject-card.is-compact { min-height:0;height:100%;padding:3px;grid-template-columns:24px 1fr;gap:3px; }
+.timetable-subject-card.is-compact .timetable-subject-icon { width:22px;height:22px; }
+.timetable-subject-card.is-compact .timetable-subject-icon svg { width:15px;height:15px; }
+.timetable-subject-card.is-compact .timetable-subject-copy strong { font-size:6px; }
+.timetable-actions { margin:0;gap:4px; }
+.timetable-actions .button { min-height:28px;padding:4px 7px;font-size:6px; }
+.timetable-status-message { min-height:0;margin:0;font-size:6px; }
+.timetable-rules-card,.timetable-final-question { padding:7px; }
+.timetable-rules-heading h3,.timetable-final-question h3 { font-size:16px; }
+.timetable-clues { margin:4px 0 0;gap:1px; }
+.timetable-clues li { padding:4px 0;grid-template-columns:22px 1fr;gap:4px; }
+.timetable-clues li b { width:20px;height:20px;font-size:6px; }
+.timetable-clues li span { margin:1px 0 0;font-size:7px;line-height:1.2; }
+.timetable-final-question p { margin:3px 0 0;font-size:6px;line-height:1.2; }
+.timetable-team-tip { display:none; }
+
+/* Challenge 6 — true 2×2 logic grid; no permanent side column. */
+.brain-freeze-puzzle { height:100%;min-height:0;display:block; }
+.brain-freeze-console { height:100%;min-height:0;padding:6px;display:grid;grid-template-rows:39px minmax(0,1fr) 37px;gap:4px; }
+.brain-freeze-side { display:none; }
+.brain-freeze-header { margin:0; }
+.brain-freeze-header h3 { margin:0;font-size:20px; }
+.brain-freeze-header p { font-size:7px;line-height:1.2; }
+.brain-freeze-status { min-width:75px;padding:4px; }
+.brain-freeze-status strong { font-size:12px; }
+.brain-freeze-grid { min-height:0;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:4px; }
+.brain-panel { min-height:0;padding:6px; }
+.brain-panel-heading { grid-template-columns:31px 1fr;gap:5px;padding-bottom:4px; }
+.brain-panel-letter { width:29px;height:29px;font-size:16px; }
+.brain-panel-heading small { font-size:5px; }
+.brain-panel-heading h4 { font-size:13px; }
+.brain-panel-instruction { padding-top:3px;font-size:5px; }
+.brain-sequence { min-height:0;gap:4px; }
+.brain-sequence b { min-width:28px;height:32px;font-size:14px; }
+.brain-sequence i { font-size:13px; }
+.brain-equations { padding:3px 0;gap:1px; }
+.brain-equation-row { min-height:25px;gap:3px; }
+.brain-symbol { width:25px;height:25px; }
+.brain-symbol svg { width:18px;height:18px; }
+.brain-equation-row strong { min-width:34px;font-size:11px; }
+.brain-number-grid { gap:3px; }
+.brain-number-grid > div { gap:3px; }
+.brain-number-grid span,.brain-number-grid b { min-height:28px;font-size:12px; }
+.brain-riddle { margin:4px 0;padding:6px 8px;gap:2px; }
+.brain-riddle p { font-size:11px;line-height:1.18; }
+.brain-hint-button { min-height:27px;font-size:6px; }
+.brain-riddle-hint { margin-top:3px;padding:4px 6px;font-size:6px; }
+.brain-code-strip { margin:0;padding:4px 7px;grid-template-columns:110px 1fr auto;gap:6px; }
+.brain-code-strip > p { font-size:6px; }
+.brain-code-slots span { width:24px;height:26px;font-size:8px; }
+
+/* Challenge 7 — grid + clues + extraction visible simultaneously. */
+.crossword-puzzle { height:100%;min-height:0;display:block; }
+.crossword-side { display:none; }
+.crossword-console { height:100%;min-height:0;padding:6px;display:grid;grid-template-columns:minmax(330px,.78fr) minmax(430px,1fr) 170px;grid-template-rows:38px minmax(0,1fr);gap:5px; }
+.crossword-console-header { grid-column:1/-1;grid-row:1;margin:0; }
+.crossword-console-header h3 { margin:0;font-size:20px; }
+.crossword-console-header p { font-size:7px;line-height:1.2; }
+.crossword-progress-badge { min-width:72px;padding:4px; }
+.crossword-workspace { display:contents; }
+.crossword-grid-panel { grid-column:1;grid-row:2;min-height:0;padding:5px;overflow:hidden; }
+.crossword-grid-topline { min-height:24px; }
+.crossword-grid-topline strong { font-size:7px; }
+.crossword-grid { --crossword-cell:23px;padding:4px;gap:1px; }
+.crossword-cell input { padding:2px 1px 0;font-size:13px; }
+.crossword-grid-help { margin-top:3px;gap:3px;font-size:5px; }
+.crossword-grid-help kbd { font-size:5px; }
+.crossword-clear-button { margin-top:3px;padding:3px 5px;font-size:5px; }
+.crossword-clues-panel { grid-column:2;grid-row:2;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:4px;overflow:hidden; }
+.crossword-clue-column { padding:5px; }
+.crossword-clue-heading { min-height:21px;padding-bottom:3px; }
+.crossword-clue-list { gap:1px;padding-top:2px; }
+.crossword-clue { min-height:0;padding:3px;grid-template-columns:18px 1fr;column-gap:4px; }
+.crossword-clue > b { width:17px;height:17px;font-size:6px; }
+.crossword-clue > span { font-size:6px;line-height:1.16; }
+.crossword-clue > small { margin-top:1px;font-size:5px; }
+.crossword-extraction-strip { grid-column:3;grid-row:2;margin:0;padding:6px;display:flex;flex-direction:column;align-items:stretch;gap:6px;border-left:3px solid var(--ch-pink); }
+.crossword-extraction-copy strong { font-size:10px; }
+.crossword-extraction-copy p { font-size:6px;line-height:1.25; }
+.crossword-extraction-boxes { display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:auto; }
+.crossword-extraction-boxes > span { width:auto;height:38px; }
+.crossword-status { display:none; }
+
+/* Challenge 8 — memory is phase-based, each phase fills the stage. */
+.memory-intro-shell,.memory-observation-shell,.memory-questions-shell { height:100%;min-height:0;padding:7px;overflow:hidden; }
+.memory-intro-shell { grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:7px;align-items:stretch; }
+.memory-intro-copy h3 { font-size:26px; }
+.memory-role-grid { margin:8px 0;gap:4px; }
+.memory-role-grid span { min-height:48px;padding:5px;font-size:7px; }
+.memory-intro-rules { padding:8px; }
+.memory-intro-rules ol { margin:5px 0 7px;font-size:7px;line-height:1.35; }
+.memory-safety-rule { padding:6px; }
+.memory-observation-header,.memory-questions-header { margin-bottom:5px; }
+.memory-observation-header h3,.memory-questions-header h3 { font-size:22px; }
+.memory-observation-header p,.memory-questions-header p { font-size:7px; }
+.memory-countdown-card { min-width:82px;padding:5px; }
+.memory-countdown-card strong { font-size:24px; }
+.memory-desk { height:calc(100% - 57px);min-height:0;padding:6px;gap:4px; }
+.memory-evidence { min-height:0;padding:6px 4px 4px;gap:2px; }
+.memory-evidence > strong { font-size:6px; }
+.memory-evidence > small { font-size:5px; }
+.memory-observation-footer { display:none; }
+.memory-question-grid { display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:4px; }
+.memory-question-card { min-height:0;padding:5px; }
+.memory-question-card header { min-height:25px;grid-template-columns:25px 1fr;gap:4px; }
+.memory-question-card header > span { width:23px;height:20px;font-size:6px; }
+.memory-question-card header > strong { font-size:7px;line-height:1.2; }
+.memory-option-grid { gap:2px; }
+.memory-option { min-height:27px;padding:3px 3px 3px 5px;gap:3px; }
+.memory-option > span { font-size:6px; }
+.memory-option > b { flex-basis:18px;width:18px;height:18px;font-size:6px; }
+.memory-final-strip { margin-top:4px;padding:5px 6px;gap:6px; }
+.memory-final-strip strong { font-size:9px; }
+.memory-final-strip p { font-size:6px; }
+.memory-code-slots > span { width:24px;height:29px;grid-template-rows:10px 1fr; }
+.memory-review-row { margin-top:3px;padding:4px 6px;gap:5px; }
+.memory-review-row strong,.memory-review-row span { font-size:6px; }
+.memory-review-button { min-width:145px;min-height:30px;padding:4px 6px;font-size:6px; }
+.challenge-stage:has(.memory-challenge-content.is-memory-intro) .challenge-answer-panel,
+.challenge-stage:has(.memory-challenge-content.is-memory-observe) .challenge-answer-panel,
+.challenge-stage:has(.memory-challenge-content.is-memory-review) .challenge-answer-panel { display:none; }
+.challenge-stage:has(.memory-challenge-content.is-memory-intro),
+.challenge-stage:has(.memory-challenge-content.is-memory-observe),
+.challenge-stage:has(.memory-challenge-content.is-memory-review) { grid-template-rows:54px minmax(0,1fr); }
+
+/* Final Vault — no rail, full-width route + machine. */
+#screenVault { height:calc(100dvh - 50px);overflow:hidden; }
+.vault-shell { width:min(1500px,100%);height:100%;min-height:0;padding:5px clamp(14px,2vw,28px) 7px;display:grid;grid-template-rows:42px minmax(0,1fr); }
+.vault-layout { min-height:0;display:block;padding-top:5px; }
+.vault-stage { height:100%;min-height:0;display:grid;grid-template-rows:50px minmax(0,1fr);gap:5px; }
+.vault-heading { margin:0;display:grid;grid-template-columns:1fr auto;align-content:center; }
+.vault-heading .protocol { grid-column:1;margin:0;font-size:6px; }
+.vault-heading h2 { grid-column:1;margin:0;font-size:31px;line-height:1; }
+.vault-heading > p:last-child { grid-column:2;grid-row:1/3;align-self:center;max-width:350px;margin:0;font-size:7px;line-height:1.2; }
+.vault-rail { display:none !important; }
+.final-vault-mount { height:100%;min-height:0; }
+.final-vault-experience { height:100%;min-height:0;grid-template-columns:minmax(390px,.9fr) minmax(470px,1.1fr);gap:7px; }
+.final-route-builder { min-height:0;padding:7px;overflow:hidden; }
+.final-route-builder-header { margin-bottom:4px; }
+.final-route-builder-header h3 { margin:0;font-size:18px; }
+.final-route-builder-header p { font-size:6px;line-height:1.2; }
+.final-route-clear { padding:4px 6px;font-size:6px; }
+.final-route-sequence { gap:3px; }
+.final-route-step { min-height:0;height:54px;padding:4px;grid-template-columns:24px 1fr 118px;gap:4px; }
+.final-route-step-number { width:22px;height:22px;font-size:6px; }
+.final-route-clue span { font-size:5px; }
+.final-route-clue strong { font-size:7px; }
+.final-route-slot { min-height:38px;padding:3px;gap:4px; }
+.final-route-slot-icon { flex-basis:25px;width:25px;height:25px; }
+.final-route-slot strong,.final-route-slot small,.final-route-slot-empty { font-size:6px; }
+.final-route-status { min-height:22px;margin-top:4px;padding:4px 6px;font-size:6px; }
+.final-vault-b-note { display:none; }
+.final-vault-machine { min-height:0;height:100%; }
+.vault-orbit { width:390px;height:390px; }
+.vault-orbit-pos-1 { --seal-x:0px;--seal-y:-166px; }
+.vault-orbit-pos-2 { --seal-x:117px;--seal-y:-117px; }
+.vault-orbit-pos-3 { --seal-x:166px;--seal-y:0px; }
+.vault-orbit-pos-4 { --seal-x:117px;--seal-y:117px; }
+.vault-orbit-pos-5 { --seal-x:0px;--seal-y:166px; }
+.vault-orbit-pos-6 { --seal-x:-117px;--seal-y:117px; }
+.vault-orbit-pos-7 { --seal-x:-166px;--seal-y:0px; }
+.vault-orbit-pos-8 { --seal-x:-117px;--seal-y:-117px; }
+.vault-orbit-seal { width:68px;min-height:65px;padding:4px; }
+.vault-orbit-icon { width:23px;height:23px; }
+.vault-orbit-seal strong { font-size:5px; }
+.vault-orbit-seal b { font-size:9px; }
+.vault-door { width:260px;min-height:330px;padding:13px 18px 10px; }
+.vault-door-ring { width:125px;height:125px; }
+.vault-wheel { width:78px;height:78px; }
+.final-vault-code-display { width:200px;margin:7px 0 5px;padding:5px; }
+.final-vault-code-display strong { font-size:18px; }
+.final-vault-keypad { width:166px;gap:3px; }
+.final-keypad-key { min-height:26px;font-size:9px; }
+
+/* Larger desktops keep the same geometry; they simply get slightly more breathing room. */
+@media (min-width:1400px) and (min-height:780px) {
+  .site-shell:has(#screenMission:not([hidden])) .brand-bar,
+  .site-shell:has(#screenChallenge:not([hidden])) .brand-bar,
+  .site-shell:has(#screenVault:not([hidden])) .brand-bar { height:56px;min-height:56px; }
+  #screenMission,#screenChallenge,#screenVault { height:calc(100dvh - 56px); }
+  .challenge-shell,.vault-shell { padding-inline:34px; }
+  .challenge-stage { grid-template-rows:62px minmax(0,1fr) auto; }
+  .challenge-heading { height:62px; }
+  .challenge-heading-copy h2 { font-size:38px; }
+  .logic-puzzle { grid-template-rows:80px minmax(0,1fr); }
+  .crossword-grid { --crossword-cell:27px; }
+  .final-route-step { height:62px; }
+  .vault-orbit { width:430px;height:430px; }
+  .vault-orbit-pos-1 { --seal-y:-185px; }
+  .vault-orbit-pos-2 { --seal-x:131px;--seal-y:-131px; }
+  .vault-orbit-pos-3 { --seal-x:185px; }
+  .vault-orbit-pos-4 { --seal-x:131px;--seal-y:131px; }
+  .vault-orbit-pos-5 { --seal-y:185px; }
+  .vault-orbit-pos-6 { --seal-x:-131px;--seal-y:131px; }
+  .vault-orbit-pos-7 { --seal-x:-185px; }
+  .vault-orbit-pos-8 { --seal-x:-131px;--seal-y:-131px; }
+}
+
+/* Fallback: smaller than the target laptop profile can scroll internally. */
+@media (max-width:999px), (max-height:599px) {
+  body:has(#screenChallenge:not([hidden])),body:has(#screenVault:not([hidden])),body:has(#screenMission:not([hidden])) { overflow:auto; }
+  #screenMission,#screenChallenge,#screenVault { height:auto;min-height:calc(100dvh - 50px);overflow:visible; }
+  .dashboard-shell,.challenge-shell,.vault-shell { height:auto;min-height:calc(100dvh - 50px); }
+  .challenge-content-card { overflow:visible; }
 }

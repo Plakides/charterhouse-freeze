@@ -795,6 +795,14 @@
       clampExpiredState(state);
       saveState(teamId, state);
 
+      container.classList.remove(
+        "is-memory-intro",
+        "is-memory-observe",
+        "is-memory-questions",
+        "is-memory-review"
+      );
+      container.classList.add(`is-memory-${state.phase}`);
+
       if (state.phase === "intro") {
         container.innerHTML = introMarkup();
         container.querySelector("[data-memory-begin]")
