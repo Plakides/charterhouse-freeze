@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  // CONTENT FREEZE: Task 10A2b
+  // CONTENT FREEZE: Task 10A3
   // Solution: Amina · Seal: Snow Leopard · Code number: 4
   // Major visual/layout redesign is deliberately deferred to Phase 10.
 
@@ -86,9 +86,8 @@
           </div>
 
           <p class="logic-brief">
-            Four students were seen near the emergency locker just before the heating system froze.
-            Compare every evidence card with all four security notes. Eliminate anyone who fails even one clue,
-            then select the only student left.
+            Compare each student with all four clues. Eliminate anyone who fails a clue.
+            Then select the only student left.
           </p>
 
           <div class="logic-suspects">

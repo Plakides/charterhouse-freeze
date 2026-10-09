@@ -83,8 +83,7 @@
               <span class="brain-freeze-kicker">COGNITIVE DEFROST PROTOCOL · TEST 06</span>
               <h3>Brain Freeze</h3>
               <p>
-                Four frozen logic panels are blocking the system. Solve each
-                panel, then enter the four answers in order: A → B → C → D.
+                Solve A, B, C and D. Then enter the four digits in that order.
               </p>
             </div>
 

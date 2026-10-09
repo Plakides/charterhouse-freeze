@@ -300,8 +300,8 @@
             <span>MISSION CONTROL · ROUTE SHEET</span>
             <h3>Follow every instruction</h3>
             <p>
-              Click each landmark as you reach it. Some instructions contain
-              more than one road movement. You may visit the same place twice.
+              Read one step at a time. Click each landmark when you arrive.
+              Some steps contain two moves. You may visit a place twice.
             </p>
           </div>
 

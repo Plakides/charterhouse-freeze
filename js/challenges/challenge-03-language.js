@@ -156,9 +156,8 @@
             <span>TRANSLATION RELAY · SIGNAL 03</span>
             <h3>Three transmissions. One hidden word.</h3>
             <p>
-              You do not need to speak Kazakh or Russian. Use the emergency
-              glossaries, solve the card order, then extract one letter from
-              each position.
+              Use the glossaries. Put the six cards in order. Then take one
+              letter from each position.
             </p>
           </div>
 
@@ -247,8 +246,7 @@
               <h3>Select a card, then choose a position</h3>
             </div>
             <p>
-              You can also drag cards. Click a filled position to pick that card
-              up again.
+              Click a card, then a position. Click a filled position to move it.
             </p>
           </div>
 
@@ -292,8 +290,8 @@
             <div>
               <span>FINAL DECODER INSTRUCTION</span>
               <strong>
-                Once all six cards are in the correct order, extract the letters
-                yourself. The website will NOT reveal them for you.
+                When the six cards are in order, take the shown letter from each card.
+                The website will not reveal the word.
               </strong>
             </div>
 

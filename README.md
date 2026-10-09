@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 10A2b — Universal 30-second wrong-answer penalty
+# Task 10A3 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 10A2b — Screenshot-led layout correction
+# Task 10A3 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 10A2b — Manual extraction correction
+# Task 10A3 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 10A2b — Card readability pass
+# Task 10A3 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 10A2b — Caesar shift changed to 8
+# Task 10A3 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1163,7 +1163,7 @@ Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
 
 
-# Task 10A2b — Extraction labels and BANCO clue refinement
+# Task 10A3 — Extraction labels and BANCO clue refinement
 
 Changes from 9G-B1:
 - extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
@@ -1518,7 +1518,7 @@ Frozen specification:
 It marks the Final Vault and all of Phase 9 as frozen.
 
 
-# Phase 10A2b — MacBook Neo responsive QA
+# Phase 10A3 — MacBook Neo responsive QA
 
 Target test viewport:
 - 1204 × 680 CSS px
@@ -1544,7 +1544,7 @@ All Phase 9 puzzle answers, cooldowns, seals, persistence, offline logic,
 Final Vault code and FINISH flow remain unchanged.
 
 
-# Phase 10A2b — Single-screen game shell
+# Phase 10A3 — Single-screen game shell
 
 10A1 is superseded. This is a structural responsive redesign rather than a compression pass.
 
@@ -1573,7 +1573,7 @@ Final Vault: route builder and circular vault fill the entire stage.
 No puzzle answers, validation rules, cooldowns, seals, persistence, offline logic, or FINISH flow were changed.
 
 
-# 10A2b — QA hotfix
+# 10A3 — QA hotfix
 
 Fixes three issues found immediately after deploying 10A2:
 
@@ -1595,3 +1595,29 @@ Fixes three issues found immediately after deploying 10A2:
 
 No puzzle logic, answers, cooldowns, seals, offline behavior or final-vault
 finish logic were changed.
+
+
+# Phase 10A3 — EAL readability / layout correction
+
+This pass responds to screenshot QA after the structural 10A2 rebuild.
+
+Principles:
+- core instructions should not use 5–7 px text
+- short plain-English instructions are preferred for high-EAL groups
+- decorative labels can remain compact
+- no puzzle logic or answers are changed
+- use width before shrinking core task text
+
+Specific changes:
+- Challenge 1: larger clues, larger evidence metadata, readable two-line brief
+- Challenge 2: hard map/route-sheet separation, wider route sheet, larger directions
+- Challenge 3: explicit workbench rows to stop overlap, larger transmissions/glossaries/cards/slots
+- Challenge 4: larger decoding/help/checklist text
+- Challenge 5: larger rules, subject names and final-question text
+- Challenge 6: A/B/C/D are now one horizontal row, not a 2×2 grid
+- Challenge 7: substantially larger crossword clues and extraction guidance
+- Challenge 8: larger memory questions, options and observation labels
+- Final Vault: larger route clues and seal labels
+- desktop and 1204×680 use the same readable information hierarchy
+
+No answers, cooldowns, seals, persistence, offline behavior or FINISH logic changed.

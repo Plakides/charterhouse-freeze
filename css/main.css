@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2b · universal wrong-answer penalty */
+/* Task 10A3 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10A3 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2b · screenshot-led map-fit corrections */
+/* Task 10A3 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — SECRET MESSAGE UI                                             */
+/* TASK 10A3 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2b · manual extraction — the site must not solve TULPAR for students */
+/* Task 10A3 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2b · readability refinements from live 1536px screenshot */
+/* Task 10A3 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10A3 — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10A3 — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — BRAIN FREEZE UI                                              */
+/* TASK 10A3 — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — FROZEN CROSSWORD UI                                          */
+/* TASK 10A3 — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10A3 — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10A3 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8793,7 +8793,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2b — LIVE FINAL VAULT SUBMISSION                                  */
+/* TASK 10A3 — LIVE FINAL VAULT SUBMISSION                                  */
 /* ========================================================================== */
 
 .final-vault-experience.is-finalizing [data-vault-preview-reset] {
@@ -8840,7 +8840,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A2b — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* PHASE 10A3 — MACBOOK NEO 1204px RESPONSIVE QA                             */
 /* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
 /* Reclaims chrome/heading height while preserving puzzle readability.         */
 /* ========================================================================== */
@@ -9254,7 +9254,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A2b — SINGLE-SCREEN GAME SHELL                                     */
+/* PHASE 10A3 — SINGLE-SCREEN GAME SHELL                                     */
 /* Structural pass: use width, not scroll. Target 1204×680 and larger.        */
 /* ========================================================================== */
 
@@ -9794,7 +9794,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* 10A2b — QA FIXES                                                          */
+/* 10A3 — QA FIXES                                                          */
 /* ========================================================================== */
 
 /* The 687×223 Charterhouse lockup was 188px wide in a 50px bar, which makes
@@ -9826,4 +9826,670 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 .challenge-mini-progress {
   white-space: nowrap;
+}
+
+
+/* ========================================================================== */
+/* PHASE 10A3 — EAL READABILITY / NO-OVERLAP PASS                            */
+/* Core student-facing text should be readable at 1204×680 and on desktop.   */
+/* ========================================================================== */
+
+/* Shared challenge chrome: keep labels compact, but make instructions readable. */
+.challenge-heading-copy > p:last-child {
+  font-size: 10px;
+  line-height: 1.28;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+.challenge-answer-copy label { font-size: 10px; }
+.challenge-answer-copy p { font-size: 8px; line-height: 1.25; }
+.challenge-message { font-size: 9px; line-height: 1.25; }
+.challenge-top-tool { font-size: 9px; }
+.challenge-mini-status strong { font-size: 9px; }
+.challenge-mini-status span { font-size: 7px; }
+.challenge-mini-progress span,
+.challenge-timer-card span { font-size: 7px; }
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 1 — clues and evidence are the learning content, not micro-copy. */
+/* -------------------------------------------------------------------------- */
+.logic-puzzle {
+  grid-template-rows: 84px minmax(0,1fr);
+  gap: 6px;
+}
+.logic-clue-board {
+  padding: 7px 9px;
+  grid-template-columns: 128px minmax(0,1fr);
+  gap: 8px;
+}
+.logic-clue-heading strong { font-size: 17px; line-height: 1.08; }
+.logic-clue-heading span { font-size: 7px; }
+.logic-clues { gap: 5px; }
+.logic-clues li {
+  min-height: 62px;
+  padding: 6px 7px;
+  grid-template-columns: 26px minmax(0,1fr);
+  gap: 6px;
+}
+.logic-clue-icon { width: 24px; height: 24px; font-size: 8px; }
+.logic-clues p {
+  font-size: 11px;
+  line-height: 1.28;
+}
+.logic-scene { padding: 7px; }
+.logic-scene-heading { min-height: 32px; }
+.logic-scene-heading h3 { font-size: 23px; }
+.logic-scene-heading > div > span { font-size: 7px; }
+.logic-brief {
+  margin: 0 0 6px;
+  font-size: 10px;
+  line-height: 1.3;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+.logic-suspects {
+  height: calc(100% - 62px);
+  gap: 6px;
+}
+.logic-suspect-meta {
+  min-height: 40px;
+  padding: 5px 6px;
+  gap: 4px;
+}
+.logic-suspect-meta small { font-size: 7px; line-height: 1.1; }
+.logic-suspect-meta strong {
+  font-size: 10px;
+  line-height: 1.15;
+}
+.logic-suspect-actions { padding: 4px 5px; gap: 4px; }
+.logic-view-card,
+.logic-eliminate {
+  min-height: 27px;
+  padding: 4px 5px;
+  font-size: 8px;
+}
+.logic-nameplate { font-size: 14px; }
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 2 — hard separation between map and route sheet, larger directions. */
+/* -------------------------------------------------------------------------- */
+.almaty-puzzle {
+  grid-template-columns: minmax(0,1.72fr) minmax(350px,.88fr);
+  gap: 6px;
+  overflow: hidden;
+}
+.almaty-map-panel,
+.almaty-dispatch {
+  min-width: 0;
+  position: relative;
+}
+.almaty-map-panel {
+  z-index: 1;
+  overflow: hidden;
+}
+.almaty-dispatch {
+  z-index: 2;
+  overflow: hidden;
+  background: rgba(247,244,238,.98);
+  border-left: 1px solid rgba(9,33,64,.18);
+}
+.almaty-map-heading { min-height: 36px; }
+.almaty-map-heading h3 { font-size: 23px; }
+.almaty-map-heading > div > span { font-size: 7px; }
+.almaty-facing-note strong { font-size: 8px; }
+.almaty-map {
+  min-width: 0;
+  overflow: hidden;
+}
+.almaty-landmark span {
+  font-size: 8px;
+  line-height: 1.12;
+}
+.almaty-route-title span,
+.almaty-route-title strong { font-size: 8px; }
+.almaty-route-chip { font-size: 8px; }
+.almaty-dispatch-heading h3 {
+  margin: 1px 0 2px;
+  font-size: 20px;
+  line-height: 1.06;
+}
+.almaty-dispatch-heading > span { font-size: 7px; }
+.almaty-dispatch-heading p {
+  margin: 3px 0 5px;
+  font-size: 9px;
+  line-height: 1.28;
+}
+.almaty-directions { gap: 0; }
+.almaty-directions li {
+  padding: 4px 0;
+  grid-template-columns: 24px minmax(0,1fr);
+  gap: 6px;
+}
+.almaty-directions li > span {
+  width: 22px;
+  height: 22px;
+  font-size: 7px;
+}
+.almaty-directions p {
+  font-size: 9px;
+  line-height: 1.22;
+}
+.almaty-route-actions .button {
+  min-height: 31px;
+  font-size: 8px;
+}
+.almaty-route-message {
+  min-height: 20px;
+  font-size: 8px;
+  line-height: 1.22;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 3 — explicit rows prevent the decoder rail from colliding.       */
+/* Core text is larger; duplicate decorative detail is removed.               */
+/* -------------------------------------------------------------------------- */
+.secret-message-puzzle {
+  grid-template-rows: 42px 118px minmax(0,1fr);
+  gap: 5px;
+}
+.secret-briefing {
+  padding: 5px 8px;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 8px;
+}
+.secret-briefing-heading > span { font-size: 7px; }
+.secret-briefing-heading h3 { font-size: 19px; }
+.secret-briefing-heading p { display: none; }
+.secret-workflow {
+  grid-template-columns: repeat(4,105px);
+  gap: 4px;
+}
+.secret-workflow span {
+  min-height: 29px;
+  padding: 4px 5px;
+  font-size: 8px;
+  line-height: 1.15;
+}
+.secret-workflow b {
+  width: 18px;
+  height: 18px;
+  font-size: 7px;
+}
+.secret-transmissions {
+  min-height: 0;
+  gap: 5px;
+}
+.secret-note {
+  min-height: 0;
+  padding: 7px 9px;
+  overflow: hidden;
+}
+.secret-note header span,
+.secret-note header strong { font-size: 7px; }
+.secret-note blockquote {
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 1.22;
+}
+.secret-glossary { gap: 3px; }
+.secret-glossary span {
+  padding: 2px 4px;
+  font-size: 7.5px;
+  line-height: 1.15;
+}
+.secret-operator-note {
+  margin-top: 5px;
+  padding: 5px 6px;
+  font-size: 8px;
+  line-height: 1.2;
+}
+.secret-stamp { opacity: .13; }
+
+.secret-card-workbench {
+  min-height: 0;
+  padding: 6px 8px;
+  display: grid;
+  grid-template-rows: 30px 64px 18px 100px 46px 27px;
+  gap: 3px;
+  overflow: hidden;
+}
+.secret-section-heading h3 { font-size: 17px; }
+.secret-section-heading > div > span { font-size: 7px; }
+.secret-section-heading > p {
+  font-size: 7px;
+  line-height: 1.15;
+}
+.secret-card-bank {
+  height: 64px;
+  padding: 3px;
+  gap: 4px;
+}
+.secret-card {
+  height: 57px;
+  padding: 4px;
+  grid-template-columns: 22px minmax(0,1fr);
+  gap: 4px;
+}
+.secret-card-seal {
+  width: 22px;
+  height: 22px;
+  font-size: 8px;
+}
+.secret-card-copy > strong {
+  font-size: 8.5px;
+  line-height: 1.08;
+}
+.secret-card-copy > span { display: none; }
+.secret-card code { margin-top: 3px; gap: 2px; }
+.secret-card code b {
+  min-width: 16px;
+  height: 18px;
+  font-size: 9px;
+}
+.secret-slots-heading {
+  margin: 0;
+  font-size: 7px;
+}
+.secret-slots-heading strong { font-size: 8px; }
+.secret-slots {
+  min-height: 0;
+  height: 100px;
+  gap: 4px;
+}
+.secret-slot {
+  height: 100px;
+  min-height: 0;
+  padding: 4px;
+  grid-template-rows: 19px minmax(0,1fr) 25px;
+  gap: 2px;
+}
+.secret-slot-position {
+  font-size: 7px;
+  gap: 3px;
+}
+.secret-slot-position b {
+  width: 18px;
+  height: 18px;
+  font-size: 7px;
+}
+.secret-slot-card > span {
+  font-size: 8px;
+  line-height: 1.15;
+}
+.secret-card.is-compact {
+  height: 100%;
+  padding: 3px;
+  grid-template-columns: 20px minmax(0,1fr);
+  gap: 3px;
+}
+.secret-card.is-compact .secret-card-copy > strong {
+  font-size: 8px;
+}
+.secret-card.is-compact code b {
+  min-width: 14px;
+  height: 17px;
+  font-size: 8px;
+}
+.secret-take {
+  min-height: 25px;
+  padding: 2px 4px;
+  font-size: 7px;
+  gap: 3px;
+}
+.secret-take b {
+  min-width: 18px;
+  height: 18px;
+  font-size: 8px;
+}
+.secret-extraction-console.is-manual {
+  margin: 0;
+  padding: 5px 6px;
+  grid-template-columns: 180px minmax(0,1fr);
+  gap: 6px;
+  overflow: hidden;
+}
+.secret-extraction-console > div:first-child > span { font-size: 6px; }
+.secret-extraction-console > div:first-child strong {
+  font-size: 7.5px;
+  line-height: 1.18;
+}
+.secret-manual-pattern {
+  gap: 3px;
+}
+.secret-manual-pattern span {
+  min-height: 32px;
+  padding: 3px;
+  grid-template-columns: 17px 1fr;
+  gap: 3px;
+  font-size: 7px;
+  line-height: 1.1;
+}
+.secret-manual-pattern b {
+  width: 17px;
+  height: 17px;
+  font-size: 7px;
+}
+.secret-manual-instruction { display: none; }
+.secret-workbench-actions {
+  margin: 0;
+  justify-content: end;
+  align-items: center;
+}
+.secret-workbench-actions .button {
+  min-height: 25px;
+  padding: 3px 7px;
+  font-size: 7px;
+}
+.secret-message-status { display: none; }
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 4 — increase actual decoding/help text.                          */
+/* -------------------------------------------------------------------------- */
+.telegram-desk-top p { font-size: 9px; line-height: 1.25; }
+.telegram-sheet-header span,
+.telegram-sheet-footer span,
+.telegram-cipher-block > span { font-size: 7px; }
+.telegram-sheet-header strong { font-size: 8px; }
+.telegram-task-strip strong { font-size: 10px; }
+.telegram-task-strip p { font-size: 9px; line-height: 1.22; }
+.telegram-help-card > p { font-size: 9px; line-height: 1.25; }
+.telegram-hint-button { font-size: 8px; }
+.telegram-hint > p { font-size: 9px; line-height: 1.22; }
+.telegram-open-tool { font-size: 8px; }
+.telegram-checklist li span { font-size: 9px; line-height: 1.2; }
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 5 — rules and subject names must be comfortably readable.       */
+/* -------------------------------------------------------------------------- */
+.timetable-console-header p { font-size: 9px; line-height: 1.22; }
+.timetable-section-heading strong,
+.timetable-grid-heading strong { font-size: 8px; }
+.timetable-subject-copy strong { font-size: 9px; }
+.timetable-subject-copy span { font-size: 7px; }
+.timetable-slot-card > span { font-size: 8px; }
+.timetable-subject-card.is-compact .timetable-subject-copy strong { font-size: 8px; }
+.timetable-actions .button { font-size: 8px; }
+.timetable-status-message { font-size: 8px; }
+.timetable-clues li span {
+  font-size: 10px;
+  line-height: 1.24;
+}
+.timetable-final-question p {
+  font-size: 9px;
+  line-height: 1.24;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 6 — four panels in ONE ROW, with readable panel text.           */
+/* -------------------------------------------------------------------------- */
+.brain-freeze-console {
+  padding: 6px;
+  grid-template-rows: 42px minmax(0,1fr) 42px;
+  gap: 5px;
+}
+.brain-freeze-header h3 { font-size: 21px; }
+.brain-freeze-header p {
+  font-size: 9px;
+  line-height: 1.25;
+}
+.brain-freeze-grid {
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  grid-template-rows: 1fr;
+  gap: 5px;
+}
+.brain-panel {
+  min-width: 0;
+  min-height: 0;
+  padding: 7px;
+  overflow: hidden;
+}
+.brain-panel-heading {
+  grid-template-columns: 31px minmax(0,1fr);
+  gap: 5px;
+  padding-bottom: 5px;
+}
+.brain-panel-heading small { font-size: 6px; }
+.brain-panel-heading h4 {
+  font-size: 13px;
+  line-height: 1.05;
+}
+.brain-panel-instruction {
+  padding-top: 4px;
+  font-size: 8px;
+  line-height: 1.2;
+}
+.brain-sequence {
+  gap: 2px;
+  justify-content: center;
+}
+.brain-sequence b {
+  min-width: 25px;
+  height: 30px;
+  font-size: 13px;
+}
+.brain-sequence i { font-size: 11px; }
+.brain-equations {
+  padding: 4px 0;
+  gap: 2px;
+}
+.brain-equation-row {
+  min-height: 27px;
+  gap: 2px;
+  justify-content: center;
+}
+.brain-symbol {
+  width: 23px;
+  height: 23px;
+}
+.brain-symbol svg {
+  width: 17px;
+  height: 17px;
+}
+.brain-equation-row strong {
+  min-width: 31px;
+  font-size: 10px;
+}
+.brain-number-grid span,
+.brain-number-grid b {
+  min-height: 31px;
+  font-size: 12px;
+}
+.brain-riddle {
+  margin: 5px 0;
+  padding: 7px 8px;
+}
+.brain-riddle p {
+  font-size: 10px;
+  line-height: 1.2;
+}
+.brain-hint-button {
+  min-height: 28px;
+  font-size: 8px;
+}
+.brain-riddle-hint {
+  margin-top: 4px;
+  padding: 5px 6px;
+  font-size: 8px;
+  line-height: 1.2;
+}
+.brain-code-strip {
+  padding: 5px 7px;
+  grid-template-columns: 115px minmax(0,1fr) auto;
+}
+.brain-code-strip > p {
+  font-size: 8px;
+  line-height: 1.2;
+}
+.brain-code-slots span {
+  width: 25px;
+  height: 28px;
+  font-size: 9px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 7 — clues are essential reading, so raise them sharply.         */
+/* -------------------------------------------------------------------------- */
+.crossword-console-header p {
+  font-size: 9px;
+  line-height: 1.22;
+}
+.crossword-grid-topline strong { font-size: 8px; }
+.crossword-grid-help,
+.crossword-grid-help kbd { font-size: 7px; }
+.crossword-clear-button { font-size: 7px; }
+.crossword-clue {
+  padding: 4px 3px;
+  grid-template-columns: 19px minmax(0,1fr);
+  column-gap: 5px;
+}
+.crossword-clue > b {
+  width: 18px;
+  height: 18px;
+  font-size: 7px;
+}
+.crossword-clue > span {
+  font-size: 9px;
+  line-height: 1.18;
+}
+.crossword-clue > small {
+  font-size: 7px;
+  line-height: 1.1;
+}
+.crossword-extraction-copy strong { font-size: 11px; }
+.crossword-extraction-copy p {
+  font-size: 8px;
+  line-height: 1.25;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 8 — memory questions/options are now EAL-readable.              */
+/* -------------------------------------------------------------------------- */
+.memory-intro-copy > p,
+.memory-observation-header p,
+.memory-questions-header p {
+  font-size: 9px;
+  line-height: 1.28;
+}
+.memory-role-grid span { font-size: 9px; }
+.memory-intro-rules ol {
+  font-size: 9px;
+  line-height: 1.35;
+}
+.memory-safety-rule span {
+  font-size: 8px;
+  line-height: 1.25;
+}
+.memory-evidence > strong { font-size: 8px; }
+.memory-evidence > small { font-size: 7px; }
+.memory-question-card header > strong {
+  font-size: 9px;
+  line-height: 1.2;
+}
+.memory-option > span {
+  font-size: 8.5px;
+  line-height: 1.15;
+}
+.memory-final-strip p,
+.memory-review-row strong,
+.memory-review-row span {
+  font-size: 8px;
+  line-height: 1.22;
+}
+.memory-review-button { font-size: 8px; }
+
+/* -------------------------------------------------------------------------- */
+/* Final Vault — increase clue / route text without changing mechanics.       */
+/* -------------------------------------------------------------------------- */
+.final-route-builder-header p {
+  font-size: 8px;
+  line-height: 1.25;
+}
+.final-route-clue span { font-size: 6px; }
+.final-route-clue strong {
+  font-size: 9px;
+  line-height: 1.2;
+}
+.final-route-slot strong,
+.final-route-slot small,
+.final-route-slot-empty { font-size: 8px; }
+.final-route-status {
+  font-size: 8px;
+  line-height: 1.22;
+}
+.vault-orbit-seal strong { font-size: 7px; }
+.vault-orbit-seal b { font-size: 10px; }
+
+/* 1204×680: spend space on readable task text, not oversized headings. */
+@media (min-width:1000px) and (max-width:1280px) and (max-height:760px) {
+  .challenge-heading {
+    height: 50px;
+    grid-template-columns: 42px minmax(0,1fr) 58px;
+  }
+  .challenge-stage {
+    grid-template-rows: 50px minmax(0,1fr) auto;
+  }
+  .challenge-heading-copy h2 {
+    font-size: 28px;
+  }
+  .challenge-number-block {
+    width: 42px;
+    height: 42px;
+  }
+
+  .logic-puzzle { grid-template-rows: 86px minmax(0,1fr); }
+  .logic-clues p { font-size: 10px; }
+  .logic-suspect-meta strong { font-size: 9px; }
+
+  .almaty-puzzle {
+    grid-template-columns: minmax(0,1.62fr) minmax(355px,.98fr);
+  }
+  .almaty-directions p { font-size: 8.5px; }
+
+  .secret-message-puzzle {
+    grid-template-rows: 40px 116px minmax(0,1fr);
+  }
+  .secret-workflow {
+    grid-template-columns: repeat(4,96px);
+  }
+  .secret-workflow span { font-size: 7.5px; }
+  .secret-note blockquote { font-size: 13px; }
+  .secret-glossary span { font-size: 7px; }
+  .secret-card-workbench {
+    grid-template-rows: 29px 62px 18px 96px 44px 26px;
+  }
+  .secret-card-bank { height: 62px; }
+  .secret-card { height: 55px; }
+  .secret-slots { height: 96px; }
+  .secret-slot { height: 96px; }
+
+  .brain-panel-heading h4 { font-size: 12px; }
+  .brain-panel-instruction { font-size: 7.5px; }
+  .brain-riddle p { font-size: 9.5px; }
+}
+
+/* Larger desktop: do not reintroduce tiny text or extra scrolling. */
+@media (min-width:1400px) and (min-height:780px) {
+  .logic-clues p { font-size: 11px; }
+  .logic-brief { font-size: 11px; }
+  .logic-suspect-meta strong { font-size: 10px; }
+
+  .almaty-directions p { font-size: 10px; }
+  .almaty-dispatch-heading p { font-size: 10px; }
+
+  .secret-note blockquote { font-size: 15px; }
+  .secret-glossary span { font-size: 8px; }
+  .secret-card-copy > strong { font-size: 9px; }
+  .secret-slot-position,
+  .secret-take,
+  .secret-manual-pattern span { font-size: 8px; }
+
+  .brain-panel-heading h4 { font-size: 14px; }
+  .brain-panel-instruction { font-size: 9px; }
+
+  .crossword-clue > span { font-size: 9.5px; }
+
+  .memory-question-card header > strong { font-size: 10px; }
+  .memory-option > span { font-size: 9px; }
 }
