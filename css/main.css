@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2 · universal wrong-answer penalty */
+/* Task 10A2b · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10A2b — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2 · screenshot-led map-fit corrections */
+/* Task 10A2b · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — SECRET MESSAGE UI                                             */
+/* TASK 10A2b — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2 · manual extraction — the site must not solve TULPAR for students */
+/* Task 10A2b · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A2 · readability refinements from live 1536px screenshot */
+/* Task 10A2b · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10A2b — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10A2b — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — BRAIN FREEZE UI                                              */
+/* TASK 10A2b — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — FROZEN CROSSWORD UI                                          */
+/* TASK 10A2b — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10A2b — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10A2b — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8793,7 +8793,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A2 — LIVE FINAL VAULT SUBMISSION                                  */
+/* TASK 10A2b — LIVE FINAL VAULT SUBMISSION                                  */
 /* ========================================================================== */
 
 .final-vault-experience.is-finalizing [data-vault-preview-reset] {
@@ -8840,7 +8840,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A2 — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* PHASE 10A2b — MACBOOK NEO 1204px RESPONSIVE QA                             */
 /* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
 /* Reclaims chrome/heading height while preserving puzzle readability.         */
 /* ========================================================================== */
@@ -9254,7 +9254,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A2 — SINGLE-SCREEN GAME SHELL                                     */
+/* PHASE 10A2b — SINGLE-SCREEN GAME SHELL                                     */
 /* Structural pass: use width, not scroll. Target 1204×680 and larger.        */
 /* ========================================================================== */
 
@@ -9790,4 +9790,40 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
   #screenMission,#screenChallenge,#screenVault { height:auto;min-height:calc(100dvh - 50px);overflow:visible; }
   .dashboard-shell,.challenge-shell,.vault-shell { height:auto;min-height:calc(100dvh - 50px); }
   .challenge-content-card { overflow:visible; }
+}
+
+
+/* ========================================================================== */
+/* 10A2b — QA FIXES                                                          */
+/* ========================================================================== */
+
+/* The 687×223 Charterhouse lockup was 188px wide in a 50px bar, which makes
+   it ~61px high and clips the crest. Keep the full mark inside the masthead. */
+.site-shell:has(#screenMission:not([hidden])) .brand-home img,
+.site-shell:has(#screenChallenge:not([hidden])) .brand-home img,
+.site-shell:has(#screenVault:not([hidden])) .brand-home img {
+  width: 150px;
+  height: auto;
+  max-height: 49px;
+  object-fit: contain;
+}
+
+/* Never allow 0/8 or similar mission counters to split over two lines. */
+#sidebarProgress,
+#challengeProgress,
+.mission-toolbar-status-copy strong,
+.challenge-mini-progress strong {
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  line-height: 1;
+}
+
+.mission-toolbar-status-copy strong {
+  flex: 0 0 auto;
+  min-width: 25px;
+}
+
+.challenge-mini-progress {
+  white-space: nowrap;
 }

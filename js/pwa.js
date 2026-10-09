@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  const BUILD = "10A2";
+  const BUILD = "10A2b";
   const RELOAD_KEY = `charterhouseFreeze.swReload.${BUILD}`;
   const hadControllerAtLoad = Boolean(navigator.serviceWorker?.controller);
   const card = document.getElementById("offlineReadiness");

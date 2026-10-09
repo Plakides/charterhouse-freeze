@@ -1,6 +1,6 @@
-const BUILD = "10A2";
+const BUILD = "10A2b";
 const CACHE_PREFIX = "charterhouse-freeze-static-";
-const CACHE_NAME = "charterhouse-freeze-static-10A2";
+const CACHE_NAME = "charterhouse-freeze-static-10A2b";
 const PRECACHE_URLS = [
   "./",
   "./assets/branding/baden-powell.png",

@@ -99,7 +99,9 @@
   const challengeStatus = document.getElementById("challengeStatus");
   const challengeStatusText = document.getElementById("challengeStatusText");
   const challengeFieldKitButton = document.getElementById("challengeFieldKitButton");
-  const challengeStatusCard = challengeStatus.closest(".challenge-status-card");
+  const challengeStatusCard = challengeStatus?.closest(
+    ".challenge-status-card, .challenge-mini-status"
+  ) || null;
 
   const challengeRegistry = window.FREEZE_CHALLENGES;
 
@@ -841,7 +843,7 @@
     missionTeamName.textContent = team.teamName;
     missionHouse.textContent = `${houseLabel} House`;
     missionProgress.textContent = `${completed}/8`;
-    sidebarProgress.textContent = `${completed} / 8`;
+    sidebarProgress.textContent = `${completed}/8`;
     statusMeterFill.style.width = `${percent}%`;
 
     if (houseAssets[house]) {
@@ -1022,13 +1024,13 @@
 
     challengeTeamName.textContent = team.teamName || "Team";
     challengeHouse.textContent = `${houseLabel} House`;
-    challengeProgress.textContent = `${completed} / 8`;
+    challengeProgress.textContent = `${completed}/8`;
 
     challengeStatus.textContent = solved ? "COMPLETED" : "UNSOLVED";
     challengeStatusText.textContent = solved
       ? "This security seal has already been recovered."
       : "Recover its seal to clear this section of ice.";
-    challengeStatusCard.classList.toggle("is-complete", solved);
+    challengeStatusCard?.classList.toggle("is-complete", solved);
 
     if (solved) {
       challengeAnswerInput.disabled = true;

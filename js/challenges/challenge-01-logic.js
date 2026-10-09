@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  // CONTENT FREEZE: Task 10A2
+  // CONTENT FREEZE: Task 10A2b
   // Solution: Amina · Seal: Snow Leopard · Code number: 4
   // Major visual/layout redesign is deliberately deferred to Phase 10.
 
