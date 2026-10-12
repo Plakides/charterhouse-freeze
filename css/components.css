@@ -230,3 +230,150 @@
 @keyframes registration-spin {
   to { transform: rotate(360deg); }
 }
+
+
+/* ========================================================================== */
+/* PHASE 10A4 — REGISTRATION: ALL FOUR STUDENTS VISIBLE                      */
+/* ========================================================================== */
+#screenRegister.registration-screen {
+  padding-top: 20px;
+  padding-bottom: 24px;
+}
+#screenRegister.registration-screen::before {
+  margin-bottom: 14px;
+}
+#screenRegister .section-heading {
+  max-width: 1000px;
+  margin: 0 auto 14px;
+}
+#screenRegister .section-heading h2 {
+  margin-bottom: 6px;
+  font-size: clamp(34px,4vw,52px);
+}
+#screenRegister .section-heading > p:last-of-type {
+  max-width: 900px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+#screenRegister .form-section {
+  max-width: 1120px;
+  margin-bottom: 14px;
+}
+#screenRegister .form-section legend {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+#screenRegister .step-number {
+  width: 27px;
+  height: 27px;
+  font-size: 9px;
+}
+#screenRegister .house-grid {
+  gap: 8px;
+}
+#screenRegister .house-card-inner {
+  min-height: 112px;
+  padding: 7px 8px;
+  gap: 5px;
+}
+#screenRegister .house-card img {
+  width: 68px;
+  height: 70px;
+}
+#screenRegister .house-name {
+  font-size: 15px;
+}
+#screenRegister .member-grid {
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 8px;
+}
+#screenRegister .optional-member.is-hidden {
+  display: grid !important;
+}
+#screenRegister .member-field {
+  gap: 4px;
+}
+#screenRegister .member-field > span {
+  font-size: 11px;
+}
+#screenRegister .member-field b,
+#screenRegister .member-field i {
+  font-size: 8px;
+}
+#screenRegister .member-field input {
+  min-height: 42px;
+  padding: 9px 10px;
+  font-size: 14px;
+}
+#screenRegister .member-actions {
+  margin-top: 6px;
+}
+#screenRegister .member-count {
+  font-size: 10px;
+}
+#screenRegister .registration-actions {
+  max-width: 1120px;
+  margin-top: 6px;
+  padding-top: 10px;
+}
+#screenRegister .registration-actions .button {
+  min-height: 44px;
+  font-size: 12px;
+}
+
+@media (min-width:1000px) and (max-width:1280px) and (max-height:760px) {
+  #screenRegister.registration-screen {
+    padding: 10px 20px 14px;
+  }
+  #screenRegister.registration-screen::before {
+    display: none;
+  }
+  #screenRegister .section-heading {
+    margin-bottom: 9px;
+  }
+  #screenRegister .section-heading .protocol {
+    margin-bottom: 3px;
+    font-size: 8px;
+  }
+  #screenRegister .section-heading h2 {
+    font-size: 31px;
+  }
+  #screenRegister .section-heading > p:last-of-type {
+    font-size: 12px;
+  }
+  #screenRegister .registration-mission-chain {
+    margin-top: 6px;
+    font-size: 10px;
+  }
+  #screenRegister .registration-mission-chain span {
+    padding: 4px 7px;
+  }
+  #screenRegister .form-section {
+    margin-bottom: 9px;
+  }
+  #screenRegister .house-card-inner {
+    min-height: 91px;
+    grid-template-columns: 62px 1fr;
+    justify-items: start;
+  }
+  #screenRegister .house-card img {
+    width: 54px;
+    height: 60px;
+  }
+  #screenRegister .house-name {
+    font-size: 14px;
+    text-align: left;
+  }
+  #screenRegister .member-field input {
+    min-height: 38px;
+  }
+  #screenRegister .registration-actions {
+    padding-top: 7px;
+  }
+}
+
+@media (max-width:900px) {
+  #screenRegister .member-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+}

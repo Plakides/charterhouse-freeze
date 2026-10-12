@@ -602,7 +602,7 @@
     eyebrow: "MAP & DIRECTIONS",
     duration: "7–9 min",
     intro:
-      "Mission Control has one safe route through frozen Almaty. Follow every direction carefully — one wrong turn sends you back to the map.",
+      "Restore the emergency route through frozen Almaty and reach Medeu safely.",
     brief:
       "Start at Abai Square, build the complete route by clicking landmarks, then ask Mission Control to check it.",
     submission: {

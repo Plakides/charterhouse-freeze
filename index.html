@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.webmanifest?v=10A3">
+  <link rel="manifest" href="manifest.webmanifest?v=10A4">
   <meta name="theme-color" content="#092140">
   <link rel="icon" type="image/png" href="assets/branding/charterhouse-logo.png">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=10A3">
-  <link rel="stylesheet" href="css/components.css?v=10A3">
-  <link rel="stylesheet" href="css/animations.css?v=10A3">
+  <link rel="stylesheet" href="css/main.css?v=10A4">
+  <link rel="stylesheet" href="css/components.css?v=10A4">
+  <link rel="stylesheet" href="css/animations.css?v=10A4">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -45,9 +45,17 @@
             <p class="protocol">EMERGENCY PROTOCOL 09</p>
             <h1 id="startTitle">The Great<br>Charterhouse Freeze</h1>
             <p class="hero-lede">
-              An unexplained systems failure has frozen Charterhouse Almaty.
-              Eight security seals are missing.
+              Charterhouse Almaty is freezing. The emergency heating system has
+              locked itself behind <strong>eight security seals</strong>.
+              Recover all eight, unlock the Emergency Vault, and restore the heating.
             </p>
+            <div class="hero-mission-chain" aria-label="Mission objective">
+              <span><b>1</b> Recover 8 seals</span>
+              <i aria-hidden="true">→</i>
+              <span><b>2</b> Unlock the vault</span>
+              <i aria-hidden="true">→</i>
+              <span><b>3</b> Restore heating</span>
+            </div>
             <div class="snow-leopard-note">
               <span class="status-lamp" aria-hidden="true"></span>
               <span>The snow leopard denies involvement.</span>
@@ -83,10 +91,18 @@
       </section>
 
       <section class="screen registration-screen" id="screenRegister" aria-labelledby="registerTitle" hidden>
-        <div class="section-heading">
+        <div class="section-heading registration-story-heading">
           <p class="protocol protocol-dark">EMERGENCY RESPONSE TEAM</p>
-          <h2 id="registerTitle">Assemble your team</h2>
-          <p>Choose your House, then enter between two and four team members.</p>
+          <h2 id="registerTitle">Build your response team</h2>
+          <p>
+            Charterhouse is freezing. Your team must recover <strong>8 security seals</strong>,
+            unlock the Emergency Vault and restart the heating.
+          </p>
+          <div class="registration-mission-chain">
+            <span>Choose a House</span><i>→</i>
+            <span>Enter 2–4 names</span><i>→</i>
+            <span>Receive a codename</span>
+          </div>
         </div>
 
         <form id="registrationForm" novalidate>
@@ -146,19 +162,19 @@
                 <span>Student 2 <b>required</b></span>
                 <input type="text" name="student2" maxlength="50" autocomplete="off" placeholder="First name" required>
               </label>
-              <label class="member-field optional-member is-hidden" data-member="3">
+              <label class="member-field optional-member" data-member="3">
                 <span>Student 3 <i>optional</i></span>
                 <input type="text" name="student3" maxlength="50" autocomplete="off" placeholder="First name">
               </label>
-              <label class="member-field optional-member is-hidden" data-member="4">
+              <label class="member-field optional-member" data-member="4">
                 <span>Student 4 <i>optional</i></span>
                 <input type="text" name="student4" maxlength="50" autocomplete="off" placeholder="First name">
               </label>
             </div>
 
-            <div class="member-actions">
-              <button class="text-button" id="addMemberButton" type="button">+ Add another team member</button>
-              <span class="member-count" id="memberCount">2 of 4 spaces shown</span>
+            <div class="member-actions member-actions-static">
+              <button class="text-button" id="addMemberButton" type="button" hidden>+ Add another team member</button>
+              <span class="member-count" id="memberCount">Teams can have 2–4 students. Leave Student 3 or 4 blank if not needed.</span>
             </div>
           </fieldset>
 
@@ -196,8 +212,12 @@
             </div>
           </div>
 
+          <div class="reveal-objective">
+            <span>YOUR MISSION</span>
+            <strong>Recover 8 seals → unlock the Emergency Vault → restore the heating.</strong>
+          </div>
           <div class="reveal-warning">
-            The timer does not begin until you press <strong>Start mission</strong>.
+            The mission timer begins when you press <strong>Start mission</strong>.
           </div>
 
           <p class="form-message reveal-error" id="startMissionError" role="alert" aria-live="polite" hidden></p>
@@ -229,10 +249,14 @@
 
           <div class="dashboard-main">
             <section class="mission-board-panel" aria-labelledby="boardHeading">
-              <div class="board-heading-row">
+              <div class="board-heading-row board-story-heading">
                 <div>
-                  <p class="protocol protocol-dark">SECURITY GRID</p>
-                  <h3 id="boardHeading">Recover the eight lost seals</h3>
+                  <p class="protocol protocol-dark">CHARTERHOUSE EMERGENCY</p>
+                  <h3 id="boardHeading">Recover 8 seals. Unlock the Emergency Vault.</h3>
+                  <div class="mission-story-line">
+                    <strong id="missionStoryState">HEATING SYSTEM: LOCKED</strong>
+                    <span id="missionStoryText">Eight security seals control the emergency heating vault. Recover them all to restore the school.</span>
+                  </div>
                 </div>
                 <div class="board-progress-pill">
                   <span id="missionProgress">0/8</span>
@@ -314,7 +338,7 @@
               </section>
 
               <div class="mission-toolbar-tools">
-                <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg></span><span><strong>Field Kit</strong><small>Tools</small></span></button>
+                <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 17h30v21H9zM17 17v-5h14v5M9 25h30M21 22h6v6h-6z"/></svg></span><span><strong>Security Tool Kit</strong><small>Decoder · Calculator · Guide</small></span></button>
                 <button class="dashboard-tool-button" id="leaderboardButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 37V25h7v12m6 0V16h7v21m6 0V10h7v27M7 37h37"/></svg></span><span><strong>Leaderboard</strong><small>Live</small></span></button>
               </div>
 
@@ -341,7 +365,7 @@
             <div class="challenge-team-strip"><span id="vaultTeamName">Team</span><i aria-hidden="true"></i><span id="vaultHouse">House</span></div>
             <div class="challenge-utility-strip vault-utility-strip">
               <div class="challenge-mini-progress"><span>SEALS</span><strong>8 / 8</strong></div>
-              <button class="challenge-top-tool" id="vaultFieldKitButton" type="button" aria-label="Open Field Kit"><span aria-hidden="true">▣</span><strong>Field Kit</strong></button>
+              <button class="challenge-top-tool" id="vaultFieldKitButton" type="button" aria-label="Open Security Tool Kit"><span aria-hidden="true">▣</span><strong>Security Tool Kit</strong></button>
               <div class="challenge-timer-card"><span>ELAPSED</span><strong id="vaultTimer">0:00</strong></div>
             </div>
           </header>
@@ -407,7 +431,7 @@
             <div class="challenge-utility-strip">
               <div class="challenge-mini-progress" title="Mission progress"><span>SEALS</span><strong id="challengeProgress">0 / 8</strong></div>
               <div class="challenge-mini-status"><strong id="challengeStatus">UNSOLVED</strong><span id="challengeStatusText">Recover its seal.</span></div>
-              <button class="challenge-top-tool" id="challengeFieldKitButton" type="button" aria-label="Open Field Kit"><span aria-hidden="true">▣</span><strong>Field Kit</strong></button>
+              <button class="challenge-top-tool" id="challengeFieldKitButton" type="button" aria-label="Open Security Tool Kit"><span aria-hidden="true">▣</span><strong>Security Tool Kit</strong></button>
               <div class="challenge-timer-card"><span>ELAPSED</span><strong id="challengeTimer">0:00</strong></div>
             </div>
           </header>
@@ -431,6 +455,17 @@
                   <strong id="challengeDuration">4 min</strong>
                 </div>
               </div>
+
+              <section class="challenge-brief-strip" aria-label="Challenge mission and task">
+                <div class="challenge-brief-mission">
+                  <span>MISSION</span>
+                  <strong id="challengeStory">Recover the next security seal.</strong>
+                </div>
+                <div class="challenge-brief-task">
+                  <span>YOUR TASK</span>
+                  <strong id="challengeTask">Solve the puzzle and submit one team answer.</strong>
+                </div>
+              </section>
 
               <div class="challenge-content-card" id="challengeContent">
                 <p>Loading challenge…</p>
@@ -462,7 +497,7 @@
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
       <button class="teacher-tools-button" id="teacherDiagnosticsButton" type="button" title="Teacher diagnostics · Ctrl+Alt+D">TEACHER DIAGNOSTICS</button>
-      <span class="demo-badge">PHASE 10A3 · SINGLE-SCREEN GAME SHELL · BUILD 10A3</span>
+      <span class="demo-badge">PHASE 10A · STORY + EAL READABILITY · BUILD 10A4</span>
     </footer>
   </div>
 
@@ -472,14 +507,14 @@
       <header class="modal-header">
         <div>
           <p class="protocol protocol-dark">EXPEDITION CASE · FK-01</p>
-          <h2 id="fieldKitTitle">Field Kit</h2>
-          <p>Seven tools. Some are useful. Some are here because emergency procurement is complicated.</p>
+          <h2 id="fieldKitTitle">Security Tool Kit</h2>
+          <p>Emergency decoders, references and calculation tools. Some are useful. Some are deliberate red herrings.</p>
         </div>
-        <button class="modal-close" type="button" data-close-modal aria-label="Close Field Kit">×</button>
+        <button class="modal-close" type="button" data-close-modal aria-label="Close Security Tool Kit">×</button>
       </header>
 
       <div class="field-kit-layout">
-        <nav class="field-kit-nav" aria-label="Field Kit tools">
+        <nav class="field-kit-nav" aria-label="Security Tool Kit tools">
           <button type="button" data-field-tool="caesar" aria-selected="true">
             <span class="field-tool-number">01</span><strong>Caesar</strong><small>Cipher wheel</small>
           </button>
@@ -774,7 +809,7 @@
         </section>
 
         <section class="diagnostics-card diagnostics-card-wide diagnostics-technical">
-          <div><span>BUILD</span><strong data-diagnostic-value="build">10A3</strong></div>
+          <div><span>BUILD</span><strong data-diagnostic-value="build">10A4</strong></div>
           <div><span>DEVICE ID</span><strong data-diagnostic-value="device">—</strong></div>
         </section>
       </div>
@@ -801,28 +836,28 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=10A3"></script>
-  <script src="js/state.js?v=10A3"></script>
-  <script src="js/recovery.js?v=10A3"></script>
-  <script src="js/answer-engine.js?v=10A3"></script>
-  <script src="js/sync-queue.js?v=10A3"></script>
-  <script src="js/sync-transport.js?v=10A3"></script>
-  <script src="js/api.js?v=10A3"></script>
-  <script src="js/challenges/registry.js?v=10A3"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=10A3"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=10A3"></script>
-  <script src="js/challenges/challenge-03-language.js?v=10A3"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=10A3"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=10A3"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=10A3"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=10A3"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=10A3"></script>
-  <script src="js/field-kit.js?v=10A3"></script>
-  <script src="js/leaderboard.js?v=10A3"></script>
-  <script src="js/pwa.js?v=10A3"></script>
-  <script src="js/diagnostics.js?v=10A3"></script>
-  <script src="js/cooldown.js?v=10A3"></script>
-  <script src="js/final-vault.js?v=10A3"></script>
-  <script src="js/app.js?v=10A3"></script>
+  <script src="js/config.js?v=10A4"></script>
+  <script src="js/state.js?v=10A4"></script>
+  <script src="js/recovery.js?v=10A4"></script>
+  <script src="js/answer-engine.js?v=10A4"></script>
+  <script src="js/sync-queue.js?v=10A4"></script>
+  <script src="js/sync-transport.js?v=10A4"></script>
+  <script src="js/api.js?v=10A4"></script>
+  <script src="js/challenges/registry.js?v=10A4"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=10A4"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=10A4"></script>
+  <script src="js/challenges/challenge-03-language.js?v=10A4"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=10A4"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=10A4"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=10A4"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=10A4"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=10A4"></script>
+  <script src="js/field-kit.js?v=10A4"></script>
+  <script src="js/leaderboard.js?v=10A4"></script>
+  <script src="js/pwa.js?v=10A4"></script>
+  <script src="js/diagnostics.js?v=10A4"></script>
+  <script src="js/cooldown.js?v=10A4"></script>
+  <script src="js/final-vault.js?v=10A4"></script>
+  <script src="js/app.js?v=10A4"></script>
 </body>
 </html>

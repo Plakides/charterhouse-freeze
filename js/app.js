@@ -98,6 +98,10 @@
   const challengeProgress = document.getElementById("challengeProgress");
   const challengeStatus = document.getElementById("challengeStatus");
   const challengeStatusText = document.getElementById("challengeStatusText");
+  const challengeStory = document.getElementById("challengeStory");
+  const challengeTask = document.getElementById("challengeTask");
+  const missionStoryState = document.getElementById("missionStoryState");
+  const missionStoryText = document.getElementById("missionStoryText");
   const challengeFieldKitButton = document.getElementById("challengeFieldKitButton");
   const challengeStatusCard = challengeStatus?.closest(
     ".challenge-status-card, .challenge-mini-status"
@@ -138,7 +142,42 @@
     8: Object.freeze({ symbol: "compass", number: 3, label: "Compass" })
   });
 
-  let shownMembers = 2;
+  const challengeNarratives = Object.freeze({
+    1: Object.freeze({
+      story: "The first heating-control key was taken from the emergency locker. Four students were nearby. One of them has it.",
+      task: "Use all four clues. Eliminate students who cannot have the key. Submit the only student left."
+    }),
+    2: Object.freeze({
+      story: "The emergency control signal has been rerouted through frozen Almaty. Only one safe route reaches Medeu.",
+      task: "Follow the directions in order. Click each landmark when you arrive, then check the complete route."
+    }),
+    3: Object.freeze({
+      story: "The heating system sent one final multilingual security message before the network froze. Its six cards were scrambled.",
+      task: "Translate the clues → put the six cards in order → take the correct letter from each card."
+    }),
+    4: Object.freeze({
+      story: "A paper telegram was recovered from the locked heating-control room. Its message is hidden with a Caesar cipher.",
+      task: "Open the Security Tool Kit, decode the telegram and enter the password hidden in the message."
+    }),
+    5: Object.freeze({
+      story: "The heating-control technician hid the next seal inside today's timetable. Only one timetable satisfies every rule.",
+      task: "Use all five rules to arrange the subjects. Then submit the subject in Period 3."
+    }),
+    6: Object.freeze({
+      story: "Four emergency circuits have frozen independently. Each circuit produces one digit of the defrost code.",
+      task: "Solve A, B, C and D. Enter the four digits in that order."
+    }),
+    7: Object.freeze({
+      story: "The frozen school archive has locked one security seal behind a Charterhouse and Almaty crossword.",
+      task: "Complete the connected crossword. Then read the six frozen cells A → F to reveal the security word."
+    }),
+    8: Object.freeze({
+      story: "Security cameras caught the snow leopard beside the control desk. The recording only stays visible for 30 seconds.",
+      task: "Split the observation work: numbers, objects, words and positions. Use the memory answers to build the vault code."
+    })
+  });
+
+  let shownMembers = 4;
   let currentSession = null;
   let currentTeam = null;
   let timerInterval = null;
@@ -225,8 +264,13 @@
   }
 
   function updateMemberControls() {
-    memberCount.textContent = `${shownMembers} of 4 spaces shown`;
-    addMemberButton.hidden = shownMembers >= 4;
+    shownMembers = 4;
+    memberCount.textContent =
+      "Teams can have 2–4 students. Leave Student 3 or 4 blank if not needed.";
+    addMemberButton.hidden = true;
+    document.querySelectorAll(".optional-member").forEach(field => {
+      field.classList.remove("is-hidden");
+    });
   }
 
   function cleanName(value) {
@@ -864,6 +908,26 @@
 
     emergencyBulletin.textContent = buildBulletinMessage(team);
 
+    if (missionStoryState && missionStoryText) {
+      if (completed >= 8) {
+        missionStoryState.textContent = "FINAL VAULT: UNLOCKED";
+        missionStoryText.textContent =
+          "All eight seals are secure. Enter the Emergency Vault and restore the heating.";
+      } else if (completed >= 6) {
+        missionStoryState.textContent = "EMERGENCY VAULT: NEARLY ACCESSIBLE";
+        missionStoryText.textContent =
+          `${completed}/8 seals recovered. Only ${8 - completed} more stand between your team and the heating controls.`;
+      } else if (completed >= 3) {
+        missionStoryState.textContent = "HEATING CONTROL: PARTIAL RESPONSE";
+        missionStoryText.textContent =
+          `${completed}/8 seals recovered. Frozen systems are beginning to respond. Keep going.`;
+      } else {
+        missionStoryState.textContent = "HEATING SYSTEM: LOCKED";
+        missionStoryText.textContent =
+          `${completed}/8 seals recovered. Find all eight to unlock the Emergency Vault.`;
+      }
+    }
+
     startClientTimer(team);
 
     if (currentChallengeId) {
@@ -1085,6 +1149,14 @@
     challengeTitle.textContent = definition.title;
     challengeIntro.textContent = definition.intro;
     challengeDuration.textContent = definition.duration;
+
+    const narrative = challengeNarratives[definition.id] || {
+      story: "Recover the next security seal and bring the emergency heating system back online.",
+      task: "Solve the puzzle and submit one team answer."
+    };
+
+    if (challengeStory) challengeStory.textContent = narrative.story;
+    if (challengeTask) challengeTask.textContent = narrative.task;
 
     challengeContent.innerHTML = "";
 
@@ -1418,10 +1490,10 @@
       window.location.pathname + window.location.search
     );
     registrationForm.reset();
-    shownMembers = 2;
+    shownMembers = 4;
 
     document.querySelectorAll(".optional-member").forEach(field => {
-      field.classList.add("is-hidden");
+      field.classList.remove("is-hidden");
       const input = field.querySelector("input");
       if (input) input.value = "";
     });

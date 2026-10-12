@@ -589,7 +589,7 @@
     eyebrow: "LANGUAGE · LOGIC · EXTRACTION",
     duration: "6–8 min",
     intro:
-      "The translation relay froze mid-transmission. Six security cards have been scrambled across three intercepted messages.",
+      "Rebuild the final multilingual transmission before the frozen network loses it completely.",
     brief:
       "Decode only the words you need, reconstruct the card order, then manually take the specified letter from each card and type the hidden six-letter message.",
     submission: {
