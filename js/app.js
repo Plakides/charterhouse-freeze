@@ -586,14 +586,15 @@
 
     const labelSpan = freezeBoard.querySelector(".centre-window-label span");
     const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
+    const labelSmall = freezeBoard.querySelector(".centre-window-label small");
 
     if (labelSpan && labelStrong) {
       if (thawed) {
-        labelSpan.textContent = "SCHOOL STATUS";
-        labelStrong.textContent = "UNFROZEN";
+        labelSpan.textContent = "CHARTERHOUSE SYSTEM";
+        labelStrong.textContent = "RESTORED";
+        if (labelSmall) labelSmall.textContent = "HEATING ONLINE · 19°C";
       } else {
-        labelSpan.textContent = "CONTROL CORE";
-        labelStrong.textContent = "VISIBLE";
+        labelSpan.textContent = "EMERGENCY CONTROL CORE";
       }
     }
   }
@@ -607,9 +608,26 @@
     const labelSpan = freezeBoard.querySelector(".centre-window-label span");
     const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
 
+    const labelSmall = freezeBoard.querySelector(".centre-window-label small");
     if (show && labelSpan && labelStrong) {
       labelSpan.textContent = "FINAL VAULT";
-      labelStrong.textContent = "UNLOCKED";
+      labelStrong.textContent = "ACCESS READY";
+      if (labelSmall) labelSmall.textContent = "8/8 SEALS · BUILD THE ROUTE";
+    }
+  }
+
+  function updateControlCoreProgress(team) {
+    if (!freezeBoard || !team || team.finished || Number(team.completedCount) >= 8) return;
+    const completed = Math.max(0, Math.min(8, Number(team.completedCount) || 0));
+    const labelSpan = freezeBoard.querySelector(".centre-window-label span");
+    const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
+    const labelSmall = freezeBoard.querySelector(".centre-window-label small");
+    if (labelSpan) labelSpan.textContent = "EMERGENCY CONTROL CORE";
+    if (labelStrong) labelStrong.textContent = `${completed}/8 SEALS`;
+    if (labelSmall) {
+      if (completed >= 6) labelSmall.textContent = "VAULT ACCESS NEARLY RESTORED";
+      else if (completed >= 3) labelSmall.textContent = "PARTIAL CONTROL RETURNING";
+      else labelSmall.textContent = "VAULT ACCESS LOCKED";
     }
   }
 
@@ -733,6 +751,7 @@
     });
 
     renderSealGrid(team);
+    updateControlCoreProgress(team);
 
     const allSealsRecovered = Number(team.completedCount) >= 8;
 

@@ -5,6 +5,10 @@
   const STORAGE_PREFIX = "charterhouseFreeze.v2.secretMessage.";
   const TAKE_PATTERN = Object.freeze([2, 4, 1, 3, 5, 2]);
 
+  function ordinal(value) {
+    return ({1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th"})[Number(value)] || String(value);
+  }
+
   const cards = Object.freeze([
     Object.freeze({
       id: "book",
@@ -279,7 +283,7 @@
                 </div>
 
                 <span class="secret-take">
-                  TAKE LETTER <b>${take}</b>
+                  <span>TAKE</span><b>${ordinal(take)}</b><span>LETTER</span>
                 </span>
 
               </button>
@@ -288,10 +292,10 @@
 
           <div class="secret-extraction-console is-manual">
             <div>
-              <span>FINAL DECODER INSTRUCTION</span>
+              <span>FINAL EXTRACTION</span>
               <strong>
-                When the six cards are in order, take the shown letter from each card.
-                The website will not reveal the word.
+                Read positions 1 → 6. Take the indicated letter from each card.
+                Join the six letters to reveal the hidden word.
               </strong>
             </div>
 

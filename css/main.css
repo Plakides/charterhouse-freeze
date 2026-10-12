@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A8 · universal wrong-answer penalty */
+/* Task 10B1 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10B1 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A8 · screenshot-led map-fit corrections */
+/* Task 10B1 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — SECRET MESSAGE UI                                             */
+/* TASK 10B1 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A8 · manual extraction — the site must not solve TULPAR for students */
+/* Task 10B1 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A8 · readability refinements from live 1536px screenshot */
+/* Task 10B1 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10B1 — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10B1 — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — BRAIN FREEZE UI                                              */
+/* TASK 10B1 — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — FROZEN CROSSWORD UI                                          */
+/* TASK 10B1 — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10B1 — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10B1 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8793,7 +8793,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A8 — LIVE FINAL VAULT SUBMISSION                                  */
+/* TASK 10B1 — LIVE FINAL VAULT SUBMISSION                                  */
 /* ========================================================================== */
 
 .final-vault-experience.is-finalizing [data-vault-preview-reset] {
@@ -8840,7 +8840,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A8 — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* PHASE 10B1 — MACBOOK NEO 1204px RESPONSIVE QA                             */
 /* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
 /* Reclaims chrome/heading height while preserving puzzle readability.         */
 /* ========================================================================== */
@@ -9254,7 +9254,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A8 — SINGLE-SCREEN GAME SHELL                                     */
+/* PHASE 10B1 — SINGLE-SCREEN GAME SHELL                                     */
 /* Structural pass: use width, not scroll. Target 1204×680 and larger.        */
 /* ========================================================================== */
 
@@ -9794,7 +9794,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* 10A8 — QA FIXES                                                          */
+/* 10B1 — QA FIXES                                                          */
 /* ========================================================================== */
 
 /* The 687×223 Charterhouse lockup was 188px wide in a 50px bar, which makes
@@ -9830,7 +9830,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10A8 — EAL READABILITY / NO-OVERLAP PASS                            */
+/* PHASE 10B1 — EAL READABILITY / NO-OVERLAP PASS                            */
 /* Core student-facing text should be readable at 1204×680 and on desktop.   */
 /* ========================================================================== */
 
@@ -10496,7 +10496,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10A8 — STORY + EAL READABILITY                                      */
+/* PHASE 10B1 — STORY + EAL READABILITY                                      */
 /* ========================================================================== */
 
 /* Opening storyline ------------------------------------------------------- */
@@ -10969,7 +10969,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10A8 — LARGE-TEXT / ALLOW-SCROLL PASS                               */
+/* PHASE 10B1 — LARGE-TEXT / ALLOW-SCROLL PASS                               */
 /* The previous single-screen constraint made important text microscopic.     */
 /* From this build, readability wins. Normal vertical scrolling is allowed.    */
 /* ========================================================================== */
@@ -12016,7 +12016,7 @@ body:has(#screenMission:not([hidden])) {
 }
 
 /* ========================================================================== */
-/* PHASE 10A8 — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
+/* PHASE 10B1 — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
 /* Fixes:                                                                     */
 /* 1) challenge pages must actually scroll on desktop                         */
 /* 2) top metadata and instruction text must be obviously readable            */
@@ -12211,7 +12211,7 @@ body {
 }
 
 /* ========================================================================== */
-/* PHASE 10A8 — LAYOUT REBALANCE                                              */
+/* PHASE 10B1 — LAYOUT REBALANCE                                              */
 /* Fixes:                                                                     */
 /* - registration screen felt empty; house logos too small                    */
 /* - codename reveal wasted space                                             */
@@ -12517,7 +12517,7 @@ body {
 }
 
 /* ========================================================================== */
-/* PHASE 10A8 — PUZZLE SPACE REBALANCE                                       */
+/* PHASE 10B1 — PUZZLE SPACE REBALANCE                                       */
 /* Challenge 3: remove dead space and keep answer entry obvious.             */
 /* Challenge 7: larger crossword + larger clues, extraction below.           */
 /* Challenge 8: full-width evidence desk, larger objects, no text overlap.    */
@@ -12975,4 +12975,294 @@ body {
   .memory-evidence {
     min-height: 165px !important;
   }
+}
+
+
+/* ========================================================================== */
+/* PHASE 10B1 — VISUAL LANGUAGE / GAME FEEL                                  */
+/* ========================================================================== */
+
+:root {
+  --game-gold: #c5a46d;
+  --game-ice: #dcecf3;
+  --game-navy-2: #123a5d;
+  --game-pink-2: #bd7383;
+}
+
+/* Team identity ----------------------------------------------------------- */
+.dashboard-team .protocol { letter-spacing:.13em; color:#8d6070; }
+.dashboard-team h2 { letter-spacing:-.025em; text-shadow:0 1px 0 #fff; }
+.dashboard-team p { color:#5f7180; font-weight:800; }
+.dashboard-house-mark {
+  border:1px solid rgba(9,33,64,.18);
+  background:linear-gradient(145deg,#fff,rgba(221,235,242,.62));
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.5),0 4px 12px rgba(9,33,64,.08);
+}
+
+/* Mission board ----------------------------------------------------------- */
+.freeze-board {
+  border:1px solid rgba(9,33,64,.28) !important;
+  background:linear-gradient(145deg,#c9dfe8,#9ebecd) !important;
+  box-shadow:0 18px 40px rgba(9,33,64,.16),inset 0 0 0 2px rgba(255,255,255,.55) !important;
+}
+.freeze-board::before {
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.35),transparent 30%),
+    repeating-linear-gradient(128deg,transparent 0 70px,rgba(255,255,255,.20) 71px 72px,transparent 73px 140px) !important;
+}
+.challenge-tile {
+  padding:10px 12px 9px !important;
+  border:1px solid rgba(255,255,255,.76) !important;
+  background:
+    linear-gradient(150deg,rgba(252,254,255,.91),rgba(196,219,229,.76) 48%,rgba(112,148,172,.60)),
+    #cfe1e8 !important;
+  box-shadow:inset 0 0 24px rgba(255,255,255,.55),inset 0 -18px 30px rgba(49,83,109,.14),0 2px 6px rgba(9,33,64,.08) !important;
+}
+.challenge-tile:hover {
+  transform:translateY(-3px) scale(1.012) !important;
+  border-color:rgba(211,147,160,.88) !important;
+  box-shadow:0 10px 24px rgba(9,33,64,.18),inset 0 0 28px rgba(255,255,255,.72) !important;
+}
+.tile-number {
+  display:inline-grid;
+  place-items:center;
+  width:26px;
+  height:22px;
+  border:1px solid rgba(9,33,64,.12);
+  background:rgba(255,255,255,.62);
+  color:#536d80 !important;
+  font-size:8px !important;
+}
+.tile-kicker {
+  position:relative;
+  z-index:2;
+  grid-column:1;
+  grid-row:1;
+  margin-left:32px;
+  align-self:center;
+  color:#8d6070;
+  font-size:6.5px;
+  font-weight:950;
+  letter-spacing:.14em;
+}
+.tile-icon {
+  width:43px !important;
+  height:43px !important;
+  padding:5px;
+  border-radius:50%;
+  color:#153b5e !important;
+  background:radial-gradient(circle,#f8fbfc 0 45%,rgba(221,235,242,.78) 46% 68%,rgba(120,147,165,.2) 69%);
+  box-shadow:0 0 0 1px rgba(9,33,64,.15),0 3px 8px rgba(9,33,64,.10);
+}
+.tile-icon svg { stroke-width:1.8 !important; }
+.tile-icon .icon-ring { opacity:.35; stroke-dasharray:2.5 3; }
+.tile-title { font-size:clamp(12px,1vw,15px) !important; letter-spacing:.045em !important; }
+.tile-status {
+  margin-top:6px !important;
+  color:#4f7188 !important;
+  font-size:7px !important;
+}
+.tile-status::before {
+  content:"";
+  display:inline-block;
+  width:6px;height:6px;
+  margin-right:5px;
+  border-radius:50%;
+  background:#9cb9c8;
+  box-shadow:0 0 0 2px rgba(255,255,255,.46);
+}
+.challenge-tile.is-revealed {
+  border-color:rgba(197,164,109,.75) !important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.35),0 8px 20px rgba(9,33,64,.10) !important;
+}
+.challenge-tile.is-revealed .tile-status { color:#7d5e35 !important; }
+.challenge-tile.is-revealed .tile-status::before {
+  background:var(--game-gold);
+  box-shadow:0 0 10px rgba(197,164,109,.75);
+}
+.challenge-tile.is-revealed::after {
+  content:"✓" !important;
+  inset:auto 9px 9px auto !important;
+  width:24px;height:24px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  color:#fff;
+  background:linear-gradient(145deg,#c5a46d,#8d6a38) !important;
+  font-size:12px;font-weight:950;
+  box-shadow:0 2px 8px rgba(9,33,64,.22);
+  opacity:1 !important;
+}
+
+/* Control core ------------------------------------------------------------ */
+.board-centre { overflow:hidden; }
+.board-centre::after {
+  content:"";
+  position:absolute;
+  inset:8%;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.38);
+  box-shadow:0 0 26px rgba(221,235,242,.34),inset 0 0 24px rgba(9,33,64,.18);
+  pointer-events:none;
+}
+.centre-core-emblem {
+  position:absolute;
+  left:50%;top:42%;
+  width:66px;height:66px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.62);
+  background:rgba(9,33,64,.62);
+  box-shadow:0 0 0 7px rgba(221,235,242,.15),0 0 24px rgba(221,235,242,.42);
+}
+.centre-core-emblem span,.centre-core-emblem i { position:absolute;left:50%;top:50%;background:#ddecf3;transform-origin:center; }
+.centre-core-emblem span { width:38px;height:2px;transform:translate(-50%,-50%);box-shadow:0 -12px 0 rgba(221,236,243,.8),0 12px 0 rgba(221,236,243,.8); }
+.centre-core-emblem i { width:2px;height:38px;transform:translate(-50%,-50%);box-shadow:-12px 0 0 rgba(221,236,243,.8),12px 0 0 rgba(221,236,243,.8); }
+.centre-window-label {
+  min-width:160px !important;
+  padding:8px 10px !important;
+  background:rgba(9,33,64,.82) !important;
+  border:1px solid rgba(255,255,255,.24);
+  box-shadow:0 6px 18px rgba(9,33,64,.18);
+}
+.centre-window-label span { font-size:6px !important; letter-spacing:.12em; }
+.centre-window-label strong { font-size:12px !important; }
+.centre-window-label small { display:block;margin-top:2px;color:#d8e7ee;font-size:6px;font-weight:800;letter-spacing:.08em; }
+
+/* Seal collectibles ------------------------------------------------------- */
+.seal-slot {
+  border-radius:50% !important;
+  border:1px solid rgba(9,33,64,.17) !important;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.85),rgba(221,235,242,.64) 55%,rgba(120,147,165,.24)) !important;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.45),0 2px 6px rgba(9,33,64,.08);
+}
+.seal-slot.is-pending {
+  filter:saturate(.55);
+  background:radial-gradient(circle,rgba(237,246,249,.8),rgba(175,201,213,.46)) !important;
+}
+.seal-slot.is-pending .seal-slot-number { color:#7893a5 !important; font-size:18px !important; }
+.seal-slot.is-recovered {
+  color:#173c5e !important;
+  border-color:rgba(197,164,109,.78) !important;
+  background:radial-gradient(circle at 35% 28%,#fffdf5 0 20%,#ead9b8 48%,#b58b4b 100%) !important;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.5),0 0 14px rgba(197,164,109,.35),0 4px 10px rgba(9,33,64,.13) !important;
+}
+.seal-slot-icon { color:#173c5e !important; }
+.seal-slot-number { color:#8e6031 !important; font-family:var(--serif);font-weight:950; }
+.seal-slot-label { color:#173c5e !important; font-weight:950 !important; }
+
+/* Toolkit --------------------------------------------------------------- */
+.dashboard-tool-button#fieldKitButton,
+.challenge-top-tool {
+  border-color:rgba(189,115,131,.55) !important;
+  background:linear-gradient(135deg,rgba(211,147,160,.20),rgba(255,255,255,.92)) !important;
+  box-shadow:inset 4px 0 0 var(--game-pink-2),0 2px 8px rgba(9,33,64,.07);
+}
+.tool-icon-case {
+  color:#8f5967 !important;
+  background:rgba(255,255,255,.7) !important;
+  border:1px solid rgba(189,115,131,.28);
+}
+.mini-toolkit-icon { width:20px;height:20px;display:inline-grid;place-items:center;color:#8f5967; }
+.mini-toolkit-icon svg { width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+.field-kit-window {
+  border:1px solid rgba(9,33,64,.20);
+  box-shadow:0 28px 70px rgba(9,33,64,.28),inset 0 0 0 3px rgba(255,255,255,.4);
+}
+.field-kit-nav button {
+  grid-template-columns:46px 1fr !important;
+  min-height:66px !important;
+  column-gap:10px !important;
+}
+.field-tool-icon {
+  grid-row:1 / 3;
+  width:40px;height:40px;
+  display:grid;place-items:center;
+  border-radius:9px;
+  color:#173c5e;
+  background:linear-gradient(145deg,#fff,rgba(221,235,242,.75));
+  border:1px solid rgba(9,33,64,.13);
+}
+.field-tool-icon svg { width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round; }
+.field-kit-nav button.is-active .field-tool-icon { color:#8f5967;background:rgba(211,147,160,.15);border-color:rgba(189,115,131,.4); }
+.field-tool-number { display:none !important; }
+
+/* Secret Message visual repair ------------------------------------------- */
+.secret-card { border:1px solid rgba(9,33,64,.18) !important;box-shadow:0 2px 6px rgba(9,33,64,.06); }
+.secret-card-seal {
+  width:34px !important;height:34px !important;
+  border:1px solid rgba(9,33,64,.18) !important;
+  background:radial-gradient(circle,#fff,rgba(221,235,242,.78)) !important;
+  font-size:10px !important;
+  font-weight:950 !important;
+}
+.secret-card-copy > strong { font-size:12px !important; }
+.secret-card-copy > span { font-size:8.5px !important; }
+.secret-card code { gap:4px !important;margin-top:6px !important; }
+.secret-card code b {
+  min-width:27px !important;
+  height:29px !important;
+  display:grid;place-items:center;
+  border:1px solid rgba(9,33,64,.20) !important;
+  background:#fff !important;
+  color:#173c5e !important;
+  font-size:14px !important;
+  font-weight:950 !important;
+  box-shadow:inset 0 -2px 0 rgba(120,147,165,.12);
+}
+.secret-card.is-compact { min-height:90px !important; }
+.secret-card.is-compact .secret-card-seal { width:29px !important;height:29px !important;font-size:9px !important; }
+.secret-card.is-compact .secret-card-copy > strong { font-size:10.5px !important; }
+.secret-card.is-compact code b { min-width:23px !important;height:25px !important;font-size:12px !important; }
+.secret-slot { min-height:155px !important;height:auto !important; }
+.secret-slot-position { font-size:9px !important; }
+.secret-slot-position b { width:24px !important;height:24px !important;font-size:9px !important; }
+.secret-take {
+  min-height:38px !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:5px !important;
+  font-size:8px !important;
+  letter-spacing:.08em;
+}
+.secret-take b {
+  min-width:38px !important;height:25px !important;
+  padding:0 5px;
+  display:grid;place-items:center;
+  border-radius:13px;
+  background:var(--ch-pink) !important;
+  color:#341c24 !important;
+  font-size:11px !important;
+}
+.secret-extraction-console.is-manual {
+  min-height:82px !important;
+  height:auto !important;
+  padding:9px 10px !important;
+  grid-template-columns:220px minmax(0,1fr) !important;
+  gap:10px !important;
+  align-items:stretch !important;
+  overflow:visible !important;
+}
+.secret-extraction-console > div:first-child > span { font-size:8px !important; }
+.secret-extraction-console > div:first-child strong { font-size:10px !important;line-height:1.27 !important; }
+.secret-manual-pattern { gap:5px !important;align-items:stretch !important; }
+.secret-manual-pattern span {
+  min-height:54px !important;
+  padding:6px !important;
+  grid-template-columns:23px 1fr !important;
+  font-size:10px !important;
+  line-height:1.15 !important;
+}
+.secret-manual-pattern b { width:23px !important;height:23px !important;font-size:9px !important; }
+
+@keyframes recoveredSealPulse {
+  0%{transform:scale(.82) rotate(-10deg);filter:brightness(1.3)}
+  55%{transform:scale(1.08) rotate(3deg);filter:brightness(1.12)}
+  100%{transform:scale(1) rotate(0);filter:none}
+}
+.seal-slot.is-recovered { animation:recoveredSealPulse .62s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-slot.is-recovered { animation:none !important; }
+  .challenge-tile:hover { transform:none !important; }
 }
