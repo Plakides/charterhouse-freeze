@@ -105,7 +105,7 @@
       case "book":
         return `<svg ${common}><path d="M8 11h14c4 0 6 2 6 6v21c-1-3-4-5-8-5H8V11Zm32 0H26c-4 0-6 2-6 6v21c1-3 4-5 8-5h12V11Z"/></svg>`;
       case "snow-leopard":
-        return `<svg ${common}><path d="M13 31c-3-5-2-11 2-15 4-4 11-5 16-2 5 3 7 9 5 14-2 6-8 10-14 9-4 0-7-2-9-6Zm5-12 3 3m9-3-3 3M19 28c3 3 7 3 10 0M14 15l-3-5m23 5 3-5"/><circle cx="21" cy="25" r="1.2"/><circle cx="29" cy="25" r="1.2"/></svg>`;
+        return `<svg ${common}><circle cx="13" cy="16" r="4"/><circle cx="24" cy="11" r="4.5"/><circle cx="35" cy="16" r="4"/><circle cx="39" cy="27" r="3.7"/><path d="M24 20c-7 0-13 6-13 13 0 5 4 8 9 8 3 0 5-2 7-2s4 2 7 2c5 0 9-3 9-8 0-7-6-13-13-13h-6Z"/></svg>`;
       case "teapot":
         return `<svg ${common}><path d="M13 19h21v15c0 5-4 8-10 8s-11-3-11-8V19Zm4-5h13M20 10h8M34 23c7 0 9 3 9 7 0 3-2 6-7 6M13 24c-5-1-8-4-8-8 4 0 7 1 10 4"/></svg>`;
       case "eagle":

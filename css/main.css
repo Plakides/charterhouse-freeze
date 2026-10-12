@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B1 · universal wrong-answer penalty */
+/* Task 10B2 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10B2 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B1 · screenshot-led map-fit corrections */
+/* Task 10B2 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — SECRET MESSAGE UI                                             */
+/* TASK 10B2 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B1 · manual extraction — the site must not solve TULPAR for students */
+/* Task 10B2 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B1 · readability refinements from live 1536px screenshot */
+/* Task 10B2 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10B2 — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10B2 — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — BRAIN FREEZE UI                                              */
+/* TASK 10B2 — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — FROZEN CROSSWORD UI                                          */
+/* TASK 10B2 — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10B2 — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10B2 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8793,7 +8793,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B1 — LIVE FINAL VAULT SUBMISSION                                  */
+/* TASK 10B2 — LIVE FINAL VAULT SUBMISSION                                  */
 /* ========================================================================== */
 
 .final-vault-experience.is-finalizing [data-vault-preview-reset] {
@@ -8840,7 +8840,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10B1 — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* PHASE 10B2 — MACBOOK NEO 1204px RESPONSIVE QA                             */
 /* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
 /* Reclaims chrome/heading height while preserving puzzle readability.         */
 /* ========================================================================== */
@@ -9254,7 +9254,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10B1 — SINGLE-SCREEN GAME SHELL                                     */
+/* PHASE 10B2 — SINGLE-SCREEN GAME SHELL                                     */
 /* Structural pass: use width, not scroll. Target 1204×680 and larger.        */
 /* ========================================================================== */
 
@@ -9794,7 +9794,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* 10B1 — QA FIXES                                                          */
+/* 10B2 — QA FIXES                                                          */
 /* ========================================================================== */
 
 /* The 687×223 Charterhouse lockup was 188px wide in a 50px bar, which makes
@@ -9830,7 +9830,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10B1 — EAL READABILITY / NO-OVERLAP PASS                            */
+/* PHASE 10B2 — EAL READABILITY / NO-OVERLAP PASS                            */
 /* Core student-facing text should be readable at 1204×680 and on desktop.   */
 /* ========================================================================== */
 
@@ -10496,7 +10496,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10B1 — STORY + EAL READABILITY                                      */
+/* PHASE 10B2 — STORY + EAL READABILITY                                      */
 /* ========================================================================== */
 
 /* Opening storyline ------------------------------------------------------- */
@@ -10969,7 +10969,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10B1 — LARGE-TEXT / ALLOW-SCROLL PASS                               */
+/* PHASE 10B2 — LARGE-TEXT / ALLOW-SCROLL PASS                               */
 /* The previous single-screen constraint made important text microscopic.     */
 /* From this build, readability wins. Normal vertical scrolling is allowed.    */
 /* ========================================================================== */
@@ -12016,7 +12016,7 @@ body:has(#screenMission:not([hidden])) {
 }
 
 /* ========================================================================== */
-/* PHASE 10B1 — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
+/* PHASE 10B2 — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
 /* Fixes:                                                                     */
 /* 1) challenge pages must actually scroll on desktop                         */
 /* 2) top metadata and instruction text must be obviously readable            */
@@ -12211,7 +12211,7 @@ body {
 }
 
 /* ========================================================================== */
-/* PHASE 10B1 — LAYOUT REBALANCE                                              */
+/* PHASE 10B2 — LAYOUT REBALANCE                                              */
 /* Fixes:                                                                     */
 /* - registration screen felt empty; house logos too small                    */
 /* - codename reveal wasted space                                             */
@@ -12517,7 +12517,7 @@ body {
 }
 
 /* ========================================================================== */
-/* PHASE 10B1 — PUZZLE SPACE REBALANCE                                       */
+/* PHASE 10B2 — PUZZLE SPACE REBALANCE                                       */
 /* Challenge 3: remove dead space and keep answer entry obvious.             */
 /* Challenge 7: larger crossword + larger clues, extraction below.           */
 /* Challenge 8: full-width evidence desk, larger objects, no text overlap.    */
@@ -12979,7 +12979,7 @@ body {
 
 
 /* ========================================================================== */
-/* PHASE 10B1 — VISUAL LANGUAGE / GAME FEEL                                  */
+/* PHASE 10B2 — VISUAL LANGUAGE / GAME FEEL                                  */
 /* ========================================================================== */
 
 :root {
@@ -13265,4 +13265,288 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .seal-slot.is-recovered { animation:none !important; }
   .challenge-tile:hover { transform:none !important; }
+}
+
+/* ========================================================================== */
+/* PHASE 10B2 — RESTRAINED VISUAL ART PASS                                   */
+/* Exact Charterhouse campus photography + proper thaw/reveal + puzzle polish */
+/* ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* Landing screen — same clean Charterhouse UI, now grounded in the real      */
+/* approved campus photograph instead of an invented building.                */
+/* -------------------------------------------------------------------------- */
+#screenStart .hero {
+  isolation:isolate;
+  background:linear-gradient(135deg,#071a33 0%,#092140 48%,#113c69 100%) !important;
+}
+#screenStart .hero::after {
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,#071a33 0%,rgba(7,26,51,.97) 31%,rgba(7,26,51,.74) 49%,rgba(7,26,51,.18) 72%,rgba(7,26,51,.10) 100%),
+    linear-gradient(180deg,rgba(7,26,51,.04) 46%,rgba(7,26,51,.65) 100%),
+    url("../assets/game/campus-snowy.png?v=10B2") 64% center / cover no-repeat;
+  opacity:.92;
+}
+#screenStart .hero::before { z-index:1; }
+#screenStart .hero-copy,
+#screenStart .hero-visual { z-index:2; }
+#screenStart .mountain-band { display:none !important; }
+#screenStart .hero-visual {
+  align-self:center;
+  padding:22px 0;
+}
+#screenStart .freeze-orb {
+  background:
+    radial-gradient(circle at 35% 30%,rgba(255,255,255,.34),transparent 20%),
+    radial-gradient(circle at center,rgba(231,240,244,.22),rgba(9,33,64,.34) 54%,rgba(9,33,64,.44) 55%) !important;
+  box-shadow:inset 0 0 55px rgba(231,240,244,.13),0 0 0 18px rgba(255,255,255,.035),0 0 0 19px rgba(255,255,255,.16) !important;
+}
+#screenStart .weather-card {
+  background:rgba(9,33,64,.72) !important;
+  border-color:rgba(247,244,238,.22) !important;
+  backdrop-filter:blur(4px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mission board uses the clean underlying campus photo. Solved panels become */
+/* genuinely transparent so the SAME continuous school scene is uncovered.   */
+/* -------------------------------------------------------------------------- */
+.final-scene-snowy {
+  background:url("../assets/game/campus-snowy.png?v=10B2") center center / 100% 100% no-repeat !important;
+}
+.final-scene-thawed {
+  background:url("../assets/game/campus-thawed.jpg?v=10B2") center center / 100% 100% no-repeat !important;
+}
+.challenge-tile.is-revealed {
+  background:rgba(255,255,255,.015) !important;
+  border-color:rgba(247,244,238,.52) !important;
+  box-shadow:inset 0 0 0 1px rgba(247,244,238,.20),0 0 0 1px rgba(9,33,64,.06) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.challenge-tile.is-revealed::before { opacity:0 !important; }
+.challenge-tile.is-revealed .tile-icon,
+.challenge-tile.is-revealed .tile-title,
+.challenge-tile.is-revealed .tile-kicker {
+  opacity:0 !important;
+  visibility:hidden !important;
+}
+.challenge-tile.is-revealed .tile-number {
+  color:#f7f4ee !important;
+  background:rgba(9,33,64,.72) !important;
+  border-color:rgba(247,244,238,.30) !important;
+}
+.challenge-tile.is-revealed .tile-status {
+  padding:5px 8px !important;
+  color:#fff8e9 !important;
+  background:rgba(9,33,64,.72) !important;
+  border-color:rgba(197,164,109,.72) !important;
+  box-shadow:0 2px 8px rgba(9,33,64,.20);
+}
+.challenge-tile.is-revealed .tile-status::before { background:#c5a46d !important; }
+
+/* Control core: stacked label rather than one overflowing line. */
+.board-centre .centre-window-label {
+  left:50% !important;
+  bottom:8px !important;
+  width:min(88%,190px) !important;
+  min-width:0 !important;
+  max-width:190px !important;
+  padding:7px 8px !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  justify-items:center !important;
+  align-items:center !important;
+  gap:2px !important;
+  text-align:center !important;
+  transform:translateX(-50%) !important;
+  overflow:hidden !important;
+}
+.board-centre .centre-window-label span {
+  width:100%;
+  font-size:5.8px !important;
+  line-height:1.1 !important;
+  letter-spacing:.11em !important;
+  white-space:normal !important;
+}
+.board-centre .centre-window-label strong {
+  width:100%;
+  font-size:12px !important;
+  line-height:1.05 !important;
+  letter-spacing:.05em !important;
+  white-space:normal !important;
+}
+.board-centre .centre-window-label small {
+  width:100%;
+  margin:0 !important;
+  font-size:5.8px !important;
+  line-height:1.1 !important;
+  letter-spacing:.08em !important;
+  white-space:normal !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Challenge 1 — restrained CCTV/evidence polish.                             */
+/* -------------------------------------------------------------------------- */
+.logic-scene {
+  border-top:3px solid rgba(120,147,165,.60);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 7px 18px rgba(9,33,64,.06);
+}
+.logic-scene-heading > div > span::before {
+  content:"●  LIVE ARCHIVE · ";
+  color:#b35f72;
+}
+.logic-suspect.is-selected {
+  box-shadow:0 0 0 3px rgba(211,147,160,.32),0 8px 18px rgba(9,33,64,.13) !important;
+}
+.logic-suspect.is-eliminated::after {
+  content:"ELIMINATED" !important;
+  inset:42% 7% auto !important;
+  height:auto !important;
+  padding:8px 10px !important;
+  transform:rotate(-8deg) !important;
+  display:grid !important;
+  place-items:center !important;
+  color:#fff !important;
+  background:rgba(151,60,78,.88) !important;
+  border:2px solid rgba(255,255,255,.78) !important;
+  font-size:14px !important;
+  font-weight:950 !important;
+  letter-spacing:.13em !important;
+  text-shadow:0 1px 1px rgba(9,33,64,.28);
+}
+
+/* Challenge 2 — route line and start cue become clearer without auto-selecting. */
+.almaty-landmark[data-landmark="abai"]::after {
+  content:"START";
+  position:absolute;
+  right:-4px;
+  top:-4px;
+  padding:3px 5px;
+  border-radius:999px;
+  color:#592733;
+  background:#f1c2cc;
+  border:1px solid rgba(151,80,97,.32);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.08em;
+  opacity:.94;
+}
+.almaty-landmark[data-landmark="abai"].is-visited::after { content:"START ✓"; }
+.almaty-route-line {
+  stroke:#d1778b !important;
+  stroke-width:1.15 !important;
+  filter:drop-shadow(0 0 2px rgba(209,119,139,.48));
+}
+.almaty-landmark.is-current {
+  filter:drop-shadow(0 0 8px rgba(211,147,160,.65));
+}
+
+/* Challenge 3 — security-card surface feels more like a decoder console. */
+.secret-card-workbench {
+  border-top:3px solid rgba(120,147,165,.55) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 7px 18px rgba(9,33,64,.06);
+}
+.secret-slot {
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(232,241,245,.66)) !important;
+}
+.secret-slot-card > span { color:#6f8494 !important; }
+.secret-extraction-console.is-manual {
+  background:linear-gradient(135deg,#092140,#123a5d) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 5px 14px rgba(9,33,64,.12);
+}
+
+/* Challenge 4 — telegram paper depth. */
+.telegram-sheet {
+  position:relative;
+  background:
+    repeating-linear-gradient(0deg,rgba(9,33,64,.018) 0 1px,transparent 1px 23px),
+    linear-gradient(145deg,#fffdf7,#f6efe1) !important;
+  box-shadow:0 8px 20px rgba(9,33,64,.10),inset 0 0 0 1px rgba(105,75,49,.11) !important;
+}
+.telegram-sheet::after {
+  content:"CONTROL ROOM COPY";
+  position:absolute;
+  right:18px;
+  bottom:16px;
+  transform:rotate(-4deg);
+  color:rgba(151,80,97,.25);
+  border:2px solid rgba(151,80,97,.18);
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.12em;
+  pointer-events:none;
+}
+
+/* Challenge 5 — subject tokens and period slots gain clearer tactile states. */
+.timetable-subject-card {
+  box-shadow:0 3px 8px rgba(9,33,64,.08) !important;
+  border-top:3px solid rgba(120,147,165,.52) !important;
+}
+.timetable-subject-card:hover {
+  transform:translateY(-2px);
+  box-shadow:0 7px 14px rgba(9,33,64,.12) !important;
+}
+.timetable-slot-card {
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(221,235,242,.56)) !important;
+}
+
+/* Challenge 6 — four distinct but restrained mini-console accents. */
+.brain-panel:nth-child(1) { border-top:4px solid #7893a5 !important; }
+.brain-panel:nth-child(2) { border-top:4px solid #d393a0 !important; }
+.brain-panel:nth-child(3) { border-top:4px solid #8cae9a !important; }
+.brain-panel:nth-child(4) { border-top:4px solid #a58aa6 !important; }
+.brain-panel {
+  box-shadow:0 5px 14px rgba(9,33,64,.08),inset 0 1px 0 rgba(255,255,255,.70) !important;
+}
+.brain-code-slots span {
+  box-shadow:inset 0 0 0 1px rgba(9,33,64,.12),0 2px 5px rgba(9,33,64,.07);
+}
+
+/* Challenge 7 — crossword active/extraction cells feel like archive controls. */
+.crossword-cell-input:focus,
+.crossword-cell.is-active .crossword-cell-input {
+  outline:2px solid rgba(211,147,160,.85) !important;
+  outline-offset:-2px;
+  background:#fff9fb !important;
+}
+.crossword-cell.is-extraction {
+  box-shadow:inset 0 0 0 2px rgba(211,147,160,.56) !important;
+}
+.crossword-extraction-strip {
+  background:linear-gradient(135deg,rgba(221,235,242,.65),rgba(255,255,255,.9)) !important;
+  border-top:3px solid rgba(120,147,165,.46) !important;
+}
+
+/* Challenge 8 — evidence desk gets cleaner security-camera framing. */
+.memory-desk {
+  border:2px solid rgba(9,33,64,.20) !important;
+  box-shadow:0 10px 24px rgba(9,33,64,.10),inset 0 0 0 5px rgba(255,255,255,.36) !important;
+}
+.memory-evidence {
+  background:linear-gradient(145deg,#fffdf8,#f4eee3) !important;
+  box-shadow:inset 0 0 0 1px rgba(117,85,53,.08);
+}
+.memory-evidence::before {
+  color:#8d6070 !important;
+  font-weight:950 !important;
+}
+.memory-observation-header::before {
+  content:"● SECURITY CAMERA FEED";
+  display:block;
+  margin-bottom:3px;
+  color:#b35f72;
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .timetable-subject-card:hover { transform:none !important; }
 }

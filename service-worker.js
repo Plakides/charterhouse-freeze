@@ -1,6 +1,6 @@
-const BUILD = "10B1";
+const BUILD = "10B2";
 const CACHE_PREFIX = "charterhouse-freeze-static-";
-const CACHE_NAME = "charterhouse-freeze-static-10B1";
+const CACHE_NAME = "charterhouse-freeze-static-10B2";
 const PRECACHE_URLS = [
   "./",
   "./assets/branding/baden-powell.png",
@@ -26,6 +26,8 @@ const PRECACHE_URLS = [
   "./assets/challenge-2/medeu.png",
   "./assets/game/final-scene-snowy.svg",
   "./assets/game/final-scene-thawed.svg",
+  "./assets/game/campus-snowy.png",
+  "./assets/game/campus-thawed.jpg",
   "./assets/game/final-scene.svg",
   "./assets/game/ice-cracks.svg",
   "./assets/kazakh-pattern.svg",

@@ -2,7 +2,7 @@
   "use strict";
 
   const challengeId = 2;
-  const routeStoragePrefix = "charterhouseFreeze.v2.almatyRoute.";
+  const routeStoragePrefix = "charterhouseFreeze.v2.almatyRoute.10B2.";
 
   const locations = Object.freeze([
     Object.freeze({
@@ -148,7 +148,7 @@
   }
 
   function loadState(teamId) {
-    const fallback = { route: ["abai"], verified: false };
+    const fallback = { route: [], verified: false };
 
     try {
       const raw = localStorage.getItem(keyFor(teamId));
@@ -157,11 +157,7 @@
       const parsed = JSON.parse(raw);
       const route = Array.isArray(parsed?.route)
         ? parsed.route.filter(id => byId.has(id))
-        : ["abai"];
-
-      if (!route.length || route[0] !== "abai") {
-        route.unshift("abai");
-      }
+        : [];
 
       return {
         route: route.slice(0, 20),
@@ -289,7 +285,7 @@
           <div class="almaty-route-console">
             <div class="almaty-route-title">
               <span>YOUR ROUTE</span>
-              <strong data-route-count>1 stop</strong>
+              <strong data-route-count>0 stops</strong>
             </div>
             <div class="almaty-route-strip" data-route-strip></div>
           </div>
@@ -327,7 +323,7 @@
           </div>
 
           <p class="almaty-route-message" data-route-message role="status" aria-live="polite">
-            Abai Square is already selected as your starting point.
+            Start with Step 1: click Abai Square.
           </p>
 
           <div class="almaty-build-note">
@@ -421,8 +417,8 @@
           : "";
       });
 
-      undoButton.disabled = state.verified || state.route.length <= 1;
-      clearButton.disabled = state.verified || state.route.length <= 1;
+      undoButton.disabled = state.verified || state.route.length === 0;
+      clearButton.disabled = state.verified || state.route.length === 0;
 
       saveState(teamId, state);
       renderPenalty();
@@ -499,7 +495,7 @@
     });
 
     undoButton.addEventListener("click", () => {
-      if (state.verified || state.route.length <= 1) return;
+      if (state.verified || state.route.length === 0) return;
 
       const removed = state.route.pop();
       message.classList.remove("is-success", "is-penalty");
@@ -511,10 +507,10 @@
     clearButton.addEventListener("click", () => {
       if (state.verified) return;
 
-      state.route = ["abai"];
+      state.route = [];
       message.classList.remove("is-success", "is-penalty");
       message.textContent =
-        "Route cleared. Abai Square remains as the starting point.";
+        "Route cleared. Start again by clicking Abai Square.";
       renderRoute();
     });
 
@@ -526,10 +522,15 @@
         return;
       }
 
-      if (state.route.length < 2) {
+      if (!state.route.length) {
         message.classList.remove("is-success", "is-penalty");
-        message.textContent =
-          "Build your route by clicking landmarks before checking it.";
+        message.textContent = "Click Abai Square to begin the route.";
+        return;
+      }
+
+      if (state.route[0] !== "abai") {
+        message.classList.remove("is-success", "is-penalty");
+        message.textContent = "Step 1 starts at Abai Square. Clear or undo, then begin there.";
         return;
       }
 
@@ -586,7 +587,7 @@
       getRoute: () => [...state.route],
       routeMatches: route => routeMatches(route),
       reset: () => {
-        state.route = ["abai"];
+        state.route = [];
         state.verified = false;
         cooldown?.clear(teamId, challengeId);
         saveState(teamId, state);

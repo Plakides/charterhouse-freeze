@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 10B1 — Universal 30-second wrong-answer penalty
+# Task 10B2 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 10B1 — Screenshot-led layout correction
+# Task 10B2 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 10B1 — Manual extraction correction
+# Task 10B2 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 10B1 — Card readability pass
+# Task 10B2 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 10B1 — Caesar shift changed to 8
+# Task 10B2 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1163,7 +1163,7 @@ Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
 
 
-# Task 10B1 — Extraction labels and BANCO clue refinement
+# Task 10B2 — Extraction labels and BANCO clue refinement
 
 Changes from 9G-B1:
 - extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
@@ -1518,7 +1518,7 @@ Frozen specification:
 It marks the Final Vault and all of Phase 9 as frozen.
 
 
-# Phase 10B1 — MacBook Neo responsive QA
+# Phase 10B2 — MacBook Neo responsive QA
 
 Target test viewport:
 - 1204 × 680 CSS px
@@ -1544,7 +1544,7 @@ All Phase 9 puzzle answers, cooldowns, seals, persistence, offline logic,
 Final Vault code and FINISH flow remain unchanged.
 
 
-# Phase 10B1 — Single-screen game shell
+# Phase 10B2 — Single-screen game shell
 
 10A1 is superseded. This is a structural responsive redesign rather than a compression pass.
 
@@ -1573,7 +1573,7 @@ Final Vault: route builder and circular vault fill the entire stage.
 No puzzle answers, validation rules, cooldowns, seals, persistence, offline logic, or FINISH flow were changed.
 
 
-# 10B1 — QA hotfix
+# 10B2 — QA hotfix
 
 Fixes three issues found immediately after deploying 10A2:
 
@@ -1597,7 +1597,7 @@ No puzzle logic, answers, cooldowns, seals, offline behavior or final-vault
 finish logic were changed.
 
 
-# Phase 10B1 — EAL readability / layout correction
+# Phase 10B2 — EAL readability / layout correction
 
 This pass responds to screenshot QA after the structural 10A2 rebuild.
 
@@ -1623,7 +1623,7 @@ Specific changes:
 No answers, cooldowns, seals, persistence, offline behavior or FINISH logic changed.
 
 
-# Phase 10B1 — Story + EAL readability
+# Phase 10B2 — Story + EAL readability
 
 Goals:
 - make the overall Freeze storyline explicit
@@ -1649,10 +1649,10 @@ Every challenge now has a prominent MISSION / YOUR TASK strip.
 The Mission Board now gives a changing story status as seals are recovered.
 
 
-# Phase 10B1 — Large-text / allow-scroll pass
+# Phase 10B2 — Large-text / allow-scroll pass
 
 The previous single-screen requirement was making important text too small.
-10B1 deliberately changes the acceptance rule:
+10B2 deliberately changes the acceptance rule:
 
 - readability is more important than fitting every pixel into 680px height
 - normal vertical scrolling is allowed
@@ -1672,12 +1672,12 @@ larger top-of-page metadata, instructions, clues, inputs and task text.
 
 No puzzle logic, answers, cooldowns, seals or FINISH behavior changed.
 
-# Phase 10B1 — Scroll unlock + bigger font hotfix
+# Phase 10B2 — Scroll unlock + bigger font hotfix
 
 This build fixes the regression where the desktop challenge pages still had no usable
 vertical scrollbar because `.site-shell` remained locked to `100dvh` with `overflow:hidden`.
 
-10B1 therefore does two things:
+10B2 therefore does two things:
 
 1. **actually unlocks scrolling** on mission/challenge/vault screens by overriding the
    active `.site-shell` wrappers, not just the inner challenge panels;
@@ -1690,7 +1690,7 @@ Key outcomes:
 - clue numbers, clue text, intro line, and `EST. 4 min` are materially larger;
 - challenge chrome and instruction text are larger across all pages.
 
-# Phase 10B1 — layout rebalance
+# Phase 10B2 — layout rebalance
 
 This pass specifically corrects three presentation regressions reported after 10A6:
 
@@ -1699,12 +1699,12 @@ This pass specifically corrects three presentation regressions reported after 10
 - the **mission board** had been over-compressed by the single-screen shell rules and
   looked squashed into a shallow strip.
 
-10B1 therefore:
+10B2 therefore:
 - enlarges the house selection cards and logos while preserving four visible name fields;
 - expands the codename reveal composition;
 - restores the mission board to a proper board + sidebar layout.
 
-# Phase 10B1 — puzzle layout + unlimited memory review
+# Phase 10B2 — puzzle layout + unlimited memory review
 
 This pass fixes three specific QA issues:
 
@@ -1720,9 +1720,9 @@ This pass fixes three specific QA issues:
 The unnecessary `SEPTEMBER 2026` label has also been removed from the masthead.
 
 
-# Phase 10B1 — Visual language + game feel
+# Phase 10B2 — Visual language + game feel
 
-10B1 begins the final visual/gamification phase while keeping the 10A8 usability baseline.
+10B2 begins the final visual/gamification phase while keeping the 10A8 usability baseline.
 
 Implemented in this build:
 - coherent illustrated mission icon family for all eight board challenges;
@@ -1735,3 +1735,23 @@ Implemented in this build:
 - reduced-motion fallbacks retained.
 
 No puzzle answers, validation, cooldowns, persistence, offline behavior or final FINISH logic changed.
+
+# Phase 10B2 — restrained visual art pass
+
+10B2 keeps the established Charterhouse cream/navy/pink interface and deliberately
+avoids the over-the-top fantasy UI concepts explored during visual ideation.
+
+Key corrections and upgrades:
+- landing screen now uses the exact approved Charterhouse Almaty campus photograph
+  already embedded in the game's final-scene asset;
+- no invented school building is introduced;
+- mission-board solved tiles genuinely lose their opaque ice layer and reveal the
+  same continuous campus photograph underneath;
+- the underlying snowy board photo no longer includes decorative seal medallions;
+- the final fully-restored state still changes to the approved thawed campus image;
+- the Snow Leopard seal uses an unmistakable paw symbol instead of the horned-face icon;
+- control-core text is stacked so it cannot overflow over itself;
+- Lost in Almaty starts with an empty route: students must click Abai Square themselves;
+- Challenges 1–8 receive restrained surface/art polish without changing their mechanics.
+
+Puzzle answers, seals, cooldown behavior and final vault code are unchanged.

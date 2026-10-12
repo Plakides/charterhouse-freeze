@@ -542,10 +542,11 @@
 
     switch (symbol) {
       case "snow-leopard":
-        createSvgPath(svg, "M24 9c6 0 11 3 13 9 1 5-1 11-5 15-3 2-5 4-8 5-3-1-5-3-8-5-4-4-6-10-5-15 2-6 7-9 13-9z", false);
-        createSvgCircle(svg, 19, 23, 1.3, true);
-        createSvgCircle(svg, 29, 23, 1.3, true);
-        createSvgPath(svg, "M20 29c2 2 6 2 8 0M17 16l-4-5M31 16l4-5", false);
+        createSvgCircle(svg, 13, 16, 4.2, false);
+        createSvgCircle(svg, 24, 11, 4.6, false);
+        createSvgCircle(svg, 35, 16, 4.2, false);
+        createSvgCircle(svg, 39, 27, 3.9, false);
+        createSvgPath(svg, "M24 20c-7 0-13 6-13 13 0 5 4 8 9 8 3 0 5-2 7-2s4 2 7 2c5 0 9-3 9-8 0-7-6-13-13-13h-6z", false);
         break;
       case "mountain":
         createSvgPath(svg, "M7 35 18 15l8 10 5-8 10 18H7zm11 0 8-12m5 12 4-8", false);
