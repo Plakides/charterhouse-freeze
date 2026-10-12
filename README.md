@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 10A6 — Universal 30-second wrong-answer penalty
+# Task 10A8 — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 10A6 — Screenshot-led layout correction
+# Task 10A8 — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 10A6 — Manual extraction correction
+# Task 10A8 — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 10A6 — Card readability pass
+# Task 10A8 — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 10A6 — Caesar shift changed to 8
+# Task 10A8 — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1163,7 +1163,7 @@ Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
 
 
-# Task 10A6 — Extraction labels and BANCO clue refinement
+# Task 10A8 — Extraction labels and BANCO clue refinement
 
 Changes from 9G-B1:
 - extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
@@ -1518,7 +1518,7 @@ Frozen specification:
 It marks the Final Vault and all of Phase 9 as frozen.
 
 
-# Phase 10A6 — MacBook Neo responsive QA
+# Phase 10A8 — MacBook Neo responsive QA
 
 Target test viewport:
 - 1204 × 680 CSS px
@@ -1544,7 +1544,7 @@ All Phase 9 puzzle answers, cooldowns, seals, persistence, offline logic,
 Final Vault code and FINISH flow remain unchanged.
 
 
-# Phase 10A6 — Single-screen game shell
+# Phase 10A8 — Single-screen game shell
 
 10A1 is superseded. This is a structural responsive redesign rather than a compression pass.
 
@@ -1573,7 +1573,7 @@ Final Vault: route builder and circular vault fill the entire stage.
 No puzzle answers, validation rules, cooldowns, seals, persistence, offline logic, or FINISH flow were changed.
 
 
-# 10A6 — QA hotfix
+# 10A8 — QA hotfix
 
 Fixes three issues found immediately after deploying 10A2:
 
@@ -1597,7 +1597,7 @@ No puzzle logic, answers, cooldowns, seals, offline behavior or final-vault
 finish logic were changed.
 
 
-# Phase 10A6 — EAL readability / layout correction
+# Phase 10A8 — EAL readability / layout correction
 
 This pass responds to screenshot QA after the structural 10A2 rebuild.
 
@@ -1623,7 +1623,7 @@ Specific changes:
 No answers, cooldowns, seals, persistence, offline behavior or FINISH logic changed.
 
 
-# Phase 10A6 — Story + EAL readability
+# Phase 10A8 — Story + EAL readability
 
 Goals:
 - make the overall Freeze storyline explicit
@@ -1649,10 +1649,10 @@ Every challenge now has a prominent MISSION / YOUR TASK strip.
 The Mission Board now gives a changing story status as seals are recovered.
 
 
-# Phase 10A6 — Large-text / allow-scroll pass
+# Phase 10A8 — Large-text / allow-scroll pass
 
 The previous single-screen requirement was making important text too small.
-10A6 deliberately changes the acceptance rule:
+10A8 deliberately changes the acceptance rule:
 
 - readability is more important than fitting every pixel into 680px height
 - normal vertical scrolling is allowed
@@ -1672,12 +1672,12 @@ larger top-of-page metadata, instructions, clues, inputs and task text.
 
 No puzzle logic, answers, cooldowns, seals or FINISH behavior changed.
 
-# Phase 10A6 — Scroll unlock + bigger font hotfix
+# Phase 10A8 — Scroll unlock + bigger font hotfix
 
 This build fixes the regression where the desktop challenge pages still had no usable
 vertical scrollbar because `.site-shell` remained locked to `100dvh` with `overflow:hidden`.
 
-10A6 therefore does two things:
+10A8 therefore does two things:
 
 1. **actually unlocks scrolling** on mission/challenge/vault screens by overriding the
    active `.site-shell` wrappers, not just the inner challenge panels;
@@ -1689,3 +1689,32 @@ Key outcomes:
 - House of Confusion cards can be viewed in full vertically;
 - clue numbers, clue text, intro line, and `EST. 4 min` are materially larger;
 - challenge chrome and instruction text are larger across all pages.
+
+# Phase 10A8 — layout rebalance
+
+This pass specifically corrects three presentation regressions reported after 10A6:
+
+- the **team setup** screen felt too empty and the house logos were too small;
+- the **codename reveal** screen was under-using the available space;
+- the **mission board** had been over-compressed by the single-screen shell rules and
+  looked squashed into a shallow strip.
+
+10A8 therefore:
+- enlarges the house selection cards and logos while preserving four visible name fields;
+- expands the codename reveal composition;
+- restores the mission board to a proper board + sidebar layout.
+
+# Phase 10A8 — puzzle layout + unlimited memory review
+
+This pass fixes three specific QA issues:
+
+- **Secret Message:** removes the large dead area below the decoder rail and keeps the
+  decoded-message submission bar visible while the team works.
+- **Frozen Crossword:** redesigns the page around a larger crossword grid and larger clue
+  text. The extraction step returns to a full-width strip underneath rather than wasting a
+  narrow right-hand column.
+- **Memory Test:** the evidence desk now uses the full page width with larger objects and
+  protected text labels. After the first 30-second observation, teams may take **unlimited
+  10-second reviews** whenever they need them.
+
+The unnecessary `SEPTEMBER 2026` label has also been removed from the masthead.

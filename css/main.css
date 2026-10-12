@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A6 · universal wrong-answer penalty */
+/* Task 10A8 · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10A8 — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A6 · screenshot-led map-fit corrections */
+/* Task 10A8 · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — SECRET MESSAGE UI                                             */
+/* TASK 10A8 — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A6 · manual extraction — the site must not solve TULPAR for students */
+/* Task 10A8 · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10A6 · readability refinements from live 1536px screenshot */
+/* Task 10A8 · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10A8 — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10A8 — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — BRAIN FREEZE UI                                              */
+/* TASK 10A8 — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — FROZEN CROSSWORD UI                                          */
+/* TASK 10A8 — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10A8 — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10A8 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8793,7 +8793,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10A6 — LIVE FINAL VAULT SUBMISSION                                  */
+/* TASK 10A8 — LIVE FINAL VAULT SUBMISSION                                  */
 /* ========================================================================== */
 
 .final-vault-experience.is-finalizing [data-vault-preview-reset] {
@@ -8840,7 +8840,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A6 — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* PHASE 10A8 — MACBOOK NEO 1204px RESPONSIVE QA                             */
 /* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
 /* Reclaims chrome/heading height while preserving puzzle readability.         */
 /* ========================================================================== */
@@ -9254,7 +9254,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10A6 — SINGLE-SCREEN GAME SHELL                                     */
+/* PHASE 10A8 — SINGLE-SCREEN GAME SHELL                                     */
 /* Structural pass: use width, not scroll. Target 1204×680 and larger.        */
 /* ========================================================================== */
 
@@ -9794,7 +9794,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* 10A6 — QA FIXES                                                          */
+/* 10A8 — QA FIXES                                                          */
 /* ========================================================================== */
 
 /* The 687×223 Charterhouse lockup was 188px wide in a 50px bar, which makes
@@ -9830,7 +9830,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10A6 — EAL READABILITY / NO-OVERLAP PASS                            */
+/* PHASE 10A8 — EAL READABILITY / NO-OVERLAP PASS                            */
 /* Core student-facing text should be readable at 1204×680 and on desktop.   */
 /* ========================================================================== */
 
@@ -10496,7 +10496,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10A6 — STORY + EAL READABILITY                                      */
+/* PHASE 10A8 — STORY + EAL READABILITY                                      */
 /* ========================================================================== */
 
 /* Opening storyline ------------------------------------------------------- */
@@ -10969,7 +10969,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10A6 — LARGE-TEXT / ALLOW-SCROLL PASS                               */
+/* PHASE 10A8 — LARGE-TEXT / ALLOW-SCROLL PASS                               */
 /* The previous single-screen constraint made important text microscopic.     */
 /* From this build, readability wins. Normal vertical scrolling is allowed.    */
 /* ========================================================================== */
@@ -12016,7 +12016,7 @@ body:has(#screenMission:not([hidden])) {
 }
 
 /* ========================================================================== */
-/* PHASE 10A6 — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
+/* PHASE 10A8 — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
 /* Fixes:                                                                     */
 /* 1) challenge pages must actually scroll on desktop                         */
 /* 2) top metadata and instruction text must be obviously readable            */
@@ -12208,4 +12208,771 @@ body {
   .almaty-directions p { font-size: 11px !important; }
   .secret-note blockquote { font-size: 17px !important; }
   .crossword-clue > span { font-size: 11px !important; }
+}
+
+/* ========================================================================== */
+/* PHASE 10A8 — LAYOUT REBALANCE                                              */
+/* Fixes:                                                                     */
+/* - registration screen felt empty; house logos too small                    */
+/* - codename reveal wasted space                                             */
+/* - mission board was crushed into a single shallow strip                    */
+/* ========================================================================== */
+
+/* Codename reveal: use the viewport better. */
+#screenReveal.reveal-screen {
+  min-height: calc(100dvh - 68px);
+  height: auto !important;
+  padding: 24px 28px 30px;
+  display: grid;
+  place-items: center;
+}
+#screenReveal .reveal-panel {
+  width: min(920px,100%);
+  max-height: none;
+}
+#screenReveal .seal-ring {
+  width: 76px;
+  height: 76px;
+  margin-bottom: 14px;
+  font-size: 22px;
+  box-shadow: 0 0 0 6px rgba(211,147,160,.13);
+}
+#screenReveal .reveal-panel .protocol {
+  margin-bottom: 10px;
+  font-size: 10px;
+}
+#screenReveal .reveal-panel h2 {
+  font-size: clamp(36px,3.5vw,50px);
+}
+#screenReveal .team-name {
+  margin: 10px 0 18px;
+  font-size: clamp(58px,6vw,86px);
+}
+#screenReveal .team-summary {
+  max-width: 820px;
+  margin-bottom: 16px;
+}
+#screenReveal .team-summary > div {
+  padding: 14px 16px;
+}
+#screenReveal .team-summary span {
+  font-size: 9px;
+}
+#screenReveal .team-summary strong {
+  font-size: 18px;
+}
+#screenReveal .reveal-objective {
+  max-width: 820px;
+  margin: 0 auto 12px;
+  padding: 12px 16px;
+}
+#screenReveal .reveal-warning {
+  max-width: 820px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+#screenReveal .button-large {
+  min-height: 52px;
+  padding-inline: 28px;
+  font-size: 15px;
+}
+
+/* Mission board: restore a proper board + sidebar, not the squashed strip. */
+#screenMission {
+  height: auto !important;
+  min-height: calc(100dvh - 50px);
+  overflow: visible !important;
+}
+#screenMission.mission-screen {
+  padding-top: 12px;
+  padding-bottom: 22px;
+}
+#screenMission .dashboard-shell {
+  width: min(1500px,100%);
+  height: auto !important;
+  min-height: calc(100dvh - 74px);
+  padding: 10px clamp(18px,2.4vw,34px) 12px;
+  display: grid;
+  grid-template-rows: auto auto;
+}
+#screenMission .dashboard-topbar {
+  height: 66px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(9,33,64,.14);
+}
+#screenMission .dashboard-house-mark {
+  width: 52px;
+  height: 52px;
+  flex-basis: 52px;
+}
+#screenMission .dashboard-house-mark img {
+  width: 40px;
+  height: 43px;
+}
+#screenMission .dashboard-team h2 {
+  font-size: 31px;
+}
+#screenMission .dashboard-team p {
+  font-size: 11px;
+}
+#screenMission .dashboard-timer-card {
+  min-width: 126px;
+}
+#screenMission .dashboard-timer-card span {
+  font-size: 8px;
+}
+#screenMission .dashboard-timer-card strong {
+  font-size: 28px;
+}
+#screenMission .dashboard-main {
+  min-height: 0;
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) 286px !important;
+  grid-template-rows: none !important;
+  gap: 18px;
+  padding-top: 12px;
+  align-items: start;
+}
+#screenMission .mission-board-panel {
+  grid-row: auto !important;
+  min-height: 0;
+  display: block !important;
+}
+#screenMission .board-heading-row {
+  height: auto;
+  min-height: 52px;
+  margin: 0 0 10px;
+  align-items: flex-end;
+}
+#screenMission .board-heading-row .protocol {
+  display: block;
+  font-size: 8px;
+}
+#screenMission .board-heading-row h3 {
+  font-size: clamp(28px,2.7vw,36px);
+}
+#screenMission .board-progress-pill {
+  display: block;
+}
+#screenMission .mission-story-line {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+#screenMission .mission-story-line strong {
+  font-size: 9px;
+}
+#screenMission .mission-story-line span {
+  font-size: 11px;
+  line-height: 1.35;
+}
+#screenMission .freeze-board {
+  width: 100%;
+  max-width: none;
+  height: clamp(420px, calc(100dvh - 300px), 560px);
+  min-height: 420px;
+  margin: 0;
+}
+#screenMission .board-instruction {
+  max-width: none;
+  margin: 8px 0 0;
+  font-size: 10px;
+}
+
+#screenMission .mission-toolbar {
+  grid-row: auto !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-content: start;
+  gap: 8px;
+}
+#screenMission .mission-toolbar-status,
+#screenMission .mission-toolbar-seals,
+#screenMission .mission-toolbar-bulletin,
+#screenMission .mission-toolbar-final {
+  min-width: 0;
+  height: auto !important;
+  min-height: 62px;
+  border: 1px solid rgba(9,33,64,.15);
+  background: rgba(255,255,255,.7);
+}
+#screenMission .mission-toolbar-status {
+  padding: 10px;
+  display: grid;
+  grid-template-rows: auto 5px;
+  gap: 8px;
+}
+#screenMission .mission-toolbar-status-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#screenMission .mission-toolbar-status-copy strong {
+  margin-left: auto;
+  font-size: 18px;
+}
+#screenMission .mission-toolbar-status-copy small {
+  font-size: 8px;
+}
+#screenMission .mission-toolbar-status .status-meter {
+  height: 5px;
+}
+#screenMission .mission-toolbar-seals {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  align-items: start;
+}
+#screenMission .mission-toolbar-label {
+  font-size: 8px;
+}
+#screenMission .mission-toolbar-seals .seal-grid {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 6px;
+}
+#screenMission .mission-toolbar-seals .seal-slot {
+  width: 100%;
+  height: auto;
+  min-height: 42px;
+  aspect-ratio: 1;
+}
+#screenMission .mission-toolbar-seals .seal-slot span {
+  font-size: 16px;
+}
+#screenMission .mission-toolbar-seals .seal-slot small {
+  font-size: 6px;
+}
+#screenMission .mission-toolbar-tools {
+  display: grid;
+  gap: 6px;
+}
+#screenMission .mission-toolbar-tools .dashboard-tool-button {
+  min-width: 0;
+  width: 100%;
+  height: auto;
+  min-height: 56px;
+  padding: 8px 10px;
+  grid-template-columns: 30px 1fr;
+  gap: 8px;
+}
+#screenMission .mission-toolbar-tools .tool-icon {
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+}
+#screenMission .mission-toolbar-tools .dashboard-tool-button strong {
+  font-size: 13px;
+}
+#screenMission .mission-toolbar-tools .dashboard-tool-button small {
+  font-size: 8px;
+}
+#screenMission .mission-toolbar-bulletin {
+  padding: 10px;
+}
+#screenMission .mission-toolbar-bulletin > span {
+  font-size: 8px;
+}
+#screenMission .mission-toolbar-bulletin p {
+  margin-top: 4px;
+  font-size: 10px;
+  line-height: 1.35;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+#screenMission .mission-toolbar-final {
+  padding: 8px;
+}
+#screenMission .mission-toolbar-final .final-route-copy {
+  height: auto;
+  display: grid;
+  gap: 6px;
+}
+#screenMission .mission-toolbar-final .final-route-copy strong,
+#screenMission .mission-toolbar-final .final-route-copy p {
+  display: block;
+}
+#screenMission .mission-toolbar-final .button {
+  min-height: 40px;
+  font-size: 11px;
+}
+
+@media (min-width:1000px) and (max-width:1280px) and (max-height:760px) {
+  #screenMission .dashboard-main {
+    grid-template-columns: minmax(0,1fr) 268px !important;
+    gap: 14px;
+  }
+  #screenMission .freeze-board {
+    height: clamp(390px, calc(100dvh - 290px), 500px);
+    min-height: 390px;
+  }
+  #screenMission .board-heading-row h3 {
+    font-size: 26px;
+  }
+}
+
+/* ========================================================================== */
+/* PHASE 10A8 — PUZZLE SPACE REBALANCE                                       */
+/* Challenge 3: remove dead space and keep answer entry obvious.             */
+/* Challenge 7: larger crossword + larger clues, extraction below.           */
+/* Challenge 8: full-width evidence desk, larger objects, no text overlap.    */
+/* ========================================================================== */
+
+/* Challenge 3 ------------------------------------------------------------- */
+.challenge-content-card.secret-message-content,
+.secret-message-puzzle,
+.secret-card-workbench {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+.secret-message-puzzle {
+  display: block !important;
+}
+
+.secret-card-workbench {
+  padding-bottom: 7px !important;
+}
+
+.secret-card-bank {
+  min-height: 78px !important;
+  height: auto !important;
+}
+
+.secret-card-bank:has(.secret-bank-empty) {
+  min-height: 42px !important;
+  padding: 4px !important;
+}
+
+.secret-bank-empty {
+  min-height: 34px !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 10px !important;
+}
+
+.secret-slots {
+  min-height: 128px !important;
+  height: auto !important;
+}
+
+.secret-slot {
+  height: 128px !important;
+}
+
+.secret-extraction-console.is-manual {
+  margin-top: 7px !important;
+}
+
+/* Keep the final answer entry visible while students work through the long puzzle. */
+.challenge-stage:has(.secret-message-content) .challenge-answer-panel {
+  position: sticky !important;
+  bottom: 8px !important;
+  z-index: 30 !important;
+  margin-top: 8px !important;
+  background: rgba(247,244,238,.98) !important;
+  box-shadow: 0 -7px 20px rgba(9,33,64,.10) !important;
+}
+
+/* Challenge 7 — full-width crossword ------------------------------------- */
+.crossword-puzzle {
+  height: auto !important;
+  min-height: 0 !important;
+  display: block !important;
+}
+
+.crossword-side {
+  display: none !important;
+}
+
+.crossword-console {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 10px !important;
+  display: block !important;
+}
+
+.crossword-console-header {
+  margin-bottom: 8px !important;
+}
+
+.crossword-console-header h3 {
+  font-size: 30px !important;
+}
+
+.crossword-console-header p {
+  max-width: 820px !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+}
+
+.crossword-progress-badge {
+  min-width: 92px !important;
+  padding: 7px 9px !important;
+}
+
+.crossword-progress-badge span {
+  font-size: 8px !important;
+}
+
+.crossword-progress-badge strong {
+  font-size: 15px !important;
+}
+
+.crossword-workspace {
+  display: grid !important;
+  grid-template-columns: minmax(390px,.9fr) minmax(0,1.35fr) !important;
+  gap: 10px !important;
+  align-items: start !important;
+}
+
+.crossword-grid-panel {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  padding: 9px !important;
+  overflow: visible !important;
+}
+
+.crossword-grid-topline {
+  min-height: 34px !important;
+}
+
+.crossword-grid-topline > span {
+  font-size: 8px !important;
+}
+
+.crossword-grid-topline strong {
+  font-size: 11px !important;
+}
+
+.crossword-grid {
+  --crossword-cell: 35px !important;
+  padding: 7px !important;
+  gap: 1px !important;
+}
+
+.crossword-cell input {
+  padding: 4px 2px 1px !important;
+  font-size: 20px !important;
+}
+
+.crossword-clue-number {
+  font-size: 7px !important;
+}
+
+.crossword-extraction-number {
+  width: 17px !important;
+  height: 17px !important;
+  font-size: 8px !important;
+}
+
+.crossword-grid-help {
+  margin-top: 6px !important;
+  gap: 5px 8px !important;
+  font-size: 8px !important;
+}
+
+.crossword-grid-help kbd {
+  font-size: 8px !important;
+}
+
+.crossword-clear-button {
+  margin-top: 6px !important;
+  padding: 6px 8px !important;
+  font-size: 9px !important;
+}
+
+.crossword-clues-panel {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  gap: 8px !important;
+  overflow: visible !important;
+}
+
+.crossword-clue-column {
+  padding: 8px !important;
+}
+
+.crossword-clue-heading {
+  min-height: 30px !important;
+  padding-bottom: 5px !important;
+}
+
+.crossword-clue-heading > span {
+  font-size: 8px !important;
+}
+
+.crossword-clue-heading strong {
+  font-size: 8px !important;
+}
+
+.crossword-clue-list {
+  gap: 4px !important;
+  padding-top: 5px !important;
+}
+
+.crossword-clue {
+  min-height: 70px !important;
+  padding: 7px 6px !important;
+  grid-template-columns: 24px minmax(0,1fr) !important;
+  column-gap: 7px !important;
+}
+
+.crossword-clue > b {
+  width: 23px !important;
+  height: 23px !important;
+  font-size: 8px !important;
+}
+
+.crossword-clue > span {
+  font-size: 12.5px !important;
+  line-height: 1.28 !important;
+}
+
+.crossword-clue > small {
+  margin-top: 2px !important;
+  font-size: 8px !important;
+}
+
+.crossword-extraction-strip {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  margin: 9px 0 0 !important;
+  padding: 9px 11px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) auto !important;
+  gap: 12px !important;
+  align-items: center !important;
+  border-left: 4px solid var(--ch-pink) !important;
+}
+
+.crossword-extraction-copy > span {
+  font-size: 8px !important;
+}
+
+.crossword-extraction-copy strong {
+  font-size: 14px !important;
+}
+
+.crossword-extraction-copy p {
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+
+.crossword-extraction-boxes {
+  display: flex !important;
+  gap: 5px !important;
+  margin-top: 0 !important;
+}
+
+.crossword-extraction-boxes > span {
+  width: 42px !important;
+  height: 50px !important;
+  grid-template-rows: 15px 1fr !important;
+}
+
+.crossword-extraction-boxes b {
+  font-size: 8px !important;
+}
+
+.crossword-extraction-boxes i {
+  font-size: 16px !important;
+}
+
+.crossword-status {
+  display: block !important;
+  margin-top: 6px !important;
+  font-size: 9px !important;
+}
+
+/* Challenge 8 — observation desk uses the full width --------------------- */
+.challenge-content-card.memory-challenge-content,
+.memory-observation-shell,
+.memory-intro-shell,
+.memory-questions-shell {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+.memory-observation-shell {
+  min-height: 0 !important;
+  padding: 12px !important;
+}
+
+.memory-observation-header {
+  margin-bottom: 9px !important;
+}
+
+.memory-observation-header h3 {
+  font-size: 30px !important;
+}
+
+.memory-observation-header p {
+  max-width: 820px !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+}
+
+.memory-countdown-card {
+  min-width: 110px !important;
+  padding: 8px 10px !important;
+}
+
+.memory-countdown-card strong {
+  font-size: 31px !important;
+}
+
+.memory-desk {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 10px !important;
+  gap: 8px !important;
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  grid-template-rows: repeat(3,minmax(180px,auto)) !important;
+}
+
+.memory-evidence {
+  min-height: 180px !important;
+  padding: 13px 10px 10px !important;
+  display: grid !important;
+  grid-template-rows: minmax(0,1fr) auto auto !important;
+  place-items: center !important;
+  align-content: stretch !important;
+  gap: 6px !important;
+  overflow: hidden !important;
+}
+
+.memory-evidence > strong {
+  position: relative !important;
+  z-index: 5 !important;
+  padding: 2px 5px !important;
+  background: rgba(255,253,248,.92) !important;
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+}
+
+.memory-evidence > small {
+  position: relative !important;
+  z-index: 5 !important;
+  font-size: 9px !important;
+  line-height: 1.15 !important;
+}
+
+.memory-evidence-pin {
+  font-size: 8px !important;
+}
+
+.memory-scarf { width: 106px !important; }
+.memory-scarf > span:first-child { height: 31px !important; }
+.memory-scarf > span:nth-child(2),
+.memory-scarf > span:nth-child(3) { width: 34px !important; height: 46px !important; }
+
+.memory-ticket-stub {
+  width: 138px !important;
+  padding: 10px 12px !important;
+}
+.memory-ticket-stub b { font-size: 12px !important; }
+.memory-ticket-stub span { font-size: 8px !important; }
+.memory-ticket-stub strong { font-size: 23px !important; }
+
+.memory-book {
+  width: 102px !important;
+  height: 114px !important;
+}
+.memory-book span { font-size: 7px !important; }
+.memory-book strong { font-size: 20px !important; }
+
+.memory-receipt-paper {
+  width: 126px !important;
+  min-height: 110px !important;
+}
+.memory-receipt-paper b { font-size: 12px !important; }
+.memory-receipt-paper span { font-size: 8px !important; }
+.memory-receipt-paper strong { font-size: 20px !important; }
+
+.memory-compass {
+  width: 112px !important;
+  height: 112px !important;
+}
+.memory-compass span { font-size: 9px !important; }
+.memory-needle { width: 38px !important; }
+
+.memory-mitten {
+  width: 72px !important;
+  height: 86px !important;
+}
+
+.memory-key {
+  width: 94px !important;
+  height: 36px !important;
+}
+.memory-key-wrap > b { font-size: 16px !important; }
+
+.memory-mug {
+  width: 82px !important;
+  height: 76px !important;
+}
+.memory-paw { font-size: 30px !important; }
+
+.memory-postcard {
+  width: 146px !important;
+  height: 102px !important;
+}
+
+.memory-observation-footer {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 18px !important;
+  margin-top: 8px !important;
+}
+.memory-observation-footer span {
+  font-size: 9px !important;
+}
+
+/* Memory question review is intentionally unlimited. */
+.memory-review-row.is-unlimited {
+  border-left: 4px solid #7893a5 !important;
+  background: rgba(221,235,242,.72) !important;
+}
+.memory-review-row.is-unlimited strong {
+  font-size: 11px !important;
+}
+.memory-review-row.is-unlimited span {
+  font-size: 10px !important;
+  line-height: 1.3 !important;
+}
+.memory-review-row.is-unlimited .memory-review-button {
+  min-width: 190px !important;
+  min-height: 38px !important;
+  font-size: 10px !important;
+}
+
+@media (min-width:1000px) and (max-width:1280px) {
+  .crossword-workspace {
+    grid-template-columns: minmax(370px,.9fr) minmax(0,1.3fr) !important;
+  }
+  .crossword-grid {
+    --crossword-cell: 33px !important;
+  }
+  .crossword-clue > span {
+    font-size: 11.5px !important;
+  }
+
+  .memory-desk {
+    grid-template-rows: repeat(3,minmax(165px,auto)) !important;
+  }
+  .memory-evidence {
+    min-height: 165px !important;
+  }
 }

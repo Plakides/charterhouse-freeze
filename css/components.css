@@ -233,7 +233,7 @@
 
 
 /* ========================================================================== */
-/* PHASE 10A6 — REGISTRATION: ALL FOUR STUDENTS VISIBLE                      */
+/* PHASE 10A8 — REGISTRATION: ALL FOUR STUDENTS VISIBLE                      */
 /* ========================================================================== */
 #screenRegister.registration-screen {
   padding-top: 20px;
@@ -375,5 +375,135 @@
 @media (max-width:900px) {
   #screenRegister .member-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+}
+
+/* ========================================================================== */
+/* PHASE 10A8 — REGISTRATION / CODENAME REBALANCE                             */
+/* Bigger house logos, less wasted space, still keeps all four name boxes.    */
+/* ========================================================================== */
+
+#screenRegister.registration-screen {
+  padding-top: 16px;
+  padding-bottom: 22px;
+}
+#screenRegister.registration-screen::before {
+  margin-bottom: 12px;
+}
+#screenRegister .section-heading {
+  max-width: 1080px;
+  margin: 0 auto 16px;
+}
+#screenRegister .section-heading h2 {
+  font-size: clamp(38px,4.5vw,56px);
+  margin-bottom: 8px;
+}
+#screenRegister .section-heading > p:last-of-type {
+  max-width: 960px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+#screenRegister .registration-mission-chain {
+  margin-top: 8px;
+  font-size: 11px;
+}
+#screenRegister .registration-mission-chain span {
+  padding: 5px 8px;
+}
+#screenRegister .form-section {
+  max-width: 1080px;
+  margin-bottom: 16px;
+}
+#screenRegister .form-section legend {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+#screenRegister .step-number {
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
+}
+#screenRegister .house-grid {
+  gap: 12px;
+}
+#screenRegister .house-card-inner {
+  min-height: 148px;
+  padding: 12px 12px 10px;
+  gap: 8px;
+  align-content: center;
+}
+#screenRegister .house-card img {
+  width: 92px;
+  height: 100px;
+}
+#screenRegister .house-name {
+  font-size: 18px;
+}
+#screenRegister .member-grid {
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 10px;
+}
+#screenRegister .member-field {
+  gap: 6px;
+}
+#screenRegister .member-field > span {
+  font-size: 12px;
+}
+#screenRegister .member-field b,
+#screenRegister .member-field i {
+  font-size: 8px;
+}
+#screenRegister .member-field input {
+  min-height: 44px;
+  padding: 10px 11px;
+  font-size: 14px;
+}
+#screenRegister .member-count {
+  font-size: 10px;
+}
+#screenRegister .registration-actions {
+  max-width: 1080px;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+#screenRegister .registration-actions .button {
+  min-height: 46px;
+  font-size: 13px;
+}
+
+@media (min-width:1000px) and (max-width:1280px) and (max-height:760px) {
+  #screenRegister.registration-screen {
+    padding: 12px 20px 18px;
+  }
+  #screenRegister.registration-screen::before {
+    display: none;
+  }
+  #screenRegister .section-heading {
+    margin-bottom: 12px;
+  }
+  #screenRegister .section-heading h2 {
+    font-size: 34px;
+  }
+  #screenRegister .section-heading > p:last-of-type {
+    font-size: 13px;
+  }
+  #screenRegister .registration-mission-chain {
+    font-size: 10px;
+  }
+  #screenRegister .house-card-inner {
+    min-height: 134px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  #screenRegister .house-card img {
+    width: 82px;
+    height: 90px;
+  }
+  #screenRegister .house-name {
+    font-size: 17px;
+    text-align: center;
+  }
+  #screenRegister .member-grid {
+    grid-template-columns: repeat(4,minmax(0,1fr));
   }
 }

@@ -425,23 +425,16 @@
       });
     }
 
-    function startReview(kind) {
+    function startReview(kind = "optional") {
       const now = Date.now();
 
       if (state.phase !== "questions") return false;
 
-      if (kind === "optional") {
-        if (state.secondLookUsed) return false;
-        state.secondLookUsed = true;
-      } else if (kind === "recovery") {
-        if (state.recoveryReviewCredits <= 0) return false;
-        state.recoveryReviewCredits -= 1;
-      } else {
-        return false;
-      }
-
+      // Teams may review the evidence as many times as they need. Each review
+      // is still short so the memory mechanic remains meaningful, but nobody
+      // can become permanently stuck because a teammate missed one detail.
       state.phase = "review";
-      state.reviewKind = kind;
+      state.reviewKind = kind === "recovery" ? "recovery" : "optional";
       state.reviewEndsAt = now + REVIEW_MS;
       saveState(teamId, state);
       renderStage();
@@ -575,8 +568,8 @@
         : "FIRST LOOK";
 
       const copy = isReview
-        ? "Check only the details your team was unsure about. The desk will freeze again automatically."
-        : "Memorise colours, words, numbers, positions and directions. You will not keep the desk open.";
+        ? "Check the details your team was unsure about. You can come back again whenever you need another look."
+        : "Memorise colours, words, numbers, positions and directions. After this first look, unlimited short reviews are available.";
 
       return `
         <section class="memory-observation-shell">
@@ -636,57 +629,16 @@
 
     function questionsMarkup() {
       clampExpiredState(state);
-      const optionalReviewAvailable = !state.secondLookUsed;
-      const recoveryAvailable = state.recoveryReviewCredits > 0;
-      const recoveryPending =
-        Boolean(state.recoveryAvailableAt) &&
-        Date.now() < Number(state.recoveryAvailableAt);
 
-      let reviewButton = `
+      const reviewButton = `
         <button
           type="button"
           class="button button-secondary memory-review-button"
-          disabled
+          data-memory-review="optional"
         >
-          SECOND LOOK USED
+          LOOK AGAIN · 10 SECONDS
         </button>
       `;
-
-      if (recoveryAvailable) {
-        reviewButton = `
-          <button
-            type="button"
-            class="button button-secondary memory-review-button"
-            data-memory-review="recovery"
-          >
-            RECOVERY REVIEW · 10 SECONDS
-          </button>
-        `;
-      } else if (optionalReviewAvailable) {
-        reviewButton = `
-          <button
-            type="button"
-            class="button button-secondary memory-review-button"
-            data-memory-review="optional"
-          >
-            SECOND LOOK · 10 SECONDS
-          </button>
-        `;
-      }
-
-      const reviewHeading = recoveryAvailable
-        ? "A recovery review is available."
-        : recoveryPending
-          ? "Recovery review unlocks when the penalty ends."
-          : optionalReviewAvailable
-            ? "Your team has one optional second look."
-            : "No optional second look remains.";
-
-      const reviewCopy = recoveryAvailable
-        ? "Use the 10-second review, then try the final code again."
-        : recoveryPending
-          ? "You can change your answers while the 30-second penalty counts down."
-          : "A wrong final code will never lock you out: after the normal penalty, another 10-second recovery review becomes available.";
 
       return `
         <section class="memory-questions-shell">
@@ -729,10 +681,10 @@
             </div>
           </section>
 
-          <div class="memory-review-row">
+          <div class="memory-review-row is-unlimited">
             <div>
-              <strong>${reviewHeading}</strong>
-              <span>${reviewCopy}</span>
+              <strong>Need another look?</strong>
+              <span>You can reopen the evidence as many times as your team needs. Each review lasts 10 seconds.</span>
             </div>
             ${reviewButton}
           </div>
@@ -778,11 +730,10 @@
             </ol>
 
             <div class="memory-safety-rule">
-              <strong>You cannot get permanently stuck.</strong>
+              <strong>Unlimited reviews are available.</strong>
               <span>
-                You get one optional 10-second second look. Each wrong final code
-                unlocks another 10-second recovery review after the normal
-                30-second penalty.
+                After the first 30-second look, you can reopen the evidence for
+                another 10 seconds whenever your team needs it.
               </span>
             </div>
           </aside>
@@ -869,12 +820,8 @@
       placeholder: "Enter the six vault digits",
       inputEnabled: true,
       enabled: true,
-      onWrongAnswer: ({ cooldownUntil }) => {
-        window.FREEZE_MEMORY_TEST?.scheduleRecoveryReview?.(cooldownUntil);
-      },
-      onCooldownExpired: () => {
-        window.FREEZE_MEMORY_TEST?.unlockPendingRecoveryReview?.();
-      }
+      onWrongAnswer: () => {},
+      onCooldownExpired: () => {}
     },
     render
   });
