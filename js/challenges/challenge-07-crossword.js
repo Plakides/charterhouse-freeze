@@ -403,6 +403,8 @@
             </div>
           </div>
 
+          <div class="crossword-answer-host" data-crossword-answer-host></div>
+
           <p
             class="crossword-status"
             data-crossword-status

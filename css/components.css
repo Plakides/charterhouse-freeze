@@ -233,7 +233,7 @@
 
 
 /* ========================================================================== */
-/* PHASE 10B2d — REGISTRATION: ALL FOUR STUDENTS VISIBLE                      */
+/* PHASE 10B2e — REGISTRATION: ALL FOUR STUDENTS VISIBLE                      */
 /* ========================================================================== */
 #screenRegister.registration-screen {
   padding-top: 20px;
@@ -379,7 +379,7 @@
 }
 
 /* ========================================================================== */
-/* PHASE 10B2d — REGISTRATION / CODENAME REBALANCE                             */
+/* PHASE 10B2e — REGISTRATION / CODENAME REBALANCE                             */
 /* Bigger house logos, less wasted space, still keeps all four name boxes.    */
 /* ========================================================================== */
 
@@ -509,6 +509,6 @@
 }
 
 
-/* 10B2d — Toolkit icon/copy polish */
+/* 10B2e — Toolkit icon/copy polish */
 .field-kit-nav strong { font-size:16px !important; }
 .field-kit-nav small { font-size:9px !important; }

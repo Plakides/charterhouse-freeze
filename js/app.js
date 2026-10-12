@@ -34,6 +34,7 @@
   const registrationSubmit = registrationForm.querySelector('button[type="submit"]');
 
   const teamName = document.getElementById("teamName");
+  const revealHouseShield = document.getElementById("revealHouseShield");
   const summaryHouse = document.getElementById("summaryHouse");
   const summaryMembers = document.getElementById("summaryMembers");
   const startMissionButton = document.getElementById("startMissionButton");
@@ -83,12 +84,16 @@
   const challengeHouse = document.getElementById("challengeHouse");
   const challengeTimer = document.getElementById("challengeTimer");
   const challengeNumberLabel = document.getElementById("challengeNumberLabel");
+  const challengeHeaderIcon = document.getElementById("challengeHeaderIcon");
   const challengeEyebrow = document.getElementById("challengeEyebrow");
   const challengeTitle = document.getElementById("challengeTitle");
   const challengeIntro = document.getElementById("challengeIntro");
   const challengeDuration = document.getElementById("challengeDuration");
   const challengeContent = document.getElementById("challengeContent");
   const challengeAnswerForm = document.getElementById("challengeAnswerForm");
+  const challengeAnswerHome = challengeAnswerForm.parentElement;
+  const challengeAnswerMarker = document.createComment("challenge-answer-home");
+  challengeAnswerHome.insertBefore(challengeAnswerMarker, challengeAnswerForm);
   const challengeAnswerLabel = document.getElementById("challengeAnswerLabel");
   const challengeAnswerHelp = document.getElementById("challengeAnswerHelp");
   const challengeAnswerInput = document.getElementById("challengeAnswerInput");
@@ -345,6 +350,9 @@
     teamName.classList.add("is-revealing");
 
     summaryHouse.textContent = team.houseName || houseNames[team.house] || team.house;
+    if (revealHouseShield && houseAssets[team.house]) {
+      revealHouseShield.src = houseAssets[team.house];
+    }
 
     const count = Array.isArray(team.students)
       ? team.students.length
@@ -1165,7 +1173,14 @@
   function renderChallenge(definition, team) {
     currentChallengeId = definition.id;
 
+    if (challengeAnswerForm.parentElement !== challengeAnswerHome) {
+      challengeAnswerHome.insertBefore(challengeAnswerForm, challengeAnswerMarker.nextSibling);
+    }
+
     challengeNumberLabel.textContent = String(definition.id).padStart(2, "0");
+    if (challengeHeaderIcon) {
+      challengeHeaderIcon.src = `assets/game-ui/challenge-${String(definition.id).padStart(2, "0")}.png?v=10B2e`;
+    }
     challengeEyebrow.textContent = definition.eyebrow;
     challengeTitle.textContent = definition.title;
     challengeIntro.textContent = definition.intro;
@@ -1190,6 +1205,14 @@
     }
 
     configureChallengeSubmission(definition, team);
+
+    if (definition.id === 7) {
+      const crosswordAnswerHost = challengeContent.querySelector("[data-crossword-answer-host]");
+      if (crosswordAnswerHost) {
+        crosswordAnswerHost.appendChild(challengeAnswerForm);
+      }
+    }
+
     updateChallengeChrome(team);
   }
 

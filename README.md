@@ -560,7 +560,7 @@ The MacBook Neo responsive pass and whole-game visual/UX redesign are reserved
 for Phase 10A–10C so all eight puzzles can be improved consistently.
 
 
-# Task 10B2d — Universal 30-second wrong-answer penalty
+# Task 10B2e — Universal 30-second wrong-answer penalty
 
 Challenge 01 remains content-frozen from 9A1.
 
@@ -620,7 +620,7 @@ hidden only for this challenge. Challenge 01 remains unchanged.
 is connected to actual game completion in 9B-D.
 
 
-# Task 10B2d — Screenshot-led layout correction
+# Task 10B2e — Screenshot-led layout correction
 
 Based on the 1536×960 Chrome screenshot:
 
@@ -694,7 +694,7 @@ accepted answer fingerprint(s), enable submission, inherit the global
 30-second wrong-answer penalty, and award Book seal 2.
 
 
-# Task 10B2d — Manual extraction correction
+# Task 10B2e — Manual extraction correction
 
 9C-B was reopened after testing feedback.
 
@@ -721,7 +721,7 @@ can be tested, but Submit is still disabled. 9C-C will enable validation,
 The Kazakh wording is unchanged.
 
 
-# Task 10B2d — Card readability pass
+# Task 10B2e — Card readability pass
 
 Based directly on live-browser screenshot feedback.
 
@@ -834,7 +834,7 @@ Frozen puzzle:
 The challenge page itself does not reveal the shift value or decoded plaintext.
 
 
-# Task 10B2d — Caesar shift changed to 8
+# Task 10B2e — Caesar shift changed to 8
 
 Reason for revision:
 - the Field Kit Caesar tool defaults to shift 3
@@ -1163,7 +1163,7 @@ Target solve time: 7–9 minutes.
 Eventual reward: Key seal / code 9.
 
 
-# Task 10B2d — Extraction labels and BANCO clue refinement
+# Task 10B2e — Extraction labels and BANCO clue refinement
 
 Changes from 9G-B1:
 - extraction cells now use A, B, C, D, E, F instead of 1–6 so they cannot
@@ -1518,7 +1518,7 @@ Frozen specification:
 It marks the Final Vault and all of Phase 9 as frozen.
 
 
-# Phase 10B2d — MacBook Neo responsive QA
+# Phase 10B2e — MacBook Neo responsive QA
 
 Target test viewport:
 - 1204 × 680 CSS px
@@ -1544,7 +1544,7 @@ All Phase 9 puzzle answers, cooldowns, seals, persistence, offline logic,
 Final Vault code and FINISH flow remain unchanged.
 
 
-# Phase 10B2d — Single-screen game shell
+# Phase 10B2e — Single-screen game shell
 
 10A1 is superseded. This is a structural responsive redesign rather than a compression pass.
 
@@ -1573,7 +1573,7 @@ Final Vault: route builder and circular vault fill the entire stage.
 No puzzle answers, validation rules, cooldowns, seals, persistence, offline logic, or FINISH flow were changed.
 
 
-# 10B2d — QA hotfix
+# 10B2e — QA hotfix
 
 Fixes three issues found immediately after deploying 10A2:
 
@@ -1597,7 +1597,7 @@ No puzzle logic, answers, cooldowns, seals, offline behavior or final-vault
 finish logic were changed.
 
 
-# Phase 10B2d — EAL readability / layout correction
+# Phase 10B2e — EAL readability / layout correction
 
 This pass responds to screenshot QA after the structural 10A2 rebuild.
 
@@ -1623,7 +1623,7 @@ Specific changes:
 No answers, cooldowns, seals, persistence, offline behavior or FINISH logic changed.
 
 
-# Phase 10B2d — Story + EAL readability
+# Phase 10B2e — Story + EAL readability
 
 Goals:
 - make the overall Freeze storyline explicit
@@ -1649,10 +1649,10 @@ Every challenge now has a prominent MISSION / YOUR TASK strip.
 The Mission Board now gives a changing story status as seals are recovered.
 
 
-# Phase 10B2d — Large-text / allow-scroll pass
+# Phase 10B2e — Large-text / allow-scroll pass
 
 The previous single-screen requirement was making important text too small.
-10B2d deliberately changes the acceptance rule:
+10B2e deliberately changes the acceptance rule:
 
 - readability is more important than fitting every pixel into 680px height
 - normal vertical scrolling is allowed
@@ -1672,12 +1672,12 @@ larger top-of-page metadata, instructions, clues, inputs and task text.
 
 No puzzle logic, answers, cooldowns, seals or FINISH behavior changed.
 
-# Phase 10B2d — Scroll unlock + bigger font hotfix
+# Phase 10B2e — Scroll unlock + bigger font hotfix
 
 This build fixes the regression where the desktop challenge pages still had no usable
 vertical scrollbar because `.site-shell` remained locked to `100dvh` with `overflow:hidden`.
 
-10B2d therefore does two things:
+10B2e therefore does two things:
 
 1. **actually unlocks scrolling** on mission/challenge/vault screens by overriding the
    active `.site-shell` wrappers, not just the inner challenge panels;
@@ -1690,7 +1690,7 @@ Key outcomes:
 - clue numbers, clue text, intro line, and `EST. 4 min` are materially larger;
 - challenge chrome and instruction text are larger across all pages.
 
-# Phase 10B2d — layout rebalance
+# Phase 10B2e — layout rebalance
 
 This pass specifically corrects three presentation regressions reported after 10A6:
 
@@ -1699,12 +1699,12 @@ This pass specifically corrects three presentation regressions reported after 10
 - the **mission board** had been over-compressed by the single-screen shell rules and
   looked squashed into a shallow strip.
 
-10B2d therefore:
+10B2e therefore:
 - enlarges the house selection cards and logos while preserving four visible name fields;
 - expands the codename reveal composition;
 - restores the mission board to a proper board + sidebar layout.
 
-# Phase 10B2d — puzzle layout + unlimited memory review
+# Phase 10B2e — puzzle layout + unlimited memory review
 
 This pass fixes three specific QA issues:
 
@@ -1720,9 +1720,9 @@ This pass fixes three specific QA issues:
 The unnecessary `SEPTEMBER 2026` label has also been removed from the masthead.
 
 
-# Phase 10B2d — Visual language + game feel
+# Phase 10B2e — Visual language + game feel
 
-10B2d begins the final visual/gamification phase while keeping the 10A8 usability baseline.
+10B2e begins the final visual/gamification phase while keeping the 10A8 usability baseline.
 
 Implemented in this build:
 - coherent illustrated mission icon family for all eight board challenges;
@@ -1736,9 +1736,9 @@ Implemented in this build:
 
 No puzzle answers, validation, cooldowns, persistence, offline behavior or final FINISH logic changed.
 
-# Phase 10B2d — restrained visual art pass
+# Phase 10B2e — restrained visual art pass
 
-10B2d keeps the established Charterhouse cream/navy/pink interface and deliberately
+10B2e keeps the established Charterhouse cream/navy/pink interface and deliberately
 avoids the over-the-top fantasy UI concepts explored during visual ideation.
 
 Key corrections and upgrades:
@@ -1757,7 +1757,7 @@ Key corrections and upgrades:
 Puzzle answers, seals, cooldown behavior and final vault code are unchanged.
 
 
-# Phase 10B2d — Illustrated asset integration
+# Phase 10B2e — Illustrated asset integration
 
 This is the code build that actually integrates the approved illustrated game-asset sheet.
 
@@ -1778,7 +1778,7 @@ What did NOT change:
 - cooldowns, final-vault code, offline-first state;
 - existing 10A readability/scrolling work.
 
-# Phase 10B2d — final student-friendly visual pass
+# Phase 10B2e — final student-friendly visual pass
 
 This pass deliberately keeps the restrained Charterhouse look while making the
 approved illustrated game assets more visible. It also simplifies the opening
@@ -1792,3 +1792,22 @@ screen for Year 7 / EAL students:
 - challenge-board illustrated icons are larger and clearer.
 - seal medallions and utility buttons are more prominent without changing the board itself.
 - a new two-colour snowflake favicon is used so the browser-tab icon is actually visible.
+
+
+# Phase 10B2e — final polish/fix pass
+
+- Homepage campus photography moved into a deliberate right-side hero composition using the existing real Charterhouse campus image.
+- Primary actions receive a consistent illustrated snow/security game-button treatment while retaining live HTML text.
+- Team-assigned screen rebuilt as a wide mission card with the actual selected House crest.
+- Challenge headings now use the approved illustrated challenge artwork as small badges.
+- Completed challenge status gains a restrained recovered-seal reward treatment.
+- Crossword final answer form is physically moved inside the crossword card directly below the A–F extraction strip.
+- No answer logic, cooldown rules, seal values, route logic or final-vault code changed.
+
+## 10B2e QA focus
+- Homepage now uses the real Charterhouse campus as a deliberate right-side composition, not a small floating image.
+- All primary actions use a consistent illustrated live-HTML game button system.
+- Team-assigned screen is a wide mission card with selected House crest and stronger use of space.
+- Challenge headers use the approved illustrated challenge graphics as badges.
+- Solved challenge top status shows a restrained recovered-seal medallion.
+- Crossword answer form now sits directly below the A–F extraction strip inside the crossword card.

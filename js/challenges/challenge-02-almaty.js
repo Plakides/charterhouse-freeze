@@ -2,7 +2,7 @@
   "use strict";
 
   const challengeId = 2;
-  const routeStoragePrefix = "charterhouseFreeze.v2.almatyRoute.10B2d.";
+  const routeStoragePrefix = "charterhouseFreeze.v2.almatyRoute.10B2e.";
 
   const locations = Object.freeze([
     Object.freeze({
