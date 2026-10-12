@@ -80,14 +80,14 @@
       name: "Kok Tobe",
       short: "Kok Tobe",
       image: "assets/challenge-2/kok-tobe.png",
-      x: 81, y: 72
+      x: 81, y: 68
     }),
     Object.freeze({
       id: "medeu",
       name: "Medeu",
       short: "Medeu",
       image: "assets/challenge-2/medeu.png",
-      x: 81, y: 87
+      x: 81, y: 91
     })
   ]);
 

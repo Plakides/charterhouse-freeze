@@ -14762,3 +14762,43 @@ body.has-seal-recovery {
     left: 50%;
   }
 }
+
+/* 10C1c screenshot fixes ---------------------------------------------------- */
+/* Give the Almaty map enough vertical space for Kok Tobe and Medeu to be     */
+/* clearly separated rather than stacking on top of one another.              */
+.almaty-puzzle {
+  min-height: 780px !important;
+}
+.almaty-map-panel,
+.almaty-dispatch {
+  min-height: 780px !important;
+}
+.almaty-map {
+  min-height: 585px !important;
+}
+.almaty-landmark[data-landmark="koktobe"] {
+  --landmark-size: clamp(62px, 6.2vw, 84px) !important;
+}
+.almaty-landmark[data-landmark="medeu"] {
+  --landmark-size: clamp(58px, 5.8vw, 78px) !important;
+}
+
+/* Seal success popup: keep the CTA readable around the standard icon block. */
+.seal-recovery-return {
+  width: auto !important;
+  min-width: 270px !important;
+  padding-left: 64px !important;
+  padding-right: 42px !important;
+  white-space: nowrap !important;
+  justify-content: center !important;
+  font-size: 11px !important;
+}
+.seal-recovery-return > span:first-child {
+  white-space: nowrap !important;
+}
+
+@media (max-width: 720px) {
+  .seal-recovery-return {
+    min-width: min(270px, 100%) !important;
+  }
+}

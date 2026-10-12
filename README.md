@@ -1812,9 +1812,9 @@ screen for Year 7 / EAL students:
 - Solved challenge top status shows a restrained recovered-seal medallion.
 - Crossword answer form now sits directly below the A–F extraction strip inside the crossword card.
 
-# Phase 10C1 — Interaction + feedback system
+# Phase 10C1c — Interaction + feedback system
 
-10C1 starts the approved game-feel phase while keeping the frozen 10B2e visual/layout baseline.
+10C1c starts the approved game-feel phase while keeping the frozen 10B2e visual/layout baseline.
 There is no sound.
 
 Implemented:
