@@ -124,11 +124,11 @@
   };
 
   const bulletinLines = [
-    "Indoor temperature: increasingly character-building.",
-    "Science Department requests that nobody lick the windows.",
-    "Heating status: emotionally unavailable.",
-    "Emergency blankets remain disappointingly theoretical.",
-    "The snow leopard continues to deny involvement."
+    "School heating is still locked.",
+    "Recover more seals to unlock the heating controls.",
+    "Each recovered seal clears one frozen section of the school.",
+    "The Emergency Vault opens after all eight seals are recovered.",
+    "The snow leopard still denies involvement."
   ];
 
   const sealDefinitions = Object.freeze({
@@ -683,6 +683,7 @@
 
     for (let challengeId = 1; challengeId <= 8; challengeId += 1) {
       const slot = document.createElement("div");
+      slot.dataset.challengeId = String(challengeId);
       const seal = sealsByChallenge.get(challengeId);
 
       if (seal) {

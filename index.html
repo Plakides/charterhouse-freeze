@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.webmanifest?v=10B2">
+  <link rel="manifest" href="manifest.webmanifest?v=10B2d">
   <meta name="theme-color" content="#092140">
-  <link rel="icon" type="image/png" href="assets/branding/charterhouse-logo.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/game-ui/favicon-freeze-64.png?v=10B2d">
+  <link rel="icon" type="image/svg+xml" href="assets/game-ui/favicon-freeze.svg?v=10B2d">
   <title>The Great Charterhouse Freeze</title>
   <meta name="description" content="Charterhouse Almaty House Challenge">
-  <link rel="stylesheet" href="css/main.css?v=10B2">
-  <link rel="stylesheet" href="css/components.css?v=10B2">
-  <link rel="stylesheet" href="css/animations.css?v=10B2">
+  <link rel="stylesheet" href="css/main.css?v=10B2d">
+  <link rel="stylesheet" href="css/components.css?v=10B2d">
+  <link rel="stylesheet" href="css/animations.css?v=10B2d">
 </head>
 <body>
   <div class="site-shell" id="app">
@@ -42,7 +43,7 @@
       <section class="screen" id="screenStart" aria-labelledby="startTitle" hidden>
         <div class="hero">
           <div class="hero-copy">
-            <p class="protocol">EMERGENCY PROTOCOL 09</p>
+            <p class="protocol">SCHOOL EMERGENCY MISSION</p>
             <h1 id="startTitle">The Great<br>Charterhouse Freeze</h1>
             <p class="hero-lede">
               Charterhouse Almaty is freezing. The emergency heating system has
@@ -82,8 +83,8 @@
               </div>
             </div>
             <div class="weather-card">
-              <span>EXTERNAL CONDITIONS</span>
-              <strong>Character-building</strong>
+              <span>HEATING SYSTEM</span>
+              <strong>LOCKED</strong>
             </div>
           </div>
         </div>
@@ -283,16 +284,16 @@
                   </g>
                 </svg>
                 <button class="challenge-tile" type="button" data-challenge="1" aria-label="Challenge 1: Logic">
-                  <span class="tile-number">01</span><span class="tile-kicker">KEY TRACE</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><circle cx="26" cy="27" r="10"/><path d="M33 34l12 12m-4-8 5-5"/><path d="M18 18l5-5m19 5-5-5"/></svg></span><span class="tile-title">LOGIC</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">01</span><span class="tile-kicker">KEY TRACE</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-01.png?v=10B2d" alt=""></span><span class="tile-title">LOGIC</span><span class="tile-status">FROZEN</span>
                 </button>
                 <button class="challenge-tile" type="button" data-challenge="2" aria-label="Challenge 2: Lost in Almaty">
-                  <span class="tile-number">02</span><span class="tile-kicker">CITY ROUTE</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><path d="M12 45 25 20l8 12 6-9 13 22H12z"/><path d="M22 44c7-8 14-13 24-16"/><circle cx="45" cy="28" r="3"/></svg></span><span class="tile-title">LOST IN ALMATY</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">02</span><span class="tile-kicker">CITY ROUTE</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-02.png?v=10B2d" alt=""></span><span class="tile-title">LOST IN ALMATY</span><span class="tile-status">FROZEN</span>
                 </button>
                 <button class="challenge-tile" type="button" data-challenge="3" aria-label="Challenge 3: Secret Message">
-                  <span class="tile-number">03</span><span class="tile-kicker">INTERCEPT</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><path d="M15 20h34v25H15z"/><path d="M19 25h18M19 31h12M19 37h16"/><path d="M43 16v9m-4-5 4-4 4 4"/></svg></span><span class="tile-title">SECRET MESSAGE</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">03</span><span class="tile-kicker">INTERCEPT</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-03.png?v=10B2d" alt=""></span><span class="tile-title">SECRET MESSAGE</span><span class="tile-status">FROZEN</span>
                 </button>
                 <button class="challenge-tile" type="button" data-challenge="4" aria-label="Challenge 4: Telegram">
-                  <span class="tile-number">04</span><span class="tile-kicker">CIPHER</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><path d="M13 21h38v25H13z"/><path d="m13 22 19 14 19-14"/><path d="M20 42h9m6 0h9"/><circle cx="47" cy="17" r="3"/></svg></span><span class="tile-title">TELEGRAM</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">04</span><span class="tile-kicker">CIPHER</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-04.png?v=10B2d" alt=""></span><span class="tile-title">TELEGRAM</span><span class="tile-status">FROZEN</span>
                 </button>
 
                 <div class="board-centre" aria-label="Emergency control core: this part of the hidden scene is visible from the start">
@@ -305,16 +306,16 @@
                 </div>
 
                 <button class="challenge-tile" type="button" data-challenge="5" aria-label="Challenge 5: Timetable">
-                  <span class="tile-number">05</span><span class="tile-kicker">SCHEDULE LOCK</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><path d="M15 17h34v32H15zM15 26h34"/><path d="M23 13v8m18-8v8"/><path d="M21 32h7m5 0h10M21 38h13m5 0h4M21 44h9m5 0h8"/></svg></span><span class="tile-title">TIMETABLE</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">05</span><span class="tile-kicker">SCHEDULE LOCK</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-05.png?v=10B2d" alt=""></span><span class="tile-title">TIMETABLE</span><span class="tile-status">FROZEN</span>
                 </button>
                 <button class="challenge-tile" type="button" data-challenge="6" aria-label="Challenge 6: Brain Freeze">
-                  <span class="tile-number">06</span><span class="tile-kicker">DEFROST</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><path d="M25 46h14M27 41h10"/><path d="M32 13c-9 0-16 7-16 16 0 6 3 10 8 14 2 2 3 4 3 6h10c0-2 1-4 3-6 5-4 8-8 8-14 0-9-7-16-16-16z"/><path d="m31 20-5 9h6l-3 9 10-13h-6l3-5"/></svg></span><span class="tile-title">BRAIN FREEZE</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">06</span><span class="tile-kicker">DEFROST</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-06.png?v=10B2d" alt=""></span><span class="tile-title">BRAIN FREEZE</span><span class="tile-status">FROZEN</span>
                 </button>
                 <button class="challenge-tile" type="button" data-challenge="7" aria-label="Challenge 7: Frozen Crossword">
-                  <span class="tile-number">07</span><span class="tile-kicker">ARCHIVE LOCK</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><path d="M16 16h32v32H16zM27 16v32M38 16v32M16 27h32M16 38h32"/><circle cx="43" cy="43" r="6"/><path d="M47 47l6 6"/></svg></span><span class="tile-title">CROSSWORD</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">07</span><span class="tile-kicker">ARCHIVE LOCK</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-07.png?v=10B2d" alt=""></span><span class="tile-title">CROSSWORD</span><span class="tile-status">FROZEN</span>
                 </button>
                 <button class="challenge-tile" type="button" data-challenge="8" aria-label="Challenge 8: Memory">
-                  <span class="tile-number">08</span><span class="tile-kicker">SECURITY FEED</span><span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="icon-ring" cx="32" cy="32" r="27"/><path d="M10 32s8-12 22-12 22 12 22 12-8 12-22 12S10 32 10 32z"/><circle cx="32" cy="32" r="6"/><path d="M20 18l-4-5m28 5 4-5"/><path d="M26 48c2 3 10 3 12 0"/></svg></span><span class="tile-title">MEMORY</span><span class="tile-status">FROZEN</span>
+                  <span class="tile-number">08</span><span class="tile-kicker">SECURITY FEED</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-08.png?v=10B2d" alt=""></span><span class="tile-title">MEMORY</span><span class="tile-status">FROZEN</span>
                 </button>
               </div>
 
@@ -340,11 +341,11 @@
               </section>
 
               <div class="mission-toolbar-tools">
-                <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon tool-icon-case" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 23h40v29H12zM23 23v-7h18v7M12 33h40"/><path d="M27 29h10v10H27zM30 32h4m-2-2v4"/><path d="M18 44h10m8 0h10"/></svg></span><span><strong>Security Tool Kit</strong><small>Decoders · references · equipment</small></span></button>
-                <button class="dashboard-tool-button" id="leaderboardButton" type="button"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 37V25h7v12m6 0V16h7v21m6 0V10h7v27M7 37h37"/></svg></span><span><strong>Leaderboard</strong><small>Live</small></span></button>
+                <button class="dashboard-tool-button" id="fieldKitButton" type="button"><span class="tool-icon tool-icon-case tool-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/toolkit.png?v=10B2d" alt=""></span><span><strong>Security Tool Kit</strong><small>Decoders · references · equipment</small></span></button>
+                <button class="dashboard-tool-button" id="leaderboardButton" type="button"><span class="tool-icon tool-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/leaderboard.png?v=10B2d" alt=""></span><span><strong>Leaderboard</strong><small>Live</small></span></button>
               </div>
 
-              <section class="mission-toolbar-bulletin"><span>BULLETIN</span><p id="emergencyBulletin">Indoor temperature: increasingly character-building.</p></section>
+              <section class="mission-toolbar-bulletin"><span>BULLETIN</span><p id="emergencyBulletin">School heating is still locked.</p></section>
 
               <section class="final-route-card mission-toolbar-final" id="finalRouteCard" hidden>
                 <div class="final-route-copy">
@@ -367,7 +368,7 @@
             <div class="challenge-team-strip"><span id="vaultTeamName">Team</span><i aria-hidden="true"></i><span id="vaultHouse">House</span></div>
             <div class="challenge-utility-strip vault-utility-strip">
               <div class="challenge-mini-progress"><span>SEALS</span><strong>8 / 8</strong></div>
-              <button class="challenge-top-tool" id="vaultFieldKitButton" type="button" aria-label="Open Security Tool Kit"><span class="mini-toolkit-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 17h32v23H8zM17 17v-6h14v6M8 26h32"/><path d="M20 22h8v8h-8zM23 24v4m-2-2h4"/></svg></span><strong>Security Tool Kit</strong></button>
+              <button class="challenge-top-tool" id="vaultFieldKitButton" type="button" aria-label="Open Security Tool Kit"><span class="mini-toolkit-icon mini-toolkit-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/toolkit.png?v=10B2d" alt=""></span><strong>Security Tool Kit</strong></button>
               <div class="challenge-timer-card"><span>ELAPSED</span><strong id="vaultTimer">0:00</strong></div>
             </div>
           </header>
@@ -433,7 +434,7 @@
             <div class="challenge-utility-strip">
               <div class="challenge-mini-progress" title="Mission progress"><span>SEALS</span><strong id="challengeProgress">0 / 8</strong></div>
               <div class="challenge-mini-status"><strong id="challengeStatus">UNSOLVED</strong><span id="challengeStatusText">Recover its seal.</span></div>
-              <button class="challenge-top-tool" id="challengeFieldKitButton" type="button" aria-label="Open Security Tool Kit"><span class="mini-toolkit-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 17h32v23H8zM17 17v-6h14v6M8 26h32"/><path d="M20 22h8v8h-8zM23 24v4m-2-2h4"/></svg></span><strong>Security Tool Kit</strong></button>
+              <button class="challenge-top-tool" id="challengeFieldKitButton" type="button" aria-label="Open Security Tool Kit"><span class="mini-toolkit-icon mini-toolkit-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/toolkit.png?v=10B2d" alt=""></span><strong>Security Tool Kit</strong></button>
               <div class="challenge-timer-card"><span>ELAPSED</span><strong id="challengeTimer">0:00</strong></div>
             </div>
           </header>
@@ -499,7 +500,7 @@
       <span>CHARTERHOUSE ALMATY</span>
       <span class="status-copy" id="statusCopy">Emergency system awaiting response.</span>
       <button class="teacher-tools-button" id="teacherDiagnosticsButton" type="button" title="Teacher diagnostics · Ctrl+Alt+D">TEACHER DIAGNOSTICS</button>
-      <span class="demo-badge">PHASE 10B · VISUAL LANGUAGE + GAME FEEL · BUILD 10B2</span>
+      <span class="demo-badge">PHASE 10B · ILLUSTRATED ASSET INTEGRATION · BUILD 10B2d</span>
     </footer>
   </div>
 
@@ -797,7 +798,7 @@
         </section>
 
         <section class="diagnostics-card diagnostics-card-wide diagnostics-technical">
-          <div><span>BUILD</span><strong data-diagnostic-value="build">10B2</strong></div>
+          <div><span>BUILD</span><strong data-diagnostic-value="build">10B2d</strong></div>
           <div><span>DEVICE ID</span><strong data-diagnostic-value="device">—</strong></div>
         </section>
       </div>
@@ -824,28 +825,28 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=10B2"></script>
-  <script src="js/state.js?v=10B2"></script>
-  <script src="js/recovery.js?v=10B2"></script>
-  <script src="js/answer-engine.js?v=10B2"></script>
-  <script src="js/sync-queue.js?v=10B2"></script>
-  <script src="js/sync-transport.js?v=10B2"></script>
-  <script src="js/api.js?v=10B2"></script>
-  <script src="js/challenges/registry.js?v=10B2"></script>
-  <script src="js/challenges/challenge-01-logic.js?v=10B2"></script>
-  <script src="js/challenges/challenge-02-almaty.js?v=10B2"></script>
-  <script src="js/challenges/challenge-03-language.js?v=10B2"></script>
-  <script src="js/challenges/challenge-04-telegram.js?v=10B2"></script>
-  <script src="js/challenges/challenge-05-timetable.js?v=10B2"></script>
-  <script src="js/challenges/challenge-06-brain-freeze.js?v=10B2"></script>
-  <script src="js/challenges/challenge-07-crossword.js?v=10B2"></script>
-  <script src="js/challenges/challenge-08-memory.js?v=10B2"></script>
-  <script src="js/field-kit.js?v=10B2"></script>
-  <script src="js/leaderboard.js?v=10B2"></script>
-  <script src="js/pwa.js?v=10B2"></script>
-  <script src="js/diagnostics.js?v=10B2"></script>
-  <script src="js/cooldown.js?v=10B2"></script>
-  <script src="js/final-vault.js?v=10B2"></script>
-  <script src="js/app.js?v=10B2"></script>
+  <script src="js/config.js?v=10B2d"></script>
+  <script src="js/state.js?v=10B2d"></script>
+  <script src="js/recovery.js?v=10B2d"></script>
+  <script src="js/answer-engine.js?v=10B2d"></script>
+  <script src="js/sync-queue.js?v=10B2d"></script>
+  <script src="js/sync-transport.js?v=10B2d"></script>
+  <script src="js/api.js?v=10B2d"></script>
+  <script src="js/challenges/registry.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-01-logic.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-02-almaty.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-03-language.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-04-telegram.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-05-timetable.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-06-brain-freeze.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-07-crossword.js?v=10B2d"></script>
+  <script src="js/challenges/challenge-08-memory.js?v=10B2d"></script>
+  <script src="js/field-kit.js?v=10B2d"></script>
+  <script src="js/leaderboard.js?v=10B2d"></script>
+  <script src="js/pwa.js?v=10B2d"></script>
+  <script src="js/diagnostics.js?v=10B2d"></script>
+  <script src="js/cooldown.js?v=10B2d"></script>
+  <script src="js/final-vault.js?v=10B2d"></script>
+  <script src="js/app.js?v=10B2d"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
-const BUILD = "10B2";
+const BUILD = "10B2d";
 const CACHE_PREFIX = "charterhouse-freeze-static-";
-const CACHE_NAME = "charterhouse-freeze-static-10B2";
+const CACHE_NAME = "charterhouse-freeze-static-10B2d";
 const PRECACHE_URLS = [
   "./",
   "./assets/branding/baden-powell.png",
@@ -32,6 +32,23 @@ const PRECACHE_URLS = [
   "./assets/game/ice-cracks.svg",
   "./assets/kazakh-pattern.svg",
   "./assets/mountain-silhouette.svg",
+  "./assets/game-ui/challenge-01.png",
+  "./assets/game-ui/challenge-02.png",
+  "./assets/game-ui/challenge-03.png",
+  "./assets/game-ui/challenge-04.png",
+  "./assets/game-ui/challenge-05.png",
+  "./assets/game-ui/challenge-06.png",
+  "./assets/game-ui/challenge-07.png",
+  "./assets/game-ui/challenge-08.png",
+  "./assets/game-ui/seal-locked.png",
+  "./assets/game-ui/seal-recovered.png",
+  "./assets/game-ui/snow-leopard-emblem.png",
+  "./assets/game-ui/toolkit.png",
+  "./assets/game-ui/leaderboard.png",
+  "./assets/game-ui/favicon-freeze.svg",
+  "./assets/game-ui/favicon-freeze-64.png",
+  "./assets/game-ui/favicon-freeze-192.png",
+  "./assets/game-ui/favicon-freeze-512.png",
   "./css/animations.css",
   "./css/components.css",
   "./css/main.css",

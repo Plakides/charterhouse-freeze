@@ -3627,7 +3627,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B2 · universal wrong-answer penalty */
+/* Task 10B2d · universal wrong-answer penalty */
 .challenge-message.is-penalty {
   color: #8a5a17;
 }
@@ -3644,7 +3644,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — LOST IN ALMATY INTERACTIVE MAP                               */
+/* TASK 10B2d — LOST IN ALMATY INTERACTIVE MAP                               */
 /* ========================================================================== */
 
 .challenge-content-card.almaty-challenge-content {
@@ -4210,7 +4210,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B2 · screenshot-led map-fit corrections */
+/* Task 10B2d · screenshot-led map-fit corrections */
 .almaty-landmark[data-landmark="medeu"] {
   --landmark-size: clamp(60px, 6.2vw, 82px);
 }
@@ -4246,7 +4246,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — SECRET MESSAGE UI                                             */
+/* TASK 10B2d — SECRET MESSAGE UI                                             */
 /* ========================================================================== */
 
 .challenge-content-card.secret-message-content {
@@ -4925,7 +4925,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B2 · manual extraction — the site must not solve TULPAR for students */
+/* Task 10B2d · manual extraction — the site must not solve TULPAR for students */
 .secret-extraction-console.is-manual {
   grid-template-columns: minmax(235px,.8fr) minmax(0,1.35fr);
 }
@@ -4994,7 +4994,7 @@ body.modal-open { overflow: hidden; }
 }
 
 
-/* Task 10B2 · readability refinements from live 1536px screenshot */
+/* Task 10B2d · readability refinements from live 1536px screenshot */
 .secret-slot.is-filled {
   background: rgba(255,255,255,.88);
 }
@@ -5029,7 +5029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — CHARTERHOUSE TELEGRAM UI                                      */
+/* TASK 10B2d — CHARTERHOUSE TELEGRAM UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.telegram-challenge-content {
@@ -5464,7 +5464,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — IMPOSSIBLE TIMETABLE UI                                      */
+/* TASK 10B2d — IMPOSSIBLE TIMETABLE UI                                      */
 /* ========================================================================== */
 
 .challenge-content-card.timetable-challenge-content {
@@ -5995,7 +5995,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — BRAIN FREEZE UI                                              */
+/* TASK 10B2d — BRAIN FREEZE UI                                              */
 /* ========================================================================== */
 
 .challenge-content-card.brain-freeze-challenge-content {
@@ -6512,7 +6512,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — FROZEN CROSSWORD UI                                          */
+/* TASK 10B2d — FROZEN CROSSWORD UI                                          */
 /* ========================================================================== */
 
 .challenge-content-card.crossword-challenge-content {
@@ -7029,7 +7029,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — SNOW LEOPARD MEMORY TEST UI                                  */
+/* TASK 10B2d — SNOW LEOPARD MEMORY TEST UI                                  */
 /* ========================================================================== */
 
 .challenge-content-card.memory-challenge-content {
@@ -7896,7 +7896,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
+/* TASK 10B2d — FINAL VAULT UI / ANIMATION FRAMEWORK                         */
 /* ========================================================================== */
 
 /* The old board route graphic is superseded by the clue-driven Final Vault. */
@@ -8793,7 +8793,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* TASK 10B2 — LIVE FINAL VAULT SUBMISSION                                  */
+/* TASK 10B2d — LIVE FINAL VAULT SUBMISSION                                  */
 /* ========================================================================== */
 
 .final-vault-experience.is-finalizing [data-vault-preview-reset] {
@@ -8840,7 +8840,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10B2 — MACBOOK NEO 1204px RESPONSIVE QA                             */
+/* PHASE 10B2d — MACBOOK NEO 1204px RESPONSIVE QA                             */
 /* Target profile: 1204 CSS px wide, approximately 650–753 CSS px high.       */
 /* Reclaims chrome/heading height while preserving puzzle readability.         */
 /* ========================================================================== */
@@ -9254,7 +9254,7 @@ body.modal-open { overflow: hidden; }
 
 
 /* ========================================================================== */
-/* PHASE 10B2 — SINGLE-SCREEN GAME SHELL                                     */
+/* PHASE 10B2d — SINGLE-SCREEN GAME SHELL                                     */
 /* Structural pass: use width, not scroll. Target 1204×680 and larger.        */
 /* ========================================================================== */
 
@@ -9794,7 +9794,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* 10B2 — QA FIXES                                                          */
+/* 10B2d — QA FIXES                                                          */
 /* ========================================================================== */
 
 /* The 687×223 Charterhouse lockup was 188px wide in a 50px bar, which makes
@@ -9830,7 +9830,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10B2 — EAL READABILITY / NO-OVERLAP PASS                            */
+/* PHASE 10B2d — EAL READABILITY / NO-OVERLAP PASS                            */
 /* Core student-facing text should be readable at 1204×680 and on desktop.   */
 /* ========================================================================== */
 
@@ -10496,7 +10496,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10B2 — STORY + EAL READABILITY                                      */
+/* PHASE 10B2d — STORY + EAL READABILITY                                      */
 /* ========================================================================== */
 
 /* Opening storyline ------------------------------------------------------- */
@@ -10969,7 +10969,7 @@ body:has(#screenChallenge:not([hidden])), body:has(#screenVault:not([hidden])), 
 
 
 /* ========================================================================== */
-/* PHASE 10B2 — LARGE-TEXT / ALLOW-SCROLL PASS                               */
+/* PHASE 10B2d — LARGE-TEXT / ALLOW-SCROLL PASS                               */
 /* The previous single-screen constraint made important text microscopic.     */
 /* From this build, readability wins. Normal vertical scrolling is allowed.    */
 /* ========================================================================== */
@@ -12016,7 +12016,7 @@ body:has(#screenMission:not([hidden])) {
 }
 
 /* ========================================================================== */
-/* PHASE 10B2 — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
+/* PHASE 10B2d — SCROLL UNLOCK + BIGGER FONT HOTFIX                           */
 /* Fixes:                                                                     */
 /* 1) challenge pages must actually scroll on desktop                         */
 /* 2) top metadata and instruction text must be obviously readable            */
@@ -12211,7 +12211,7 @@ body {
 }
 
 /* ========================================================================== */
-/* PHASE 10B2 — LAYOUT REBALANCE                                              */
+/* PHASE 10B2d — LAYOUT REBALANCE                                              */
 /* Fixes:                                                                     */
 /* - registration screen felt empty; house logos too small                    */
 /* - codename reveal wasted space                                             */
@@ -12517,7 +12517,7 @@ body {
 }
 
 /* ========================================================================== */
-/* PHASE 10B2 — PUZZLE SPACE REBALANCE                                       */
+/* PHASE 10B2d — PUZZLE SPACE REBALANCE                                       */
 /* Challenge 3: remove dead space and keep answer entry obvious.             */
 /* Challenge 7: larger crossword + larger clues, extraction below.           */
 /* Challenge 8: full-width evidence desk, larger objects, no text overlap.    */
@@ -12979,7 +12979,7 @@ body {
 
 
 /* ========================================================================== */
-/* PHASE 10B2 — VISUAL LANGUAGE / GAME FEEL                                  */
+/* PHASE 10B2d — VISUAL LANGUAGE / GAME FEEL                                  */
 /* ========================================================================== */
 
 :root {
@@ -13268,7 +13268,7 @@ body {
 }
 
 /* ========================================================================== */
-/* PHASE 10B2 — RESTRAINED VISUAL ART PASS                                   */
+/* PHASE 10B2d — RESTRAINED VISUAL ART PASS                                   */
 /* Exact Charterhouse campus photography + proper thaw/reveal + puzzle polish */
 /* ========================================================================== */
 
@@ -13289,7 +13289,7 @@ body {
   background:
     linear-gradient(90deg,#071a33 0%,rgba(7,26,51,.97) 31%,rgba(7,26,51,.74) 49%,rgba(7,26,51,.18) 72%,rgba(7,26,51,.10) 100%),
     linear-gradient(180deg,rgba(7,26,51,.04) 46%,rgba(7,26,51,.65) 100%),
-    url("../assets/game/campus-snowy.png?v=10B2") 64% center / cover no-repeat;
+    url("../assets/game/campus-snowy.png?v=10B2d") 64% center / cover no-repeat;
   opacity:.92;
 }
 #screenStart .hero::before { z-index:1; }
@@ -13317,10 +13317,10 @@ body {
 /* genuinely transparent so the SAME continuous school scene is uncovered.   */
 /* -------------------------------------------------------------------------- */
 .final-scene-snowy {
-  background:url("../assets/game/campus-snowy.png?v=10B2") center center / 100% 100% no-repeat !important;
+  background:url("../assets/game/campus-snowy.png?v=10B2d") center center / 100% 100% no-repeat !important;
 }
 .final-scene-thawed {
-  background:url("../assets/game/campus-thawed.jpg?v=10B2") center center / 100% 100% no-repeat !important;
+  background:url("../assets/game/campus-thawed.jpg?v=10B2d") center center / 100% 100% no-repeat !important;
 }
 .challenge-tile.is-revealed {
   background:rgba(255,255,255,.015) !important;
@@ -13549,4 +13549,384 @@ body {
 
 @media (prefers-reduced-motion:reduce) {
   .timetable-subject-card:hover { transform:none !important; }
+}
+
+
+/* ========================================================================== */
+/* PHASE 10B2d — ILLUSTRATED ASSET INTEGRATION                               */
+/* Uses the approved game-style asset sheet for board icons, seals and tools. */
+/* Middle challenge panels / campus reveal remain unchanged.                  */
+/* ========================================================================== */
+
+/* Challenge-board illustrated icons -------------------------------------- */
+.tile-icon.tile-icon-illustrated {
+  width: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 50%;
+  background: transparent !important;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.72),
+    0 0 0 3px rgba(9,33,64,.15),
+    0 5px 14px rgba(9,33,64,.16) !important;
+}
+.tile-icon.tile-icon-illustrated img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.challenge-tile:hover .tile-icon.tile-icon-illustrated {
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.88),
+    0 0 0 4px rgba(211,147,160,.36),
+    0 7px 18px rgba(9,33,64,.22) !important;
+}
+
+/* Keep the approved behaviour: completed tiles reveal the actual school. */
+.challenge-tile.is-revealed .tile-icon.tile-icon-illustrated {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Seal medallions --------------------------------------------------------- */
+.seal-slot {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.seal-slot::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+.seal-slot.is-pending::before {
+  background-image: url("../assets/game-ui/seal-locked.png?v=10B2d");
+  filter: saturate(.76) brightness(1.02);
+}
+.seal-slot.is-recovered::before {
+  background-image: url("../assets/game-ui/seal-recovered.png?v=10B2d");
+}
+.seal-slot-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 11% 8% 8%;
+  display: grid !important;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,.68);
+}
+.seal-slot.is-pending .seal-slot-content {
+  color: #24445d !important;
+}
+.seal-slot.is-pending .seal-slot-number {
+  color: #24445d !important;
+  font-size: 17px !important;
+  text-shadow: 0 1px 0 #fff;
+}
+.seal-slot.is-pending .seal-slot-label {
+  color: #24445d !important;
+  font-size: 5.5px !important;
+  letter-spacing: .07em;
+}
+.seal-slot.is-pending small {
+  color: rgba(9,33,64,.58) !important;
+}
+.seal-slot.is-recovered .seal-slot-icon {
+  width: 23px !important;
+  height: 23px !important;
+  color: #163653 !important;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
+}
+.seal-slot.is-recovered .seal-slot-number {
+  margin-top: -2px;
+  color: #704a20 !important;
+  font-size: 13px !important;
+  line-height: .95;
+}
+.seal-slot.is-recovered .seal-slot-label {
+  max-width: 86%;
+  color: #173c5e !important;
+  font-size: 5.4px !important;
+  line-height: 1.02;
+  letter-spacing: .035em;
+}
+.seal-slot.is-recovered small {
+  color: rgba(81,54,24,.62) !important;
+}
+.seal-slot[data-challenge-id="1"].is-recovered::before {
+  background-image: url("../assets/game-ui/snow-leopard-emblem.png?v=10B2d");
+}
+.seal-slot[data-challenge-id="1"].is-recovered .seal-slot-icon {
+  opacity: 0;
+}
+.seal-slot[data-challenge-id="1"].is-recovered .seal-slot-number,
+.seal-slot[data-challenge-id="1"].is-recovered .seal-slot-label,
+.seal-slot[data-challenge-id="1"].is-recovered small {
+  color: #fff !important;
+  text-shadow: 0 1px 3px rgba(9,33,64,.95);
+}
+
+/* Illustrated utility buttons ------------------------------------------- */
+.tool-icon.tool-icon-illustrated,
+.tool-icon-case.tool-icon-illustrated {
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 11px;
+  background: transparent !important;
+  box-shadow: 0 2px 8px rgba(9,33,64,.10);
+}
+.tool-icon.tool-icon-illustrated img,
+.tool-icon-case.tool-icon-illustrated img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#screenMission .mission-toolbar-tools .dashboard-tool-button {
+  grid-template-columns: 50px 1fr !important;
+  min-height: 66px !important;
+  padding: 8px 10px !important;
+}
+#screenMission .mission-toolbar-tools .dashboard-tool-button strong {
+  font-size: 14px !important;
+}
+#screenMission .mission-toolbar-tools .dashboard-tool-button small {
+  font-size: 8px !important;
+  line-height: 1.25;
+}
+
+.mini-toolkit-icon.mini-toolkit-icon-illustrated {
+  width: 28px !important;
+  height: 28px !important;
+  overflow: hidden;
+  border-radius: 7px;
+  box-shadow: 0 1px 5px rgba(9,33,64,.12);
+}
+.mini-toolkit-icon.mini-toolkit-icon-illustrated img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.challenge-top-tool {
+  gap: 7px !important;
+  min-width: 176px !important;
+}
+
+/* MacBook Neo / compact desktop ----------------------------------------- */
+@media (min-width:1000px) and (max-width:1280px) {
+  .tile-icon.tile-icon-illustrated {
+    width: 49px !important;
+    height: 49px !important;
+  }
+  #screenMission .mission-toolbar-tools .dashboard-tool-button {
+    grid-template-columns: 44px 1fr !important;
+    min-height: 60px !important;
+  }
+  .tool-icon.tool-icon-illustrated,
+  .tool-icon-case.tool-icon-illustrated {
+    width: 39px !important;
+    height: 39px !important;
+  }
+  .seal-slot-content {
+    padding-top: 10%;
+  }
+}
+
+/* ========================================================================== */
+/* PHASE 10B2d — FINAL STUDENT-FRIENDLY VISUAL PASS                          */
+/* Restrained gamification: illustrated assets are prominent, but the         */
+/* Charterhouse editorial layout and the real campus imagery remain primary.  */
+/* ========================================================================== */
+
+/* Homepage: clearer Year 7 / EAL language and a subtle REAL campus layer. */
+#screenStart .hero {
+  isolation: isolate;
+  overflow: hidden;
+}
+#screenStart .hero::after {
+  content:"";
+  position:absolute;
+  z-index:0;
+  right:-1%;
+  bottom:0;
+  width:58%;
+  height:49%;
+  background:
+    linear-gradient(90deg,rgba(9,33,64,1) 0%,rgba(9,33,64,.72) 24%,rgba(9,33,64,.2) 62%,rgba(9,33,64,.08) 100%),
+    linear-gradient(0deg,rgba(9,33,64,.78),rgba(9,33,64,.08)),
+    url("../assets/game/campus-snowy.png") center 56% / cover no-repeat;
+  opacity:.38;
+  pointer-events:none;
+  mask-image:linear-gradient(to top,black 15%,rgba(0,0,0,.82) 55%,transparent 100%);
+}
+#screenStart .hero-copy,
+#screenStart .hero-visual {
+  position:relative;
+  z-index:2;
+}
+#screenStart .protocol {
+  font-size:11px;
+  letter-spacing:.16em;
+}
+#screenStart .weather-card {
+  min-width:280px;
+  padding:12px 16px;
+  border-color:rgba(255,255,255,.22);
+  background:rgba(7,26,51,.72);
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+#screenStart .weather-card span {
+  font-size:8px;
+}
+#screenStart .weather-card strong {
+  font-size:22px;
+  letter-spacing:.035em;
+}
+#screenStart .hero-mission-chain span {
+  border-color:rgba(211,147,160,.38);
+  background:rgba(255,255,255,.08);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
+}
+#screenStart .button-primary {
+  box-shadow:0 8px 22px rgba(0,0,0,.16), inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+/* Board challenge icons: let the approved illustrations read clearly. */
+.tile-icon.tile-icon-illustrated {
+  width:68px !important;
+  height:68px !important;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.82),
+    0 0 0 4px rgba(9,33,64,.14),
+    0 8px 18px rgba(9,33,64,.18) !important;
+}
+.challenge-tile:hover .tile-icon.tile-icon-illustrated {
+  transform:translateY(-2px) scale(1.035);
+}
+.tile-number {
+  width:28px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(211,147,160,.42);
+  background:rgba(247,244,238,.88);
+  color:#173c5e !important;
+  font-size:9px !important;
+  box-shadow:0 2px 7px rgba(9,33,64,.08);
+}
+.tile-kicker {
+  font-size:7.5px !important;
+  letter-spacing:.11em !important;
+}
+.tile-title {
+  font-size:clamp(12px,1.1vw,16px) !important;
+}
+.challenge-tile:not(.is-revealed) {
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 0 rgba(9,33,64,.08);
+}
+
+/* Collectible medallions: bigger, clearer and more obviously game rewards. */
+#screenMission .mission-toolbar-seals .seal-grid {
+  gap:8px !important;
+}
+#screenMission .mission-toolbar-seals .seal-slot {
+  min-height:50px !important;
+}
+.seal-slot.is-pending .seal-slot-number {
+  font-size:18px !important;
+}
+.seal-slot.is-pending .seal-slot-label,
+.seal-slot.is-recovered .seal-slot-label {
+  font-size:6.3px !important;
+}
+.seal-slot.is-recovered .seal-slot-icon {
+  width:25px !important;
+  height:25px !important;
+}
+.seal-slot.is-recovered .seal-slot-number {
+  font-size:14px !important;
+}
+
+/* Utility actions: visually stronger, but still restrained. */
+#screenMission .mission-toolbar-tools .dashboard-tool-button {
+  border-width:1px !important;
+  box-shadow:0 5px 14px rgba(9,33,64,.08);
+}
+#screenMission #fieldKitButton {
+  background:linear-gradient(135deg,rgba(211,147,160,.18),rgba(255,255,255,.92)) !important;
+  border-color:rgba(190,111,129,.42) !important;
+}
+#screenMission #leaderboardButton {
+  background:linear-gradient(135deg,rgba(221,235,242,.7),rgba(255,255,255,.92)) !important;
+  border-color:rgba(87,136,169,.28) !important;
+}
+#screenMission .mission-toolbar-tools .dashboard-tool-button:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(9,33,64,.12);
+}
+.challenge-top-tool {
+  background:linear-gradient(135deg,rgba(211,147,160,.13),rgba(255,255,255,.9)) !important;
+  box-shadow:0 3px 10px rgba(9,33,64,.07);
+}
+.mini-toolkit-icon.mini-toolkit-icon-illustrated {
+  width:32px !important;
+  height:32px !important;
+}
+
+/* Registration: stronger selected state, still clean. */
+#screenRegister .house-card input:checked + .house-card-inner {
+  transform:translateY(-2px);
+  box-shadow:0 9px 20px rgba(9,33,64,.13), inset 0 -4px 0 rgba(211,147,160,.55);
+}
+#screenRegister .registration-actions .button-primary,
+#screenReveal .button-primary {
+  box-shadow:0 7px 18px rgba(9,33,64,.12), inset 0 0 0 1px rgba(255,255,255,.22);
+}
+
+/* Clear focus/hover affordance for Year 7 users. */
+.challenge-tile:focus-visible,
+.dashboard-tool-button:focus-visible,
+.button:focus-visible,
+.house-card input:focus-visible + .house-card-inner {
+  outline:3px solid rgba(211,147,160,.78) !important;
+  outline-offset:3px !important;
+}
+
+@media (min-width:1000px) and (max-width:1280px) {
+  .tile-icon.tile-icon-illustrated {
+    width:58px !important;
+    height:58px !important;
+  }
+  #screenStart .hero::after {
+    width:61%;
+    height:44%;
+    opacity:.3;
+  }
+  #screenStart .protocol {
+    font-size:10px;
+  }
+  #screenStart .weather-card {
+    min-width:240px;
+  }
+  #screenMission .mission-toolbar-seals .seal-slot {
+    min-height:46px !important;
+  }
 }
