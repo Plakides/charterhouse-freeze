@@ -14644,3 +14644,121 @@ body.has-seal-recovery {
     transform: none !important;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* 10C1 final pass — clearer, consistent seal system + central vault button.  */
+/* -------------------------------------------------------------------------- */
+.board-centre {
+  appearance: none;
+  cursor: default;
+}
+.board-centre[disabled] {
+  cursor: default;
+}
+.board-centre .centre-action {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  min-width: 120px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.34);
+  background: linear-gradient(135deg, rgba(211,147,160,.96), rgba(194,122,140,.96));
+  color: #fff7fb;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .10em;
+  box-shadow: 0 8px 20px rgba(9,33,64,.18), inset 0 1px 0 rgba(255,255,255,.26);
+}
+.freeze-board.has-final-route .board-centre {
+  cursor: pointer;
+  border-color: rgba(255,255,255,.58);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18), 0 10px 26px rgba(9,33,64,.18);
+}
+.freeze-board.has-final-route .board-centre:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+.freeze-board.has-final-route .board-centre .centre-window-label {
+  bottom: 14px !important;
+}
+
+/* Use the same clearer seal artwork everywhere. */
+.seal-slot::before {
+  inset: 0 !important;
+  background-size: contain !important;
+}
+.seal-slot .seal-slot-content {
+  opacity: 0 !important;
+}
+.seal-slot.is-pending::before {
+  background-image: url("../assets/game-ui/seal-locked-clear.png?v=10C1c") !important;
+  filter: none !important;
+}
+.seal-slot.is-recovered::before { background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="1"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="2"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-02.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="3"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-03.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="4"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-04.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="5"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-05.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="6"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-06.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="7"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-07.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="8"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-08.png?v=10C1c") !important; }
+.seal-slot[data-challenge-id="1"].is-recovered .seal-slot-number,
+.seal-slot[data-challenge-id="1"].is-recovered .seal-slot-label,
+.seal-slot[data-challenge-id="1"].is-recovered small {
+  color: inherit !important;
+  text-shadow: none !important;
+}
+
+.seal-recovery-medallion {
+  width: 142px !important;
+  height: 142px !important;
+}
+.seal-recovery-medallion > img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+#sealRecoveryIcon {
+  display: none !important;
+}
+
+/* Replace the old floating end-screen icons with the new seal set. */
+.victory-seal-orbit {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.victory-seal {
+  position: absolute;
+  width: clamp(84px, 10vw, 124px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: drop-shadow(0 14px 24px rgba(0,0,0,.18)) saturate(.98);
+  opacity: .98;
+}
+.victory-seal-1 { left: 10.5%; top: 11%; background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1c"); }
+.victory-seal-2 { left: 47.2%; top: 9%; background-image: url("../assets/game-ui/seals/seal-02.png?v=10C1c"); }
+.victory-seal-3 { right: 10.5%; top: 11.5%; background-image: url("../assets/game-ui/seals/seal-03.png?v=10C1c"); }
+.victory-seal-4 { left: 8.5%; top: 42%; background-image: url("../assets/game-ui/seals/seal-04.png?v=10C1c"); }
+.victory-seal-5 { right: 9%; top: 44%; background-image: url("../assets/game-ui/seals/seal-05.png?v=10C1c"); }
+.victory-seal-6 { left: 11%; bottom: 7%; background-image: url("../assets/game-ui/seals/seal-06.png?v=10C1c"); }
+.victory-seal-7 { left: 49%; bottom: 5%; transform: translateX(-50%); background-image: url("../assets/game-ui/seals/seal-07.png?v=10C1c"); }
+.victory-seal-8 { right: 10.5%; bottom: 8%; background-image: url("../assets/game-ui/seals/seal-08.png?v=10C1c"); }
+
+@media (max-width: 900px) {
+  .victory-seal {
+    width: 82px;
+  }
+  .victory-seal-2,
+  .victory-seal-7 {
+    left: 50%;
+  }
+}

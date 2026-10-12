@@ -64,6 +64,8 @@
 
   const finalRouteCard = document.getElementById("finalRouteCard");
   const proceedToVaultButton = document.getElementById("proceedToVaultButton");
+  const boardCentreButton = document.getElementById("boardCentreButton");
+  const boardCentreAction = document.getElementById("boardCentreAction");
   const vaultRouteOverlay = document.getElementById("vaultRouteOverlay");
 
   const vaultBackButton = document.getElementById("vaultBackButton");
@@ -112,6 +114,7 @@
     ".challenge-status-card, .challenge-mini-status"
   ) || null;
   const sealRecoveryOverlay = document.getElementById("sealRecoveryOverlay");
+  const sealRecoveryImage = document.getElementById("sealRecoveryImage");
   const sealRecoveryIcon = document.getElementById("sealRecoveryIcon");
   const sealRecoveryName = document.getElementById("sealRecoveryName");
   const sealRecoveryNumber = document.getElementById("sealRecoveryNumber");
@@ -152,6 +155,11 @@
     7: Object.freeze({ symbol: "key", number: 9, label: "Key" }),
     8: Object.freeze({ symbol: "compass", number: 3, label: "Compass" })
   });
+
+  function sealImagePath(challengeId) {
+    const id = String(Number(challengeId) || 0).padStart(2, "0");
+    return `assets/game-ui/seals/seal-.png?v=10C1c`;
+  }
 
   const challengeNarratives = Object.freeze({
     1: Object.freeze({
@@ -598,14 +606,22 @@
   }
 
   function setFinalSceneThawed(thawed) {
-    freezeBoard.classList.toggle("is-thawed", Boolean(thawed));
+    const isThawed = Boolean(thawed);
+    freezeBoard.classList.toggle("is-thawed", isThawed);
 
     const labelSpan = freezeBoard.querySelector(".centre-window-label span");
     const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
     const labelSmall = freezeBoard.querySelector(".centre-window-label small");
 
+    if (boardCentreButton) {
+      boardCentreButton.disabled = true;
+      boardCentreButton.classList.remove("is-vault-ready");
+      boardCentreButton.setAttribute("aria-label", "Emergency control core");
+    }
+    if (boardCentreAction) boardCentreAction.hidden = true;
+
     if (labelSpan && labelStrong) {
-      if (thawed) {
+      if (isThawed) {
         labelSpan.textContent = "CHARTERHOUSE SYSTEM";
         labelStrong.textContent = "RESTORED";
         if (labelSmall) labelSmall.textContent = "HEATING ONLINE · 19°C";
@@ -623,17 +639,28 @@
 
     const labelSpan = freezeBoard.querySelector(".centre-window-label span");
     const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
-
     const labelSmall = freezeBoard.querySelector(".centre-window-label small");
+
+    if (boardCentreButton) {
+      boardCentreButton.disabled = !show;
+      boardCentreButton.classList.toggle("is-vault-ready", show);
+      boardCentreButton.setAttribute("aria-label", show ? "Open the Emergency Vault" : "Emergency control core");
+    }
+    if (boardCentreAction) boardCentreAction.hidden = !show;
+
     if (show && labelSpan && labelStrong) {
       labelSpan.textContent = "FINAL VAULT";
       labelStrong.textContent = "ACCESS READY";
-      if (labelSmall) labelSmall.textContent = "8/8 SEALS · BUILD THE ROUTE";
+      if (labelSmall) labelSmall.textContent = "8/8 SEALS · OPEN THE VAULT";
     }
   }
 
   function updateControlCoreProgress(team) {
-    if (!freezeBoard || !team || team.finished || Number(team.completedCount) >= 8) return;
+    if (!freezeBoard || !team || team.finished || Number(team.completedCount) >= 8) {
+      if (boardCentreButton && (!team || !team.finished)) boardCentreButton.disabled = true;
+      if (boardCentreAction && (!team || !team.finished)) boardCentreAction.hidden = true;
+      return;
+    }
     const completed = Math.max(0, Math.min(8, Number(team.completedCount) || 0));
     const labelSpan = freezeBoard.querySelector(".centre-window-label span");
     const labelStrong = freezeBoard.querySelector(".centre-window-label strong");
@@ -1128,6 +1155,7 @@
     sealRecoveryOverlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("has-seal-recovery");
     if (sealRecoveryIcon) sealRecoveryIcon.innerHTML = "";
+    if (sealRecoveryImage) sealRecoveryImage.src = sealImagePath(1);
   }
 
   function showSealRecovery(definition, team) {
@@ -1136,9 +1164,11 @@
     const seal = sealDefinitions[Number(definition.id)];
     if (!seal) return;
 
+    if (sealRecoveryImage) {
+      sealRecoveryImage.src = sealImagePath(definition.id);
+    }
     if (sealRecoveryIcon) {
       sealRecoveryIcon.innerHTML = "";
-      sealRecoveryIcon.appendChild(createSealIcon(seal.symbol));
     }
 
     if (sealRecoveryName) {
@@ -1795,6 +1825,11 @@
   });
 
   proceedToVaultButton.addEventListener("click", () => {
+    if (!currentTeam || Number(currentTeam.completedCount) < 8 || currentTeam.finished) return;
+    showVault(currentTeam);
+  });
+
+  boardCentreButton?.addEventListener("click", () => {
     if (!currentTeam || Number(currentTeam.completedCount) < 8 || currentTeam.finished) return;
     showVault(currentTeam);
   });

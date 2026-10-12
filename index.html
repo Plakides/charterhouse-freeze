@@ -300,14 +300,15 @@
                   <span class="tile-number">04</span><span class="tile-kicker">CIPHER</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-04.png?v=10C1" alt=""></span><span class="tile-title">TELEGRAM</span><span class="tile-status">FROZEN</span>
                 </button>
 
-                <div class="board-centre" aria-label="Emergency control core: this part of the hidden scene is visible from the start">
+                <button class="board-centre" id="boardCentreButton" type="button" aria-label="Emergency control core" disabled>
                   <div class="centre-core-emblem" aria-hidden="true"><span></span><i></i></div>
                   <div class="centre-window-label">
                     <span>EMERGENCY CONTROL CORE</span>
                     <strong>0/8 SEALS</strong>
                     <small>VAULT ACCESS LOCKED</small>
                   </div>
-                </div>
+                  <span class="centre-action" id="boardCentreAction" hidden>OPEN VAULT →</span>
+                </button>
 
                 <button class="challenge-tile" type="button" data-challenge="5" aria-label="Challenge 5: Timetable">
                   <span class="tile-number">05</span><span class="tile-kicker">SCHEDULE LOCK</span><span class="tile-icon tile-icon-illustrated" aria-hidden="true"><img src="assets/game-ui/challenge-05.png?v=10C1" alt=""></span><span class="tile-title">TIMETABLE</span><span class="tile-status">FROZEN</span>
@@ -394,6 +395,9 @@
       <section class="screen victory-screen" id="screenVictory" aria-labelledby="victoryTitle" hidden>
         <div class="victory-shell">
           <div class="victory-campus" aria-hidden="true"></div>
+          <div class="victory-seal-orbit" aria-hidden="true">
+            <span class="victory-seal victory-seal-1"></span><span class="victory-seal victory-seal-2"></span><span class="victory-seal victory-seal-3"></span><span class="victory-seal victory-seal-4"></span><span class="victory-seal victory-seal-5"></span><span class="victory-seal victory-seal-6"></span><span class="victory-seal victory-seal-7"></span><span class="victory-seal victory-seal-8"></span>
+          </div>
 
           <div class="victory-card">
             <img class="victory-logo" src="assets/branding/charterhouse-logo.png" alt="Charterhouse Almaty">
@@ -501,7 +505,7 @@
             <section class="seal-recovery-card" role="dialog" aria-modal="true" aria-labelledby="sealRecoveryTitle">
               <p class="seal-recovery-kicker">ACCESS GRANTED</p>
               <div class="seal-recovery-medallion" id="sealRecoveryMedallion" aria-hidden="true">
-                <img src="assets/game-ui/seal-recovered.png?v=10C1" alt="">
+                <img id="sealRecoveryImage" src="assets/game-ui/seals/seal-01.png?v=10C1" alt="">
                 <span id="sealRecoveryIcon"></span>
               </div>
               <h2 id="sealRecoveryTitle">Security seal recovered</h2>
