@@ -14274,3 +14274,373 @@ body {
   #screenReveal .reveal-identity { border-right:0; border-bottom:1px solid rgba(9,33,64,.12); }
   .crossword-answer-host .challenge-answer-panel { grid-template-columns:1fr !important; }
 }
+
+
+/* ========================================================================== */
+/* PHASE 10C1 — INTERACTION + FEEDBACK SYSTEM                                */
+/* 10B2e visual/layout baseline remains frozen. No sound.                     */
+/* ========================================================================== */
+
+:root {
+  --game-focus: rgba(211,147,160,.92);
+  --game-success: #b18a45;
+  --game-danger: #b34d64;
+  --game-ice: #dcebf2;
+}
+
+.button,
+.challenge-back-button,
+.challenge-top-tool,
+.dashboard-tool-button,
+.logic-view-card,
+.logic-eliminate,
+.almaty-route-actions .button,
+.secret-workbench-actions .button,
+.telegram-hint-button,
+.telegram-open-tool,
+.timetable-actions .button,
+.brain-hint-button,
+.crossword-clear-button,
+.memory-review-button {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    filter 160ms ease;
+}
+
+@media (hover:hover) {
+  .button:not(:disabled):hover,
+  .challenge-back-button:not(:disabled):hover,
+  .challenge-top-tool:not(:disabled):hover,
+  .dashboard-tool-button:not(:disabled):hover,
+  .logic-view-card:not(:disabled):hover,
+  .logic-eliminate:not(:disabled):hover,
+  .almaty-route-actions .button:not(:disabled):hover,
+  .secret-workbench-actions .button:not(:disabled):hover,
+  .telegram-hint-button:not(:disabled):hover,
+  .telegram-open-tool:not(:disabled):hover,
+  .timetable-actions .button:not(:disabled):hover,
+  .brain-hint-button:not(:disabled):hover,
+  .crossword-clear-button:not(:disabled):hover,
+  .memory-review-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(9,33,64,.12);
+  }
+}
+
+.button:not(:disabled):active,
+.challenge-back-button:not(:disabled):active,
+.challenge-top-tool:not(:disabled):active,
+.dashboard-tool-button:not(:disabled):active {
+  transform: translateY(1px) scale(.995);
+  box-shadow: inset 0 2px 6px rgba(9,33,64,.12);
+}
+
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--game-focus) !important;
+  outline-offset: 3px !important;
+}
+
+.logic-suspect.is-selected,
+.secret-card.is-selected,
+.timetable-subject-card.is-selected,
+.memory-option.is-selected {
+  box-shadow:
+    0 0 0 3px rgba(211,147,160,.82),
+    0 10px 22px rgba(9,33,64,.12) !important;
+  transform: translateY(-2px);
+}
+
+.secret-slot.is-drop-target,
+.timetable-slot.is-drop-target {
+  border-color: var(--ch-pink) !important;
+  background:
+    linear-gradient(rgba(211,147,160,.16),rgba(211,147,160,.16)),
+    rgba(255,255,255,.92) !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(211,147,160,.6),
+    0 0 0 4px rgba(211,147,160,.12) !important;
+}
+
+.secret-slot.is-selected-source,
+.timetable-slot.is-selected-source {
+  box-shadow: inset 0 0 0 2px rgba(120,147,165,.9) !important;
+}
+
+.almaty-landmark.is-current {
+  z-index: 7;
+}
+.almaty-landmark.is-current img {
+  filter: drop-shadow(0 8px 10px rgba(9,33,64,.2)) saturate(1.08);
+}
+.almaty-landmark.is-current > span {
+  background: var(--ch-navy) !important;
+  color: white !important;
+  border-color: var(--ch-navy) !important;
+}
+.almaty-landmark.is-just-clicked img {
+  animation: c1-map-click 340ms ease-out both;
+}
+
+.crossword-cell.is-active-word {
+  background: rgba(221,235,242,.92) !important;
+}
+.crossword-cell.is-current {
+  box-shadow:
+    inset 0 0 0 3px var(--ch-pink),
+    0 0 0 2px rgba(211,147,160,.15) !important;
+  position: relative;
+  z-index: 2;
+}
+.crossword-clue.is-active {
+  background: rgba(221,235,242,.72) !important;
+  border-left: 4px solid var(--ch-pink) !important;
+  box-shadow: 0 4px 10px rgba(9,33,64,.07);
+}
+
+.memory-challenge-content.is-memory-review .memory-observation-shell {
+  box-shadow:
+    inset 0 0 0 2px rgba(120,147,165,.5),
+    0 12px 28px rgba(9,33,64,.09);
+  animation: c1-camera-online 440ms ease-out both;
+}
+
+.challenge-answer-panel {
+  position: relative;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.challenge-answer-panel.is-lockout {
+  border-color: rgba(179,77,100,.7) !important;
+  background:
+    linear-gradient(90deg,rgba(179,77,100,.08),rgba(255,255,255,.94)) !important;
+  box-shadow:
+    inset 5px 0 0 var(--game-danger),
+    0 8px 22px rgba(179,77,100,.08) !important;
+}
+
+.challenge-answer-panel.is-lockout::before {
+  content: "SECURITY LOCKOUT";
+  position: absolute;
+  top: -11px;
+  right: 12px;
+  padding: 4px 8px;
+  border: 1px solid rgba(179,77,100,.38);
+  background: #fbf2f4;
+  color: #8f3047;
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: .09em;
+}
+
+.challenge-answer-panel.is-lockout .challenge-submit-button {
+  background: #e2d4d8 !important;
+  color: #6d4a54 !important;
+  border-color: #c7aeb5 !important;
+  cursor: not-allowed;
+}
+
+.challenge-answer-panel.is-unlocked {
+  border-color: rgba(120,147,165,.75) !important;
+  box-shadow: inset 5px 0 0 #7893a5 !important;
+}
+
+.challenge-answer-panel.is-success-state {
+  border-color: rgba(177,138,69,.7) !important;
+  box-shadow: inset 5px 0 0 var(--game-success) !important;
+}
+
+.challenge-message.is-penalty,
+.almaty-route-message.is-penalty {
+  color: #8f3047 !important;
+  font-weight: 850 !important;
+}
+
+.almaty-route-message.is-penalty {
+  padding: 8px 10px !important;
+  border-left: 4px solid var(--game-danger);
+  background: rgba(179,77,100,.08);
+}
+
+.seal-recovery-overlay[hidden] {
+  display: none !important;
+}
+
+.seal-recovery-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(4,20,38,.74);
+  backdrop-filter: blur(5px);
+}
+
+.seal-recovery-card {
+  width: min(520px,calc(100vw - 36px));
+  padding: 28px 34px 30px;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  border: 1px solid rgba(211,147,160,.65);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.97),rgba(247,244,238,.98));
+  box-shadow:
+    0 26px 70px rgba(0,12,25,.34),
+    inset 0 0 0 5px rgba(221,235,242,.55);
+}
+
+.seal-recovery-kicker {
+  margin: 0 0 10px;
+  color: #9f5e6d;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: .16em;
+}
+
+.seal-recovery-medallion {
+  position: relative;
+  width: 138px;
+  height: 138px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  border-radius: 50%;
+}
+
+.seal-recovery-medallion > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.seal-recovery-medallion > span {
+  position: relative;
+  z-index: 1;
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  color: #fff9eb;
+  filter: drop-shadow(0 2px 2px rgba(35,20,5,.38));
+}
+
+.seal-recovery-medallion svg {
+  width: 54px;
+  height: 54px;
+  stroke-width: 2.4;
+}
+
+.seal-recovery-card h2 {
+  margin: 0;
+  color: var(--ch-navy);
+  font-family: Georgia,serif;
+  font-size: 30px;
+  line-height: 1.08;
+}
+
+.seal-recovery-name {
+  margin: 7px 0 0;
+  color: #8d6070;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+}
+
+.seal-recovery-number {
+  margin: 3px 0 7px;
+  color: var(--ch-navy);
+  font-family: var(--mono);
+  font-size: 48px;
+  line-height: 1;
+}
+
+.seal-recovery-copy {
+  max-width: 400px;
+  margin: 0 0 18px;
+  color: #536b79;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.seal-recovery-return {
+  min-height: 48px !important;
+  padding-inline: 20px !important;
+  font-size: 12px !important;
+}
+
+.seal-recovery-overlay.is-entering .seal-recovery-card {
+  animation: c1-seal-card-in 460ms cubic-bezier(.2,.82,.25,1) both;
+}
+.seal-recovery-overlay.is-entering .seal-recovery-medallion {
+  animation: c1-seal-settle 720ms cubic-bezier(.16,.8,.25,1) both;
+}
+
+body.has-seal-recovery {
+  overflow: hidden !important;
+}
+
+@keyframes c1-map-click {
+  0% { transform: scale(1); }
+  46% { transform: scale(1.075); }
+  100% { transform: scale(1); }
+}
+
+@keyframes c1-camera-online {
+  0% { opacity:.82; filter:contrast(.88) brightness(.9); }
+  100% { opacity:1; filter:none; }
+}
+
+@keyframes c1-seal-card-in {
+  0% { opacity:0; transform:translateY(16px) scale(.975); }
+  100% { opacity:1; transform:none; }
+}
+
+@keyframes c1-seal-settle {
+  0% { opacity:0; transform:scale(.72) rotate(-8deg); }
+  55% { opacity:1; transform:scale(1.05) rotate(2deg); }
+  100% { opacity:1; transform:scale(1) rotate(0); }
+}
+
+@media (max-width: 700px) {
+  .seal-recovery-card {
+    padding: 22px 20px 24px;
+  }
+  .seal-recovery-medallion {
+    width: 118px;
+    height: 118px;
+  }
+  .seal-recovery-card h2 {
+    font-size: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .challenge-back-button,
+  .challenge-top-tool,
+  .dashboard-tool-button,
+  .logic-suspect.is-selected,
+  .secret-card.is-selected,
+  .timetable-subject-card.is-selected,
+  .memory-option.is-selected,
+  .seal-recovery-card,
+  .seal-recovery-medallion,
+  .almaty-landmark.is-just-clicked img,
+  .memory-challenge-content.is-memory-review .memory-observation-shell {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

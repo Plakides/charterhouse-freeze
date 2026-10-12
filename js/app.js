@@ -111,6 +111,12 @@
   const challengeStatusCard = challengeStatus?.closest(
     ".challenge-status-card, .challenge-mini-status"
   ) || null;
+  const sealRecoveryOverlay = document.getElementById("sealRecoveryOverlay");
+  const sealRecoveryIcon = document.getElementById("sealRecoveryIcon");
+  const sealRecoveryName = document.getElementById("sealRecoveryName");
+  const sealRecoveryNumber = document.getElementById("sealRecoveryNumber");
+  const sealRecoveryCopy = document.getElementById("sealRecoveryCopy");
+  const sealRecoveryReturn = document.getElementById("sealRecoveryReturn");
 
   const challengeRegistry = window.FREEZE_CHALLENGES;
 
@@ -191,6 +197,7 @@
   let syncInFlight = false;
   let dashboardVisible = false;
   let currentChallengeId = null;
+  let pendingSealPreviousTeam = null;
   let challengeSubmitInFlight = false;
   let challengeCooldownInterval = null;
   let challengeHistoryPushed = false;
@@ -1041,6 +1048,8 @@
           challengeAnswerHelp.textContent =
             "Submit one team answer when you are confident.";
 
+          challengeAnswerForm.classList.remove("is-lockout");
+          challengeAnswerForm.classList.add("is-unlocked");
           challengeMessage.classList.remove(
             "is-success",
             "is-penalty"
@@ -1048,8 +1057,12 @@
 
           if (options.showExpiryMessage !== false) {
             challengeMessage.textContent =
-              "Penalty complete. You can submit again.";
+              "SECURITY UNLOCKED · You can submit again.";
           }
+
+          window.setTimeout(() => {
+            challengeAnswerForm.classList.remove("is-unlocked");
+          }, 900);
         }
 
         return;
@@ -1057,16 +1070,17 @@
 
       challengeAnswerInput.disabled = false;
       challengeSubmitButton.disabled = true;
+      challengeAnswerForm.classList.remove("is-unlocked");
+      challengeAnswerForm.classList.add("is-lockout");
       challengeSubmitLabel.textContent =
-        `Try again in ${seconds}s`;
+        `Locked · ${seconds}s`;
       challengeAnswerHelp.textContent =
-        "You can change your answer while the penalty counts down.";
+        "Check your work. You can change the answer while the timer counts down.";
 
       challengeMessage.classList.remove("is-success");
       challengeMessage.classList.add("is-penalty");
       challengeMessage.textContent =
-        `Wrong answer · ${seconds}-second penalty. ` +
-        "Review the puzzle before trying again.";
+        `SECURITY LOCKOUT · Wrong answer. Check your work. Try again in ${seconds} seconds.`;
     };
 
     if (
@@ -1107,6 +1121,57 @@
     });
   }
 
+
+  function hideSealRecovery() {
+    if (!sealRecoveryOverlay) return;
+    sealRecoveryOverlay.hidden = true;
+    sealRecoveryOverlay.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("has-seal-recovery");
+    if (sealRecoveryIcon) sealRecoveryIcon.innerHTML = "";
+  }
+
+  function showSealRecovery(definition, team) {
+    if (!sealRecoveryOverlay || !definition) return;
+
+    const seal = sealDefinitions[Number(definition.id)];
+    if (!seal) return;
+
+    if (sealRecoveryIcon) {
+      sealRecoveryIcon.innerHTML = "";
+      sealRecoveryIcon.appendChild(createSealIcon(seal.symbol));
+    }
+
+    if (sealRecoveryName) {
+      sealRecoveryName.textContent = `${seal.label} seal recovered`;
+    }
+
+    if (sealRecoveryNumber) {
+      sealRecoveryNumber.textContent = String(seal.number);
+    }
+
+    if (sealRecoveryCopy) {
+      const progress = Math.max(0, Math.min(8, Number(team?.completedCount) || 0));
+      sealRecoveryCopy.textContent =
+        progress >= 8
+          ? "All eight security seals are recovered. Return to the Mission Board to unlock the Emergency Vault."
+          : `Seal ${progress} of 8 secured. Return to the Mission Board to thaw this section of Charterhouse.`;
+    }
+
+    sealRecoveryOverlay.hidden = false;
+    sealRecoveryOverlay.setAttribute("aria-hidden", "false");
+    document.body.classList.add("has-seal-recovery");
+
+    window.requestAnimationFrame(() => {
+      sealRecoveryOverlay.classList.remove("is-entering");
+      void sealRecoveryOverlay.offsetWidth;
+      sealRecoveryOverlay.classList.add("is-entering");
+    });
+
+    window.setTimeout(() => {
+      sealRecoveryReturn?.focus({ preventScroll: true });
+    }, 160);
+  }
+
   function updateChallengeChrome(team) {
     if (!team || !currentChallengeId) return;
 
@@ -1145,6 +1210,7 @@
     stopChallengeCooldownTimer();
     challengeMessage.textContent = "";
     challengeMessage.classList.remove("is-success", "is-penalty");
+    challengeAnswerForm.classList.remove("is-lockout", "is-unlocked", "is-success-state");
 
     const enabled = Boolean(submission.enabled) && !solved;
     const inputEnabled =
@@ -1172,6 +1238,9 @@
 
   function renderChallenge(definition, team) {
     currentChallengeId = definition.id;
+    pendingSealPreviousTeam = null;
+    hideSealRecovery();
+    challengeAnswerForm.classList.remove("is-lockout", "is-unlocked", "is-success-state");
 
     if (challengeAnswerForm.parentElement !== challengeAnswerHome) {
       challengeAnswerHome.insertBefore(challengeAnswerForm, challengeAnswerMarker.nextSibling);
@@ -1179,7 +1248,7 @@
 
     challengeNumberLabel.textContent = String(definition.id).padStart(2, "0");
     if (challengeHeaderIcon) {
-      challengeHeaderIcon.src = `assets/game-ui/challenge-${String(definition.id).padStart(2, "0")}.png?v=10B2e`;
+      challengeHeaderIcon.src = `assets/game-ui/challenge-${String(definition.id).padStart(2, "0")}.png?v=10C1`;
     }
     challengeEyebrow.textContent = definition.eyebrow;
     challengeTitle.textContent = definition.title;
@@ -1268,6 +1337,8 @@
   }
 
   function returnToMissionBoard(options = {}) {
+    hideSealRecovery();
+    pendingSealPreviousTeam = null;
     stopChallengeCooldownTimer();
     currentChallengeId = null;
     showMission(currentTeam);
@@ -1376,19 +1447,10 @@
       persistTeamSnapshot(updatedTeam);
       updateChallengeChrome(updatedTeam);
 
-      window.setTimeout(() => {
-        currentChallengeId = null;
-        window.history.replaceState(
-          { screen: "mission" },
-          "",
-          window.location.pathname + window.location.search
-        );
-
-        showMission(updatedTeam, {
-          previousTeam,
-          animateNew: true
-        });
-      }, 850);
+      challengeAnswerForm.classList.remove("is-lockout", "is-unlocked");
+      challengeAnswerForm.classList.add("is-success-state");
+      pendingSealPreviousTeam = previousTeam;
+      showSealRecovery(definition, updatedTeam);
 
       return {
         ...result,
@@ -1474,25 +1536,17 @@
       challengeMessage.classList.remove("is-penalty");
       challengeMessage.classList.add("is-success");
       challengeSubmitLabel.textContent = "Access granted";
+      challengeAnswerForm.classList.remove("is-lockout", "is-unlocked");
+      challengeAnswerForm.classList.add("is-success-state");
 
       const previousTeam = currentTeam;
       const updatedTeam = result.team || await api.getTeamState(currentSession);
 
       currentTeam = updatedTeam;
       persistTeamSnapshot(updatedTeam);
-
-      window.setTimeout(() => {
-        currentChallengeId = null;
-        window.history.replaceState(
-          { screen: "mission" },
-          "",
-          window.location.pathname + window.location.search
-        );
-        showMission(updatedTeam, {
-          previousTeam,
-          animateNew: true
-        });
-      }, 300);
+      updateChallengeChrome(updatedTeam);
+      pendingSealPreviousTeam = previousTeam;
+      showSealRecovery(definition, updatedTeam);
     } catch (error) {
       console.error("Challenge submission failed:", error);
       challengeMessage.textContent = mapApiError(error);
@@ -1692,6 +1746,22 @@
 
   challengeBackButton.addEventListener("click", () => {
     returnToMissionBoard();
+  });
+
+  sealRecoveryReturn?.addEventListener("click", () => {
+    const previousTeam = pendingSealPreviousTeam;
+    pendingSealPreviousTeam = null;
+    hideSealRecovery();
+    currentChallengeId = null;
+    window.history.replaceState(
+      { screen: "mission" },
+      "",
+      window.location.pathname + window.location.search
+    );
+    showMission(currentTeam, {
+      previousTeam,
+      animateNew: true
+    });
   });
 
   challengeFieldKitButton.addEventListener("click", () => {

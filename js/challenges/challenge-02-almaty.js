@@ -448,11 +448,11 @@
       }
 
       checkButton.disabled = true;
-      checkButton.textContent = `Try again in ${seconds}s`;
+      checkButton.textContent = `Locked · ${seconds}s`;
       message.classList.remove("is-success");
       message.classList.add("is-penalty");
       message.textContent =
-        `Route rejected · ${seconds}-second penalty. You can edit the route while you wait.`;
+        `SECURITY LOCKOUT · Wrong route. Check your work. Try again in ${seconds} seconds.`;
 
       penaltyTimer = setInterval(() => {
         const next = cooldown.remainingSeconds(teamId, challengeId);
@@ -463,13 +463,13 @@
           checkButton.textContent = "Check route";
           message.classList.remove("is-penalty");
           message.textContent =
-            "Penalty complete. Review the route, then check again.";
+            "SECURITY UNLOCKED · Review the route, then check again.";
           return;
         }
 
-        checkButton.textContent = `Try again in ${next}s`;
+        checkButton.textContent = `Locked · ${next}s`;
         message.textContent =
-          `Route rejected · ${next}-second penalty. You can edit the route while you wait.`;
+          `SECURITY LOCKOUT · Wrong route. Check your work. Try again in ${next} seconds.`;
       }, 250);
     }
 
@@ -479,6 +479,11 @@
 
         const id = button.dataset.landmark;
         if (!byId.has(id)) return;
+
+        button.classList.remove("is-just-clicked");
+        void button.offsetWidth;
+        button.classList.add("is-just-clicked");
+        window.setTimeout(() => button.classList.remove("is-just-clicked"), 360);
 
         if (state.route.length >= 20) {
           message.textContent =

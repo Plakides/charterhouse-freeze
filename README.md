@@ -1811,3 +1811,31 @@ screen for Year 7 / EAL students:
 - Challenge headers use the approved illustrated challenge graphics as badges.
 - Solved challenge top status shows a restrained recovered-seal medallion.
 - Crossword answer form now sits directly below the A–F extraction strip inside the crossword card.
+
+# Phase 10C1 — Interaction + feedback system
+
+10C1 starts the approved game-feel phase while keeping the frozen 10B2e visual/layout baseline.
+There is no sound.
+
+Implemented:
+- restrained hover / press / keyboard-focus feedback for primary controls;
+- clearer selected states for Logic, Secret Message, Timetable and Memory;
+- stronger drag/drop target feedback in Secret Message and Timetable;
+- clearer current-stop feedback and a short click pulse on the Almaty map;
+- stronger active word/current cell feedback in the Crossword;
+- visible "camera feed online" transition when Memory LOOK AGAIN is used;
+- consistent wrong-answer SECURITY LOCKOUT presentation with the existing 30-second timer;
+- consistent SECURITY UNLOCKED message when the cooldown finishes;
+- correct answers now show an ACCESS GRANTED seal-recovery card with the seal name and number;
+- students explicitly choose RETURN TO MISSION BOARD so they can see what they earned;
+- returning to the board still triggers the existing tile-thaw / new-seal progress animation;
+- all new motion respects prefers-reduced-motion.
+
+Not changed:
+- page layouts;
+- puzzle answers or mechanics;
+- 30-second cooldown length;
+- seal numbers;
+- final-vault code;
+- offline-first architecture;
+- approved 10B2e graphics.
