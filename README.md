@@ -1812,9 +1812,9 @@ screen for Year 7 / EAL students:
 - Solved challenge top status shows a restrained recovered-seal medallion.
 - Crossword answer form now sits directly below the A–F extraction strip inside the crossword card.
 
-# Phase 10C1c — Interaction + feedback system
+# Phase 10C1d — Interaction + feedback system
 
-10C1c starts the approved game-feel phase while keeping the frozen 10B2e visual/layout baseline.
+10C1d starts the approved game-feel phase while keeping the frozen 10B2e visual/layout baseline.
 There is no sound.
 
 Implemented:
@@ -1839,3 +1839,9 @@ Not changed:
 - final-vault code;
 - offline-first architecture;
 - approved 10B2e graphics.
+
+## 10C1d — simple seal system fix
+- Replaced the detailed/gold raster seal treatment with one simple reusable SVG seal design.
+- Same seal component is used on the recovery popup, Mission Board collection, and Victory background.
+- Retains the eight canonical seal symbols/numbers used by the Final Vault.
+- Removes broken recovery-seal image dependency.

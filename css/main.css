@@ -14694,18 +14694,18 @@ body.has-seal-recovery {
   opacity: 0 !important;
 }
 .seal-slot.is-pending::before {
-  background-image: url("../assets/game-ui/seal-locked-clear.png?v=10C1c") !important;
+  background-image: url("../assets/game-ui/seal-locked-clear.png?v=10C1d") !important;
   filter: none !important;
 }
-.seal-slot.is-recovered::before { background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="1"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="2"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-02.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="3"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-03.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="4"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-04.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="5"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-05.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="6"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-06.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="7"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-07.png?v=10C1c") !important; }
-.seal-slot[data-challenge-id="8"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-08.png?v=10C1c") !important; }
+.seal-slot.is-recovered::before { background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="1"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="2"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-02.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="3"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-03.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="4"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-04.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="5"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-05.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="6"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-06.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="7"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-07.png?v=10C1d") !important; }
+.seal-slot[data-challenge-id="8"].is-recovered::before { background-image: url("../assets/game-ui/seals/seal-08.png?v=10C1d") !important; }
 .seal-slot[data-challenge-id="1"].is-recovered .seal-slot-number,
 .seal-slot[data-challenge-id="1"].is-recovered .seal-slot-label,
 .seal-slot[data-challenge-id="1"].is-recovered small {
@@ -14744,14 +14744,14 @@ body.has-seal-recovery {
   filter: drop-shadow(0 14px 24px rgba(0,0,0,.18)) saturate(.98);
   opacity: .98;
 }
-.victory-seal-1 { left: 10.5%; top: 11%; background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1c"); }
-.victory-seal-2 { left: 47.2%; top: 9%; background-image: url("../assets/game-ui/seals/seal-02.png?v=10C1c"); }
-.victory-seal-3 { right: 10.5%; top: 11.5%; background-image: url("../assets/game-ui/seals/seal-03.png?v=10C1c"); }
-.victory-seal-4 { left: 8.5%; top: 42%; background-image: url("../assets/game-ui/seals/seal-04.png?v=10C1c"); }
-.victory-seal-5 { right: 9%; top: 44%; background-image: url("../assets/game-ui/seals/seal-05.png?v=10C1c"); }
-.victory-seal-6 { left: 11%; bottom: 7%; background-image: url("../assets/game-ui/seals/seal-06.png?v=10C1c"); }
-.victory-seal-7 { left: 49%; bottom: 5%; transform: translateX(-50%); background-image: url("../assets/game-ui/seals/seal-07.png?v=10C1c"); }
-.victory-seal-8 { right: 10.5%; bottom: 8%; background-image: url("../assets/game-ui/seals/seal-08.png?v=10C1c"); }
+.victory-seal-1 { left: 10.5%; top: 11%; background-image: url("../assets/game-ui/seals/seal-01.png?v=10C1d"); }
+.victory-seal-2 { left: 47.2%; top: 9%; background-image: url("../assets/game-ui/seals/seal-02.png?v=10C1d"); }
+.victory-seal-3 { right: 10.5%; top: 11.5%; background-image: url("../assets/game-ui/seals/seal-03.png?v=10C1d"); }
+.victory-seal-4 { left: 8.5%; top: 42%; background-image: url("../assets/game-ui/seals/seal-04.png?v=10C1d"); }
+.victory-seal-5 { right: 9%; top: 44%; background-image: url("../assets/game-ui/seals/seal-05.png?v=10C1d"); }
+.victory-seal-6 { left: 11%; bottom: 7%; background-image: url("../assets/game-ui/seals/seal-06.png?v=10C1d"); }
+.victory-seal-7 { left: 49%; bottom: 5%; transform: translateX(-50%); background-image: url("../assets/game-ui/seals/seal-07.png?v=10C1d"); }
+.victory-seal-8 { right: 10.5%; bottom: 8%; background-image: url("../assets/game-ui/seals/seal-08.png?v=10C1d"); }
 
 @media (max-width: 900px) {
   .victory-seal {
@@ -14763,7 +14763,7 @@ body.has-seal-recovery {
   }
 }
 
-/* 10C1c screenshot fixes ---------------------------------------------------- */
+/* 10C1d screenshot fixes ---------------------------------------------------- */
 /* Give the Almaty map enough vertical space for Kok Tobe and Medeu to be     */
 /* clearly separated rather than stacking on top of one another.              */
 .almaty-puzzle {
@@ -14800,5 +14800,195 @@ body.has-seal-recovery {
 @media (max-width: 720px) {
   .seal-recovery-return {
     min-width: min(270px, 100%) !important;
+  }
+}
+
+/* ========================================================================== */
+/* 10C1d — SIMPLE SEAL ICON SYSTEM                                            */
+/* One restrained visual language everywhere: pale ice + navy + pink number. */
+/* ========================================================================== */
+
+/* Dashboard seal collection ------------------------------------------------ */
+.seal-slot {
+  position: relative !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.seal-slot::before,
+.seal-slot::after {
+  display: none !important;
+  content: none !important;
+}
+.seal-slot .seal-slot-content {
+  display: none !important;
+}
+
+.dashboard-seal-medallion,
+.dashboard-seal-pending,
+.seal-recovery-medallion,
+.victory-seal-medallion {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #123a5d;
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255,255,255,.98), rgba(235,246,251,.95) 42%, rgba(194,220,235,.96) 100%);
+  border: 2px solid #86abc2;
+  box-shadow:
+    inset 0 0 0 4px rgba(255,255,255,.78),
+    inset 0 -5px 10px rgba(71,112,141,.10),
+    0 3px 8px rgba(9,33,64,.13);
+}
+.dashboard-seal-medallion::before,
+.dashboard-seal-pending::before,
+.seal-recovery-medallion::before,
+.victory-seal-medallion::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border: 1px solid rgba(18,58,93,.28);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.dashboard-seal-medallion {
+  width: 100%;
+  height: 100%;
+  min-width: 48px;
+  min-height: 48px;
+}
+.dashboard-seal-pending {
+  width: 100%;
+  height: 100%;
+  min-width: 48px;
+  min-height: 48px;
+  color: #718b9e;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255,255,255,.98), rgba(239,246,249,.95) 46%, rgba(213,226,233,.96) 100%);
+  border-color: #bdced8;
+}
+.dashboard-seal-pending > span {
+  position: relative;
+  z-index: 1;
+  font-family: var(--serif);
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.seal-medallion-icon,
+.dashboard-seal-medallion .seal-medallion-icon,
+.victory-seal-medallion .seal-medallion-icon {
+  position: relative;
+  z-index: 1;
+  width: 54%;
+  height: 54%;
+  display: grid;
+  place-items: center;
+  color: #123a5d;
+}
+.seal-medallion-icon svg,
+#sealRecoveryIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.seal-medallion-icon svg [fill="currentColor"],
+#sealRecoveryIcon svg [fill="currentColor"] {
+  fill: currentColor;
+}
+.seal-medallion-number,
+.seal-recovery-badge {
+  position: absolute;
+  z-index: 3;
+  right: -2px;
+  bottom: -2px;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 2px solid #f7f4ee;
+  color: #092140;
+  background: #dca0ad;
+  box-shadow: 0 2px 5px rgba(9,33,64,.18);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+/* Recovery modal: the SAME icon system, just larger. ----------------------- */
+.seal-recovery-medallion {
+  width: 126px !important;
+  height: 126px !important;
+  margin: 12px auto 16px !important;
+}
+.seal-recovery-medallion > img {
+  display: none !important;
+}
+#sealRecoveryIcon {
+  display: grid !important;
+  place-items: center;
+  width: 58%;
+  height: 58%;
+  color: #123a5d;
+}
+#sealRecoveryIcon svg {
+  display: block;
+}
+.seal-recovery-badge {
+  right: 4px;
+  bottom: 4px;
+  min-width: 31px;
+  height: 31px;
+  font-size: 15px;
+  border-width: 3px;
+}
+
+/* End screen: eight identical seal components around the real campus. ------- */
+.victory-seal {
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+.victory-seal-medallion {
+  width: 100%;
+  height: 100%;
+}
+.victory-seal-medallion .seal-medallion-number {
+  right: 1px;
+  bottom: 1px;
+  min-width: 25px;
+  height: 25px;
+  font-size: 12px;
+}
+
+/* At compact MacBook size, keep them clear rather than detailed. */
+@media (min-width:1000px) and (max-width:1280px) and (max-height:760px) {
+  .dashboard-seal-medallion,
+  .dashboard-seal-pending {
+    min-width: 42px;
+    min-height: 42px;
+  }
+  .seal-medallion-number {
+    min-width: 18px;
+    height: 18px;
+    font-size: 9px;
+  }
+  .seal-recovery-medallion {
+    width: 112px !important;
+    height: 112px !important;
+  }
+  .victory-seal {
+    width: 74px !important;
   }
 }

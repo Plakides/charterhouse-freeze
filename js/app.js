@@ -114,8 +114,8 @@
     ".challenge-status-card, .challenge-mini-status"
   ) || null;
   const sealRecoveryOverlay = document.getElementById("sealRecoveryOverlay");
-  const sealRecoveryImage = document.getElementById("sealRecoveryImage");
   const sealRecoveryIcon = document.getElementById("sealRecoveryIcon");
+  const sealRecoveryBadge = document.getElementById("sealRecoveryBadge");
   const sealRecoveryName = document.getElementById("sealRecoveryName");
   const sealRecoveryNumber = document.getElementById("sealRecoveryNumber");
   const sealRecoveryCopy = document.getElementById("sealRecoveryCopy");
@@ -156,10 +156,6 @@
     8: Object.freeze({ symbol: "compass", number: 3, label: "Compass" })
   });
 
-  function sealImagePath(challengeId) {
-    const id = String(Number(challengeId) || 0).padStart(2, "0");
-    return `assets/game-ui/seals/seal-.png?v=10C1c`;
-  }
 
   const challengeNarratives = Object.freeze({
     1: Object.freeze({
@@ -605,6 +601,36 @@
     return svg;
   }
 
+  function buildSealMedallion(seal, challengeId, className = "seal-medallion") {
+    const medallion = document.createElement("div");
+    medallion.className = className;
+    medallion.dataset.challengeId = String(challengeId);
+
+    const icon = document.createElement("span");
+    icon.className = "seal-medallion-icon";
+    icon.appendChild(createSealIcon(seal.symbol));
+
+    const badge = document.createElement("span");
+    badge.className = "seal-medallion-number";
+    badge.textContent = String(seal.number);
+
+    medallion.append(icon, badge);
+    return medallion;
+  }
+
+  function renderVictorySeals() {
+    const orbit = document.querySelector(".victory-seal-orbit");
+    if (!orbit) return;
+
+    orbit.querySelectorAll(".victory-seal").forEach((node, index) => {
+      const challengeId = index + 1;
+      const seal = sealDefinitions[challengeId];
+      if (!seal) return;
+      node.innerHTML = "";
+      node.appendChild(buildSealMedallion(seal, challengeId, "victory-seal-medallion"));
+    });
+  }
+
   function setFinalSceneThawed(thawed) {
     const isThawed = Boolean(thawed);
     freezeBoard.classList.toggle("is-thawed", isThawed);
@@ -731,47 +757,17 @@
       if (seal) {
         slot.className = "seal-slot is-recovered";
         slot.setAttribute("aria-label", `Recovered seal ${challengeId}: ${seal.label}, code number ${seal.number}`);
-
-        const content = document.createElement("div");
-        content.className = "seal-slot-content";
-
-        const iconWrap = document.createElement("div");
-        iconWrap.className = "seal-slot-icon";
-        iconWrap.appendChild(createSealIcon(seal.symbol));
-
-        const number = document.createElement("div");
-        number.className = "seal-slot-number";
-        number.textContent = String(seal.number);
-
-        const label = document.createElement("div");
-        label.className = "seal-slot-label";
-        label.textContent = seal.label;
-
-        const index = document.createElement("small");
-        index.textContent = String(challengeId).padStart(2, "0");
-
-        content.append(iconWrap, number, label, index);
-        slot.appendChild(content);
+        slot.appendChild(buildSealMedallion(seal, challengeId, "dashboard-seal-medallion"));
       } else {
         slot.className = "seal-slot is-pending";
         slot.setAttribute("aria-label", `Seal ${challengeId} not yet recovered`);
 
-        const content = document.createElement("div");
-        content.className = "seal-slot-content";
-
-        const marker = document.createElement("div");
-        marker.className = "seal-slot-number";
-        marker.textContent = "?";
-
-        const label = document.createElement("div");
-        label.className = "seal-slot-label";
-        label.textContent = "LOCKED";
-
-        const index = document.createElement("small");
-        index.textContent = String(challengeId).padStart(2, "0");
-
-        content.append(marker, label, index);
-        slot.appendChild(content);
+        const pending = document.createElement("div");
+        pending.className = "dashboard-seal-pending";
+        const mark = document.createElement("span");
+        mark.textContent = "?";
+        pending.appendChild(mark);
+        slot.appendChild(pending);
       }
 
       sealGrid.appendChild(slot);
@@ -921,6 +917,7 @@
     victoryTeamName.textContent = team.teamName || "Emergency Team";
     victoryHouse.textContent = `${houseLabel} House`;
     victoryTime.textContent = formatElapsed(Number(team.elapsedSeconds) || 0);
+    renderVictorySeals();
 
     if (victoryResultCode && window.FREEZE_RECOVERY) {
       victoryResultCode.textContent = window.FREEZE_RECOVERY.createResultCode(team);
@@ -1155,7 +1152,7 @@
     sealRecoveryOverlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("has-seal-recovery");
     if (sealRecoveryIcon) sealRecoveryIcon.innerHTML = "";
-    if (sealRecoveryImage) sealRecoveryImage.src = sealImagePath(1);
+    if (sealRecoveryBadge) sealRecoveryBadge.textContent = "";
   }
 
   function showSealRecovery(definition, team) {
@@ -1164,11 +1161,12 @@
     const seal = sealDefinitions[Number(definition.id)];
     if (!seal) return;
 
-    if (sealRecoveryImage) {
-      sealRecoveryImage.src = sealImagePath(definition.id);
-    }
     if (sealRecoveryIcon) {
       sealRecoveryIcon.innerHTML = "";
+      sealRecoveryIcon.appendChild(createSealIcon(seal.symbol));
+    }
+    if (sealRecoveryBadge) {
+      sealRecoveryBadge.textContent = String(seal.number);
     }
 
     if (sealRecoveryName) {
